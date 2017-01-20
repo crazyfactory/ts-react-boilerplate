@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/app/*",
+        "src/app/redux/*"
+      ]
+    },
+    "outDir": "build",
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
+}
