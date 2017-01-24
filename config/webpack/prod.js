@@ -1,9 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
-var postcssAssets = require('postcss-assets');
-var postcssNext = require('postcss-cssnext');
-var stylelint = require('stylelint');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -56,27 +53,6 @@ var config = {
         loader: 'json-loader'
       },
       {
-        test: /\.css$/,
-        include: path.resolve('./src/app'),
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
-            'postcss-loader'
-          ]
-        })
-      },
-      {
-        test: /\.css$/,
-        exclude: path.resolve('./src/app'),
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            'css-loader',
-          ]
-        })
-      },
-      {
         test: /\.eot(\?.*)?$/,
         loader: 'file-loader?name=fonts/[hash].[ext]'
       },
@@ -105,17 +81,6 @@ var config = {
       options: {
         tslint: {
           failOnHint: true
-        },
-        postcss: function () {
-          return [
-            stylelint({
-              files: '../../src/app/*.css'
-            }),
-            postcssNext(),
-            postcssAssets({
-              relative: true
-            }),
-          ];
         },
       }
     }),

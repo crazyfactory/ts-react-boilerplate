@@ -53,13 +53,6 @@ var config = {
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "file-loader"
-      },
-      {
-        test: /\.css$/,
-        loaders: [
-          'isomorphic-style-loader',
-          'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]'
-        ]
       }
     ]
   },
