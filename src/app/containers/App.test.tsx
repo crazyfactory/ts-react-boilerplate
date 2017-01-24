@@ -1,5 +1,5 @@
 import { renderComponent, chai } from 'helpers/TestHelper';
-import { App, Styles } from './index';
+import { App, Styles } from './App';
 
 describe('<App />', () => {
 

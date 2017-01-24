@@ -1,9 +1,9 @@
-const appConfig = require('../../../../config/main');
+const appConfig = require('../../../config/main');
 
 import * as React from 'react';
 import * as Helmet from 'react-helmet';
 import { style, cssRule } from 'typestyle';
-import { SiteStyles } from '../../SiteStyles';
+import { SiteStyles } from '../SiteStyles';
 import { Header } from 'components';
 
 // Define base stylings here
