@@ -25,4 +25,8 @@ function renderComponent(ComponentClass, state?, props?) {
   );
 }
 
-export { mockStore, fetchMock, renderComponent };
+const chai = require('chai');
+const chaiEnzyme = require('chai-enzyme');
+chai.use(chaiEnzyme());
+
+export { mockStore, fetchMock, renderComponent, chai };

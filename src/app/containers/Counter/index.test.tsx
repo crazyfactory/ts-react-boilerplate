@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import { renderComponent } from 'helpers/TestHelper';
+import { renderComponent, chai } from 'helpers/TestHelper';
 import { Counter } from './index';
 
 /** Mock App. State */
@@ -15,33 +14,28 @@ describe('<Counter />', () => {
     component = renderComponent(Counter, state);
   });
 
-  it('Renders with correct style', () => {
-    const s = require('./style.css');
-    expect(component.find(s.counter)).to.exist;
-  });
-
   it('Renders header', () => {
-    expect(component.find('h4').text()).to.eql('Counter Example');
+    chai.expect(component.find('h4').text()).to.eql('Counter Example');
   });
 
   it('Renders Increment and Decrement buttons', () => {
-    expect(component.find('button')).to.have.length(2);
+    chai.expect(component.find('button')).to.have.length(2);
   });
 
   it('Renders counter value', () => {
-    expect(component.find('p').text()).to.eql('1');
+    chai.expect(component.find('p').text()).to.eql('1');
   });
 
   it('Calls the increment', () => {
-    expect(component.find({ name: 'incBtn' })).to.exist;
+    chai.expect(component.find({ name: 'incBtn' })).to.exist;
     component.find({ name: 'incBtn' }).simulate('click');
-    expect(component.find('p').text()).to.eql('2');
+    chai.expect(component.find('p').text()).to.eql('2');
   });
 
   it('Calls the decrement', () => {
-    expect(component.find({ name: 'decBtn' })).to.exist;
+    chai.expect(component.find({ name: 'decBtn' })).to.exist;
     component.find({ name: 'decBtn' }).simulate('click');
-    expect(component.find('p').text()).to.eql('0');
+    chai.expect(component.find('p').text()).to.eql('0');
   });
 
 });

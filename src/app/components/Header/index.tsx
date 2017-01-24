@@ -1,10 +1,28 @@
 import * as React from 'react';
 import { Link } from 'react-router';
+import { style } from 'typestyle';
 
-const s = require('./style.css');
+const Styles = {
+    nav: style({
+        $nest: {
+            ul: {
+                listStyleType: 'none',
+                padding: 0,
 
-export const Header = () => (
-  <nav className={s.nav}>
+                $nest: {
+                    li: {
+                        display: 'inline',
+                        padding: '5px',
+                        color: 'blue',
+                    },
+                },
+            },
+        },
+    }),
+};
+
+const Header = () => (
+  <nav className={Styles.nav}>
     <ul>
       <li><Link to="/">Home</Link></li>
       <li><Link to="about">About</Link></li>
@@ -13,3 +31,5 @@ export const Header = () => (
     </ul>
   </nav>
 );
+
+export { Header, Styles };
