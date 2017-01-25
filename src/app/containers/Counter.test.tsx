@@ -1,5 +1,5 @@
 import { renderComponent, chai } from 'helpers/TestHelper';
-import { Counter } from './index';
+import { Counter } from './Counter';
 
 /** Mock App. State */
 const state: Object = {

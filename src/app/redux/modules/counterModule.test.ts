@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import * as counter from './';
-import { ICounter, ICounterAction } from 'models/counter';
+import * as counter from './counterModule';
+import { ICounter, ICounterAction } from 'models/counterModel';
 
 /** Module */
 describe('Counter Module', () => {
