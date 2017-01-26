@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { fetchMock, mockStore } from 'helpers/TestHelper.tsx';
+import { fetchMock, mockStore } from '../../helpers/TestHelper';
 import * as stars from './starsModule';
 import { IStarsAction } from 'models/starsModel';
 
