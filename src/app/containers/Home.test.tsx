@@ -1,4 +1,4 @@
-import { renderComponent, chai } from 'helpers/TestHelper';
+import { renderComponent, chai } from '../helpers/TestHelper';
 import { Home, Styles } from './Home';
 
 describe('<Home />', () => {
