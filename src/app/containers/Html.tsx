@@ -1,6 +1,7 @@
 import { IStore } from 'redux/IStore';
 import * as React from 'react';
 import * as Helmet from 'react-helmet';
+import { getStyles } from 'typestyle';
 
 interface IHtmlProps {
   manifest?: Object;
@@ -41,6 +42,7 @@ class Html extends React.Component<IHtmlProps, {}> {
           {head.meta.toComponent()}
           {head.link.toComponent()}
           {head.script.toComponent()}
+          <style id="styles-target">{getStyles()}</style>
 
           {renderStyles}
           <link rel="shortcut icon" href="/favicon.ico" />

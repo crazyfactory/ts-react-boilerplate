@@ -11,6 +11,7 @@ const { ReduxAsyncConnect } = require('redux-connect');
 import { configureStore } from './app/redux/store';
 import 'isomorphic-fetch';
 import routes from './app/routes';
+import { setStylesTarget } from 'typestyle';
 
 const store = configureStore(
   browserHistory,
@@ -30,3 +31,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app'),
 );
+
+setStylesTarget(document.getElementById('styles-target'));
