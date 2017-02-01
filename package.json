@@ -5,11 +5,11 @@
   "main": "build/server.js",
   "scripts": {
     "clean": "rimraf build",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean -s",
     "build": "webpack --config config/webpack/index.js",
     "build:prod": "cross-env NODE_ENV=production npm run build",
     "postbuild": "webpack --config config/webpack/server.js",
-    "prestart": "npm run build",
+    "prestart": "npm run build -s",
     "start": "node build/server.js",
     "start:prod": "cross-env NODE_ENV=production npm start",
     "test": "karma start config/test/karma.conf.js",
