@@ -137,6 +137,8 @@
   "dependencies": {
     "chalk": "^1.1.3",
     "compression": "^1.6.2",
+    "csstips": "0.0.3",
+    "csx": "^8.2.1",
     "es6-promise": "^4.0.5",
     "express": "^4.14.0",
     "history": "^4.5.1",
