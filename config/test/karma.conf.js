@@ -22,7 +22,10 @@ module.exports = function (config) {
 
     coverageReporter: {
       dir: '../../coverage',
-      reporters: []
+      reporters: [{
+          type: 'lcov',
+          subdir: '.'
+      }]
     },
 
     hostname: appConfig.host,
@@ -114,15 +117,7 @@ module.exports = function (config) {
     conf.autoWatch = false;
     conf.singleRun = true;
     conf.browsers.push('Firefox');
-    conf.coverageReporter.reporters.push({
-      type: 'lcov',
-      subdir: '.'
-    });
   } else {
-    conf.coverageReporter.reporters.push({
-      type: 'html',
-      subdir: 'html'
-    });
     conf.browsers.push('Chrome');
   }
 
