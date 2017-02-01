@@ -152,6 +152,6 @@
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.3.2",
-    "typestyle": "^0.26.1"
+    "typestyle": "^1.0.0"
   }
 }
