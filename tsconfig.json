@@ -21,9 +21,7 @@
   },
   "exclude": [
     "node_modules",
-    "build",
-    "typings/main",
-    "typings/main.d.ts"
+    "build"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useCache": true,
