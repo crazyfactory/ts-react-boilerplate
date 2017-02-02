@@ -15,8 +15,8 @@ var config = {
   target: 'node',
 
   resolve: {
-    extensions: ['', '.ts', '.tsx', '.js', '.jsx'],
-    modulesDirectories: ['node_modules', 'app', 'app/redux'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    modules: [path.resolve(__dirname), 'node_modules', 'app', 'app/redux'],
   },
 
   entry: './src/server.tsx',
@@ -29,10 +29,9 @@ var config = {
   },
 
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url?limit=1000&name=images/[hash].[ext]'
+        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
       },
       {
         test: /\.json$/,
@@ -40,19 +39,20 @@ var config = {
       },
       {
         test: /\.jsx$/,
-        loader: 'babel?presets[]=es2015'
+        loader: 'babel-loader'
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: 'awesome-typescript-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        loaders: [
-          'isomorphic-style-loader',
-          'css-loader?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]'
-        ]
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
       }
     ]
   },
@@ -68,5 +68,23 @@ var config = {
     __dirname: false
   }
 };
+
+const copySync = (src, dest, overwrite) => {
+  if (overwrite && fs.existsSync(dest)) {
+    fs.unlinkSync(dest);
+  }
+  const data = fs.readFileSync(src);
+  fs.writeFileSync(dest, data);
+}
+
+const createIfDoesntExist = dest => {
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest);
+  }
+}
+
+createIfDoesntExist('./build');
+createIfDoesntExist('./build/public');
+copySync('./src/favicon.ico', './build/public/favicon.ico', true);
 
 module.exports = config;

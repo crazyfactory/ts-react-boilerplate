@@ -35,8 +35,8 @@ node_modules
 # OS X
 .DS_STORE
 
-# TypeScript
-typings
-
 # JetBrains
-.idea
+.idea/*
+!.idea/runConfigurations/
+!.idea/inspectionProfiles/
+.awcache/

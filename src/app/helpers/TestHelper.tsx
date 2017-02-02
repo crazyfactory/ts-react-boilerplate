@@ -3,7 +3,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from 'redux/reducers';
+import rootReducer from '../redux/reducers';
 import configureStore from 'redux-mock-store';
 
 const fetchMock = require('fetch-mock');
@@ -21,8 +21,12 @@ function renderComponent(ComponentClass, state?, props?) {
   return mount(
     <Provider store={store}>
       <ComponentClass {...props} />
-    </Provider>
+    </Provider>,
   );
 }
 
-export { mockStore, fetchMock, renderComponent };
+const chai = require('chai');
+const chaiEnzyme = require('chai-enzyme');
+chai.use(chaiEnzyme());
+
+export { mockStore, fetchMock, renderComponent, chai };

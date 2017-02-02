@@ -11,10 +11,11 @@ const { ReduxAsyncConnect } = require('redux-connect');
 import { configureStore } from './app/redux/store';
 import 'isomorphic-fetch';
 import routes from './app/routes';
+import { setStylesTarget } from 'typestyle';
 
 const store = configureStore(
   browserHistory,
-  window.__INITIAL_STATE__
+  window.__INITIAL_STATE__,
 );
 const history = syncHistoryWithStore(browserHistory, store);
 const connectedCmp = (props) => <ReduxAsyncConnect {...props} />;
@@ -28,5 +29,7 @@ ReactDOM.render(
       {routes}
     </Router>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
+
+setStylesTarget(document.getElementById('styles-target'));
