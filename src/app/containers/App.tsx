@@ -2,34 +2,19 @@ const appConfig = require('../../../config/main');
 
 import * as React from 'react';
 import * as Helmet from 'react-helmet';
-import { style, cssRule } from 'typestyle';
-import { SiteStyles } from '../SiteStyles';
+import {cssRaw, style, cssRule} from 'typestyle';
+import { normalize, setupPage } from 'csstips';
 import { Header } from 'components';
 
-// Define base stylings here
-// Registering a CSS rule cannot use properties with nested styles
-
-cssRule('html', {
-    boxSizing: 'border-box',
+// Global style
+cssRaw(`@import url('https://fonts.googleapis.com/css?family=Roboto');`);
+normalize();
+cssRule(`body`, {
+    fontFamily: 'Roboto',
 });
+setupPage('#app');
 
-cssRule('*, *:before, *:after', {
-    boxSizing: 'inherit',
-});
-
-cssRule('body',
-    SiteStyles.backgroundColor,
-);
-
-cssRule('a',
-    SiteStyles.linkColor,
-    { textDecoration: 'none' },
-);
-
-cssRule('a:hover',
-    SiteStyles.linkColorOnHovered,
-);
-
+// App container style
 const Styles = {
     container: style({
         padding: 0,
