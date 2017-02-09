@@ -11,6 +11,7 @@ cache:
   - node_modules
 
 install:
+  - npm prune
   - npm install
 
 before_script:
