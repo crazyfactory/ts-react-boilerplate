@@ -31,7 +31,8 @@ module.exports = function(config) {
 				]
 			},
 			compilerOptions: {
-				target: "ES5"
+				target: "es5",
+				lib: ["es2015", "dom"]
 			},
 			tsconfig: "tsconfig.json"
 		},

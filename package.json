@@ -69,7 +69,6 @@
     "@types/chai": "^3.4.34",
     "@types/classnames": "0.0.32",
     "@types/enzyme": "^2.7.1",
-    "@types/es6-promise": "0.0.32",
     "@types/history": "^4.5.0",
     "@types/isomorphic-fetch": "0.0.32",
     "@types/mocha": "^2.2.38",
