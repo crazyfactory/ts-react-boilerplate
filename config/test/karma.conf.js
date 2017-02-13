@@ -1,125 +1,44 @@
-var path = require('path');
-var webpack = require('webpack');
-var appConfig = require('../main');
+module.exports = function(config) {
+	config.set({
 
-module.exports = function (config) {
-  const conf = {
-    frameworks: ['mocha', 'chai', 'es6-shim'],
+		frameworks: ["mocha", "karma-typescript"],
 
-    browsers: ['PhantomJS'],
+		basePath: "../../",
 
-    files: ['../webpack/test.js'],
+		files: [
+			{ pattern: "node_modules/es6-shim/es6-shim.js" }, // needed for PhantomJS
+			{ pattern: "src/**/*.+(ts|tsx)" }
+		],
 
-    preprocessors: {
-      '../src/**/*.ts': ['coverage'],
-      '../src/**/*.tsx': ['coverage'],
-      '../webpack/test.js': ['webpack']
-    },
+		preprocessors: {
+			"**/*.+(ts|tsx)": ["karma-typescript"]
+		},
 
-    plugins: ['karma-*'],
+		karmaTypescriptConfig: {
+			bundlerOptions: {
+				entrypoints: /\.test\.tsx$/,
+				exclude: [
+					// dynamic requires or stuff that breaks PhantomJS
+					"node-pre-gyp",
+					"react/addons",
+					"react/lib/ExecutionEnvironment",
+					"react/lib/ReactContext",
+					"send",
+					// webpack stuff, can be removed if webpack imports are removed from dev setup
+					"../config/webpack/dev",
+					"webpack",
+					"webpack-manifest-plugin"
+				]
+			},
+			compilerOptions: {
+				target: "es5",
+				lib: ["es2015", "dom"]
+			},
+			tsconfig: "tsconfig.json"
+		},
 
-    reporters: ['mocha', 'coverage'],
+		reporters: ["progress", "karma-typescript"],
 
-    coverageReporter: {
-      dir: '../../coverage',
-      reporters: [{
-          type: 'lcov',
-          subdir: '.'
-      }]
-    },
-
-    hostname: appConfig.host,
-
-    port: appConfig.karmaPort,
-
-    colors: true,
-
-    logLevel: config.LOG_INFO,
-
-    autoWatch: true,
-
-    singleRun: false,
-
-    concurrency: Infinity,
-
-    webpack: {
-      devtool: 'inline-source-map',
-
-      resolve: {
-        modules: [
-          path.resolve(__dirname),
-          '../../src',
-          '../../src/app',
-          '../../src/app/redux',
-          'node_modules'
-        ],
-        extensions: ['.json', '.js', '.ts', '.tsx', '.jsx']
-      },
-
-      module: {
-        rules: [{
-            enforce: 'pre',
-            test: /\.tsx?$/,
-            loader: 'tslint-loader'
-          },
-          {
-            test: /\.tsx?$/,
-            loader: 'awesome-typescript-loader?useCache=false'
-          },
-          {
-            test: /\.(jpe?g|png|gif)$/i,
-            loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
-          },
-          {
-            test: /\.json$/,
-            loader: 'json-loader'
-          },
-          {
-            enforce: 'post',
-            test: /\.tsx?$/,
-            loader: 'istanbul-instrumenter-loader',
-            include: path.resolve('./src/app')
-          }
-        ],
-      },
-
-      externals: {
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': 'window'
-      },
-
-      plugins: [
-        new webpack.LoaderOptionsPlugin({
-          options: {
-            tslint: {
-              failOnHint: true
-            },
-          }
-        }),
-        new webpack.IgnorePlugin(/^fs$/),
-        new webpack.IgnorePlugin(/^react\/addons$/),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.DefinePlugin({
-          'process.env': {
-            BROWSER: JSON.stringify(true),
-            NODE_ENV: JSON.stringify('development')
-          }
-        })
-      ]
-    },
-
-    webpackServer: {
-      noInfo: true
-    }
-  };
-
-  if (process.env.NODE_ENV === 'ci') {
-    conf.autoWatch = false;
-    conf.singleRun = true;
-    conf.browsers.push('Firefox');
-  } else {
-    conf.browsers.push('Chrome');
-  }
-
-  config.set(conf);
+		browsers: ["PhantomJS"]
+	});
 };
