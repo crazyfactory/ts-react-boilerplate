@@ -23,7 +23,9 @@ module.exports = function(config) {
 					"react/addons",
 					"react/lib/ExecutionEnvironment",
 					"react/lib/ReactContext",
-					"send",
+					"send"
+				],
+				ignore: [
 					// webpack stuff, can be removed if webpack imports are removed from dev setup
 					"../config/webpack/dev",
 					"webpack",
