@@ -68,7 +68,7 @@
     "@types/chai": "^3.4.34",
     "@types/classnames": "0.0.32",
     "@types/enzyme": "^2.7.1",
-    "@types/isomorphic-fetch": "0.0.32",
+    "@types/isomorphic-fetch": "0.0.33",
     "@types/mocha": "^2.2.38",
     "@types/node": "^7.0.0",
     "@types/react": "^15.0.6",
