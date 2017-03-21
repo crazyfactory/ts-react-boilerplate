@@ -2,7 +2,7 @@ import { renderComponent, chai } from '../helpers/TestHelper';
 import { Stars } from './Stars';
 
 /** Mock App. State */
-const state: Object = {
+const state: object = {
   stars: {
     count: 61,
     isFetching: false,

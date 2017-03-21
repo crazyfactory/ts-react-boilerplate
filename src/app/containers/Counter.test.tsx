@@ -2,7 +2,7 @@ import { renderComponent, chai } from '../helpers/TestHelper';
 import { Counter } from './Counter';
 
 /** Mock App. State */
-const state: Object = {
+const state: object = {
   counter: { count: 1 },
 };
 
