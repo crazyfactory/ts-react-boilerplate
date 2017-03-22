@@ -4,7 +4,7 @@ import * as Helmet from 'react-helmet';
 import { getStyles } from 'typestyle';
 
 interface IHtmlProps {
-  manifest?: Object;
+  manifest?: object;
   markup?: string;
   store?: Redux.Store<IStore>;
 }
