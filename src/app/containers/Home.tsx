@@ -8,7 +8,7 @@ const Styles = {
 };
 
 class Home extends React.Component<any, any> {
-  public render() {
+  public render(): JSX.Element {
     return (
       <div className={Styles.home}>
         <img src={require("./barbar.png")} />

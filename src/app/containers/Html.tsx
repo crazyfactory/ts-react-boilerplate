@@ -17,7 +17,7 @@ class Html extends React.Component<IHtmlProps, {}> {
     }).filter((file) => file !== undefined);
   }
 
-  public render() {
+  public render(): JSX.Element {
     const head = Helmet.rewind();
     const { markup, store } = this.props;
 

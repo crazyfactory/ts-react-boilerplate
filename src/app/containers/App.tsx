@@ -24,7 +24,7 @@ const Styles = {
 };
 
 class App extends React.Component<any, any> {
-  public render() {
+  public render(): JSX.Element {
     return (
       <section className={Styles.container}>
         <Helmet {...appConfig.app} {...appConfig.app.head}/>

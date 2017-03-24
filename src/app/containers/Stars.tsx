@@ -18,7 +18,7 @@ interface IProps {
   (state) => ({ stars: state.stars })
 )
 class Stars extends React.Component<IProps, {}> {
-  public render() {
+  public render(): JSX.Element {
     const { stars } = this.props;
 
     return (
