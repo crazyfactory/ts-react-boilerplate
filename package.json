@@ -17,7 +17,8 @@
     "start:prod": "cross-env NODE_ENV=production npm start",
     "test": "karma start config/test/karma.conf.js --single-run --no-auto-watch",
     "test:watch": "karma start config/test/karma.conf.js",
-    "lint": "tslint \"src/**/**.ts*\""
+    "lint": "tslint -t stylish \"src/**/**.ts*\"",
+    "lint-fix": "npm run lint -s -- --fix"
   },
   "author": "Barbar Startup Factory <hey@barbar.com.tr>",
   "contributors": [
@@ -129,6 +130,7 @@
     "source-map-loader": "^0.1.6",
     "tslint": "^4.3.1",
     "tslint-loader": "^3.3.0",
+    "tslint-microsoft-contrib": "^4.0.1",
     "tslint-react": "^2.3.0",
     "typescript": "^2.1.5",
     "url-loader": "^0.5.7",
