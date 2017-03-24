@@ -119,7 +119,7 @@
     "missing-jsdoc": false,
     "new-parens": true,
     "no-construct": true,
-    "no-default-export": true,
+    "no-default-export": false,
     "no-empty-interfaces": true,
     "no-for-in": true,
     "no-function-expression": true,
