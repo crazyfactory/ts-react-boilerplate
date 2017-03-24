@@ -23,9 +23,8 @@ class Html extends React.Component<IHtmlProps, {}> {
       <script src={src} key={i} />
     );
 
-    /* tslint:disable */
+    /* tslint:disable-next-line:react-no-dangerous-html */
     const initialState = (<script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />);
-    /* tslint:enable */
     return (
       <html>
         <head>
@@ -38,9 +37,8 @@ class Html extends React.Component<IHtmlProps, {}> {
           <link rel="shortcut icon" href="/favicon.ico" />
         </head>
         <body>
-          {/* tslint:disable */}
+          {/* tslint:disable-next-line:react-no-dangerous-html */}
           <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
-          {/* tslint:enable */}
           {initialState}
           {renderScripts}
         </body>
