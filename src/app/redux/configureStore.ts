@@ -1,12 +1,13 @@
+import {History} from "history";
 const appConfig = require("../../../config/main");
 import { routerMiddleware } from "react-router-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { IStore } from "./IStore";
-import rootReducer from "./reducers";
+import rootReducer from "./rootReducer";
 const createLogger = require("redux-logger");
 
-export function configureStore(history, initialState?: IStore): Redux.Store<IStore> {
+export function configureStore(history: History, initialState?: IStore): Redux.Store<IStore> {
 
   const middlewares: Redux.Middleware[] = [
     routerMiddleware(history),
@@ -28,8 +29,8 @@ export function configureStore(history, initialState?: IStore): Redux.Store<ISto
   ));
 
   if (appConfig.env === "development" && (module as any).hot) {
-    (module as any).hot.accept("./reducers", () => {
-      store.replaceReducer((require("./reducers")));
+    (module as any).hot.accept("./rootReducer", () => {
+      store.replaceReducer((require("./rootReducer")));
     });
   }
 

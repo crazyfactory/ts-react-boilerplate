@@ -7,7 +7,7 @@ import * as Helmet from "react-helmet";
 import {cssRaw, cssRule, style} from "typestyle";
 
 // Global style
-cssRaw(`@import url('https://fonts.googleapis.com/css?family=Roboto');`);
+cssRaw(`@import url(https://fonts.googleapis.com/css?family=Roboto);`);
 normalize();
 cssRule(`body`, {
     fontFamily: "Roboto"

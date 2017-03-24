@@ -11,8 +11,8 @@ import { Provider } from "react-redux";
 import { createMemoryHistory, match } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 const { ReduxAsyncConnect, loadOnServer } = require("redux-connect");
-import { configureStore } from "./app/redux/store";
-import routes from "./app/routes";
+import { configureStore } from "./app/redux/configureStore";
+import routes from "./app/routes/routes";
 
 import { Html } from "./app/containers";
 const manifest = require("../build/manifest.json");
@@ -89,7 +89,7 @@ app.listen(appConfig.port, appConfig.host, (err) => {
   }
 });
 
-function renderHTML(markup: string, store: any) {
+function renderHTML(markup: string, store: any): string {
   const html = ReactDOMServer.renderToString(
     <Html markup={markup} manifest={manifest} store={store} />
   );

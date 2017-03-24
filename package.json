@@ -18,7 +18,7 @@
     "test": "karma start config/test/karma.conf.js --single-run --no-auto-watch",
     "test:watch": "karma start config/test/karma.conf.js",
     "lint": "tslint -t stylish \"src/**/**.ts*\"",
-    "lint-fix": "npm run lint -s -- --fix"
+    "lint:fix": "npm run lint -s -- --fix"
   },
   "author": "Barbar Startup Factory <hey@barbar.com.tr>",
   "contributors": [

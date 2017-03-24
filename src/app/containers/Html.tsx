@@ -10,13 +10,6 @@ interface IHtmlProps {
 }
 
 class Html extends React.Component<IHtmlProps, {}> {
-  private resolve(files) {
-    return files.map((src) => {
-      if (!this.props.manifest[src]) { return; }
-      return "/public/" + this.props.manifest[src];
-    }).filter((file) => file !== undefined);
-  }
-
   public render(): JSX.Element {
     const head = Helmet.rewind();
     const { markup, store } = this.props;
@@ -30,9 +23,9 @@ class Html extends React.Component<IHtmlProps, {}> {
       <script src={src} key={i} />
     );
 
-    // tslint:disable-next-line:max-line-length
+    /* tslint:disable */
     const initialState = (<script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />);
-
+    /* tslint:enable */
     return (
       <html>
         <head>
@@ -45,13 +38,22 @@ class Html extends React.Component<IHtmlProps, {}> {
           <link rel="shortcut icon" href="/favicon.ico" />
         </head>
         <body>
+          {/* tslint:disable */}
           <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
+          {/* tslint:enable */}
           {initialState}
           {renderScripts}
         </body>
       </html>
     );
   }
+  private resolve(files: string[]): string[] {
+    return files.map((src) => {
+      if (!this.props.manifest[src]) { return; }
+      return "/public/" + this.props.manifest[src];
+    }).filter((file) => file !== undefined);
+  }
+
 }
 
 export { Html }

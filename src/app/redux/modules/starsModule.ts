@@ -11,7 +11,7 @@ const initialState: IStars = {
 };
 
 /** Reducer */
-export function starsReducer(state = initialState, action: IStarsAction) {
+export function starsReducer(state: IStars = initialState, action: IStarsAction): IStars {
   switch (action.type) {
     case GET_REQUEST:
       return Object.assign({}, state, {
@@ -37,7 +37,7 @@ export function starsReducer(state = initialState, action: IStarsAction) {
 }
 
 /** Async Action Creator */
-export function getStars() {
+export function getStars(): (dispatch: any) => Promise<IStars> {
   return (dispatch) => {
     dispatch(starsRequest());
 
@@ -45,10 +45,10 @@ export function getStars() {
       .then((res) => {
         if (res.ok) {
           return res.json()
-            .then((res) => dispatch(starsSuccess(res.stargazers_count)));
+            .then((repo) => dispatch(starsSuccess(repo.stargazers_count)));
         } else {
           return res.json()
-            .then((res) => dispatch(starsFailure(res)));
+            .then((starsErr) => dispatch(starsFailure(starsErr)));
         }
       })
       .catch((err) => dispatch(starsFailure(err)));

@@ -4,4 +4,4 @@ import { IStars } from "models/starsModel";
 export interface IStore {
   counter: ICounter;
   stars: IStars;
-};
+}
