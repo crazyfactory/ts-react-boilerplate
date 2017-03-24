@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 class About extends React.Component<any, any> {
   public render() {

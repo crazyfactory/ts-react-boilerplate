@@ -1,26 +1,26 @@
-const appConfig = require('../../../config/main');
+const appConfig = require("../../../config/main");
 
-import * as React from 'react';
-import * as Helmet from 'react-helmet';
-import {cssRaw, style, cssRule} from 'typestyle';
-import { normalize, setupPage } from 'csstips';
-import { Header } from 'components';
+import { Header } from "components";
+import { normalize, setupPage } from "csstips";
+import * as React from "react";
+import * as Helmet from "react-helmet";
+import {cssRaw, cssRule, style} from "typestyle";
 
 // Global style
 cssRaw(`@import url('https://fonts.googleapis.com/css?family=Roboto');`);
 normalize();
 cssRule(`body`, {
-    fontFamily: 'Roboto',
+    fontFamily: "Roboto"
 });
-setupPage('#app');
+setupPage("#app");
 
 // App container style
 const Styles = {
     container: style({
         padding: 0,
         margin: 0,
-        textAlign: 'center',
-    }),
+        textAlign: "center"
+    })
 };
 
 class App extends React.Component<any, any> {

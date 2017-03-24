@@ -1,15 +1,15 @@
 /** React Specific */
-import * as React from 'react';
-import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from '../redux/reducers';
-import configureStore from 'redux-mock-store';
+import { mount } from "enzyme";
+import * as React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import configureStore from "redux-mock-store";
+import rootReducer from "../redux/reducers";
 
-const fetchMock = require('fetch-mock');
+const fetchMock = require("fetch-mock");
 
 /** Redux Mock Store Configuration */
-import thunk from 'redux-thunk';
+import thunk from "redux-thunk";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -21,12 +21,12 @@ function renderComponent(ComponentClass, state?, props?) {
   return mount(
     <Provider store={store}>
       <ComponentClass {...props} />
-    </Provider>,
+    </Provider>
   );
 }
 
-const chai = require('chai');
-const chaiEnzyme = require('chai-enzyme');
+const chai = require("chai");
+const chaiEnzyme = require("chai-enzyme");
 chai.use(chaiEnzyme());
 
 export { mockStore, fetchMock, renderComponent, chai };

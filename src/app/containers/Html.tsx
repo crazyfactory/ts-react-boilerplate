@@ -1,7 +1,7 @@
-import { IStore } from 'redux/IStore';
-import * as React from 'react';
-import * as Helmet from 'react-helmet';
-import { getStyles } from 'typestyle';
+import * as React from "react";
+import * as Helmet from "react-helmet";
+import { IStore } from "redux/IStore";
+import { getStyles } from "typestyle";
 
 interface IHtmlProps {
   manifest?: object;
@@ -13,7 +13,7 @@ class Html extends React.Component<IHtmlProps, {}> {
   private resolve(files) {
     return files.map((src) => {
       if (!this.props.manifest[src]) { return; }
-      return '/public/' + this.props.manifest[src];
+      return "/public/" + this.props.manifest[src];
     }).filter((file) => file !== undefined);
   }
 
@@ -25,9 +25,9 @@ class Html extends React.Component<IHtmlProps, {}> {
     const renderStyles = <style id="styles-target">{getStyles()}</style>;
 
     // Scripts
-    const scripts = this.resolve(['vendor.js', 'app.js']);
+    const scripts = this.resolve(["vendor.js", "app.js"]);
     const renderScripts = scripts.map((src, i) =>
-      <script src={src} key={i} />,
+      <script src={src} key={i} />
     );
 
     // tslint:disable-next-line:max-line-length

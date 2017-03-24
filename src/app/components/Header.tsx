@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { Link } from 'react-router';
-import { style } from 'typestyle';
+import * as React from "react";
+import { Link } from "react-router";
+import { style } from "typestyle";
 
 const Styles = {
     nav: style({
         $nest: {
             ul: {
-                listStyleType: 'none',
+                listStyleType: "none",
                 padding: 0,
 
                 $nest: {
                     li: {
-                        display: 'inline',
-                        padding: '5px',
-                        color: 'blue',
-                    },
-                },
-            },
-        },
-    }),
+                        display: "inline",
+                        padding: "5px",
+                        color: "blue"
+                    }
+                }
+            }
+        }
+    })
 };
 
 const Header = () => (

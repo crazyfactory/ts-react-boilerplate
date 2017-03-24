@@ -1,13 +1,13 @@
 const SiteStyles = {
     backgroundColor: {
-        backgroundColor: 'lightblue',
+        backgroundColor: "lightblue"
     },
     linkColor: {
-        color: 'darkslateblue',
+        color: "darkslateblue"
     },
     linkColorOnHovered: {
-        color: 'deepskyblue',
-    },
+        color: "deepskyblue"
+    }
 };
 
 export { SiteStyles };
