@@ -225,6 +225,7 @@
     "no-reference": true,
     "no-unexternalized-strings": false,
     "prefer-type-cast": false,
-    "no-angle-bracket-type-assertion": true
+    "no-angle-bracket-type-assertion": true,
+    "jsx-alignment": false
   }
 }
