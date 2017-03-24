@@ -1,7 +1,7 @@
-import { IStore } from 'redux/IStore';
-import * as React from 'react';
-import * as Helmet from 'react-helmet';
-import { getStyles } from 'typestyle';
+import * as React from "react";
+import * as Helmet from "react-helmet";
+import { IStore } from "redux/IStore";
+import { getStyles } from "typestyle";
 
 interface IHtmlProps {
   manifest?: object;
@@ -10,14 +10,7 @@ interface IHtmlProps {
 }
 
 class Html extends React.Component<IHtmlProps, {}> {
-  private resolve(files) {
-    return files.map((src) => {
-      if (!this.props.manifest[src]) { return; }
-      return '/public/' + this.props.manifest[src];
-    }).filter((file) => file !== undefined);
-  }
-
-  public render() {
+  public render(): JSX.Element {
     const head = Helmet.rewind();
     const { markup, store } = this.props;
 
@@ -25,14 +18,13 @@ class Html extends React.Component<IHtmlProps, {}> {
     const renderStyles = <style id="styles-target">{getStyles()}</style>;
 
     // Scripts
-    const scripts = this.resolve(['vendor.js', 'app.js']);
+    const scripts = this.resolve(["vendor.js", "app.js"]);
     const renderScripts = scripts.map((src, i) =>
-      <script src={src} key={i} />,
+      <script src={src} key={i} />
     );
 
-    // tslint:disable-next-line:max-line-length
+    /* tslint:disable-next-line:react-no-dangerous-html */
     const initialState = (<script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />);
-
     return (
       <html>
         <head>
@@ -45,6 +37,7 @@ class Html extends React.Component<IHtmlProps, {}> {
           <link rel="shortcut icon" href="/favicon.ico" />
         </head>
         <body>
+          {/* tslint:disable-next-line:react-no-dangerous-html */}
           <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
           {initialState}
           {renderScripts}
@@ -52,6 +45,13 @@ class Html extends React.Component<IHtmlProps, {}> {
       </html>
     );
   }
+  private resolve(files: string[]): string[] {
+    return files.map((src) => {
+      if (!this.props.manifest[src]) { return; }
+      return "/public/" + this.props.manifest[src];
+    }).filter((file) => file !== undefined);
+  }
+
 }
 
 export { Html }
