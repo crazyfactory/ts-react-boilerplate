@@ -37,7 +37,7 @@ export function starsReducer(state: IStars = initialState, action: IStarsAction)
 }
 
 /** Async Action Creator */
-export function getStars(): (dispatch: any) => Promise<IStars> {
+export function getStars(): (dispatch: (action: IStarsAction) => IStars) => Promise<IStars> {
   return (dispatch) => {
     dispatch(starsRequest());
 
