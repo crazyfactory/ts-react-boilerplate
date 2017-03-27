@@ -134,7 +134,7 @@
     "typescript": "^2.1.5",
     "url-loader": "^0.5.7",
     "validate-commit-msg": "^2.11.2",
-    "wallaby-webpack": "0.0.35",
+    "wallaby-webpack": "0.0.38",
     "webpack": "^2.3.0",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-dev-server": "^2.2.0",
