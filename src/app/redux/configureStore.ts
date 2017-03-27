@@ -5,7 +5,7 @@ import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { IStore } from "./IStore";
 import rootReducer from "./rootReducer";
-const createLogger = require("redux-logger");
+const {createLogger} = require("redux-logger");
 
 export function configureStore(history: History, initialState?: IStore): Redux.Store<IStore> {
 
