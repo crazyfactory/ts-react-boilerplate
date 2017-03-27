@@ -4,7 +4,7 @@ import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { IStore } from './IStore';
-import createLogger from 'redux-logger';
+import {createLogger} from 'redux-logger';
 
 export function configureStore(history, initialState?: IStore): Redux.Store<IStore> {
 
