@@ -16,7 +16,7 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 /** Render Component */
-function renderComponent(ComponentClass: any, state?: Object, props?: Object): ReactWrapper<IStore, any> {
+function renderComponent(ComponentClass: any, state?: object, props?: object): ReactWrapper<IStore, any> {
   const store = createStore(rootReducer, state);
 
   return mount(
