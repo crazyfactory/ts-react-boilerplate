@@ -1,6 +1,6 @@
 {
   "extends": [
-    "tslint:recommended",
+    "tslint:latest",
     "tslint-react"
   ],
   "rulesDirectory": [
