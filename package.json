@@ -1,6 +1,5 @@
 {
-  "name": "vortigern",
-  "version": "0.1.1",
+  "name": "ts-react-boilerplate",
   "description": "A universal boilerplate for building web applications w/ TypeScript, React, Redux and more.",
   "main": "build/server.js",
   "scripts": {
@@ -20,36 +19,14 @@
     "lint": "tslint -t stylish \"src/**/**.ts*\"",
     "lint:fix": "npm run lint -s -- --fix"
   },
-  "author": "Barbar Startup Factory <hey@barbar.com.tr>",
-  "contributors": [
-    {
-      "name": "Altay Aydemir",
-      "email": "altay.aydemir@gmail.com",
-      "url": "http://altayaydemir.com/"
-    },
-    {
-      "name": "Batuhan Icoz",
-      "email": "hey@batuhanicoz.com",
-      "url": "http://batuhanicoz.com/"
-    },
-    {
-      "name": "Omer Ufuk Efendioglu",
-      "email": "ufukomer@gmail.com",
-      "url": "http://ufukomer.com/"
-    },
-    {
-      "name": "Patrick Roza",
-      "email": "contact@patrickroza.com",
-      "url": "http://patrickroza.com/"
-    }
-  ],
-  "homepage": "https://github.com/barbar/vortigern.git",
+  "author": "Crazy Factory <dev@crazy-factory.com>",
+  "homepage": "https://github.com/crazyfactory/ts-react-boilerplate.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/barbar/vortigern.git"
+    "url": "https://github.com/crazyfactory/ts-react-boilerplate.git"
   },
   "bugs": {
-    "url": "https://github.com/barbar/vortigern/issues"
+    "url": "https://github.com/crazyfactory/ts-react-boilerplate/issues"
   },
   "keywords": [
     "react",
@@ -71,7 +48,6 @@
   "devDependencies": {
     "@types/base16": "^1.0.1",
     "@types/chai": "^3.4.34",
-    "@types/classnames": "0.0.32",
     "@types/enzyme": "^2.7.1",
     "@types/isomorphic-fetch": "0.0.33",
     "@types/mocha": "^2.2.38",
@@ -99,7 +75,6 @@
     "babel-preset-es2015": "^6.22.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.6.1",
-    "classnames": "^2.2.5",
     "cross-env": "^3.1.4",
     "electron": "^1.4.15",
     "enzyme": "^2.7.0",
