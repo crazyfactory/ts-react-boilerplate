@@ -5,12 +5,12 @@ var config = {
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || 8889,
   karmaPort: 9876,
+  ssr: true,
 
   // This part goes to React-Helmet for Head of our HTML
   app: {
     head: {
-      title: 'barbar-vortigern',
-      titleTemplate: 'barbar-vortigern: %s',
+      title: 'Crazy Factory',
       meta: [
         { charset: 'utf-8' },
         { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },

@@ -110,5 +110,6 @@ const createIfDoesntExist = dest => {
 createIfDoesntExist('./build');
 createIfDoesntExist('./build/public');
 copySync('./src/favicon.ico', './build/public/favicon.ico', true);
+copySync('./src/index.html', './build/index.html');
 
 module.exports = config;

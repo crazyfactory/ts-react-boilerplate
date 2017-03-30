@@ -1,20 +1,20 @@
 const appConfig = require("../config/main");
 
 import * as e6p from "es6-promise";
-(e6p as any).polyfill();
 import "isomorphic-fetch";
 
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 
-import { Provider } from "react-redux";
-import { createMemoryHistory, match } from "react-router";
-import { syncHistoryWithStore } from "react-router-redux";
-const { ReduxAsyncConnect, loadOnServer } = require("redux-connect");
-import { configureStore } from "./app/redux/configureStore";
+import {Provider} from "react-redux";
+import {createMemoryHistory, match} from "react-router";
+import {syncHistoryWithStore} from "react-router-redux";
+import {configureStore} from "./app/redux/configureStore";
 import routes from "./app/routes/routes";
 
-import { Html } from "./app/containers";
+import {Html} from "./app/containers";
+(e6p as any).polyfill();
+const { ReduxAsyncConnect, loadOnServer } = require("redux-connect");
 const manifest = require("../build/manifest.json");
 
 const express = require("express");
@@ -71,7 +71,15 @@ app.get("*", (req, res) => {
               <ReduxAsyncConnect {...renderProps} />
             </Provider>
           );
-          res.status(200).send(renderHTML(markup, store));
+          if (appConfig.ssr) {
+            res.status(200).send(renderHTML(markup, store));
+          }else {
+            res.sendFile(path.resolve("./build/index.html"), (err) => {
+              if (err) {
+                console.error(err);
+              }
+            });
+          }
         });
       } else {
         res.status(404).send("Not Found?");
