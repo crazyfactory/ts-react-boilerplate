@@ -64,6 +64,7 @@ This boilerplate uses the following libraries and tools:
 - [Mocha](https://github.com/mochajs/mocha) as testing framework.
 - [Chai](https://github.com/chaijs/chai) as assertion library.
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
+- [Chai Enzyme](https://github.com/producthunt/chai-enzyme) for asserting React Components.
 - [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
 - [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
 
