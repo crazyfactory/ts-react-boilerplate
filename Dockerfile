@@ -1,6 +1,6 @@
 FROM mhart/alpine-node:latest
 
-MAINTAINER Barbar Startup Factory hey@barbar.com.tr
+MAINTAINER Crazy Factory dev@crazy-factory.com
 
 WORKDIR /app
 ADD . .
