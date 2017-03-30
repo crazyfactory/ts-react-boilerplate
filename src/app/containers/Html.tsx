@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 import { IStore } from "redux/IStore";
 import { getStyles } from "typestyle";
 
@@ -11,7 +11,7 @@ interface IHtmlProps {
 
 class Html extends React.Component<IHtmlProps, {}> {
   public render(): JSX.Element {
-    const head = Helmet.rewind();
+    const head = Helmet.renderStatic();
     const { markup, store } = this.props;
 
     // Styles
