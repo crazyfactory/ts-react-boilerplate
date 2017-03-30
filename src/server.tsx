@@ -74,7 +74,7 @@ app.get("*", (req, res) => {
           if (appConfig.ssr) {
             res.status(200).send(renderHTML(markup, store));
           }else {
-            res.sendFile(path.resolve("./build/index.html"), (err) => {
+            res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
               if (err) {
                 console.error(err);
               }
