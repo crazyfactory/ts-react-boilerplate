@@ -1,23 +1,18 @@
-# Vortigern
-[![Build Status](https://travis-ci.org/barbar/vortigern.svg?branch=master)](https://travis-ci.org/barbar/vortigern)
-[![Dependency Status](https://david-dm.org/barbar/vortigern.svg)]()
-[![devDependency Status](https://david-dm.org/barbar/vortigern/dev-status.svg)]()
-[![Code Climate](https://codeclimate.com/github/barbar/vortigern/badges/gpa.svg)](https://codeclimate.com/github/barbar/vortigern)
-[![GitHub issues](https://img.shields.io/github/issues/barbar/vortigern.svg)](https://github.com/barbar/vortigern/issues)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/barbar/vortigern/develop/LICENSE)
+# ts-react-boilerplate
+[![Build Status](https://travis-ci.org/crazyfactory/ts-react-boilerplate.svg?branch=master)](https://travis-ci.org/crazyfactory/ts-react-boilerplate)
+[![Dependency Status](https://david-dm.org/crazyfactory/ts-react-boilerplate.svg)](https://david-dm.org/crazyfactory/ts-react-boilerplate)
+[![devDependency Status](https://david-dm.org/crazyfactory/ts-react-boilerplate/dev-status.svg)](https://david-dm.org/crazyfactory/ts-react-boilerplate?type=dev)
+[![GitHub issues](https://img.shields.io/github/issues/crazyfactory/ts-react-boilerplate.svg)](https://github.com/crazyfactory/ts-react-boilerplate/issues)
 ___
 
-<img src="https://barbaruploads.s3.amazonaws.com/bicoz/vortigern.png" width="100%" />
+##### Based on [Vortigern](https://github.com/barbar/vortigern)
 
-**Vortigern** is our opinionated boilerplate for crafting universal web applications by using modern technologies like TypeScript, React and Redux.
-
-[![TypeScript](https://barbaruploads.s3.amazonaws.com/bicoz/typescript.png)](https://www.typescriptlang.org/) 
-[![React](https://barbaruploads.s3.amazonaws.com/bicoz/react.png)](https://github.com/facebook/react) 
+[![TypeScript](https://barbaruploads.s3.amazonaws.com/bicoz/typescript.png)](https://www.typescriptlang.org/)
+[![React](https://barbaruploads.s3.amazonaws.com/bicoz/react.png)](https://github.com/facebook/react)
 [![Redux](https://barbaruploads.s3.amazonaws.com/bicoz/redux.png)](https://github.com/reactjs/redux)
 
-
 ## Libraries
-Vortigern uses the following libraries and tools:
+This boilerplate uses the following libraries and tools:
 
 #### Core
 - [TypeScript](https://www.typescriptlang.org/)
@@ -32,19 +27,13 @@ Vortigern uses the following libraries and tools:
 - [Redux Thunk](https://github.com/gaearon/redux-thunk) for dispatching async actions.
 - [Redux Connect](https://github.com/makeomatic/redux-connect) for resolving async props in react-router.
 - [React Helmet](https://github.com/nfl/react-helmet)
-- [classnames](https://github.com/JedWatson/classnames)
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
   - [Awesome TypeScript Loader](https://github.com/s-panferov/awesome-typescript-loader) as ts loader.
   - [Babel Loader](https://github.com/babel/babel-loader) as js loader.
   - [React Hot Loader](https://github.com/gaearon/react-hot-loader) for providing hot reload capability to our development server
-  - [Isomorphic Style Loader](https://github.com/kriasoft/isomorphic-style-loader) for loading styles on server-side.
-  - [Style Loader](https://github.com/webpack/style-loader)
-  - [CSS Loader](https://github.com/webpack/css-loader)
-  - [PostCSS Loader](https://github.com/postcss/postcss)
-    - [PostCSS cssnext](https://github.com/MoOx/postcss-cssnext)
-    - [PostCSS Assets](https://github.com/assetsjs/postcss-assets)
+  - [TypeStyle](https://github.com/typestyle/typestyle)
   - [JSON Loader](https://github.com/webpack/json-loader)
   - [File Loader](https://github.com/webpack/file-loader)
   - [URL Loader](https://github.com/webpack/url-loader)
@@ -52,21 +41,16 @@ Vortigern uses the following libraries and tools:
   - [Manifest Plugin](https://github.com/danethurber/webpack-manifest-plugin)
   - [Extract Text Plugin](https://github.com/webpack/extract-text-webpack-plugin) for exporting bundled css. 
   - [tslint Loader](https://github.com/wbuchwalter/tslint-loader) for using tslint as preloader on build process.
-  - [stylelint Loader](https://github.com/adrianhall/stylelint-loader) for using stylelint as preloader on build process.
-  - [Istanbul Instrumenter Loader](https://github.com/deepsweet/istanbul-instrumenter-loader) for using istanbul on postload process while generating code coverage reports.
 
 #### Dev & Prod Server
 - [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
   - [Webpack Dev Middleware](https://github.com/webpack/webpack-dev-middleware)
   - [Webpack Hot Middleware](https://github.com/webpack/webpack-hot-middleware)
 - [Express](https://github.com/expressjs/express) for running server both on client and server side.
-- [Compression](https://github.com/expressjs/compression) for gzip compression
 - [Serve Favicon](https://github.com/expressjs/serve-favicon) for serving favicon.
 
 #### Developer Experience
-- [Typings](https://github.com/typings/typings) for installing type definitions of external libraries.
 - [tslint](https://github.com/palantir/tslint) for linting TypeScript files.
-- [stylelint](https://github.com/stylelint/stylelint) for linting styles.
 - [Redux Logger](https://github.com/theaqua/redux-logger)
 - [Redux DevTools](https://github.com/gaearon/redux-devtools)
 - [Chalk](https://github.com/chalk/chalk) for colored terminal logs.
@@ -74,13 +58,15 @@ Vortigern uses the following libraries and tools:
 #### Testing
 - [Karma](https://github.com/karma-runner/karma) as test runner with following plugins
   - [Karma-Webpack](https://github.com/webpack/karma-webpack)
+  - [Karma-Typescript](https://github.com/monounity/karma-typescript)
   - [Karma-Mocha](https://github.com/karma-runner/karma-mocha)
   - [Karma-Chai](https://github.com/xdissent/karma-chai)
   - [Karma-Coverage](https://github.com/karma-runner/karma-coverage)
   - [Karma-PhantomJS Launcher](https://github.com/karma-runner/karma-phantomjs-launcher)
 - [Mocha](https://github.com/mochajs/mocha) as testing framework.
 - [Chai](https://github.com/chaijs/chai) as assertion library.
-- [Enzyme](https://github.com/jquery/jquery) for rendering React Components.
+- [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
+- [Chai Enzyme](https://github.com/producthunt/chai-enzyme) for asserting React Components.
 - [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
 - [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
 
@@ -92,7 +78,7 @@ Vortigern uses the following libraries and tools:
 │   ├── test                    # Test configurations.
 │   ├── types                   # Global type definitions, written by us.
 │   ├── webpack                 # Webpack configurations.
-│   └── main.ts                 # Generic App configurations.
+│   └── main.js                 # Generic App configurations.
 ├── node_modules                # Node Packages.
 ├── src                         # Source code.
 │   ├── app                     # App folder.
@@ -104,28 +90,31 @@ Vortigern uses the following libraries and tools:
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
 │   │ │   └── store.ts          # Redux store, contains global app state.    
 │   │ └── routes.tsx            # Routes.
+│   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
+│   ├── favicon.ico             # Favicon
 │   └── server.tsx              # Entry point for server side rendering.
-├── typings                     # Type definitions installed with typings.              
+├── .babelrc                    # babel config.
 ├── .dockerignore               # Tells docker which files to ignore.
+├── .editorconfig               # Configuration for editors.
 ├── .gitignore                  # Tells git which files to ignore.
-├── .stylelintrc                # Configures stylelint.
+├── .travis.yml                 # Travis file.
 ├── Dockerfile                  # Dockerfile.
-├── favicon.ico                 # Favicon.
+├── LICENSE                     # License file
 ├── package.json                # Package configuration.
 ├── README.md                   # This file
 ├── tsconfig.json               # TypeScript transpiler configuration.
 ├── tslint.json                 # Configures tslint.
-└── typings.json                # Typings package configuration.
+└── wallaby.conf.js             # Configuraton for wallaby testing
 ```
 
 ## Installation
 
-You can clone from this repository or [install the latest version](https://github.com/barbar/vortigern/releases) as a zip file or a tarball. 
+You can clone from this repository and use master
 
 ```bash
-$ git clone https://github.com/barbar/vortigern
-$ cd vortigern
+$ git clone https://github.com/crazyfactory/ts-react-boilerplate
+$ cd ts-react-boilerplate
 $ npm install
 ```
 
@@ -156,28 +145,17 @@ $ npm test
 
 For Windows users, we recommend using the shortcuts instead of setting environment variables because they work a little different on Windows.
 
-## Notes
-```bash
-# If you want install additional libraries, you can also install their typings from DefinitelyTyped
-$ typings install dt~<package> --global --save
-# or if it's located on npm
-$ typings install <package> --save
-```
-
 ## Credits
 
-Vortigern is released under the [MIT license](LICENSE). 
-
-The image in this README belongs to [hhvferry.com](http://www.hhvferry.com/vortscrap.html).
+This boilerplate is based on [Vortigern](https://github.com/barbar/vortigern) and is heavily updated.
+This boilerplate is released under the [MIT license](LICENSE).
 
 ___
 
-## [Barbar Startup Factory](https://www.barbar.com.tr/?ref=vortigern)
+## [Crazy Factory](https://www.crazy-factory.com/en-US/)
 
-<a target="_blank" href="https://barbar.digital/?ref=vortigern-barbar-logo"><img src="https://barbaruploads.s3.amazonaws.com/bicoz/logo2x.png" height="55px" /></a>
+Crazy factory is an online shop which manufactures piercings, jewellery, mobile covers, etc. **All at factory prices!**
 
-We help startups start and stay started by helping them plan, strategize, fund and execute their vision. 
+You can contact us at [dev@crazy-factory.com](mailto:dev@crazy-factory.com)
 
-You can contact us at [hey@barbar.digital](mailto:hey@barbar.digital)
-
-Be sure to check out available [jobs at Barbar](https://github.com/barbar/hr).
+Be sure to check out available [jobs at Crazy](http://stackoverflow.com/jobs/companies/Crazy-Factory).

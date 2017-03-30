@@ -1,46 +1,47 @@
-module.exports = function(config) {
-	config.set({
+module.exports = function (config)
+{
+  config.set({
 
-		frameworks: ["mocha", "karma-typescript"],
+    frameworks: ["mocha", "karma-typescript"],
 
-		basePath: "../../",
+    basePath: "../../",
 
-		files: [
-			{ pattern: "node_modules/es6-shim/es6-shim.js" }, // needed for PhantomJS
-			{ pattern: "src/**/*.+(ts|tsx)" }
-		],
+    files: [
+      {pattern: "node_modules/es6-shim/es6-shim.js"}, // needed for PhantomJS
+      {pattern: "src/**/*.+(ts|tsx)"}
+    ],
 
-		preprocessors: {
-			"**/*.+(ts|tsx)": ["karma-typescript"]
-		},
+    preprocessors: {
+      "**/*.+(ts|tsx)": ["karma-typescript"]
+    },
 
-		karmaTypescriptConfig: {
-			bundlerOptions: {
-				entrypoints: /\.test\.tsx$/,
-				exclude: [
-					// dynamic requires or stuff that breaks PhantomJS
-					"node-pre-gyp",
-					"react/addons",
-					"react/lib/ExecutionEnvironment",
-					"react/lib/ReactContext",
-					"send"
-				],
-				ignore: [
-					// webpack stuff, can be removed if webpack imports are removed from dev setup
-					"../config/webpack/dev",
-					"webpack",
-					"webpack-manifest-plugin"
-				]
-			},
-			compilerOptions: {
-				target: "es5",
-				lib: ["es2015", "dom"]
-			},
-			tsconfig: "tsconfig.json"
-		},
+    karmaTypescriptConfig: {
+      bundlerOptions: {
+        entrypoints: /\.test\.tsx$/,
+        exclude: [
+          // dynamic requires or stuff that breaks PhantomJS
+          "node-pre-gyp",
+          "react/addons",
+          "react/lib/ExecutionEnvironment",
+          "react/lib/ReactContext",
+          "send"
+        ],
+        ignore: [
+          // webpack stuff, can be removed if webpack imports are removed from dev setup
+          "../config/webpack/dev",
+          "webpack",
+          "webpack-manifest-plugin"
+        ]
+      },
+      compilerOptions: {
+        target: "es5",
+        lib: ["es2015", "dom"]
+      },
+      tsconfig: "tsconfig.json"
+    },
 
-		reporters: ["progress", "karma-typescript"],
+    reporters: ["progress", "karma-typescript"],
 
-		browsers: ["PhantomJS"]
-	});
+    browsers: ["PhantomJS"]
+  });
 };
