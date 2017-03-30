@@ -71,7 +71,11 @@ app.get("*", (req, res) => {
               <ReduxAsyncConnect {...renderProps} />
             </Provider>
           );
-          res.status(200).send(renderHTML(markup, store));
+          if (appConfig.ssr) {
+            res.status(200).send(renderHTML(markup, store));
+          }else {
+            res.sendFile(path.resolve("./build/index.html"), (err) => {console.error(err); });
+          }
         });
       } else {
         res.status(404).send("Not Found?");
