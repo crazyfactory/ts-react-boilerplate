@@ -65,7 +65,7 @@
     "@types/redux-devtools-log-monitor": "^1.0.29",
     "@types/redux-mock-store": "0.0.7",
     "@types/redux-thunk": "^2.1.31",
-    "@types/sinon": "^1.16.34",
+    "@types/sinon": "^2.1.0",
     "@types/source-map": "^0.5.0",
     "@types/uglify-js": "^2.6.28",
     "@types/webpack": "^2.2.13",
