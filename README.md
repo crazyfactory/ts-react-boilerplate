@@ -56,6 +56,7 @@ This boilerplate uses the following libraries and tools:
 #### Testing
 - [Karma](https://github.com/karma-runner/karma) as test runner with following plugins
   - [Karma-Webpack](https://github.com/webpack/karma-webpack)
+  - [Karma-Typescript](https://github.com/monounity/karma-typescript)
   - [Karma-Mocha](https://github.com/karma-runner/karma-mocha)
   - [Karma-Chai](https://github.com/xdissent/karma-chai)
   - [Karma-Coverage](https://github.com/karma-runner/karma-coverage)
