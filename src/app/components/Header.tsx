@@ -6,16 +6,15 @@ const Styles = {
     nav: style({
         $nest: {
             ul: {
-                listStyleType: "none",
-                padding: 0,
-
                 $nest: {
                     li: {
+                        color: "blue",
                         display: "inline",
-                        padding: "5px",
-                        color: "blue"
+                        padding: "5px"
                     }
-                }
+                },
+                listStyleType: "none",
+                padding: 0
             }
         }
     })
