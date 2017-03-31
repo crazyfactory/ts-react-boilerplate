@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/base16": "^1.0.1",
     "@types/chai": "^3.4.34",
-    "@types/enzyme": "^2.7.1",
+    "@types/enzyme": "^2.7.7",
     "@types/isomorphic-fetch": "0.0.33",
     "@types/mocha": "^2.2.38",
     "@types/node": "^7.0.0",
