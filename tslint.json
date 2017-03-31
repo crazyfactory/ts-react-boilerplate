@@ -134,7 +134,7 @@
     "no-var-keyword": true,
     "no-var-requires": false,
     "no-var-self": true,
-    "object-literal-sort-keys": false,
+    "object-literal-sort-keys": true,
     "one-variable-per-declaration": true,
     "prefer-array-literal": true,
     "array-type": [

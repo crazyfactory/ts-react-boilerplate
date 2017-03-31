@@ -28,8 +28,8 @@ describe("Stars Module", () => {
       it("dispatches Request and Success Actions on OK requests", (done) => {
 
         fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
-          status: 200,
-          body: githubResponse
+          body: githubResponse,
+          status: 200
         });
 
         const expectedActions: IStarsAction[] = [
@@ -49,8 +49,8 @@ describe("Stars Module", () => {
       it("dispatches Failure on failed requests", (done) => {
 
         fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
-          status: 400,
-          body: errResponse
+          body: errResponse,
+          status: 400
         });
 
         const expectedActions: IStarsAction[] = [
