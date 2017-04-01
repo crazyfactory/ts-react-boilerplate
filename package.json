@@ -76,7 +76,7 @@
     "electron": "^1.4.15",
     "enzyme": "^2.7.0",
     "fetch-mock": "^5.8.1",
-    "file-loader": "^0.10.0",
+    "file-loader": "^0.11.1",
     "husky": "^0.13.2",
     "karma": "^1.4.0",
     "karma-chai": "^0.1.0",
