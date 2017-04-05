@@ -19,13 +19,10 @@ const manifest = require("../build/manifest.json");
 
 const express = require("express");
 const path = require("path");
-const compression = require("compression");
 const Chalk = require("chalk");
 const favicon = require("serve-favicon");
 
 const app = express();
-
-app.use(compression());
 
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -33,14 +30,14 @@ if (process.env.NODE_ENV !== "production") {
   const webpackCompiler = webpack(webpackConfig);
 
   app.use(require("webpack-dev-middleware")(webpackCompiler, {
-    publicPath: webpackConfig.output.publicPath,
-    stats: { colors: true },
-    noInfo: true,
+    historyApiFallback: true,
     hot: true,
     inline: true,
     lazy: false,
-    historyApiFallback: true,
-    quiet: true
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true,
+    stats: { colors: true }
   }));
 
   app.use(require("webpack-hot-middleware")(webpackCompiler));

@@ -20,15 +20,15 @@ export function starsReducer(state: IStars = initialState, action: IStarsAction)
 
     case GET_SUCCESS:
       return Object.assign({}, state, {
-        isFetching: false,
-        count: action.payload.count
+        count: action.payload.count,
+        isFetching: false
       });
 
     case GET_FAILURE:
       return Object.assign({}, state, {
+        error: true,
         isFetching: false,
-        message: action.payload.message,
-        error: true
+        message: action.payload.message
       });
 
     default:
@@ -65,19 +65,19 @@ export function starsRequest(): IStarsAction {
 /** Action Creator */
 export function starsSuccess(count: number): IStarsAction {
   return {
-    type: GET_SUCCESS,
     payload: {
       count
-    }
+    },
+    type: GET_SUCCESS
   };
 }
 
 /** Action Creator */
 export function starsFailure(message: any): IStarsAction {
   return {
-    type: GET_FAILURE,
     payload: {
       message
-    }
+    },
+    type: GET_FAILURE
   };
 }
