@@ -4,7 +4,7 @@
   "main": "build/server.js",
   "scripts": {
     "precommit": "npm run lint",
-    "prepush": "npm run build && npm run build:prod && npm test",
+    "prepush": "npm run build && npm test && npm run build:prod && npm test",
     "commitmsg": "validate-commit-msg",
     "clean": "rimraf build",
     "prebuild": "npm run clean -s",
