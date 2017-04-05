@@ -34,12 +34,10 @@ This boilerplate uses the following libraries and tools:
   - [Babel Loader](https://github.com/babel/babel-loader) as js loader.
   - [React Hot Loader](https://github.com/gaearon/react-hot-loader) for providing hot reload capability to our development server
   - [TypeStyle](https://github.com/typestyle/typestyle)
-  - [JSON Loader](https://github.com/webpack/json-loader)
   - [File Loader](https://github.com/webpack/file-loader)
   - [URL Loader](https://github.com/webpack/url-loader)
   - [Sourcemap Loader](https://github.com/webpack/source-map-loader)
   - [Manifest Plugin](https://github.com/danethurber/webpack-manifest-plugin)
-  - [Extract Text Plugin](https://github.com/webpack/extract-text-webpack-plugin) for exporting bundled css. 
   - [tslint Loader](https://github.com/wbuchwalter/tslint-loader) for using tslint as preloader on build process.
 
 #### Dev & Prod Server

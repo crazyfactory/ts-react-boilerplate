@@ -34,10 +34,6 @@ var config = {
         loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
       },
       {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
-      {
         test: /\.jsx$/,
         loader: 'babel-loader'
       },
