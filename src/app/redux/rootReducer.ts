@@ -7,10 +7,10 @@ import { starsReducer } from "./modules/starsModule";
 const { reducer } = require("redux-connect");
 
 const rootReducer: Redux.Reducer<IStore> = combineReducers<IStore>({
-  routing: routerReducer,
   counter: counterReducer,
-  stars: starsReducer,
-  reduxAsyncConnect: reducer
+  reduxAsyncConnect: reducer,
+  routing: routerReducer,
+  stars: starsReducer
 });
 
 export default rootReducer;

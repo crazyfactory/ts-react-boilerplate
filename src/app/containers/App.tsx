@@ -17,8 +17,8 @@ setupPage("#app");
 // App container style
 const Styles = {
     container: style({
-        padding: 0,
         margin: 0,
+        padding: 0,
         textAlign: "center"
     })
 };
