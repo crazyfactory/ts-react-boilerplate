@@ -29,11 +29,7 @@ var config = {
   },
 
   module: {
-    rules: [{
-        enforce: 'pre',
-        test: /\.tsx?$/,
-        loader: 'tslint-loader'
-      },
+    rules: [
       {
         test: /\.tsx?$/,
         loader: 'react-hot-loader!awesome-typescript-loader'
@@ -41,10 +37,6 @@ var config = {
       {
         test: /\.jsx$/,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
       },
       {
         test: /\.eot(\?.*)?$/,
