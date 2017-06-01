@@ -47,7 +47,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/base16": "^1.0.1",
-    "@types/chai": "^3.4.34",
+    "@types/chai": "^4.0.0",
     "@types/enzyme": "^2.7.1",
     "@types/isomorphic-fetch": "0.0.34",
     "@types/mocha": "^2.2.38",
