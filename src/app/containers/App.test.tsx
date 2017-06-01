@@ -1,12 +1,13 @@
-import { chai, renderComponent } from "../helpers/TestHelper";
+import {shallow} from "enzyme";
+import * as React from "react";
 import { App, Styles } from "./App";
 
 describe("<App />", () => {
 
-  const component = renderComponent(App);
+  const component = shallow(<App />);
 
   it("Renders with correct style", () => {
-    chai.expect(component).to.have.className(Styles.container);
+    expect(component.is(`.${Styles.container}`)).toBeTruthy();
   });
 
 });

@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { IStarsAction } from "models/starsModel";
 import { fetchMock, mockStore } from "../../helpers/TestHelper";
 import * as stars from "./starsModule";
@@ -25,7 +24,7 @@ describe("Stars Module", () => {
       });
 
       /** 200 */
-      it("dispatches Request and Success Actions on OK requests", (done) => {
+      test("dispatches Request and Success Actions on OK requests", (done) => {
 
         fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
           body: githubResponse,
@@ -40,13 +39,13 @@ describe("Stars Module", () => {
         const store = mockStore({});
 
         store.dispatch(stars.getStars())
-          .then(() => expect(store.getActions()).to.eql(expectedActions))
+          .then(() => expect(store.getActions()).toBe(expectedActions))
           .then(() => done())
           .catch((err) => done(err));
       });
 
       /** 400 */
-      it("dispatches Failure on failed requests", (done) => {
+      test("dispatches Failure on failed requests", (done) => {
 
         fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
           body: errResponse,
@@ -61,7 +60,7 @@ describe("Stars Module", () => {
         const store = mockStore({});
 
         store.dispatch(stars.getStars())
-          .then(() => expect(store.getActions()).to.eql(expectedActions))
+          .then(() => expect(store.getActions()).toBe(expectedActions))
           .then(() => done())
           .catch((err) => done(err));
       });

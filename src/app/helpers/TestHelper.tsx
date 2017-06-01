@@ -26,8 +26,4 @@ function renderComponent(ComponentClass: React.ComponentClass<any> | React.SFC<a
   );
 }
 
-const chai = require("chai");
-const chaiEnzyme = require("chai-enzyme");
-chai.use(chaiEnzyme());
-
-export { mockStore, fetchMock, renderComponent, chai };
+export { mockStore, fetchMock, renderComponent};

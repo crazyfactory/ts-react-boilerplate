@@ -4,9 +4,9 @@
   "main": "build/server.js",
   "scripts": {
     "precommit": "npm run lint",
-    "prepush": "npm run build && npm test && npm run build:prod && npm test",
+    "prepush": "npm run build && npm run test:no-cache && npm run build:prod && npm run test:no-cache",
     "commitmsg": "validate-commit-msg",
-    "clean": "rimraf build",
+    "clean": "rimraf build && rimraf .jest/cache",
     "prebuild": "npm run clean -s",
     "build": "webpack --config config/webpack/index.js",
     "build:prod": "cross-env NODE_ENV=production npm run build",
@@ -14,8 +14,9 @@
     "prestart": "npm run build -s",
     "start": "node build/server.js",
     "start:prod": "cross-env NODE_ENV=production npm start",
-    "test": "karma start config/test/karma.conf.js --single-run --no-auto-watch",
-    "test:watch": "karma start config/test/karma.conf.js",
+    "test": "jest",
+    "test:no-cache": "jest --no-cache",
+    "test:watch": "jest --watch",
     "lint": "tslint -t stylish \"src/**/**.ts*\"",
     "lint:fix": "npm run lint -s -- --fix"
   },
@@ -47,10 +48,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/base16": "^1.0.1",
-    "@types/chai": "^3.4.34",
     "@types/enzyme": "^2.7.1",
     "@types/isomorphic-fetch": "0.0.34",
-    "@types/mocha": "^2.2.38",
+    "@types/jest": "^19.2.3",
     "@types/node": "^7.0.0",
     "@types/react": "^15.0.22",
     "@types/react-addons-test-utils": "^0.14.16",
@@ -70,33 +70,18 @@
     "babel-core": "^6.22.1",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.22.0",
-    "chai": "^3.5.0",
-    "chai-enzyme": "^0.7.0",
     "cross-env": "^4.0.0",
-    "electron": "^1.4.15",
     "enzyme": "^2.8.2",
     "fetch-mock": "^5.8.1",
     "file-loader": "^0.11.1",
     "husky": "^0.13.2",
-    "karma": "^1.4.0",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-coverage": "^1.1.1",
-    "karma-es6-shim": "^1.0.0",
-    "karma-firefox-launcher": "^1.0.1",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.3",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-typescript": "^3.0.0",
-    "karma-webpack": "^2.0.3",
-    "mocha": "^3.2.0",
-    "phantomjs-prebuilt": "^2.1.14",
+    "jest": "^20.0.3",
     "react-addons-test-utils": "~15.5.1",
     "react-hot-loader": "^1.3.1",
     "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.1",
     "rimraf": "^2.5.4",
+    "ts-jest": "^20.0.4",
     "tslint": "^4.3.1",
     "tslint-loader": "^3.3.0",
     "tslint-microsoft-contrib": "^4.0.1",
@@ -130,5 +115,25 @@
     "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.3.2",
     "typestyle": "^1.0.0"
+  },
+  "jest": {
+    "mapCoverage": true,
+    "transform": {
+      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "cacheDirectory": "<rootDir>/.jest/cache",
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "moduleDirectories": ["node_modules", "./"]
   }
 }

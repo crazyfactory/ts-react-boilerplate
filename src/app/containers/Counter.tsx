@@ -1,6 +1,6 @@
-import { ICounter, ICounterAction } from "models/counterModel";
-import { decrement, increment } from "modules/counterModule";
 import * as React from "react";
+import { ICounter, ICounterAction } from "../models/counterModel";
+import { decrement, increment } from "../redux/modules/counterModule";
 const { connect } = require("react-redux");
 
 interface IProps {
