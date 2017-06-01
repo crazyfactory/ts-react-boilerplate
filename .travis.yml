@@ -16,6 +16,6 @@ install:
 script:
   - npm run lint
   - npm run build
-  - npm test:no-cache
+  - npm run test:no-cache
   - npm run build:prod
-  - npm test:no-cache
+  - npm run test:no-cache

@@ -42,8 +42,7 @@
     "hot reload",
     "react-hot-loader",
     "enzyme",
-    "mocha",
-    "chai"
+    "jest"
   ],
   "license": "MIT",
   "devDependencies": {

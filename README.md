@@ -56,17 +56,9 @@ This boilerplate uses the following libraries and tools:
 - [Chalk](https://github.com/chalk/chalk) for colored terminal logs.
 
 #### Testing
-- [Karma](https://github.com/karma-runner/karma) as test runner with following plugins
-  - [Karma-Webpack](https://github.com/webpack/karma-webpack)
-  - [Karma-Typescript](https://github.com/monounity/karma-typescript)
-  - [Karma-Mocha](https://github.com/karma-runner/karma-mocha)
-  - [Karma-Chai](https://github.com/xdissent/karma-chai)
-  - [Karma-Coverage](https://github.com/karma-runner/karma-coverage)
-  - [Karma-PhantomJS Launcher](https://github.com/karma-runner/karma-phantomjs-launcher)
-- [Mocha](https://github.com/mochajs/mocha) as testing framework.
-- [Chai](https://github.com/chaijs/chai) as assertion library.
+- [Jest](https://github.com/facebook/jest) as test runner.
+- [ts-jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
-- [Chai Enzyme](https://github.com/producthunt/chai-enzyme) for asserting React Components.
 - [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
 - [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
 
