@@ -6,7 +6,7 @@ describe("<Header />", () => {
     const component = renderComponent(Header);
 
     it("Renders with correct style", () => {
-        expect(component.find(`.${Styles.nav}`)).toBeDefined();
+        expect(component.hasClass(Styles.nav)).toBeTruthy();
     });
 
 });

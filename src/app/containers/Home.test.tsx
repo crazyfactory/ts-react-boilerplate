@@ -6,7 +6,7 @@ describe("<Home />", () => {
 
   const component = shallow(<Home />);
   it("Renders with correct style", () => {
-    expect(component.find(`.${Styles.home}`)).toBeDefined();
+    expect(component.hasClass(Styles.home)).toBeTruthy();
   });
 
   it("Renders Barbar Logo", () => {
