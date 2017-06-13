@@ -75,6 +75,7 @@
     "file-loader": "^0.11.1",
     "husky": "^0.13.2",
     "jest": "^20.0.3",
+    "jest-enzyme": "^3.2.0",
     "react-addons-test-utils": "~15.5.1",
     "react-hot-loader": "^1.3.1",
     "react-test-renderer": "^15.5.4",
@@ -133,6 +134,7 @@
       "js",
       "json"
     ],
-    "moduleDirectories": ["node_modules", "./"]
+    "moduleDirectories": ["node_modules", "./"],
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
 }
