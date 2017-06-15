@@ -82,7 +82,7 @@ This boilerplate uses the following libraries and tools:
 │   │ │   ├── modules           # Redux modules.   
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
 │   │ │   └── store.ts          # Redux store, contains global app state.    
-│   │ └── routes.tsx            # Routes.
+│   │ └── routes                # Routes.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
@@ -95,6 +95,7 @@ This boilerplate uses the following libraries and tools:
 ├── Dockerfile                  # Dockerfile.
 ├── LICENSE                     # License file
 ├── package.json                # Package configuration.
+├── package-lock.json           # Package lock
 ├── README.md                   # This file
 ├── tsconfig.json               # TypeScript transpiler configuration.
 ├── tslint.json                 # Configures tslint.
