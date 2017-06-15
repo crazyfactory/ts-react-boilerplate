@@ -34,7 +34,8 @@ var config = {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         enforce: 'pre',
         test: /\.tsx?$/,
         loader: 'tslint-loader'

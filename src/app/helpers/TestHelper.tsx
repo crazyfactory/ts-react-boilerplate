@@ -1,8 +1,8 @@
 /** React Specific */
 import {mount, ReactWrapper} from "enzyme";
 import * as React from "react";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
 import configureStore from "redux-mock-store";
 import rootReducer from "../redux/rootReducer";
 
@@ -26,8 +26,4 @@ function renderComponent(ComponentClass: React.ComponentClass<any> | React.SFC<a
   );
 }
 
-const chai = require("chai");
-const chaiEnzyme = require("chai-enzyme");
-chai.use(chaiEnzyme());
-
-export { mockStore, fetchMock, renderComponent, chai };
+export {mockStore, fetchMock, renderComponent};

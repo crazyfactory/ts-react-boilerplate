@@ -85,16 +85,20 @@ var config = {
   ]
 };
 
-const copySync = (src, dest, overwrite) => {
-  if (overwrite && fs.existsSync(dest)) {
+const copySync = (src, dest, overwrite) =>
+{
+  if (overwrite && fs.existsSync(dest))
+  {
     fs.unlinkSync(dest);
   }
   const data = fs.readFileSync(src);
   fs.writeFileSync(dest, data);
 }
 
-const createIfDoesntExist = dest => {
-  if (!fs.existsSync(dest)) {
+const createIfDoesntExist = dest =>
+{
+  if (!fs.existsSync(dest))
+  {
     fs.mkdirSync(dest);
   }
 }

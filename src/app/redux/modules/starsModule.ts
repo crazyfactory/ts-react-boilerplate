@@ -1,4 +1,4 @@
-import { IStars, IStarsAction } from "models/starsModel";
+import {IStars, IStarsAction} from "models/starsModel";
 
 /** Action Types */
 export const GET_REQUEST: string = "stars/GET_REQUEST";
