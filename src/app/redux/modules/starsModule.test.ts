@@ -24,7 +24,7 @@ describe("Stars Module", () => {
       });
 
       /** 200 */
-      test("dispatches Request and Success Actions on OK requests", (done) => {
+      it("dispatches Request and Success Actions on OK requests", (done) => {
 
         fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
           body: githubResponse,
@@ -45,7 +45,7 @@ describe("Stars Module", () => {
       });
 
       /** 400 */
-      test("dispatches Failure on failed requests", (done) => {
+      it("dispatches Failure on failed requests", (done) => {
 
         fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
           body: errResponse,
