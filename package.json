@@ -134,7 +134,10 @@
       "js",
       "json"
     ],
-    "moduleDirectories": ["node_modules", "./"],
+    "moduleDirectories": [
+      "node_modules",
+      "./"
+    ],
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
 }
