@@ -7,7 +7,7 @@ describe("<App />", () => {
   const component = shallow(<App />);
 
   it("Renders with correct style", () => {
-    expect(component.hasClass(Styles.container)).toBeTruthy();
+    expect(component).toHaveClassName(Styles.container);
   });
 
 });

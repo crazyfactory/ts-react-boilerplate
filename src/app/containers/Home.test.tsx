@@ -6,7 +6,7 @@ describe("<Home />", () => {
 
   const component = shallow(<Home />);
   it("Renders with correct style", () => {
-    expect(component.hasClass(Styles.home)).toBeTruthy();
+    expect(component).toHaveClassName(Styles.home);
   });
 
   it("Renders Barbar Logo", () => {
@@ -14,7 +14,7 @@ describe("<Home />", () => {
   });
 
   it("Has a p element that says Hello!", () => {
-    expect(component.find("p").text()).toEqual("Hello!");
+    expect(component.find("p")).toHaveText("Hello!");
   });
 
 });

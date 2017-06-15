@@ -14,7 +14,7 @@ describe("<Counter />", () => {
   const component = renderComponent(Stars, state);
 
   it("Renders header", () => {
-    expect(component.find("div").text()).toBe("61");
+    expect(component.find("div")).toHaveText("61");
   });
 
 });
