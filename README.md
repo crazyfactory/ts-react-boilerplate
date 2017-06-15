@@ -57,8 +57,9 @@ This boilerplate uses the following libraries and tools:
 
 #### Testing
 - [Jest](https://github.com/facebook/jest) as test runner.
-- [ts-jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
+- [TS Jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
+- [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
 - [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
 - [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
 
