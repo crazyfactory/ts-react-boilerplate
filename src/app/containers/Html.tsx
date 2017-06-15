@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Helmet } from "react-helmet";
-import { IStore } from "redux/IStore";
-import { getStyles } from "typestyle";
+import {Helmet} from "react-helmet";
+import {IStore} from "redux/IStore";
+import {getStyles} from "typestyle";
 
 interface IHtmlProps {
   manifest?: object;
@@ -12,7 +12,7 @@ interface IHtmlProps {
 class Html extends React.Component<IHtmlProps, {}> {
   public render(): JSX.Element {
     const head = Helmet.renderStatic();
-    const { markup, store } = this.props;
+    const {markup, store} = this.props;
 
     // Styles
     const renderStyles = <style id="styles-target">{getStyles()}</style>;
@@ -20,38 +20,43 @@ class Html extends React.Component<IHtmlProps, {}> {
     // Scripts
     const scripts = this.resolve(["vendor.js", "app.js"]);
     const renderScripts = scripts.map((src, i) =>
-      <script src={src} key={i} />
+      <script src={src} key={i}/>
     );
 
     /* tslint:disable-next-line:react-no-dangerous-html */
-    const initialState = (<script dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />);
+    const initialState = (
+      <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};`}}
+              charSet="UTF-8"/>);
     return (
       <html>
-        <head>
-          {head.base.toComponent()}
-          {head.title.toComponent()}
-          {head.meta.toComponent()}
-          {head.link.toComponent()}
-          {head.script.toComponent()}
-          {renderStyles}
-          <link rel="shortcut icon" href="/favicon.ico" />
-        </head>
-        <body>
-          {/* tslint:disable-next-line:react-no-dangerous-html */}
-          <main id="app" dangerouslySetInnerHTML={{ __html: markup }} />
-          {initialState}
-          {renderScripts}
-        </body>
+      <head>
+        {head.base.toComponent()}
+        {head.title.toComponent()}
+        {head.meta.toComponent()}
+        {head.link.toComponent()}
+        {head.script.toComponent()}
+        {renderStyles}
+        <link rel="shortcut icon" href="/favicon.ico"/>
+      </head>
+      <body>
+      {/* tslint:disable-next-line:react-no-dangerous-html */}
+      <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
+      {initialState}
+      {renderScripts}
+      </body>
       </html>
     );
   }
+
   private resolve(files: string[]): string[] {
     return files.map((src) => {
-      if (!this.props.manifest[src]) { return; }
+      if (!this.props.manifest[src]) {
+        return;
+      }
       return "/public/" + this.props.manifest[src];
     }).filter((file) => file !== undefined);
   }
 
 }
 
-export { Html }
+export {Html}

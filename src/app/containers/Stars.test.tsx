@@ -1,5 +1,5 @@
-import { renderComponent } from "../helpers/TestHelper";
-import { Stars } from "./Stars";
+import {renderComponent} from "../helpers/TestHelper";
+import {Stars} from "./Stars";
 
 /** Mock App. State */
 const state: object = {

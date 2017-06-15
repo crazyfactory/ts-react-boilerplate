@@ -1,6 +1,6 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import { App, Styles } from "./App";
+import {App, Styles} from "./App";
 
 describe("<App />", () => {
 

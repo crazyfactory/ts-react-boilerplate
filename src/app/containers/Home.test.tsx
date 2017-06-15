@@ -1,7 +1,7 @@
 // import { renderComponent } from "../helpers/TestHelper";
-import { shallow } from "enzyme";
+import {shallow} from "enzyme";
 import * as React from "react";
-import { Home, Styles } from "./Home";
+import {Home, Styles} from "./Home";
 describe("<Home />", () => {
 
   const component = shallow(<Home />);

@@ -1,23 +1,23 @@
 import * as React from "react";
-import { Link } from "react-router";
-import { style } from "typestyle";
+import {Link} from "react-router";
+import {style} from "typestyle";
 
 const Styles = {
-    nav: style({
+  nav: style({
+    $nest: {
+      ul: {
         $nest: {
-            ul: {
-                $nest: {
-                    li: {
-                        color: "blue",
-                        display: "inline",
-                        padding: "5px"
-                    }
-                },
-                listStyleType: "none",
-                padding: 0
-            }
-        }
-    })
+          li: {
+            color: "blue",
+            display: "inline",
+            padding: "5px"
+          }
+        },
+        listStyleType: "none",
+        padding: 0
+      }
+    }
+  })
 };
 
 const Header = () => (
@@ -31,4 +31,4 @@ const Header = () => (
   </nav>
 );
 
-export { Header, Styles };
+export {Header, Styles};

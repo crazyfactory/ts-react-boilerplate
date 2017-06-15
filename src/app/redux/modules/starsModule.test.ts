@@ -1,5 +1,5 @@
-import { IStarsAction } from "models/starsModel";
-import { fetchMock, mockStore } from "../../helpers/TestHelper";
+import {IStarsAction} from "models/starsModel";
+import {fetchMock, mockStore} from "../../helpers/TestHelper";
 import * as stars from "./starsModule";
 
 /** Mock Data */
@@ -32,8 +32,8 @@ describe("Stars Module", () => {
         });
 
         const expectedActions: IStarsAction[] = [
-          { type: stars.GET_REQUEST },
-          { type: stars.GET_SUCCESS, payload: { count: githubResponse.stargazers_count } }
+          {type: stars.GET_REQUEST},
+          {type: stars.GET_SUCCESS, payload: {count: githubResponse.stargazers_count}}
         ];
 
         const store = mockStore({});
@@ -53,8 +53,8 @@ describe("Stars Module", () => {
         });
 
         const expectedActions: IStarsAction[] = [
-          { type: stars.GET_REQUEST },
-          { type: stars.GET_FAILURE, payload: { message: errResponse } }
+          {type: stars.GET_REQUEST},
+          {type: stars.GET_FAILURE, payload: {message: errResponse}}
         ];
 
         const store = mockStore({});
