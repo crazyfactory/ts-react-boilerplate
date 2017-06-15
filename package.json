@@ -4,7 +4,7 @@
   "main": "build/server.js",
   "scripts": {
     "precommit": "npm run lint",
-    "prepush": "npm run build && npm run test:no-cache && npm run build:prod && npm run test:no-cache",
+    "prepush": "npm run build && npm run build:prod && npm run test:no-cache",
     "commitmsg": "validate-commit-msg",
     "clean": "rimraf build && rimraf .jest/cache",
     "prebuild": "npm run clean -s",
