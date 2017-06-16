@@ -1,5 +1,5 @@
-import { chai, renderComponent } from "../helpers/TestHelper";
-import { Stars } from "./Stars";
+import {renderComponent} from "../helpers/TestHelper";
+import {Stars} from "./Stars";
 
 /** Mock App. State */
 const state: object = {
@@ -14,7 +14,7 @@ describe("<Counter />", () => {
   const component = renderComponent(Stars, state);
 
   it("Renders header", () => {
-    chai.expect(component.find("div").text()).to.eql("61");
+    expect(component.find("div")).toHaveText("61");
   });
 
 });

@@ -1,20 +1,20 @@
-import { chai, renderComponent } from "../helpers/TestHelper";
-import { Home, Styles } from "./Home";
-
+// import { renderComponent } from "../helpers/TestHelper";
+import {shallow} from "enzyme";
+import * as React from "react";
+import {Home, Styles} from "./Home";
 describe("<Home />", () => {
 
-  const component = renderComponent(Home);
-
+  const component = shallow(<Home />);
   it("Renders with correct style", () => {
-    chai.expect(component).to.have.className(Styles.home);
+    expect(component).toHaveClassName(Styles.home);
   });
 
   it("Renders Barbar Logo", () => {
-    chai.expect(component.find("img")).to.exist;
+    expect(component.find("img")).toBeDefined();
   });
 
   it("Has a p element that says Hello!", () => {
-    chai.expect(component.find("p").text()).eql("Hello!");
+    expect(component.find("p")).toHaveText("Hello!");
   });
 
 });

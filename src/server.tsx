@@ -14,7 +14,7 @@ import routes from "./app/routes/routes";
 
 import {Html} from "./app/containers";
 (e6p as any).polyfill();
-const { ReduxAsyncConnect, loadOnServer } = require("redux-connect");
+const {ReduxAsyncConnect, loadOnServer} = require("redux-connect");
 const manifest = require("../build/manifest.json");
 
 const express = require("express");
@@ -37,7 +37,7 @@ if (process.env.NODE_ENV !== "production") {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
     quiet: true,
-    stats: { colors: true }
+    stats: {colors: true}
   }));
 
   app.use(require("webpack-hot-middleware")(webpackCompiler));
@@ -53,14 +53,13 @@ app.get("*", (req, res) => {
   const store = configureStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
 
-  match({ history, routes, location },
-        (error, redirectLocation, renderProps) => {
+  match({history, routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        const asyncRenderData = Object.assign({}, renderProps, { store });
+        const asyncRenderData = Object.assign({}, renderProps, {store});
 
         loadOnServer(asyncRenderData).then(() => {
           const markup = ReactDOMServer.renderToString(
@@ -70,7 +69,7 @@ app.get("*", (req, res) => {
           );
           if (appConfig.ssr) {
             res.status(200).send(renderHTML(markup, store));
-          }else {
+          } else {
             res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
               if (err) {
                 console.error(err);
@@ -96,7 +95,7 @@ app.listen(appConfig.port, appConfig.host, (err) => {
 
 function renderHTML(markup: string, store: any): string {
   const html = ReactDOMServer.renderToString(
-    <Html markup={markup} manifest={manifest} store={store} />
+    <Html markup={markup} manifest={manifest} store={store}/>
   );
 
   return `<!doctype html> ${html}`;

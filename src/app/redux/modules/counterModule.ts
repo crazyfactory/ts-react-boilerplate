@@ -1,4 +1,4 @@
-import { ICounter, ICounterAction } from "models/counterModel";
+import {ICounter, ICounterAction} from "models/counterModel";
 
 /** Action Types */
 export const INCREMENT: string = "counter/INCREMENT";
