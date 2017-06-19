@@ -9,6 +9,7 @@ export interface IStarsAction {
   type: string;
   payload?: {
     count?: number;
+    stargazers_count: number;
     message?: any;
   };
 }

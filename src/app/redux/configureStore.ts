@@ -3,15 +3,21 @@ const appConfig = require("../../../config/main");
 import {routerMiddleware} from "react-router-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
+import reduxPromiseMiddleware from "redux-promise-middleware";
+import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
+import rootSaga from "../Sagas/rootSaga";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
 
 export function configureStore(history: History, initialState?: IStore): Redux.Store<IStore> {
 
+  const sagaMiddleware = createSagaMiddleware();
   const middlewares: Redux.Middleware[] = [
     routerMiddleware(history),
-    thunk
+    thunk,
+    reduxPromiseMiddleware(),
+    sagaMiddleware
   ];
 
   /** Add Only Dev. Middlewares */
@@ -34,6 +40,7 @@ export function configureStore(history: History, initialState?: IStore): Redux.S
       store.replaceReducer((require("./rootReducer").default));
     });
   }
+  sagaMiddleware.run(rootSaga);
 
   return store;
 }
