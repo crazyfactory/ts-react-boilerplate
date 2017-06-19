@@ -1,6 +1,6 @@
 import * as React from "react";
 import {IStars, IStarsAction} from "../models/starsModel";
-import {STARS_LOAD} from "../redux/modules/starsModule";
+import {STARS_REQUEST} from "../redux/modules/starsModule";
 const {connect} = require("react-redux");
 const {asyncConnect} = require("redux-connect");
 
@@ -11,7 +11,7 @@ interface IProps {
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
-    return dispatch({type: STARS_LOAD});
+    return dispatch({type: STARS_REQUEST});
   }
 }])
 @connect(

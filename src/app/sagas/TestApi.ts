@@ -1,3 +1,4 @@
+import {Promise} from "es6-promise";
 import {IStars} from "../models/starsModel";
 
 export default class TestApi {

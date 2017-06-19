@@ -1,10 +1,10 @@
-import {STARS_REQUEST, starsReducer} from "./starsModule";
+import {STARS_FAILURE, STARS_REQUEST, STARS_SUCCESS, starsReducer} from "./starsModule";
 
 describe("Stars Reducer", () => {
 
   it("handles action of type STARS_REQUEST_PENDING", () => {
     const action = {
-      type: STARS_REQUEST + "_PENDING"
+      type: STARS_REQUEST
     };
     const stateBefore = {};
     const stateAfter = {
@@ -18,7 +18,7 @@ describe("Stars Reducer", () => {
       payload: {
         stargazers_count: 99
       },
-      type: STARS_REQUEST + "_FULFILLED"
+      type: STARS_SUCCESS
     };
     const stateBefore = {};
     const stateAfter = {
@@ -32,7 +32,7 @@ describe("Stars Reducer", () => {
 
   it("handles action of type STARS_REQUEST_REJECTED", () => {
     const action = {
-      type: STARS_REQUEST + "_REJECTED"
+      type: STARS_FAILURE
     };
     const stateBefore = {};
     const stateAfter = {

@@ -3,7 +3,6 @@ const appConfig = require("../../../config/main");
 import {routerMiddleware} from "react-router-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
-import reduxPromiseMiddleware from "redux-promise-middleware";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
 import rootSaga from "../sagas/rootSaga";
@@ -16,7 +15,6 @@ export function configureStore(history: History, initialState?: IStore): Redux.S
   const middlewares: Redux.Middleware[] = [
     routerMiddleware(history),
     thunk,
-    reduxPromiseMiddleware(),
     sagaMiddleware
   ];
 
