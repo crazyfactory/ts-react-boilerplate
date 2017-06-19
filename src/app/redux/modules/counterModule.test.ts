@@ -1,29 +1,7 @@
 import {ICounter, ICounterAction} from "models/counterModel";
 import * as counter from "./counterModule";
 
-/** Module */
-describe("Counter Module", () => {
-
-  /** Actions */
-  describe("Actions", () => {
-    describe("Increment", () => {
-      it("has the correct type", () => {
-        const action: ICounterAction = counter.increment();
-        expect(action.type).toBe(counter.INCREMENT);
-      });
-    });
-
-    describe("Decrement", () => {
-      it("has the correct type", () => {
-        const action: ICounterAction = counter.decrement();
-        expect(action.type).toBe(counter.DECREMENT);
-      });
-    });
-  });
-
-  /** Reducer */
-  describe("Reducer", () => {
-
+describe("Counter Reducer", () => {
     const state: ICounter = {count: 10};
 
     it("handles action of type INCREMENT", () => {
@@ -39,7 +17,4 @@ describe("Counter Module", () => {
     it("handles actions with unknown type", () => {
       expect(counter.counterReducer(state, {type: ""})).toEqual({count: state.count});
     });
-
-  });
-
 });

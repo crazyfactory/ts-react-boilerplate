@@ -6,7 +6,7 @@ import {createLogger} from "redux-logger";
 import reduxPromiseMiddleware from "redux-promise-middleware";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
-import rootSaga from "../Sagas/rootSaga";
+import rootSaga from "../sagas/rootSaga";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
 

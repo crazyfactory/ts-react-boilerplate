@@ -1,5 +1,6 @@
 import * as React from "react";
 import {IStars, IStarsAction} from "../models/starsModel";
+import {STARS_LOAD} from "../redux/modules/starsModule";
 const {connect} = require("react-redux");
 const {asyncConnect} = require("redux-connect");
 
@@ -10,7 +11,7 @@ interface IProps {
 
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
-    return dispatch({type: "stars/PAGE_LOAD"});
+    return dispatch({type: STARS_LOAD});
   }
 }])
 @connect(
@@ -22,7 +23,7 @@ class Stars extends React.Component<IProps, {}> {
 
     return (
       <div>
-        {stars.isFetching ? "Fetching Stars" : stars.count}
+        {stars.isFetching ? "Fetching Stars" : stars.payload.stargazers_count}
       </div>
     );
   }

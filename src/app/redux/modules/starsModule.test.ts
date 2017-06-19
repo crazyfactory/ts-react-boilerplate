@@ -1,72 +1,58 @@
-import {IStarsAction} from "models/starsModel";
-import {fetchMock, mockStore} from "../../helpers/TestHelper";
-import * as stars from "./starsModule";
+import {STARS_REQUEST, starsReducer} from "./starsModule";
 
-/** Mock Data */
-const githubResponse = {
-  stargazers_count: 999
-};
+describe("Stars Reducer", () => {
 
-const errResponse = {
-  message: "ERROR :-O"
-};
+  it("handles action of type STARS_REQUEST_PENDING", () => {
+    const action = {
+      type: STARS_REQUEST + "_PENDING"
+    };
+    const stateBefore = {};
+    const stateAfter = {
+      isFetching: true
+    };
+    expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+  });
 
-/** Stargazers Module */
-describe("Stars Module", () => {
+  it("handles action of type STARS_REQUEST_FULFILLED", () => {
+    const action = {
+      payload: {
+        stargazers_count: 99
+      },
+      type: STARS_REQUEST + "_FULFILLED"
+    };
+    const stateBefore = {};
+    const stateAfter = {
+      isFetching: false,
+      payload: {
+        stargazers_count: 99
+      }
+    };
+    expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+  });
 
-  /** Action Creators */
-  describe("Action Creators", () => {
+  it("handles action of type STARS_REQUEST_REJECTED", () => {
+    const action = {
+      type: STARS_REQUEST + "_REJECTED"
+    };
+    const stateBefore = {};
+    const stateAfter = {
+      error: true,
+      isFetching: false
+    };
+    expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+  });
 
-    describe("Get Stars (Async)", () => {
-
-      afterEach(() => {
-        fetchMock.restore();
-      });
-
-      /** 200 */
-      it("dispatches Request and Success Actions on OK requests", (done) => {
-
-        fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
-          body: githubResponse,
-          status: 200
-        });
-
-        const expectedActions: IStarsAction[] = [
-          {type: stars.GET_REQUEST},
-          {type: stars.GET_SUCCESS, payload: {count: githubResponse.stargazers_count}}
-        ];
-
-        const store = mockStore({});
-
-        store.dispatch(stars.getStars())
-          .then(() => expect(store.getActions()).toBe(expectedActions))
-          .then(() => done())
-          .catch((err) => done(err));
-      });
-
-      /** 400 */
-      it("dispatches Failure on failed requests", (done) => {
-
-        fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
-          body: errResponse,
-          status: 400
-        });
-
-        const expectedActions: IStarsAction[] = [
-          {type: stars.GET_REQUEST},
-          {type: stars.GET_FAILURE, payload: {message: errResponse}}
-        ];
-
-        const store = mockStore({});
-
-        store.dispatch(stars.getStars())
-          .then(() => expect(store.getActions()).toBe(expectedActions))
-          .then(() => done())
-          .catch((err) => done(err));
-      });
-
-    });
-
+  it("handles actions with unknown type", () => {
+    const action = {
+      type: ""
+    };
+    const stateBefore = {
+      isFetching: false
+    };
+    const stateAfter = {
+      isFetching: false
+    };
+    expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
 });

@@ -4,8 +4,10 @@ import {Stars} from "./Stars";
 /** Mock App. State */
 const state: object = {
   stars: {
-    count: 61,
-    isFetching: false
+    isFetching: false,
+    payload: {
+      stargazers_count: 61
+    }
   }
 };
 

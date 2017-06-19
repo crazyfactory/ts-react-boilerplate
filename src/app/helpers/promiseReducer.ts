@@ -1,25 +1,19 @@
 import IBaseAction from "../models/IBaseAction";
 
-/**
- * @param name todo: change to a better name
- * @param state
- * @param action
- * @returns {any}
- */
-export default function baseReducer<TState, TAction>(name: string, state: TState, action: IBaseAction & TAction): TState {
+export default function promiseReducer<TState, TAction>(baseAction: string, state: TState, action: IBaseAction & TAction): TState {
   switch (action.type) {
-    case name + "_PENDING":
+    case baseAction + "_PENDING":
       return Object.assign({}, state, {
         isFetching: true
       });
 
-    case name + "_FULFILLED":
+    case baseAction + "_FULFILLED":
       return Object.assign({}, state, {
         isFetching: false,
         payload: action.payload
       });
 
-    case name + "_REJECTED":
+    case baseAction + "_REJECTED":
       return Object.assign({}, state, {
         error: true,
         isFetching: false,

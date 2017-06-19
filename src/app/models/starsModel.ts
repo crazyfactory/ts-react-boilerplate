@@ -1,15 +1,14 @@
 export interface IStars {
   isFetching?: boolean;
-  count?: number;
   error?: boolean;
-  message?: any;
+  payload?: {
+    stargazers_count: number;
+  };
 }
 
 export interface IStarsAction {
   type: string;
   payload?: {
-    count?: number;
     stargazers_count: number;
-    message?: any;
   };
 }

@@ -1,8 +1,8 @@
 import { fork } from "redux-saga/effects";
-import fetchStars from "./fetchStars";
+import { watchStarsLoad } from "./stars";
 
 export default function* rootSaga(): any {
   yield [
-    fork(fetchStars)
+    fork(watchStarsLoad)
   ];
 }

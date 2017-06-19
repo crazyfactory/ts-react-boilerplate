@@ -1,8 +1,9 @@
 import {IStars, IStarsAction} from "models/starsModel";
-import baseReducer from "../../helpers/baseReducer";
+import promiseReducer from "../../helpers/promiseReducer";
 
 /** Action Types */
-export const GET_REQUEST: string = "stars/GET_REQUEST";
+export const STARS_LOAD: string = "stars/STARS_LOAD";
+export const STARS_REQUEST: string = "stars/STARS_REQUEST";
 
 /** Initial State */
 const initialState: IStars = {
@@ -11,5 +12,5 @@ const initialState: IStars = {
 
 /** Reducer */
 export function starsReducer(state: IStars = initialState, action: IStarsAction): IStars {
-  return baseReducer<IStars, IStarsAction>("stars/GET_REQUEST", state, action);
+  return promiseReducer<IStars, IStarsAction>(STARS_REQUEST, state, action);
 }
