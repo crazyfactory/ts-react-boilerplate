@@ -10,8 +10,12 @@ cache:
   directories:
   - node_modules
 
+before_install:
+  - npm install -g greenkeeper-lockfile@1
 install:
   - npm install
+
+before_script: greenkeeper-lockfile-update
 
 script:
   - npm run lint
@@ -19,3 +23,5 @@ script:
   - npm run test:no-cache
   - npm run build:prod
   - npm run test:no-cache
+
+after_script: greenkeeper-lockfile-upload
