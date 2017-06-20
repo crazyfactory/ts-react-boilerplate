@@ -9,10 +9,9 @@ import rootReducer from "../redux/rootReducer";
 const fetchMock = require("fetch-mock");
 
 /** Redux Mock Store Configuration */
-import thunk from "redux-thunk";
 import {IStore} from "../redux/IStore";
 
-const middlewares = [thunk];
+const middlewares = [];
 const mockStore = configureStore(middlewares);
 
 /** Render Component */

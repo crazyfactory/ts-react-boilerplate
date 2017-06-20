@@ -4,7 +4,6 @@ import {routerMiddleware} from "react-router-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
 import createSagaMiddleware from "redux-saga";
-import thunk from "redux-thunk";
 import rootSaga from "../sagas/rootSaga";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
@@ -14,7 +13,6 @@ export function configureStore(history: History, initialState?: IStore): Redux.S
   const sagaMiddleware = createSagaMiddleware();
   const middlewares: Redux.Middleware[] = [
     routerMiddleware(history),
-    thunk,
     sagaMiddleware
   ];
 

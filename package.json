@@ -63,7 +63,6 @@
     "@types/redux-devtools-dock-monitor": "^1.1.29",
     "@types/redux-devtools-log-monitor": "^1.0.29",
     "@types/redux-mock-store": "0.0.7",
-    "@types/redux-thunk": "^2.1.31",
     "@types/webpack": "^2.2.13",
     "awesome-typescript-loader": "^3.0.0-beta.18",
     "babel-core": "^6.22.1",
@@ -113,7 +112,6 @@
     "redux-connect": "^5.1.0",
     "redux-logger": "^3.0.0",
     "redux-saga": "^0.15.3",
-    "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.3.2",
     "typestyle": "^1.0.0"
   },
