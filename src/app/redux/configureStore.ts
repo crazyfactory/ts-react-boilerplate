@@ -3,12 +3,16 @@ const appConfig = require("../../../config/main");
 import {routerMiddleware} from "react-router-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
-import createSagaMiddleware from "redux-saga";
-import rootSaga from "../sagas/rootSaga";
+import createSagaMiddleware, { END } from "redux-saga";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
 
-export function configureStore(history: History, initialState?: IStore): Redux.Store<IStore> {
+interface IExtendedStore extends Redux.Store<IStore> {
+  runSaga: (rootSaga: any) => any;
+  close: () => void;
+}
+
+export function configureStore(history: History, initialState?: IStore): IExtendedStore {
 
   const sagaMiddleware = createSagaMiddleware();
   const middlewares: Redux.Middleware[] = [
@@ -36,7 +40,10 @@ export function configureStore(history: History, initialState?: IStore): Redux.S
       store.replaceReducer((require("./rootReducer").default));
     });
   }
-  sagaMiddleware.run(rootSaga);
 
-  return store;
+  return {
+    ...store,
+    close: () => store.dispatch(END),
+    runSaga: sagaMiddleware.run
+  };
 }

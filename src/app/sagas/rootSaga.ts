@@ -1,8 +1,8 @@
-import { fork } from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
 import { watchStarsLoad } from "./starsSaga";
 
 export default function* rootSaga(): any {
-  yield [
+  yield all([
     fork(watchStarsLoad)
-  ];
+  ]);
 }

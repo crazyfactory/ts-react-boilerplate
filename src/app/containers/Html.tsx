@@ -1,18 +1,17 @@
 import * as React from "react";
 import {Helmet} from "react-helmet";
-import {IStore} from "redux/IStore";
 import {getStyles} from "typestyle";
 
 interface IHtmlProps {
   manifest?: object;
   markup?: string;
-  store?: Redux.Store<IStore>;
+  initialState?: any;
 }
 
 class Html extends React.Component<IHtmlProps, {}> {
   public render(): JSX.Element {
     const head = Helmet.renderStatic();
-    const {markup, store} = this.props;
+    const {markup, initialState} = this.props;
 
     // Styles
     const renderStyles = <style id="styles-target">{getStyles()}</style>;
@@ -24,8 +23,8 @@ class Html extends React.Component<IHtmlProps, {}> {
     );
 
     /* tslint:disable-next-line:react-no-dangerous-html */
-    const initialState = (
-      <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(store.getState())};`}}
+    const initialStateScript = (
+      <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
               charSet="UTF-8"/>);
     return (
       <html>
@@ -41,7 +40,7 @@ class Html extends React.Component<IHtmlProps, {}> {
       <body>
       {/* tslint:disable-next-line:react-no-dangerous-html */}
       <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
-      {initialState}
+      {initialStateScript}
       {renderScripts}
       </body>
       </html>
