@@ -26,7 +26,7 @@ This boilerplate uses the following libraries and tools:
 
 #### Utilities
 - [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
-- [Redux Thunk](https://github.com/gaearon/redux-thunk) for dispatching async actions.
+- [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
 - [Redux Connect](https://github.com/makeomatic/redux-connect) for resolving async props in react-router.
 - [React Helmet](https://github.com/nfl/react-helmet)
 
@@ -60,8 +60,6 @@ This boilerplate uses the following libraries and tools:
 - [TS Jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
 - [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
-- [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
-- [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
 
 ## Directory Structure
 ```bash
