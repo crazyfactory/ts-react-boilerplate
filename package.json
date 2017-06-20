@@ -62,7 +62,7 @@
     "@types/redux-devtools": "^3.0.36",
     "@types/redux-devtools-dock-monitor": "^1.1.29",
     "@types/redux-devtools-log-monitor": "^1.0.29",
-    "@types/redux-mock-store": "0.0.7",
+    "@types/redux-mock-store": "0.0.9",
     "@types/redux-thunk": "^2.1.31",
     "@types/webpack": "^2.2.13",
     "awesome-typescript-loader": "^3.0.0-beta.18",
