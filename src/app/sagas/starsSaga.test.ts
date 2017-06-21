@@ -1,16 +1,15 @@
 import {call, takeLatest} from "redux-saga/effects";
 import {actionType} from "../redux/modules/starsModule";
+import {dummyApi} from "./dummyApi";
 import makeRequest from "./makeRequest";
 import {fetchStars, watchStarsLoad} from "./starsSaga";
-import TestApi from "./TestApi";
 
 describe("starsSaga", () => {
   describe("fetchStars", () => {
     const gen = fetchStars();
 
     it("must call makeRequest of api.getStars", () => {
-      const api = new TestApi();
-      expect(gen.next().value).toEqual(call(makeRequest, api.getStars, actionType));
+      expect(gen.next().value).toEqual(call(makeRequest, dummyApi.getStars, actionType));
     });
 
     it("must be done", () => {
