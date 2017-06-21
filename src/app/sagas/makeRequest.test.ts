@@ -4,7 +4,14 @@ import makeRequest from "./makeRequest";
 
 describe("makeRequest", () => {
   const promiseFunction = () => Promise.resolve("success!");
-  const gen = makeRequest(promiseFunction, "SUCCESS_ACTION", "FAILURE_ACTION");
+  const gen = makeRequest(
+    promiseFunction,
+    {
+      FAILURE: "FAILURE_ACTION",
+      REQUEST: "REQUEST_ACTION",
+      SUCCESS: "SUCCESS_ACTION"
+    }
+  );
 
   it("must call apiMethod", () => {
     expect(gen.next().value).toEqual(call(promiseFunction));

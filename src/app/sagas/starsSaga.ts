@@ -5,7 +5,7 @@ import TestApi from "./TestApi";
 
 export function* fetchStars(): any {
   const api = new TestApi();
-  yield call(makeRequest, api.getStars, actionType.SUCCESS, actionType.FAILURE);
+  yield call(makeRequest, api.getStars, actionType);
 }
 
 export function* watchStarsLoad(): any {

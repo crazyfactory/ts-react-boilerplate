@@ -10,7 +10,7 @@ describe("starsSaga", () => {
 
     it("must call makeRequest of api.getStars", () => {
       const api = new TestApi();
-      expect(gen.next().value).toEqual(call(makeRequest, api.getStars, actionType.SUCCESS, actionType.FAILURE));
+      expect(gen.next().value).toEqual(call(makeRequest, api.getStars, actionType));
     });
 
     it("must be done", () => {
