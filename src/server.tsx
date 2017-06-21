@@ -63,12 +63,18 @@ app.get("*", (req, res) => {
           // deep clone state because store will be mutated during the second render in componentWillMount
           const initialState = JSON.parse(JSON.stringify(store.getState()));
 
+          // tslint:disable-next-line
+          console.time("second render");
+
           // render again from the initial data
           const markup = renderToString(
             <Provider store={store} key="provider">
               <RouterContext {...renderProps} />
             </Provider>
           );
+
+          // tslint:disable-next-line
+          console.timeEnd("second render");
 
           if (appConfig.ssr) {
             res.status(200).send(renderHTML(markup, initialState));
@@ -84,12 +90,19 @@ app.get("*", (req, res) => {
           res.status(500).send(err.message);
         });
 
+        // tslint:disable-next-line
+        console.time("first render");
+
         // first render to activate componentWillMount to dispatch actions for loading initial data
         renderToString(
           <Provider store={store} key="provider">
             <RouterContext {...renderProps} />
           </Provider>
         );
+
+        // tslint:disable-next-line
+        console.timeEnd("first render");
+
         // dispatching END will cause the root saga to terminate after all fired tasks terminate
         store.close();
       } else {
