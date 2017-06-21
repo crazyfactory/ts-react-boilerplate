@@ -5,7 +5,7 @@ describe("Stars Reducer", () => {
   it("handles action of type STARS_REQUEST", () => {
     const action = { type: STARS_REQUEST };
     const stateBefore = {};
-    const stateAfter = { isFetching: true };
+    const stateAfter = { payload: null };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
@@ -18,7 +18,6 @@ describe("Stars Reducer", () => {
     };
     const stateBefore = {};
     const stateAfter = {
-      isFetching: false,
       payload: {
         stargazers_count: 99
       }
@@ -29,14 +28,14 @@ describe("Stars Reducer", () => {
   it("handles action of type STARS_FAILURE", () => {
     const action = { type: STARS_FAILURE };
     const stateBefore = {};
-    const stateAfter = { error: true, isFetching: false };
+    const stateAfter = { error: true};
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it("handles actions with unknown type", () => {
     const action = { type: "" };
-    const stateBefore = { isFetching: false };
-    const stateAfter = { isFetching: false };
+    const stateBefore = { payload: null };
+    const stateAfter = { payload: null };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 

@@ -4,19 +4,17 @@ export default function promiseReducer<TState, TAction>(baseAction: string, stat
   switch (action.type) {
     case baseAction + "_REQUEST":
       return Object.assign({}, state, {
-        isFetching: true
+        payload: null
       });
 
     case baseAction + "_SUCCESS":
       return Object.assign({}, state, {
-        isFetching: false,
         payload: action.payload
       });
 
     case baseAction + "_FAILURE":
       return Object.assign({}, state, {
         error: true,
-        isFetching: false,
         message: action.message
       });
 

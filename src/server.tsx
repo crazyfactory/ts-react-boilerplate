@@ -60,20 +60,16 @@ app.get("*", (req, res) => {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         store.runSaga(rootSaga).done.then(() => {
-          // store will be mutated during the second render (because of componentDidMount)
-          // deep clone state
+          // deep clone state because store will be mutated during the second render in componentWillMount
           const initialState = JSON.parse(JSON.stringify(store.getState()));
-          console.info("before markup => store.stars = " + JSON.stringify(store.getState().stars));
+
+          // render again from the initial data
           const markup = renderToString(
             <Provider store={store} key="provider">
               <RouterContext {...renderProps} />
             </Provider>
           );
-          console.info("after markup => store.stars = " + JSON.stringify(store.getState().stars));
-          console.info("--------------------------------");
-          console.info("--------------------------------");
-          console.info("--------------------------------");
-          console.info("markup = " + markup);
+
           if (appConfig.ssr) {
             res.status(200).send(renderHTML(markup, initialState));
           } else {
@@ -88,12 +84,13 @@ app.get("*", (req, res) => {
           res.status(500).send(err.message);
         });
 
-        console.info("before renderToString => state.stars = " + JSON.stringify(store.getState().stars));
+        // first render to activate componentWillMount to dispatch actions for loading initial data
         renderToString(
           <Provider store={store} key="provider">
             <RouterContext {...renderProps} />
           </Provider>
         );
+        // dispatching END will cause the root saga to terminate after all fired tasks terminate
         store.close();
       } else {
         res.status(404).send("Not Found?");

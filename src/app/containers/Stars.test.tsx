@@ -1,23 +1,32 @@
 import {renderComponent} from "../helpers/TestHelper";
 import {Stars} from "./Stars";
 
-/** Mock App. State */
-const state: object = {
-  stars: {
-    isFetching: false,
-    payload: {
-      stargazers_count: 61
-    }
-  }
-};
+describe("<Stars />", () => {
 
-describe("<Counter />", () => {
+  it("Renders stars", () => {
+    const state: object = {
+      stars: {
+        payload: {
+          stargazers_count: 61
+        }
+      }
+    };
 
-  const component = renderComponent(Stars, state);
+    const component = renderComponent(Stars, state);
 
-  it("Renders header", () => {
-    expect(component.find("div")).toBeDefined();
-    // expect(component.find("div")).toHaveText("61");
+    expect(component.find("div")).toHaveText("61");
+  });
+
+  it("Renders fetching", () => {
+    const state: object = {
+      stars: {
+        payload: null
+      }
+    };
+
+    const component = renderComponent(Stars, state);
+
+    expect(component.find("div")).toHaveText("Fetching Stars..");
   });
 
 });

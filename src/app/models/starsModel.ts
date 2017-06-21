@@ -1,5 +1,4 @@
 export interface IStars {
-  isFetching?: boolean;
   error?: boolean;
   message?: string;
   payload?: {

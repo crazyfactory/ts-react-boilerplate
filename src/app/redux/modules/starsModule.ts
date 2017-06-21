@@ -8,10 +8,7 @@ export const STARS_FAILURE: string = "stars/STARS_FAILURE";
 
 /** Initial State */
 const initialState: IStars = {
-  isFetching: false,
-  payload: {
-    stargazers_count: -1
-  }
+  payload: null
 };
 
 /** Reducer */
