@@ -1,20 +1,32 @@
 import {renderComponent} from "../helpers/TestHelper";
 import {Stars} from "./Stars";
 
-/** Mock App. State */
-const state: object = {
-  stars: {
-    count: 61,
-    isFetching: false
-  }
-};
+describe("<Stars />", () => {
 
-describe("<Counter />", () => {
+  it("Renders stars", () => {
+    const state: object = {
+      stars: {
+        payload: {
+          stargazers_count: 61
+        }
+      }
+    };
 
-  const component = renderComponent(Stars, state);
+    const component = renderComponent(Stars, state);
 
-  it("Renders header", () => {
     expect(component.find("div")).toHaveText("61");
+  });
+
+  it("Renders fetching", () => {
+    const state: object = {
+      stars: {
+        payload: null
+      }
+    };
+
+    const component = renderComponent(Stars, state);
+
+    expect(component.find("div")).toHaveText("Fetching Stars..");
   });
 
 });
