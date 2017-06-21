@@ -15,5 +15,9 @@ const initialState: IStars = {
 
 /** Reducer */
 export function starsReducer(state: IStars = initialState, action: IStarsAction): IStars {
+  // an example how you can deal with action type other than requesting types in promiseReducer
+  if (action.type === LOAD_STARS) {
+    return state;
+  }
   return promiseReducer<IStars, IStarsAction>(requestType, state, action);
 }
