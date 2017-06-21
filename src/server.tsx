@@ -60,7 +60,7 @@ app.get("*", (req, res) => {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         store.runSaga(rootSaga).done.then(() => {
-          // deep clone state because store will be mutated during the second render in componentWillMount
+          // deep clone state because store will be changed during the second render in componentWillMount
           const initialState = JSON.parse(JSON.stringify(store.getState()));
 
           // tslint:disable-next-line
