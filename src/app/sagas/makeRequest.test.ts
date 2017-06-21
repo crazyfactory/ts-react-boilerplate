@@ -8,10 +8,14 @@ describe("makeRequest", () => {
     promiseFunction,
     {
       FAILURE: "FAILURE_ACTION",
-      PENDING: "REQUEST_ACTION",
+      PENDING: "PENDING_ACTION",
       SUCCESS: "SUCCESS_ACTION"
     }
   );
+
+  it("must dispatch actionPending", () => {
+    expect(gen.next().value).toEqual(put({type: "PENDING_ACTION"}));
+  });
 
   it("must call apiMethod", () => {
     expect(gen.next().value).toEqual(call(promiseFunction));
