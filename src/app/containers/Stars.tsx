@@ -11,7 +11,7 @@ interface IProps {
 @connect(
   (state) => ({stars: state.stars}),
   (dispatch) => ({
-    getStars: () => dispatch({type: actionType.REQUEST})
+    getStars: () => dispatch({type: actionType.PENDING})
   })
 )
 class Stars extends React.Component<IProps, {}> {

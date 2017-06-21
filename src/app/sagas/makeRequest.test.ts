@@ -8,7 +8,7 @@ describe("makeRequest", () => {
     promiseFunction,
     {
       FAILURE: "FAILURE_ACTION",
-      REQUEST: "REQUEST_ACTION",
+      PENDING: "REQUEST_ACTION",
       SUCCESS: "SUCCESS_ACTION"
     }
   );

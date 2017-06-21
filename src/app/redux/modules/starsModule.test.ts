@@ -3,7 +3,7 @@ import {actionType, starsReducer} from "./starsModule";
 describe("Stars Reducer", () => {
 
   it("handles action of type STARS_REQUEST", () => {
-    const action = { type: actionType.REQUEST };
+    const action = { type: actionType.PENDING };
     const stateBefore = {};
     const stateAfter = { payload: null };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);

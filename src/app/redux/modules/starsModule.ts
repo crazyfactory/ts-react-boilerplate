@@ -3,7 +3,7 @@ import promiseReducer, {IRequestType} from "../../helpers/promiseReducer";
 
 export const actionType: IRequestType = {
   FAILURE: "STARS_FAILURE",
-  REQUEST: "STARS_REQUEST",
+  PENDING: "STARS_REQUEST",
   SUCCESS: "STARS_SUCCESS"
 };
 

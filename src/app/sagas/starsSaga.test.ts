@@ -21,7 +21,7 @@ describe("starsSaga", () => {
     const gen = watchStarsLoad();
 
     it("must call takeLatest of STARS_REQUEST", () => {
-      expect(gen.next().value).toEqual(takeLatest(actionType.REQUEST, fetchStars));
+      expect(gen.next().value).toEqual(takeLatest(actionType.PENDING, fetchStars));
     });
 
     it("must be done", () => {

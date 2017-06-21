@@ -8,5 +8,5 @@ export function* fetchStars(): any {
 }
 
 export function* watchStarsLoad(): any {
-  yield takeLatest(actionType.REQUEST, fetchStars);
+  yield takeLatest(actionType.PENDING, fetchStars);
 }

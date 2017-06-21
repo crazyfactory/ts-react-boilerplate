@@ -1,14 +1,14 @@
 import IBaseAction from "../models/IBaseAction";
 
 export interface IRequestType {
-  REQUEST: string;
+  PENDING: string;
   SUCCESS: string;
   FAILURE: string;
 }
 
 export default function promiseReducer<TState, TAction>(actionType: IRequestType, state: TState, action: IBaseAction & TAction): TState {
   switch (action.type) {
-    case actionType.REQUEST:
+    case actionType.PENDING:
       return Object.assign({}, state, {
         payload: null
       });
