@@ -1,10 +1,11 @@
 import {IStars, IStarsAction} from "models/starsModel";
-import promiseReducer from "../../helpers/promiseReducer";
+import promiseReducer, {IRequestType} from "../../helpers/promiseReducer";
 
-/** Action Types */
-export const STARS_REQUEST: string = "stars/STARS_REQUEST";
-export const STARS_SUCCESS: string = "stars/STARS_SUCCESS";
-export const STARS_FAILURE: string = "stars/STARS_FAILURE";
+export const actionType: IRequestType = {
+  FAILURE: "STARS_FAILURE",
+  REQUEST: "STARS_REQUEST",
+  SUCCESS: "STARS_SUCCESS"
+};
 
 /** Initial State */
 const initialState: IStars = {
@@ -13,5 +14,5 @@ const initialState: IStars = {
 
 /** Reducer */
 export function starsReducer(state: IStars = initialState, action: IStarsAction): IStars {
-  return promiseReducer<IStars, IStarsAction>("stars/STARS", state, action);
+  return promiseReducer<IStars, IStarsAction>(actionType, state, action);
 }

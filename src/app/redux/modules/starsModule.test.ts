@@ -1,9 +1,9 @@
-import {STARS_FAILURE, STARS_REQUEST, STARS_SUCCESS, starsReducer} from "./starsModule";
+import {actionType, starsReducer} from "./starsModule";
 
 describe("Stars Reducer", () => {
 
   it("handles action of type STARS_REQUEST", () => {
-    const action = { type: STARS_REQUEST };
+    const action = { type: actionType.REQUEST };
     const stateBefore = {};
     const stateAfter = { payload: null };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
@@ -14,7 +14,7 @@ describe("Stars Reducer", () => {
       payload: {
         stargazers_count: 99
       },
-      type: STARS_SUCCESS
+      type: actionType.SUCCESS
     };
     const stateBefore = {};
     const stateAfter = {
@@ -26,7 +26,7 @@ describe("Stars Reducer", () => {
   });
 
   it("handles action of type STARS_FAILURE", () => {
-    const action = { type: STARS_FAILURE };
+    const action = { type: actionType.FAILURE };
     const stateBefore = {};
     const stateAfter = { error: true};
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);

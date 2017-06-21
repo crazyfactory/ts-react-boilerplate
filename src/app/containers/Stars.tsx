@@ -1,6 +1,6 @@
 import * as React from "react";
 import {IStars, IStarsAction} from "../models/starsModel";
-import {STARS_REQUEST} from "../redux/modules/starsModule";
+import {actionType} from "../redux/modules/starsModule";
 const {connect} = require("react-redux");
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 @connect(
   (state) => ({stars: state.stars}),
   (dispatch) => ({
-    getStars: () => dispatch({type: STARS_REQUEST})
+    getStars: () => dispatch({type: actionType.REQUEST})
   })
 )
 class Stars extends React.Component<IProps, {}> {

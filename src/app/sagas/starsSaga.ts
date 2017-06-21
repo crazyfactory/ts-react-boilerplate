@@ -1,13 +1,13 @@
 import {call, takeLatest} from "redux-saga/effects";
-import {STARS_FAILURE, STARS_REQUEST, STARS_SUCCESS} from "../redux/modules/starsModule";
+import {actionType} from "../redux/modules/starsModule";
 import makeRequest from "./makeRequest";
 import TestApi from "./TestApi";
 
 export function* fetchStars(): any {
   const api = new TestApi();
-  yield call(makeRequest, api.getStars, STARS_SUCCESS, STARS_FAILURE);
+  yield call(makeRequest, api.getStars, actionType.SUCCESS, actionType.FAILURE);
 }
 
 export function* watchStarsLoad(): any {
-  yield takeLatest(STARS_REQUEST, fetchStars);
+  yield takeLatest(actionType.REQUEST, fetchStars);
 }
