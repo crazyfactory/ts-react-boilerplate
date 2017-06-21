@@ -106,7 +106,6 @@
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
     "redux": "^3.6.0",
-    "redux-connect": "^5.1.0",
     "redux-logger": "^3.0.0",
     "redux-saga": "^0.15.3",
     "serve-favicon": "^2.3.2",

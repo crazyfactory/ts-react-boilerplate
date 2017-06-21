@@ -22,7 +22,6 @@ var config = {
       'react-redux',
       'react-router-redux',
       'redux',
-      'redux-connect',
       'redux-saga'
     ]
   },
