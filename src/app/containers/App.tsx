@@ -39,7 +39,6 @@ class App extends React.Component<any, any> {
   }
 
   public render(): JSX.Element {
-    console.info(this.props.languages);
     return (
       <IntlProvider locale={this.props.languages.locale} messages={this.props.languages.languageData}>
         <section className={Styles.container}>

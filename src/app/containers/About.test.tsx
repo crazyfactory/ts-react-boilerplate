@@ -7,7 +7,7 @@ describe("<About />", () => {
   const component = shallow(<About />);
 
   it("Renders header with text", () => {
-    expect(component.find("h4")).toHaveText("About");
+    expect(component.find("FormattedMessage")).toHaveProp("id", "about");
   });
 
 });

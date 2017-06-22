@@ -16,6 +16,7 @@ import routes from "./app/routes/routes";
 import rootSaga from "./app/sagas/rootSaga";
 
 import {Html} from "./app/containers";
+import {SET_LANGUAGE} from "./app/redux/modules/languageModule";
 (e6p as any).polyfill();
 const manifest = require("../build/manifest.json");
 
@@ -55,7 +56,7 @@ app.get("*", (req, res) => {
   const store = configureStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
   const languageHelper = new LanguageHelper(req.headers["accept-language"]);
-  console.info(languageHelper);
+  store.dispatch({type: SET_LANGUAGE, payload: {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferedLanguage()}});
   match({history, routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);
