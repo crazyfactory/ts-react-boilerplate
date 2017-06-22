@@ -15,6 +15,7 @@ var config = {
 
   entry: {
     app: [
+      'react-hot-loader/patch',
       'webpack-hot-middleware/client?reload=true',
       './src/client.tsx',
       './src/vendor/main.ts'
@@ -32,7 +33,7 @@ var config = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'react-hot-loader!awesome-typescript-loader'
+        loader: 'awesome-typescript-loader'
       },
       {
         test: /\.jsx$/,
