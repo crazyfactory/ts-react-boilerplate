@@ -26,17 +26,3 @@ export function counterReducer(state: ICounter = initialState, action?: ICounter
       return state;
   }
 }
-
-/** Action Creator: Increments the Counter */
-export function increment(): ICounterAction {
-  return {
-    type: INCREMENT
-  };
-}
-
-/** Action Creator: Decrements the Counter */
-export function decrement(): ICounterAction {
-  return {
-    type: DECREMENT
-  };
-}

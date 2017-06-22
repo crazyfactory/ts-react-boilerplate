@@ -22,8 +22,7 @@ var config = {
       'react-redux',
       'react-router-redux',
       'redux',
-      'redux-connect',
-      'redux-thunk'
+      'redux-saga'
     ]
   },
 
