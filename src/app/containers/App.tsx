@@ -6,6 +6,13 @@ import {Header} from "components";
 import {normalize, setupPage} from "csstips";
 import * as React from "react";
 import {Helmet} from "react-helmet";
+import {IntlProvider} from "react-intl";
+import {addLocaleData} from "react-intl";
+import * as en from "react-intl/locale-data/en";
+import * as es from "react-intl/locale-data/es";
+import * as fr from "react-intl/locale-data/fr";
+import * as de from "react-intl/locale-data/de";
+
 import {cssRaw, cssRule, style} from "typestyle";
 
 // Global style
@@ -26,13 +33,21 @@ const Styles = {
 };
 
 class App extends React.Component<any, any> {
+  constructor() {
+    super();
+    addLocaleData([...en, ...es, ...fr, ...de]);
+  }
+
   public render(): JSX.Element {
+    console.info(this.props.languages);
     return (
-      <section className={Styles.container}>
-        <Helmet {...appConfig.app.head}/>
-        <Header />
-        {this.props.children}
-      </section>
+      <IntlProvider locale={this.props.languages.locale} messages={this.props.languages.languageData}>
+        <section className={Styles.container}>
+          <Helmet {...appConfig.app.head}/>
+          <Header />
+          {this.props.children}
+        </section>
+      </IntlProvider>
     );
   }
 }
