@@ -1,4 +1,4 @@
-import {About, App, Counter, Home, Stars} from "containers";
+import {About, App, Counter, FormPage, Home, Stars} from "containers";
 import * as React from "react";
 import {IndexRoute, Route} from "react-router";
 
@@ -8,7 +8,7 @@ const routes = (
     <Route path="about" component={About}/>
     <Route path="counter" component={Counter}/>
     <Route path="stars" component={Stars}/>
-    {/*<Route path="form" component={FormPage}/>*/}
+    <Route path="form" component={FormPage}/>
   </Route>
 );
 export default routes;

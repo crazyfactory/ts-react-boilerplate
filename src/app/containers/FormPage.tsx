@@ -8,9 +8,13 @@ const required = (value) => (value ? undefined : "Required");
 
 const maxLength = (max) => (value) => value && value.length > max ? `Must be ${max} characters or less` : undefined;
 
+const maxLength15 = maxLength(15);
+
 const numberType = (value) => value && isNaN(Number(value)) ? "Must be a number" : undefined;
 
 const minValue = (min) => (value) => value && value < min ? `Must be at least ${min}` : undefined;
+
+const minValue18 = minValue(18);
 
 const email = (value) => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? "Invalid email address" : undefined;
 
@@ -28,7 +32,7 @@ const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
   </div>
 );
 
-let Form = (props) => {
+const Form = (props) => {
   const {handleSubmit, pristine, reset, submitting} = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -37,7 +41,7 @@ let Form = (props) => {
         type="text"
         component={renderField}
         label="Username"
-        validate={[required, maxLength(15)]}
+        validate={[required, maxLength15]}
       />
       <Field
         name="email"
@@ -52,7 +56,7 @@ let Form = (props) => {
         type="number"
         component={renderField}
         label="Age"
-        validate={[required, numberType, minValue(18)]}
+        validate={[required, numberType, minValue18]}
         warn={tooOld}
       />
       <div>
@@ -65,7 +69,7 @@ let Form = (props) => {
   );
 };
 
-Form = reduxForm({
+const ReduxForm = reduxForm({
   form: "exampleForm"
 })(Form);
 
@@ -88,7 +92,7 @@ class FormPage extends React.Component<void, void> {
 
   public render(): JSX.Element {
     return (
-      <Form onSubmit={this.showResults}/>
+      <ReduxForm onSubmit={this.showResults}/>
     );
   }
 }

@@ -1,5 +1,4 @@
 import * as React from "react";
-import {style} from "typestyle";
 
 export const required = (value) => (value ? undefined : "Required");
 
@@ -15,29 +14,10 @@ export const tooOld = (value) => value && value > 65 ? "You might be too old for
 
 export const aol = (value) => value && /.+@aol\.com/.test(value) ? "Really? You still use AOL for your email?" : undefined;
 
-/* tslint:disable:object-literal-sort-keys */
-const Styles = {
-  container: style({
-    display: "flex"
-  }),
-  label: style({
-    marginRight: 10,
-    minWidth: 150,
-    textAlign: "right"
-  }),
-  inputContainer: style({
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    maxWidth: 500
-  })
-};
-/* tslint:enable:object-literal-sort-keys */
-
 export const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-  <div className={Styles.container}>
-    <label className={Styles.label}>{label}</label>
-    <div className={Styles.inputContainer}>
+  <div>
+    <label>{label}</label>
+    <div>
       <input {...input} placeholder={label} type={type} />
       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
     </div>
