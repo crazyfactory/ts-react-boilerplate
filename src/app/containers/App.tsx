@@ -8,10 +8,10 @@ import * as React from "react";
 import {Helmet} from "react-helmet";
 import {IntlProvider} from "react-intl";
 import {addLocaleData} from "react-intl";
+import * as de from "react-intl/locale-data/de";
 import * as en from "react-intl/locale-data/en";
 import * as es from "react-intl/locale-data/es";
 import * as fr from "react-intl/locale-data/fr";
-import * as de from "react-intl/locale-data/de";
 
 import {cssRaw, cssRule, style} from "typestyle";
 
