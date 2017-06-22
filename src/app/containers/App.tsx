@@ -1,3 +1,5 @@
+import {connect} from "react-redux";
+
 const appConfig = require("../../../config/main");
 
 import {Header} from "components";
@@ -35,4 +37,5 @@ class App extends React.Component<any, any> {
   }
 }
 
-export {App, Styles}
+const connectedApp = connect((state) => ({languages: state.language}))(App);
+export {connectedApp as App, Styles}

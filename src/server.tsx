@@ -1,3 +1,5 @@
+import {LanguageHelper} from "./app/helpers/LanguageHelper";
+
 const appConfig = require("../config/main");
 
 import * as e6p from "es6-promise";
@@ -52,7 +54,8 @@ app.get("*", (req, res) => {
   const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
-
+  const languageHelper = new LanguageHelper(req.headers["accept-language"]);
+  console.info(languageHelper);
   match({history, routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);
