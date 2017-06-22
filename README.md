@@ -26,8 +26,7 @@ This boilerplate uses the following libraries and tools:
 
 #### Utilities
 - [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
-- [Redux Thunk](https://github.com/gaearon/redux-thunk) for dispatching async actions.
-- [Redux Connect](https://github.com/makeomatic/redux-connect) for resolving async props in react-router.
+- [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
 - [React Helmet](https://github.com/nfl/react-helmet)
 
 #### Build System
@@ -56,19 +55,10 @@ This boilerplate uses the following libraries and tools:
 - [Chalk](https://github.com/chalk/chalk) for colored terminal logs.
 
 #### Testing
-- [Karma](https://github.com/karma-runner/karma) as test runner with following plugins
-  - [Karma-Webpack](https://github.com/webpack/karma-webpack)
-  - [Karma-Typescript](https://github.com/monounity/karma-typescript)
-  - [Karma-Mocha](https://github.com/karma-runner/karma-mocha)
-  - [Karma-Chai](https://github.com/xdissent/karma-chai)
-  - [Karma-Coverage](https://github.com/karma-runner/karma-coverage)
-  - [Karma-PhantomJS Launcher](https://github.com/karma-runner/karma-phantomjs-launcher)
-- [Mocha](https://github.com/mochajs/mocha) as testing framework.
-- [Chai](https://github.com/chaijs/chai) as assertion library.
+- [Jest](https://github.com/facebook/jest) as test runner.
+- [TS Jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
-- [Chai Enzyme](https://github.com/producthunt/chai-enzyme) for asserting React Components.
-- [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
-- [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
+- [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
 
 ## Directory Structure
 ```bash
@@ -89,7 +79,7 @@ This boilerplate uses the following libraries and tools:
 │   │ │   ├── modules           # Redux modules.   
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
 │   │ │   └── store.ts          # Redux store, contains global app state.    
-│   │ └── routes.tsx            # Routes.
+│   │ └── routes                # Routes.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
@@ -102,6 +92,7 @@ This boilerplate uses the following libraries and tools:
 ├── Dockerfile                  # Dockerfile.
 ├── LICENSE                     # License file
 ├── package.json                # Package configuration.
+├── package-lock.json           # Package lock
 ├── README.md                   # This file
 ├── tsconfig.json               # TypeScript transpiler configuration.
 ├── tslint.json                 # Configures tslint.

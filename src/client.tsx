@@ -4,27 +4,25 @@ import "isomorphic-fetch";
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-const { Router, browserHistory } = require("react-router");
-import { syncHistoryWithStore } from "react-router-redux";
-const { ReduxAsyncConnect } = require("redux-connect");
-import "isomorphic-fetch";
-import { setStylesTarget } from "typestyle";
-import { configureStore } from "./app/redux/configureStore";
+import {Provider} from "react-redux";
+const {Router, browserHistory} = require("react-router");
+import {syncHistoryWithStore} from "react-router-redux";
+import {setStylesTarget} from "typestyle";
+import {configureStore} from "./app/redux/configureStore";
 import routes from "./app/routes/routes";
+import rootSaga from "./app/sagas/rootSaga";
 
 const store = configureStore(
   browserHistory,
   window.__INITIAL_STATE__
 );
+store.runSaga(rootSaga);
 const history = syncHistoryWithStore(browserHistory, store);
-const connectedCmp = (props) => <ReduxAsyncConnect {...props} />;
 
 ReactDOM.render(
   <Provider store={store} key="provider">
     <Router
       history={history}
-      render={connectedCmp}
     >
       {routes}
     </Router>

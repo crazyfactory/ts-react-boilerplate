@@ -1,32 +1,34 @@
-import { IStars, IStarsAction } from "models/starsModel";
-import { getStars } from "modules/starsModule";
 import * as React from "react";
-const { connect } = require("react-redux");
-const { asyncConnect } = require("redux-connect");
+import {IStars, IStarsAction} from "../models/starsModel";
+import {LOAD_STARS} from "../redux/modules/starsModule";
+const {connect} = require("react-redux");
 
 interface IProps {
   stars: IStars;
   getStars: Redux.ActionCreator<IStarsAction>;
 }
 
-@asyncConnect([{
-  promise: ({ store: { dispatch } }) => {
-    return dispatch(getStars());
-  }
-}])
 @connect(
-  (state) => ({ stars: state.stars })
+  (state) => ({stars: state.stars}),
+  (dispatch) => ({
+    getStars: () => dispatch({type: LOAD_STARS})
+  })
 )
 class Stars extends React.Component<IProps, {}> {
-  public render(): JSX.Element {
-    const { stars } = this.props;
+  public componentWillMount(): void {
+    if (!this.props.stars.payload) {
+      this.props.getStars();
+    }
+  }
 
+  public render(): JSX.Element {
+    const {stars} = this.props;
     return (
       <div>
-        {stars.isFetching ? "Fetching Stars" : stars.count}
+        {stars.payload ? stars.payload.stargazers_count : "Fetching Stars.."}
       </div>
     );
   }
 }
 
-export { Stars }
+export {Stars}

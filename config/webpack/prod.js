@@ -22,8 +22,7 @@ var config = {
       'react-redux',
       'react-router-redux',
       'redux',
-      'redux-connect',
-      'redux-thunk'
+      'redux-saga'
     ]
   },
 
@@ -34,7 +33,8 @@ var config = {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         enforce: 'pre',
         test: /\.tsx?$/,
         loader: 'tslint-loader'
