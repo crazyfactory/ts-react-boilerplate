@@ -1,4 +1,9 @@
 {
-  "init": "Hello World",
-  "about": "About Us"
+  "about": "About",
+  "about.us": "About Us",
+  "counter": "Counter",
+  "current.language": "Current Language",
+  "stars": "Stars",
+  "home": "Home",
+  "init": "Hello world"
 }

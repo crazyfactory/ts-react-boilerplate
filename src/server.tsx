@@ -26,6 +26,10 @@ const Chalk = require("chalk");
 const favicon = require("serve-favicon");
 
 const app = express();
+const translationHandler = (req, res) => {
+  const languageHelper = new LanguageHelper(req.params.lang);
+  res.json({languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferedLanguage()});
+};
 
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -49,6 +53,8 @@ if (process.env.NODE_ENV !== "production") {
 app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+app.get("/translation/:lang", translationHandler);
 
 app.get("*", (req, res) => {
   const location = req.url;

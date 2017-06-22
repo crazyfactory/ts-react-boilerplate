@@ -1,13 +1,12 @@
-import {shallow} from "enzyme";
-import * as React from "react";
+import {renderComponent} from "../helpers/TestHelper";
 import {About} from "./About";
 
 describe("<About />", () => {
 
-  const component = shallow(<About />);
+  const component = renderComponent(About);
 
   it("Renders header with text", () => {
-    expect(component.find("FormattedMessage")).toHaveProp("id", "about");
+    expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");
   });
 
 });
