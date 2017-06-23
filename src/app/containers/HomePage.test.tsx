@@ -1,10 +1,10 @@
 // import { renderComponent } from "../helpers/TestHelper";
 import {shallow} from "enzyme";
 import * as React from "react";
-import {Home, Styles} from "./Home";
-describe("<Home />", () => {
+import {HomePage, Styles} from "./HomePage";
+describe("<HomePage />", () => {
 
-  const component = shallow(<Home />);
+  const component = shallow(<HomePage />);
   it("Renders with correct style", () => {
     expect(component).toHaveClassName(Styles.home);
   });

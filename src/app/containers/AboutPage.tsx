@@ -1,6 +1,6 @@
 import * as React from "react";
 
-class About extends React.Component<any, any> {
+class AboutPage extends React.Component<any, any> {
   public render(): JSX.Element {
     return (
       <div>
@@ -10,4 +10,4 @@ class About extends React.Component<any, any> {
   }
 }
 
-export {About}
+export {AboutPage}

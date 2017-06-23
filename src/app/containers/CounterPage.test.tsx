@@ -1,17 +1,17 @@
 import {renderComponent} from "../helpers/TestHelper";
-import {Counter} from "./Counter";
+import {CounterPage} from "./CounterPage";
 
 /** Mock App. State */
 const state: object = {
   counter: {count: 1}
 };
 
-describe("<Counter />", () => {
+describe("<CounterPage />", () => {
 
   let component;
 
   beforeEach(() => {
-    component = renderComponent(Counter, state);
+    component = renderComponent(CounterPage, state);
   });
 
   it("Renders header", () => {

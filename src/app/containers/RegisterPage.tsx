@@ -1,9 +1,9 @@
 import {Promise} from "es6-promise";
 import * as React from "react";
 import {Form} from "../components";
-import {IFormData} from "../components/Form";
+import {IFormData} from "../components/RegisterForm";
 
-class FormPage extends React.Component<void, void> {
+class RegisterPage extends React.Component<void, void> {
   constructor() {
     super();
     this.showResults = this.showResults.bind(this);
@@ -27,4 +27,4 @@ class FormPage extends React.Component<void, void> {
   }
 }
 
-export {FormPage};
+export {RegisterPage};

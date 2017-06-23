@@ -24,6 +24,7 @@ class Form extends React.Component<FormProps<IFormData, IProps, void> & IProps, 
       <form onSubmit={handleSubmit}>
         <Field name="username" type="text" component={renderField} label="Username" validate={[required, maxLength(15)]}/>
         <Field name="password" type="password" component={renderField} label="Password" validate={[required, minLength(8)]}/>
+        <Field name="confirm-password" type="password" component={renderField} label="Confirm Password" validate={[required, minLength(8)]}/>
         <Field name="email" type="email" component={renderField} label="Email" validate={email} warn={aol}/>
         <Field name="age" type="number" component={renderField} label="Age" validate={[required, numberType, minValue(18)]} warn={tooOld}/>
         <div>

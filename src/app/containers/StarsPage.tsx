@@ -14,7 +14,7 @@ interface IProps {
     getStars: () => dispatch({type: LOAD_STARS})
   })
 )
-class Stars extends React.Component<IProps, {}> {
+class StarsPage extends React.Component<IProps, {}> {
   public componentWillMount(): void {
     if (!this.props.stars.payload) {
       this.props.getStars();
@@ -31,4 +31,4 @@ class Stars extends React.Component<IProps, {}> {
   }
 }
 
-export {Stars}
+export {StarsPage}

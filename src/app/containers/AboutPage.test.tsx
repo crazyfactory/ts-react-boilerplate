@@ -1,10 +1,10 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {About} from "./About";
+import {AboutPage} from "./AboutPage";
 
-describe("<About />", () => {
+describe("<AboutPage />", () => {
 
-  const component = shallow(<About />);
+  const component = shallow(<AboutPage />);
 
   it("Renders header with text", () => {
     expect(component.find("h4")).toHaveText("About");

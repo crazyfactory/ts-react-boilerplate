@@ -1,5 +1,5 @@
 import {renderComponent} from "../helpers/TestHelper";
-import {Stars} from "./Stars";
+import {StarsPage} from "./StarsPage";
 
 describe("<Stars />", () => {
 
@@ -12,7 +12,7 @@ describe("<Stars />", () => {
       }
     };
 
-    const component = renderComponent(Stars, state);
+    const component = renderComponent(StarsPage, state);
 
     expect(component.find("div")).toHaveText("61");
   });
@@ -24,7 +24,7 @@ describe("<Stars />", () => {
       }
     };
 
-    const component = renderComponent(Stars, state);
+    const component = renderComponent(StarsPage, state);
 
     expect(component.find("div")).toHaveText("Fetching Stars..");
   });
