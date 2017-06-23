@@ -1,8 +1,15 @@
 import * as React from "react";
+import {WrappedFieldProps} from "redux-form";
+interface IRenderFieldProps<T> extends WrappedFieldProps<T> {
+  label?: string;
+  type?: string;
+}
 
 export const required = (value) => (value ? undefined : "Required");
 
 export const maxLength = (max) => (value) => value && value.length > max ? `Must be ${max} characters or less` : undefined;
+
+export const minLength = (min) => (value) => value && value.length < min ? `Must be ${min} characters or more` : undefined;
 
 export const numberType = (value) => value && isNaN(Number(value)) ? "Must be a number" : undefined;
 
@@ -14,12 +21,15 @@ export const tooOld = (value) => value && value > 65 ? "You might be too old for
 
 export const aol = (value) => value && /.+@aol\.com/.test(value) ? "Really? You still use AOL for your email?" : undefined;
 
-export const renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-  <div>
-    <label>{label}</label>
+export const renderField = (props: IRenderFieldProps<any>) => {
+  const {input, label, type, meta: {active, touched, error, warning}} = props;
+  return (
     <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      <label>{props.label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} />
+        {(active || touched) && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
     </div>
-  </div>
-);
+  );
+};

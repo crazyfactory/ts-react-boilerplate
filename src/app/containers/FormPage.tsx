@@ -1,13 +1,14 @@
 import {Promise} from "es6-promise";
 import * as React from "react";
 import {Form} from "../components";
+import {IFormData} from "../components/Form";
 
 class FormPage extends React.Component<void, void> {
   constructor() {
     super();
     this.showResults = this.showResults.bind(this);
   }
-  public showResults(values: any): Promise<any> {
+  public showResults(values: IFormData): Promise<any> {
     return new Promise((resolve) => {
       setTimeout(
         () => {
