@@ -8,7 +8,7 @@ const routes = (
     <Route path="about" component={AboutPage}/>
     <Route path="counter" component={CounterPage}/>
     <Route path="stars" component={StarsPage}/>
-    <Route path="form" component={RegisterPage}/>
+    <Route path="register" component={RegisterPage}/>
   </Route>
 );
 export default routes;

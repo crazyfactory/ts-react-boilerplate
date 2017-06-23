@@ -1,2 +1,2 @@
 export {Header} from "./Header";
-export {Form} from "./RegisterForm";
+export {RegisterForm} from "./RegisterForm";
