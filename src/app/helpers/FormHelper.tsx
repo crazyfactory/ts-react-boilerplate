@@ -15,7 +15,7 @@ export const minLength = (min) => (value) => value && value.length < min ? `Must
 
 export const numberType = (value) => value && isNaN(Number(value)) ? "Must be a number" : undefined;
 
-export const minValue = (min) => (value) => value && value < min ? `Must be at least ${min}` : undefined;
+export const minValue = (min) => (value) => value < min ? `Must be at least ${min}` : undefined;
 
 export const matchedPwd = (value, otherValues) => value !== otherValues.password ? `Passwords not matched` : undefined;
 
