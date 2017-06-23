@@ -75,11 +75,13 @@ This boilerplate uses the following libraries and tools:
 │   │ ├── components            # React Components.
 │   │ ├── containers            # React/Redux Containers.
 │   │ ├── helpers               # Helper Functions & Components.
+|   | ├── models                # Interfaces for different parts of app
 │   │ ├── redux                 # Redux related code aka data layer of the app.
 │   │ │   ├── modules           # Redux modules.   
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
 │   │ │   └── store.ts          # Redux store, contains global app state.    
 │   │ └── routes                # Routes.
+│   │ └── sagas                 # Saga files.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
