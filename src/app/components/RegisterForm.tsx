@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Field, FormProps, reduxForm } from "redux-form";
+import { Field, FormProps } from "redux-form";
+const { reduxForm } = require("redux-form");
 import {
   aol, email, matchedPwd, maxLength, minLength, minValue,
   numberType, renderField, required, tooOld
@@ -40,7 +41,8 @@ class RegisterForm extends React.Component<FormProps<IFormData, IProps, void> & 
 }
 
 const RegisterReduxForm = reduxForm({
-  form: "example"
+  form: "register"
 })(RegisterForm);
 
-export {RegisterReduxForm as RegisterForm};
+// export RegisterForm for testing
+export {RegisterReduxForm, RegisterForm};

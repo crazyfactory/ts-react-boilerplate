@@ -1,9 +1,9 @@
 import {Promise} from "es6-promise";
 import * as React from "react";
-import {RegisterForm} from "../components";
+import {RegisterReduxForm} from "../components";
 import {IFormData} from "../components/RegisterForm";
 
-class RegisterPage extends React.Component<void, void> {
+class RegisterPage extends React.Component<null, null> {
   constructor() {
     super();
     this.showResults = this.showResults.bind(this);
@@ -22,7 +22,7 @@ class RegisterPage extends React.Component<void, void> {
 
   public render(): JSX.Element {
     return (
-      <RegisterForm onSubmit={this.showResults}/>
+      <RegisterReduxForm onSubmit={this.showResults}/>
     );
   }
 }
