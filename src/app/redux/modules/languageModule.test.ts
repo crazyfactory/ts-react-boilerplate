@@ -22,7 +22,7 @@ describe("languageModule", () => {
   });
 
   it("sets language data in payload when SET_LANGUAGE action type", () => {
-    expect(languageReducer(null, {type: SET_LANGUAGE, payload: sampleState})).toEqual(sampleState);
+    expect(languageReducer(null, {type: SET_LANGUAGE, payload: sampleState})).toEqual({payload: sampleState});
   });
 
 });

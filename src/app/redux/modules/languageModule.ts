@@ -1,4 +1,4 @@
-import {IRequestType} from "../../helpers/promiseReducer";
+import {default as promiseReducer, IRequestType} from "../../helpers/promiseReducer";
 import IBaseAction from "../../models/IBaseAction";
 
 export const SET_LANGUAGE = "language/SET_LANGUAGE";
@@ -25,10 +25,5 @@ const initialState: ILanguageState = {
 };
 
 export function languageReducer(state: ILanguageState = initialState, action: ILanguageAction): ILanguageState {
-  switch (action.type) {
-    case SET_LANGUAGE:
-      return action.payload;
-    default:
-      return state;
-  }
+  return promiseReducer<ILanguageState, ILanguageAction>(requestType, state, action);
 }

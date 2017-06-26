@@ -39,7 +39,7 @@ class App extends React.Component<any, any> {
 
   public render(): JSX.Element {
     return (
-      <IntlProvider locale={this.props.languages.locale} messages={this.props.languages.languageData}>
+      <IntlProvider locale={this.props.languages.payload.locale} messages={this.props.languages.payload.languageData}>
         <section className={Styles.container}>
           <Helmet {...appConfig.app.head}/>
           <Header />

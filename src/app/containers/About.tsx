@@ -24,7 +24,7 @@ class About extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state) => ({locale: state.language.locale});
+const mapStateToProps = (state) => ({locale: state.language.payload.locale});
 const mapDispatchToProps = (dispatch) => (
   {
     switchLanguage: (lang: string) => {
