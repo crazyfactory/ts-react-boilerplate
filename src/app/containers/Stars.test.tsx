@@ -6,6 +6,7 @@ describe("<Stars />", () => {
   it("Renders stars", () => {
     const state: object = {
       stars: {
+        isFetching: false,
         payload: {
           stargazers_count: 61
         }
@@ -20,7 +21,10 @@ describe("<Stars />", () => {
   it("Renders fetching", () => {
     const state: object = {
       stars: {
-        payload: null
+        isFetching: true,
+        payload: {
+          stargazers_count: -1
+        }
       }
     };
 
