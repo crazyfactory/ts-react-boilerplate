@@ -10,17 +10,19 @@ export default function promiseReducer<TState, TAction>(actionType: IRequestType
   switch (action.type) {
     case actionType.PENDING:
       return Object.assign({}, state, {
-        payload: null
+        isFetching: true
       });
 
     case actionType.SUCCESS:
       return Object.assign({}, state, {
+        isFetching: false,
         payload: action.payload
       });
 
     case actionType.FAILURE:
       return Object.assign({}, state, {
         error: true,
+        isFetching: false,
         message: action.message
       });
 

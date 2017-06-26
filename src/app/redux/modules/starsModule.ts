@@ -10,7 +10,10 @@ export const requestType: IRequestType = {
 
 /** Initial State */
 const initialState: IStars = {
-  payload: null
+  isFetching: true,
+  payload: {
+    stargazers_count: -1
+  }
 };
 
 /** Reducer */

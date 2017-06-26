@@ -1,5 +1,6 @@
 export interface IStars {
   error?: boolean;
+  isFetching?: boolean;
   message?: string;
   payload?: {
     stargazers_count: number;

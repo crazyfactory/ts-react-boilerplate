@@ -6,13 +6,18 @@ import {About, UnconnectedAbout} from "./About";
 
 describe("<About />", () => {
 
-  const component = renderComponent(About, {language: {payload: {locale: "en"}}});
+  const component = renderComponent(About, {language: {payload: {locale: "en-GB"}}});
 
-  it("Renders header with text", () => {
+  it("renders header with text", () => {
     expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");
   });
 
-  it("Calls switchLanguage() when button is clicked", () => {
+  it("has correct props passed from store state", () => {
+    expect(component.find(About)).toHaveLength(1);
+    expect(component.find(About)).toHaveProp("locale", "en-GB");
+  });
+
+  it("calls switchLanguage() when button is clicked", () => {
     const dispatch = jest.fn();
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
     const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch}/>);
@@ -23,28 +28,32 @@ describe("<About />", () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it("switchLanguage() dispatches SWITCH_LANGUAGE action to en-GB", () => {
-    const dispatch = jest.fn();
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} />);
+  describe("switchLanguage()", () => {
 
-    expect(dispatch).not.toHaveBeenCalled();
-    (shallowComponent as any).instance().switchLanguage();
-    expect(dispatch).toHaveBeenCalledWith({
-      payload: "en-GB",
-      type: SWITCH_LANGUAGE
+    it("dispatches SWITCH_LANGUAGE action to en-GB", () => {
+      const dispatch = jest.fn();
+      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} />);
+
+      expect(dispatch).not.toHaveBeenCalled();
+      (shallowComponent as any).instance().switchLanguage();
+      expect(dispatch).toHaveBeenCalledWith({
+        payload: "en-GB",
+        type: SWITCH_LANGUAGE
+      });
     });
-  });
 
-  it("switchLanguage() dispatches SWITCH_LANGUAGE action to de", () => {
-    const dispatch = jest.fn();
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale="en-GB"/>);
+    it("dispatches SWITCH_LANGUAGE action to de", () => {
+      const dispatch = jest.fn();
+      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale="en-GB"/>);
 
-    expect(dispatch).not.toHaveBeenCalled();
-    (shallowComponent as any).instance().switchLanguage();
-    expect(dispatch).toHaveBeenCalledWith({
-      payload: "de",
-      type: SWITCH_LANGUAGE
+      expect(dispatch).not.toHaveBeenCalled();
+      (shallowComponent as any).instance().switchLanguage();
+      expect(dispatch).toHaveBeenCalledWith({
+        payload: "de",
+        type: SWITCH_LANGUAGE
+      });
     });
+
   });
 
 });

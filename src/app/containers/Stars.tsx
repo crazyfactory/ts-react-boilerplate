@@ -16,7 +16,7 @@ interface IProps {
 )
 class Stars extends React.Component<IProps, {}> {
   public componentWillMount(): void {
-    if (!this.props.stars.payload) {
+    if (this.props.stars.payload.stargazers_count === -1) {
       this.props.getStars();
     }
   }
@@ -25,7 +25,7 @@ class Stars extends React.Component<IProps, {}> {
     const {stars} = this.props;
     return (
       <div>
-        {stars.payload ? stars.payload.stargazers_count : "Fetching Stars.."}
+        {stars.isFetching ? "Fetching Stars.." : stars.payload.stargazers_count}
       </div>
     );
   }

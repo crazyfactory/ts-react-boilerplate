@@ -7,14 +7,17 @@ describe("languageModule", () => {
   beforeAll(() => {
 
     sampleState = {
-      language: {hello: "world"},
-      locale: "de"
+      isFetching: false,
+      payload: {
+        languageData: {hello: "world"},
+        locale: "de"
+      }
     };
 
   });
 
   it("returns initial state with default language", () => {
-    expect(languageReducer(undefined, {type: undefined} as any).locale).toEqual("en-GB");
+    expect(languageReducer(undefined, {type: undefined} as any).payload.locale).toEqual("en-GB");
   });
 
   it("returns normal state for unknown types", () => {
@@ -22,7 +25,7 @@ describe("languageModule", () => {
   });
 
   it("sets language data in payload when SET_LANGUAGE action type", () => {
-    expect(languageReducer(null, {type: SET_LANGUAGE, payload: sampleState})).toEqual({payload: sampleState});
+    expect(languageReducer(null, {type: SET_LANGUAGE, payload: sampleState})).toEqual({isFetching: false, payload: sampleState});
   });
 
 });

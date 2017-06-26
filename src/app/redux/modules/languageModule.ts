@@ -1,5 +1,4 @@
 import {default as promiseReducer, IRequestType} from "../../helpers/promiseReducer";
-import IBaseAction from "../../models/IBaseAction";
 
 export const SET_LANGUAGE = "language/SET_LANGUAGE";
 export const SWITCH_LANGUAGE = "language/SWITCH_LANGUAGE";
@@ -11,17 +10,30 @@ export const requestType: IRequestType = {
 };
 
 export interface ILanguageState {
-  locale: string;
-  language: object;
+  error?: boolean;
+  isFetching: boolean;
+  message?: string;
+  payload: {
+    languageData: any;
+    locale: string;
+  };
 }
 
-export interface ILanguageAction extends IBaseAction {
-  payload: ILanguageState;
+export interface ILanguageAction {
+  type: string;
+  message?: string;
+  payload: {
+    languageData: any;
+    locale: string;
+  };
 }
 
 const initialState: ILanguageState = {
-  language: {},
-  locale: "en-GB"
+  isFetching: false,
+  payload: {
+    languageData: {},
+    locale: "en-GB"
+  }
 };
 
 export function languageReducer(state: ILanguageState = initialState, action: ILanguageAction): ILanguageState {
