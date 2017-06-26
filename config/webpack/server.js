@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var utils = require('./utils');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')
@@ -66,27 +67,9 @@ var config = {
   }
 };
 
-const copySync = (src, dest, overwrite) => {
-  if (overwrite && fs.existsSync(dest)) {
-    fs.unlinkSync(dest);
-  }
-  const data = fs.readFileSync(src);
-  fs.writeFileSync(dest, data);
-}
-
-const createIfDoesntExist = dest => {
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest);
-  }
-}
-const copySyncIfDoesntExist = (src, dest) => {
-  if(fs.existsSync(dest)) return;
-  copySync(src, dest);
-};
-
-copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
-createIfDoesntExist('./build');
-createIfDoesntExist('./build/public');
-copySync('./src/favicon.ico', './build/public/favicon.ico', true);
+utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
+utils.createIfDoesntExist('./build');
+utils.createIfDoesntExist('./build/public');
+utils.copySync('./src/favicon.ico', './build/public/favicon.ico', true);
 
 module.exports = config;
