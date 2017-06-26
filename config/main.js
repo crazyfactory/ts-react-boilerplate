@@ -6,6 +6,11 @@ var config = {
   port: process.env.PORT || 8889,
   karmaPort: 9876,
   ssr: true,
+  sentry: false,
+  //   sentry: {
+  //     dsn: "",
+  //     release: ""
+  //   },
 
   // This part goes to React-Helmet for Head of our HTML
   app: {

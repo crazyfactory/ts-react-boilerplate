@@ -115,6 +115,12 @@ const createIfDoesntExist = dest => {
     fs.mkdirSync(dest);
   }
 }
+const copySyncIfDoesntExist = (src, dest) => {
+  if(fs.existsSync(dest)) return;
+  copySync(src, dest);
+};
+
+copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
 
 createIfDoesntExist('./build');
 createIfDoesntExist('./build/public');
