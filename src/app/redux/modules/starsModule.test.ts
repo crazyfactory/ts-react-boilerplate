@@ -1,6 +1,17 @@
+import {IStars} from "../../models/starsModel";
 import {requestType, starsReducer} from "./starsModule";
 
 describe("Stars Reducer", () => {
+
+  it("returns initial state with default language", () => {
+    const initialState: IStars = {
+      isFetching: true,
+      payload: {
+        stargazers_count: -1
+      }
+    };
+    expect(starsReducer(undefined, {type: undefined})).toEqual(initialState);
+  });
 
   it("handles action of type STARS_REQUEST", () => {
     const action = { type: requestType.PENDING };

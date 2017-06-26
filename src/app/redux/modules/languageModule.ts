@@ -11,9 +11,9 @@ export const requestType: IRequestType = {
 
 export interface ILanguageState {
   error?: boolean;
-  isFetching: boolean;
+  isFetching?: boolean;
   message?: string;
-  payload: {
+  payload?: {
     languageData: any;
     locale: string;
   };
@@ -22,7 +22,7 @@ export interface ILanguageState {
 export interface ILanguageAction {
   type: string;
   message?: string;
-  payload: {
+  payload?: {
     languageData: any;
     locale: string;
   };
