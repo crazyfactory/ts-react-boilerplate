@@ -1,10 +1,10 @@
 import {call, takeLatest} from "redux-saga/effects";
-
-import {ILanguageAction, requestType, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
+import IBaseAction from "../models/IBaseAction";
+import {requestType, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
 import {dummyApi} from "./dummyApi";
 import makeRequest from "./makeRequest";
 
-export function* updateLanguage(action: ILanguageAction): any {
+export function* updateLanguage(action: IBaseAction): any {
   yield call(makeRequest, dummyApi.getLanguageData, requestType, action.payload);
 }
 

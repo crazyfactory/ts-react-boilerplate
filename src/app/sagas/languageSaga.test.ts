@@ -13,12 +13,20 @@ describe("languageSaga", () => {
     it("must call makeRequest of api.getStars", () => {
       expect(gen.next().value).toEqual(call(makeRequest, dummyApi.getLanguageData, requestType, payload));
     });
+
+    it("must be done", () => {
+      expect(gen.next()).toEqual({done: true, value: undefined});
+    });
   });
 
   describe("watchLanguageSwitch", () => {
     const gen = watchLanguageSwitch();
     it("should watch for LANGUAGE_SWITCH actions", () => {
         expect(gen.next().value).toEqual(takeLatest(SWITCH_LANGUAGE, updateLanguage));
+    });
+
+    it("must be done", () => {
+      expect(gen.next()).toEqual({done: true, value: undefined});
     });
   });
 });

@@ -15,10 +15,10 @@ function renderComponent(ComponentClass: React.ComponentClass<any> | React.SFC<a
 
   return mount(
     <IntlProvider locale="en">
-        <Provider store={store}>
-          <ComponentClass {...props} />
-        </Provider>
-      </IntlProvider>
+      <Provider store={store}>
+        <ComponentClass {...props} />
+      </Provider>
+    </IntlProvider>
   );
 }
 
