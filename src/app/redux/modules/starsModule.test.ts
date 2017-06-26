@@ -5,7 +5,7 @@ describe("Stars Reducer", () => {
   it("handles action of type STARS_REQUEST", () => {
     const action = { type: requestType.PENDING };
     const stateBefore = {};
-    const stateAfter = { payload: null };
+    const stateAfter = { isFetching: true };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
@@ -18,6 +18,7 @@ describe("Stars Reducer", () => {
     };
     const stateBefore = {};
     const stateAfter = {
+      isFetching: false,
       payload: {
         stargazers_count: 99
       }
@@ -26,9 +27,9 @@ describe("Stars Reducer", () => {
   });
 
   it("handles action of type STARS_FAILURE", () => {
-    const action = { type: requestType.FAILURE };
+    const action = { type: requestType.FAILURE, message: "error!" };
     const stateBefore = {};
-    const stateAfter = { error: true};
+    const stateAfter = { error: true, isFetching: false, message: "error!"};
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
