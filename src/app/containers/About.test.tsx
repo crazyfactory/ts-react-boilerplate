@@ -1,7 +1,8 @@
 import {shallow} from "enzyme";
 import * as React from "react";
 import {renderComponent} from "../helpers/TestHelper";
-import {SWITCH_LANGUAGE} from "../redux/modules/languageModule";
+import {IAction} from "../redux/modules/baseModule";
+import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
 import {About, UnconnectedAbout} from "./About";
 
 describe("<About />", () => {
@@ -15,7 +16,7 @@ describe("<About />", () => {
   it("calls switchLanguage() when button is clicked", () => {
     const dispatch = jest.fn();
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch}/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale=""/>);
 
     expect(shallowComponent.find("button")).toBeDefined();
     expect(spy).not.toHaveBeenCalled();
@@ -24,31 +25,37 @@ describe("<About />", () => {
   });
 
   describe("switchLanguage()", () => {
-
     it("dispatches SWITCH_LANGUAGE action to en-GB", () => {
       const dispatch = jest.fn();
-      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} />);
+      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale="" />);
+      const expectedValue: IAction<ILanguage> = {
+        payload: {
+          languageData: {},
+          locale: "en-GB"
+        },
+        type: SWITCH_LANGUAGE
+      };
 
       expect(dispatch).not.toHaveBeenCalled();
       (shallowComponent as any).instance().switchLanguage();
-      expect(dispatch).toHaveBeenCalledWith({
-        payload: "en-GB",
-        type: SWITCH_LANGUAGE
-      });
+      expect(dispatch).toHaveBeenCalledWith(expectedValue);
     });
 
     it("dispatches SWITCH_LANGUAGE action to de", () => {
       const dispatch = jest.fn();
       const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale="en-GB"/>);
+      const expectedValue: IAction<ILanguage> = {
+        payload: {
+          languageData: {},
+          locale: "de"
+        },
+        type: SWITCH_LANGUAGE
+      };
 
       expect(dispatch).not.toHaveBeenCalled();
       (shallowComponent as any).instance().switchLanguage();
-      expect(dispatch).toHaveBeenCalledWith({
-        payload: "de",
-        type: SWITCH_LANGUAGE
-      });
+      expect(dispatch).toHaveBeenCalledWith(expectedValue);
     });
-
   });
 
 });

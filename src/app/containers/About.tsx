@@ -1,19 +1,19 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
-import {SWITCH_LANGUAGE} from "../redux/modules/languageModule";
+import {IStore} from "../redux/IStore";
+import {IDispatchToProps} from "../redux/modules/baseModule";
+import {switchLanguage} from "../redux/modules/languageModule";
 
-class About extends React.Component<any, any> {
+class About extends React.Component<IStateToProps & IDispatchToProps, null> {
   constructor() {
     super();
     this.switchLanguage = this.switchLanguage.bind(this);
   }
 
   public switchLanguage(): void {
-    this.props.dispatch({
-      payload: this.props.locale === "en-GB" ? "de" : "en-GB",
-      type: SWITCH_LANGUAGE
-    });
+    const locale = this.props.locale === "en-GB" ? "de" : "en-GB";
+    this.props.dispatch(switchLanguage(locale));
   }
 
   public render(): JSX.Element {
@@ -27,6 +27,12 @@ class About extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state) => ({locale: state.language.payload.locale});
-const connectedAbout = connect(mapStateToProps)(About);
+interface IStateToProps {
+  locale: string;
+}
+
+const mapStateToProps = (state: IStore) => ({
+  locale: state.language.payload.locale
+});
+const connectedAbout = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(About);
 export {About as UnconnectedAbout, connectedAbout as About};

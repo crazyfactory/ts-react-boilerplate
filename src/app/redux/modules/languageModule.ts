@@ -25,3 +25,13 @@ const initialState: IState<ILanguage> = {
 export function languageReducer(state: IState<ILanguage> = initialState, action: IAction<ILanguage>): IState<ILanguage> {
   return promiseReducer<ILanguage>(requestType, state, action);
 }
+
+export function switchLanguage(locale: string): IAction<ILanguage> {
+  return {
+    payload: {
+      languageData: {},
+      locale
+    },
+    type: SWITCH_LANGUAGE
+  };
+}

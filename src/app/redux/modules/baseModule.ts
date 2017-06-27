@@ -1,14 +1,17 @@
 import {Action} from "redux";
 
-interface IAction<P> extends Action {
+export interface IAction<P> extends Action {
   payload?: P;
   message?: string;
 }
 
-interface IState<P> {
+export interface IState<P> {
   error?: boolean;
   isFetching: boolean;
   message?: string;
   payload: P;
 }
-export {IAction, IState};
+
+export interface IDispatchToProps {
+  dispatch: (actionCreator: IAction<any>) => any;
+}
