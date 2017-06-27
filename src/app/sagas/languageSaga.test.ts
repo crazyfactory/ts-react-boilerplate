@@ -11,7 +11,7 @@ describe("languageSaga", () => {
     const gen = updateLanguage({type: "", payload});
 
     it("must call makeRequest of api.getLanguageData", () => {
-      expect(gen.next().value).toEqual(call(makeRequest, requestType, dummyApi.getLanguageData, payload));
+      expect(gen.next().value).toEqual(call(makeRequest, requestType, dummyApi.getLanguageData, payload.locale));
     });
 
     it("must be done", () => {

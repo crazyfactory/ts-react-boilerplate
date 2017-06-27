@@ -5,7 +5,7 @@ import {dummyApi} from "./dummyApi";
 import makeRequest from "./makeRequest";
 
 export function* updateLanguage(action: IAction<ILanguage>): any {
-  yield call(makeRequest, requestType, dummyApi.getLanguageData, action.payload);
+  yield call(makeRequest, requestType, dummyApi.getLanguageData, action.payload.locale);
 }
 
 export function* watchLanguageSwitch(): any {
