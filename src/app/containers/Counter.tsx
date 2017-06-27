@@ -1,39 +1,50 @@
 import * as React from "react";
-import {IAction, IState} from "../redux/modules/baseModule";
-import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
-const {connect} = require("react-redux");
+import {connect} from "react-redux";
+import {IStore} from "../redux/IStore";
+import {IDispatchToProps} from "../redux/modules/baseModule";
+import {decrement, increment} from "../redux/modules/counterModule";
 
-interface IProps {
-  counter: IState<ICounter>;
-  increment: Redux.ActionCreator<IAction<ICounter>>;
-  decrement: Redux.ActionCreator<IAction<ICounter>>;
-}
+class Counter extends React.Component<IStateToProps & IDispatchToProps, null> {
+  constructor() {
+    super();
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleDecrement = this.handleDecrement.bind(this);
+  }
 
-@connect(
-  (state) => ({counter: state.counter}),
-  (dispatch) => ({
-    decrement: () => dispatch({type: DECREMENT}),
-    increment: () => dispatch({type: INCREMENT})
-  })
-)
+  public handleIncrement(): void {
+    this.props.dispatch(increment());
+  }
 
-class Counter extends React.Component<IProps, null> {
+  public handleDecrement(): void {
+    this.props.dispatch(decrement());
+  }
+
   public render(): JSX.Element {
-    const {increment, decrement, counter} = this.props;
+    const {count} = this.props;
 
     return (
       <div>
         <h4>Counter Example</h4>
-        <button name="incBtn" onClick={increment}>
+        <button name="incBtn" onClick={this.handleIncrement}>
           INCREMENT
         </button>
-        <button name="decBtn" onClick={decrement} disabled={counter.payload.count <= 0}>
+        <button name="decBtn" onClick={this.handleDecrement} disabled={count <= 0}>
           DECREMENT
         </button>
-        <p>{counter.payload.count}</p>
+        <p>{count}</p>
       </div>
     );
   }
 }
 
-export {Counter}
+interface IStateToProps {
+  count: number;
+}
+
+const mapStateToProps = (state: IStore) => ({
+  count: state.counter.payload.count
+});
+
+const connectedCounter = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(Counter);
+
+export {Counter as UnconnectedCounter, connectedCounter as Counter}

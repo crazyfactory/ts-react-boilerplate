@@ -14,9 +14,8 @@ describe("<About />", () => {
   });
 
   it("calls switchLanguage() when button is clicked", () => {
-    const dispatch = jest.fn();
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
 
     expect(shallowComponent.find("button")).toBeDefined();
     expect(spy).not.toHaveBeenCalled();

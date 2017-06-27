@@ -7,7 +7,6 @@ export interface ICounter {
   count: number;
 }
 
-/** Counter: Initial State */
 const initialState: IState<ICounter> = {
   isFetching: false,
   payload: {
@@ -15,7 +14,6 @@ const initialState: IState<ICounter> = {
   }
 };
 
-/** Reducer: CounterReducer */
 export function counterReducer(state: IState<ICounter> = initialState, action?: IAction<ICounter>): IState<ICounter> {
   switch (action.type) {
     case INCREMENT:
@@ -25,7 +23,6 @@ export function counterReducer(state: IState<ICounter> = initialState, action?: 
           count: state.payload.count + 1
         }
       };
-
     case DECREMENT:
       return {
         ...state,
@@ -33,8 +30,19 @@ export function counterReducer(state: IState<ICounter> = initialState, action?: 
           count: ((state.payload.count - 1 > 0) ? state.payload.count - 1 : 0)
         }
       };
-
     default:
       return state;
   }
+}
+
+export function increment(): IAction<ICounter> {
+  return {
+    type: INCREMENT
+  };
+}
+
+export function decrement(): IAction<ICounter> {
+  return {
+    type: DECREMENT
+  };
 }
