@@ -26,3 +26,9 @@ export function starsReducer(state: IState<IStars> = initialState, action: IActi
   }
   return promiseReducer<IStars>(requestType, state, action);
 }
+
+export function loadStars(): IAction<IStars> {
+  return {
+    type: LOAD_STARS
+  };
+}

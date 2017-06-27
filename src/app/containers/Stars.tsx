@@ -1,34 +1,34 @@
 import * as React from "react";
-import {IAction, IState} from "../redux/modules/baseModule";
-import {IStars, LOAD_STARS} from "../redux/modules/starsModule";
-const {connect} = require("react-redux");
+import {connect} from "react-redux";
+import {IStore} from "../redux/IStore";
+import {IDispatchToProps} from "../redux/modules/baseModule";
+import {loadStars} from "../redux/modules/starsModule";
 
-interface IProps {
-  stars: IState<IStars>;
-  getStars: Redux.ActionCreator<IAction<IStars>>;
-}
-
-@connect(
-  (state) => ({stars: state.stars}),
-  (dispatch) => ({
-    getStars: () => dispatch({type: LOAD_STARS})
-  })
-)
-class Stars extends React.Component<IProps, {}> {
+class Stars extends React.Component<IStateToProps & IDispatchToProps, null> {
   public componentWillMount(): void {
-    if (this.props.stars.payload.stargazers_count === -1) {
-      this.props.getStars();
+    if (this.props.stargazers_count === -1) {
+      this.props.dispatch(loadStars());
     }
   }
 
   public render(): JSX.Element {
-    const {stars} = this.props;
+    const {isFetching, stargazers_count} = this.props;
     return (
       <div>
-        {stars.isFetching ? "Fetching Stars.." : stars.payload.stargazers_count}
+        {isFetching ? "Fetching Stars.." : stargazers_count}
       </div>
     );
   }
 }
 
-export {Stars}
+interface IStateToProps {
+  isFetching: boolean;
+  stargazers_count: number;
+}
+
+const mapStateToProps = (state: IStore) => ({
+  isFetching: state.stars.isFetching,
+  stargazers_count: state.stars.payload.stargazers_count
+});
+const connectedStars = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(Stars);
+export {Stars as UnconnectedStars, connectedStars as Stars}
