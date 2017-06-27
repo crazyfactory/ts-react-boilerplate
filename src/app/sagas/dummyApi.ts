@@ -1,9 +1,9 @@
 import {Promise} from "es6-promise";
-import {IStars} from "../models/starsModel";
-import {ILanguageState} from "../redux/modules/languageModule";
+import {ILanguage} from "../redux/modules/languageModule";
+import {IStars} from "../redux/modules/starsModule";
 
 export const dummyApi = {
-  getLanguageData: (payload): Promise<ILanguageState> => {
+  getLanguageData: (payload: string): Promise<ILanguage> => {
     return fetch(`http://localhost:8889/translation/${payload}`).then((res) => res.json());
   },
   getStars: () : Promise<IStars> => {

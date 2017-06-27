@@ -1,11 +1,11 @@
 import * as React from "react";
-import {IStars, IStarsAction} from "../models/starsModel";
-import {LOAD_STARS} from "../redux/modules/starsModule";
+import {IAction, IState} from "../redux/modules/baseModule";
+import {IStars, LOAD_STARS} from "../redux/modules/starsModule";
 const {connect} = require("react-redux");
 
 interface IProps {
-  stars: IStars;
-  getStars: Redux.ActionCreator<IStarsAction>;
+  stars: IState<IStars>;
+  getStars: Redux.ActionCreator<IAction<IStars>>;
 }
 
 @connect(

@@ -5,12 +5,12 @@ import makeRequest from "./makeRequest";
 describe("makeRequest", () => {
   const promiseFunction = () => Promise.resolve("success!");
   const gen = makeRequest(
-    promiseFunction,
     {
       FAILURE: "FAILURE_ACTION",
       PENDING: "PENDING_ACTION",
       SUCCESS: "SUCCESS_ACTION"
-    }
+    },
+    promiseFunction
   );
 
   it("must dispatch actionPending", () => {

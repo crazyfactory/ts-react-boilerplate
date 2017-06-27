@@ -1,10 +1,11 @@
 import {renderComponent} from "../helpers/TestHelper";
+import {IStore} from "../redux/IStore";
 import {Stars} from "./Stars";
 
 describe("<Stars />", () => {
 
   it("Renders stars", () => {
-    const state: object = {
+    const state: Partial<IStore> = {
       stars: {
         isFetching: false,
         payload: {
@@ -19,7 +20,7 @@ describe("<Stars />", () => {
   });
 
   it("Renders fetching", () => {
-    const state: object = {
+    const state: Partial<IStore> = {
       stars: {
         isFetching: true,
         payload: {

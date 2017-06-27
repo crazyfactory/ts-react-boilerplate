@@ -1,17 +1,17 @@
 import {call, takeLatest} from "redux-saga/effects";
 
-import {requestType, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
+import {ILanguage, requestType, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
 import {dummyApi} from "./dummyApi";
 import {updateLanguage, watchLanguageSwitch} from "./languageSaga";
 import makeRequest from "./makeRequest";
 
 describe("languageSaga", () => {
   describe("updateLanguage", () => {
-    const payload = {locale: "en", language: {hello: "world"}};
+    const payload: ILanguage = {locale: "en", languageData: {hello: "world"}};
     const gen = updateLanguage({type: "", payload});
 
-    it("must call makeRequest of api.getStars", () => {
-      expect(gen.next().value).toEqual(call(makeRequest, dummyApi.getLanguageData, requestType, payload));
+    it("must call makeRequest of api.getLanguageData", () => {
+      expect(gen.next().value).toEqual(call(makeRequest, requestType, dummyApi.getLanguageData, payload));
     });
 
     it("must be done", () => {
@@ -21,7 +21,7 @@ describe("languageSaga", () => {
 
   describe("watchLanguageSwitch", () => {
     const gen = watchLanguageSwitch();
-    it("should watch for LANGUAGE_SWITCH actions", () => {
+    it("should watch for LANGUAGE_SWITCH action", () => {
         expect(gen.next().value).toEqual(takeLatest(SWITCH_LANGUAGE, updateLanguage));
     });
 

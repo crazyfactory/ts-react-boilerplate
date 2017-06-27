@@ -1,9 +1,15 @@
 import {renderComponent} from "../helpers/TestHelper";
+import {IStore} from "../redux/IStore";
 import {Counter} from "./Counter";
 
 /** Mock App. State */
-const state: object = {
-  counter: {count: 1}
+const state: Partial<IStore> = {
+  counter: {
+    isFetching: false,
+    payload: {
+      count: 1
+    }
+  }
 };
 
 describe("<Counter />", () => {

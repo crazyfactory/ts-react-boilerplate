@@ -1,12 +1,12 @@
 import * as React from "react";
-import {ICounter, ICounterAction} from "../models/counterModel";
-import {DECREMENT, INCREMENT} from "../redux/modules/counterModule";
+import {IAction, IState} from "../redux/modules/baseModule";
+import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
 const {connect} = require("react-redux");
 
 interface IProps {
-  counter: ICounter;
-  increment: Redux.ActionCreator<ICounterAction>;
-  decrement: Redux.ActionCreator<ICounterAction>;
+  counter: IState<ICounter>;
+  increment: Redux.ActionCreator<IAction<ICounter>>;
+  decrement: Redux.ActionCreator<IAction<ICounter>>;
 }
 
 @connect(
@@ -27,10 +27,10 @@ class Counter extends React.Component<IProps, null> {
         <button name="incBtn" onClick={increment}>
           INCREMENT
         </button>
-        <button name="decBtn" onClick={decrement} disabled={counter.count <= 0}>
+        <button name="decBtn" onClick={decrement} disabled={counter.payload.count <= 0}>
           DECREMENT
         </button>
-        <p>{counter.count}</p>
+        <p>{counter.payload.count}</p>
       </div>
     );
   }

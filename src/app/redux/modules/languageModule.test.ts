@@ -1,8 +1,9 @@
-import {ILanguageState, languageReducer, requestType, SET_LANGUAGE} from "./languageModule";
+import {IState} from "./baseModule";
+import {ILanguage, languageReducer, requestType, SET_LANGUAGE} from "./languageModule";
 
 describe("languageModule", () => {
   it("returns initial state with default language", () => {
-    const initialState: ILanguageState = {
+    const initialState: IState<ILanguage> = {
       isFetching: false,
       payload: {
         languageData: {},
@@ -13,11 +14,11 @@ describe("languageModule", () => {
   });
 
   it("handles action of type LANGUAGE_PENDING", () => {
-    expect(languageReducer({}, {type: requestType.PENDING})).toEqual({isFetching: true});
+    expect(languageReducer({isFetching: false, payload: null}, {type: requestType.PENDING})).toEqual({isFetching: true, payload: null});
   });
 
   it("handles action of type SET_LANGUAGE", () => {
-    const payload = {
+    const payload: ILanguage = {
       languageData: {hello: "world"},
       locale: "de"
     };
@@ -25,16 +26,17 @@ describe("languageModule", () => {
   });
 
   it("handles action of type LANGUAGE_FAILURE", () => {
-    const stateAfter = {
+    const stateAfter: IState<ILanguage> = {
       error: true,
       isFetching: false,
-      message: "error!"
+      message: "error!",
+      payload: null
     };
-    expect(languageReducer({}, {type: requestType.FAILURE, message: "error!"})).toEqual(stateAfter);
+    expect(languageReducer({isFetching: true, payload: null}, {type: requestType.FAILURE, message: "error!"})).toEqual(stateAfter);
   });
 
   it("handles actions with unknown type", () => {
-    const state: ILanguageState = {
+    const state: IState<ILanguage> = {
       isFetching: false,
       payload: {
         languageData: {hello: "world"},

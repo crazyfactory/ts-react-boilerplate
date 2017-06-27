@@ -12,11 +12,6 @@ describe("<About />", () => {
     expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");
   });
 
-  it("has correct props passed from store state", () => {
-    expect(component.find(About)).toHaveLength(1);
-    expect(component.find(About)).toHaveProp("locale", "en-GB");
-  });
-
   it("calls switchLanguage() when button is clicked", () => {
     const dispatch = jest.fn();
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");

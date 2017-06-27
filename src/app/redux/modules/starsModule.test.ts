@@ -1,10 +1,10 @@
-import {IStars} from "../../models/starsModel";
-import {requestType, starsReducer} from "./starsModule";
+import {IAction, IState} from "./baseModule";
+import {IStars, requestType, starsReducer} from "./starsModule";
 
 describe("Stars Reducer", () => {
 
   it("returns initial state with default language", () => {
-    const initialState: IStars = {
+    const initialState: IState<IStars> = {
       isFetching: true,
       payload: {
         stargazers_count: -1
@@ -15,20 +15,20 @@ describe("Stars Reducer", () => {
 
   it("handles action of type STARS_REQUEST", () => {
     const action = { type: requestType.PENDING };
-    const stateBefore = {};
-    const stateAfter = { isFetching: true };
+    const stateBefore: IState<IStars> = { isFetching: false, payload: null };
+    const stateAfter: IState<IStars> = { isFetching: true, payload: null };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it("handles action of type STARS_SUCCESS", () => {
-    const action = {
+    const action: IAction<IStars> = {
       payload: {
         stargazers_count: 99
       },
       type: requestType.SUCCESS
     };
-    const stateBefore = {};
-    const stateAfter = {
+    const stateBefore: IState<IStars> = { isFetching: true, payload: null };
+    const stateAfter: IState<IStars> = {
       isFetching: false,
       payload: {
         stargazers_count: 99
@@ -38,16 +38,16 @@ describe("Stars Reducer", () => {
   });
 
   it("handles action of type STARS_FAILURE", () => {
-    const action = { type: requestType.FAILURE, message: "error!" };
-    const stateBefore = {};
-    const stateAfter = { error: true, isFetching: false, message: "error!"};
+    const action: IAction<IStars> = { type: requestType.FAILURE, message: "error!" };
+    const stateBefore: IState<IStars> = { isFetching: true, payload: null };
+    const stateAfter: IState<IStars> = { error: true, isFetching: false, message: "error!", payload: null};
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
   it("handles actions with unknown type", () => {
-    const action = { type: "" };
-    const stateBefore = { payload: null };
-    const stateAfter = { payload: null };
+    const action: IAction<IStars> = { type: "" };
+    const stateBefore: IState<IStars> = { isFetching: false, payload: null };
+    const stateAfter: IState<IStars> = { isFetching: false, payload: null };
     expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
   });
 
