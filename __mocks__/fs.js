@@ -19,5 +19,5 @@ fs.__setFileContents = function (filename, content) {
 
 fs.__clear = function() {
   files = {};
-}
+};
 module.exports = fs;

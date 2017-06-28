@@ -34,7 +34,7 @@ export class LanguageHelper {
     return this.requestLanguage;
   }
 
-  public getPreferedLanguage(): string {
+  public getPreferredLanguage(): string {
     return this.preferedLang;
   }
 }

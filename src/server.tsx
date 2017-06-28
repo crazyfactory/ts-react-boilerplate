@@ -28,7 +28,7 @@ const favicon = require("serve-favicon");
 const app = express();
 const translationHandler = (req, res) => {
   const languageHelper = new LanguageHelper(req.params.lang);
-  res.json({languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferedLanguage()});
+  res.json({languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferredLanguage()});
 };
 
 if (process.env.NODE_ENV !== "production") {
@@ -62,7 +62,7 @@ app.get("*", (req, res) => {
   const store = configureStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
   const languageHelper = new LanguageHelper(req.headers["accept-language"]);
-  store.dispatch({type: SET_LANGUAGE, payload: {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferedLanguage()}});
+  store.dispatch({type: SET_LANGUAGE, payload: {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferredLanguage()}});
   match({history, routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);
