@@ -140,6 +140,20 @@ $ npm test
 
 For Windows users, we recommend using the shortcuts instead of setting environment variables because they work a little different on Windows.
 
+#### Raven
+Create main.local.js in config folder and export an object that has `sentry` key like so:
+```
+module.exports = {
+  sentry: {
+    dsn: YOUR_DSN,
+    release: YOUR_RELEASE_VERSION
+  }
+  
+  // other configs
+  ...
+}
+```
+
 ## Credits
 
 This boilerplate is based on [Vortigern](https://github.com/barbar/vortigern) and is heavily updated.

@@ -7,11 +7,6 @@ var config = {
   karmaPort: 9876,
   ssr: true,
   sentry: false,
-  //   sentry: {
-  //     dsn: "",
-  //     release: ""
-  //   },
-
   // This part goes to React-Helmet for Head of our HTML
   app: {
     head: {
