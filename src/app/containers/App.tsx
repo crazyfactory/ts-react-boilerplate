@@ -17,10 +17,11 @@ import {cssRaw, cssRule, style} from "typestyle";
 // Global style
 cssRaw(`@import url(https://fonts.googleapis.com/css?family=Roboto);`);
 normalize();
-cssRule(`body`, {
-  fontFamily: "Roboto"
-});
 setupPage("#app");
+cssRule(`html, body`, {
+  fontFamily: "Roboto",
+  height: "auto"
+});
 
 // App container style
 const Styles = {
