@@ -1,13 +1,12 @@
-import {shallow} from "enzyme";
-import * as React from "react";
+import {renderComponent} from "../helpers/TestHelper";
 import {App, Styles} from "./App";
 
 describe("<App />", () => {
 
-  const component = shallow(<App />);
+  const component = renderComponent(App, {language: {payload: {locale: "en"}}});
 
   it("Renders with correct style", () => {
-    expect(component).toHaveClassName(Styles.container);
+    expect(component.find("section")).toHaveClassName(Styles.container);
   });
 
 });

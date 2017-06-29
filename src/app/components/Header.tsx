@@ -1,4 +1,5 @@
 import * as React from "react";
+import {FormattedMessage} from "react-intl";
 import {Link} from "react-router";
 import {style} from "typestyle";
 
@@ -24,9 +25,9 @@ const Header = () => (
   <nav className={Styles.nav}>
     <ul>
       <li><Link to="/">Home</Link></li>
-      <li><Link to="about">About</Link></li>
-      <li><Link to="counter">Counter</Link></li>
-      <li><Link to="stars">Stars</Link></li>
+      <li><Link to="about"><FormattedMessage id="about" defaultMessage="About Us" /></Link></li>
+      <li><Link to="counter"><FormattedMessage id="counter" defaultMessage="Counter" /></Link></li>
+      <li><Link to="stars"><FormattedMessage id="stars" defaultMessage="Stars" /></Link></li>
     </ul>
   </nav>
 );

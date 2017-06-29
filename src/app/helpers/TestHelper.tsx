@@ -1,6 +1,7 @@
 /** React Specific */
 import {mount, ReactWrapper} from "enzyme";
 import * as React from "react";
+import {IntlProvider} from "react-intl";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 import rootReducer from "../redux/rootReducer";
@@ -13,9 +14,11 @@ function renderComponent(ComponentClass: React.ComponentClass<any> | React.SFC<a
   const store = createStore(rootReducer, state);
 
   return mount(
-    <Provider store={store}>
-      <ComponentClass {...props} />
-    </Provider>
+    <IntlProvider locale="en">
+      <Provider store={store}>
+        <ComponentClass {...props} />
+      </Provider>
+    </IntlProvider>
   );
 }
 

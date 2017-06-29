@@ -1,6 +1,6 @@
 # Build Folder
 build
-
+config/main.local.js
 # Logs
 logs
 *.log

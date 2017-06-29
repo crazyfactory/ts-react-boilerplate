@@ -1,4 +1,4 @@
-import IBaseAction from "../models/IBaseAction";
+import {IAction, IState} from "../redux/modules/baseModule";
 
 export interface IRequestType {
   PENDING: string;
@@ -6,24 +6,27 @@ export interface IRequestType {
   FAILURE: string;
 }
 
-export default function promiseReducer<TState, TAction>(actionType: IRequestType, state: TState, action: IBaseAction & TAction): TState {
+export default function promiseReducer<P>(actionType: IRequestType, state: IState<P>, action: IAction<P>): IState<P> {
   switch (action.type) {
     case actionType.PENDING:
-      return Object.assign({}, state, {
-        payload: null
-      });
+      return {
+        ...state,
+        isFetching: true
+      };
 
     case actionType.SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
+        isFetching: false,
         payload: action.payload
-      });
-
+      };
     case actionType.FAILURE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         error: true,
+        isFetching: false,
         message: action.message
-      });
-
+      };
     default:
       return state;
   }
