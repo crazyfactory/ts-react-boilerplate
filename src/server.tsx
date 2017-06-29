@@ -1,3 +1,5 @@
+import {LanguageHelper} from "./app/helpers/LanguageHelper";
+
 const appConfig = require("../config/main");
 
 import * as e6p from "es6-promise";
@@ -14,6 +16,8 @@ import routes from "./app/routes/routes";
 import rootSaga from "./app/sagas/rootSaga";
 
 import {Html} from "./app/containers";
+import {IAction} from "./app/redux/modules/baseModule";
+import {ILanguage, SET_LANGUAGE} from "./app/redux/modules/languageModule";
 (e6p as any).polyfill();
 const manifest = require("../build/manifest.json");
 
@@ -23,6 +27,11 @@ const Chalk = require("chalk");
 const favicon = require("serve-favicon");
 
 const app = express();
+const translationHandler = (req, res) => {
+  const languageHelper = new LanguageHelper(req.params.lang);
+  const lang: ILanguage = {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferredLanguage()};
+  res.json(lang);
+};
 
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -47,12 +56,22 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
+app.get("/translation/:lang", translationHandler);
+
 app.get("*", (req, res) => {
   const location = req.url;
   const memoryHistory = createMemoryHistory(req.originalUrl);
   const store = configureStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
-
+  const languageHelper = new LanguageHelper(req.headers["accept-language"]);
+  const setLangAction: IAction<ILanguage> = {
+    payload: {
+      languageData: languageHelper.getRequestLanguageData(),
+      locale: languageHelper.getPreferredLanguage()
+    },
+    type: SET_LANGUAGE
+  };
+  store.dispatch(setLangAction);
   match({history, routes, location}, (error, redirectLocation, renderProps) => {
       if (error) {
         res.status(500).send(error.message);
