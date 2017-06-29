@@ -28,6 +28,8 @@ This boilerplate uses the following libraries and tools:
 - [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
 - [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
 - [React Helmet](https://github.com/nfl/react-helmet)
+- [RavenJS](https://github.com/getsentry/raven-js) For capturing exceptions during run time
+- [raven-for-redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
@@ -137,6 +139,20 @@ $ npm test
 ```
 
 For Windows users, we recommend using the shortcuts instead of setting environment variables because they work a little different on Windows.
+
+#### Raven
+Create main.local.js in config folder and export an object that has `sentry` key like so:
+```
+module.exports = {
+  sentry: {
+    dsn: YOUR_DSN,
+    release: YOUR_RELEASE_VERSION
+  }
+  
+  // other configs
+  ...
+}
+```
 
 ## Credits
 
