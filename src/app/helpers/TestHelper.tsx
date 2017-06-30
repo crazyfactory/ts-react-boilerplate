@@ -12,7 +12,7 @@ import {ILanguage} from "../redux/modules/languageModule";
 
 declare type TComponent = React.ComponentClass<any> | React.SFC<any> | React.ClassType<any, any, any> | string;
 
-export class TestHelper<TProps, TTranslation> {
+export class TestHelper<TProps, TState> {
 
   protected state: Partial<IStore>;
   protected props: TProps;
@@ -20,30 +20,30 @@ export class TestHelper<TProps, TTranslation> {
   protected languageData: object;
   private ComponentClass: TComponent;
 
-  public withState(state: Partial<IStore>): TestHelper<TProps, TTranslation> {
+  public withState(state: Partial<IStore>): TestHelper<TProps, TState> {
     this.state = state;
     return this;
   }
 
-  public withProps(props: TProps): TestHelper<TProps, TTranslation> {
+  public withProps(props: TProps): TestHelper<TProps, TState> {
     this.props = props;
     return this;
   }
 
-  public withTranslation(translation: ILanguage): TestHelper<TProps, TTranslation> {
+  public withTranslation(translation: ILanguage): TestHelper<TProps, TState> {
     this.locale = translation.locale;
     this.languageData = translation.languageData;
     return this;
   }
 
-  public mount(component: TComponent): ReactWrapper<IStore, any> {
+  public mount(component: TComponent): ReactWrapper<TProps, TState> {
     this.ComponentClass = component;
     return mount(
       this.getWrappedComponent()
     );
   }
 
-  public shallow(component: TComponent, options?: ShallowRendererProps): ShallowWrapper<TProps, Partial<IStore>> {
+  public shallow(component: TComponent, options?: ShallowRendererProps): ShallowWrapper<TProps, TState> {
     this.ComponentClass = component;
     return shallow(this.getWrappedComponent(), options);
   }
