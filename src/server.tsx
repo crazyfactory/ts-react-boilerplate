@@ -1,3 +1,5 @@
+import {RouterProvider} from "react-router5";
+
 const appConfig = require("../config/main");
 
 import * as e6p from "es6-promise";
@@ -7,13 +9,13 @@ import * as React from "react";
 import { renderToString } from "react-dom/server";
 
 import {Provider} from "react-redux";
-import {createMemoryHistory, match, RouterContext} from "react-router";
-import {syncHistoryWithStore} from "react-router-redux";
 import {configureStore} from "./app/redux/configureStore";
-import routes from "./app/routes/routes";
 import rootSaga from "./app/sagas/rootSaga";
 
 import {Html} from "./app/containers";
+import {App} from "./app/containers/App";
+import configureRouter from "./app/routes/configureRouter";
+import Main from "./app/routes/Main";
 (e6p as any).polyfill();
 const manifest = require("../build/manifest.json");
 
@@ -48,67 +50,68 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.get("*", (req, res) => {
-  const location = req.url;
-  const memoryHistory = createMemoryHistory(req.originalUrl);
-  const store = configureStore(memoryHistory);
-  const history = syncHistoryWithStore(memoryHistory, store);
 
-  match({history, routes, location}, (error, redirectLocation, renderProps) => {
-      if (error) {
-        res.status(500).send(error.message);
-      } else if (redirectLocation) {
-        res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      } else if (renderProps) {
-        store.runSaga(rootSaga).done.then(() => {
-          // deep clone state because store will be changed during the second render in componentWillMount
-          const initialState = JSON.parse(JSON.stringify(store.getState()));
-
-          // tslint:disable-next-line
-          console.time("second render");
-
-          // render again from the initial data
-          const markup = renderToString(
-            <Provider store={store} key="provider">
-              <RouterContext {...renderProps} />
-            </Provider>
-          );
-
-          // tslint:disable-next-line
-          console.timeEnd("second render");
-
-          if (appConfig.ssr) {
-            res.status(200).send(renderHTML(markup, initialState));
-          } else {
-            res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
-              if (err) {
-                console.error(err.message);
-              }
-            });
-          }
-        }).catch((err: any) => {
-          console.error(err.message);
-          res.status(500).send(err.message);
-        });
-
-        // tslint:disable-next-line
-        console.time("first render");
-
-        // first render to activate componentWillMount to dispatch actions for loading initial data
-        renderToString(
-          <Provider store={store} key="provider">
-            <RouterContext {...renderProps} />
-          </Provider>
-        );
-
-        // tslint:disable-next-line
-        console.timeEnd("first render");
-
-        // dispatching END will cause the root saga to terminate after all fired tasks terminate
-        store.close();
-      } else {
-        res.status(404).send("Not Found?");
+  if (!appConfig.ssr) {
+    res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
+      if (err) {
+        console.error(err.message);
       }
     });
+    return;
+  }
+
+  const router = configureRouter(true);
+
+  router.start(req.url, (error, state) => {
+    if (error) {
+      res.status(500).send(error);
+      return;
+    }
+    const store = configureStore(router, {router: state} as any);
+
+    store.runSaga(rootSaga).done.then(() => {
+      // deep clone state because store will be changed during the second render in componentWillMount
+      const initialState = JSON.parse(JSON.stringify(store.getState()));
+
+      // tslint:disable-next-line
+      console.time("second render");
+
+      // render again from the initial data
+      const markup = renderToString(
+        <Provider store={store} key="provider">
+          <RouterProvider router={router}>
+            <App />
+          </RouterProvider>
+        </Provider>
+      );
+
+      // tslint:disable-next-line
+      console.timeEnd("second render");
+
+      res.status(200).send(renderHTML(markup, initialState));
+    }).catch((err: any) => {
+      console.error(err.message);
+      res.status(500).send(err.message);
+    });
+
+    // tslint:disable-next-line
+    console.time("first render");
+
+    // first render to activate componentWillMount to dispatch actions for loading initial data
+    renderToString(
+      <Provider store={store} key="provider">
+        <RouterProvider router={router}>
+          <Main/>
+        </RouterProvider>
+      </Provider>
+    );
+
+    // tslint:disable-next-line
+    console.timeEnd("first render");
+
+    // dispatching END will cause the root saga to terminate after all fired tasks terminate
+    store.close();
+  });
 });
 
 app.listen(appConfig.port, appConfig.host, (err) => {

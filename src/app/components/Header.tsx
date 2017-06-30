@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Link} from "react-router";
+import {BaseLink} from "react-router5";
+import {Router} from "router5";
 import {style} from "typestyle";
 
 const Styles = {
@@ -20,15 +21,24 @@ const Styles = {
   })
 };
 
-const Header = () => (
-  <nav className={Styles.nav}>
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="about">About</Link></li>
-      <li><Link to="counter">Counter</Link></li>
-      <li><Link to="stars">Stars</Link></li>
-    </ul>
-  </nav>
-);
+class Header extends React.Component <any, any> {
+  protected router: Router;
+  constructor(props: any) {
+    super(props);
+    this.router = props.router;
+  }
+  public render(): JSX.Element {
+    return (
+      <nav className={Styles.nav}>
+        <ul>
+          <li><BaseLink router={this.router} routeName="main">Home</BaseLink></li>
+          <li><BaseLink router={this.router} routeName="about">About</BaseLink></li>
+          <li><BaseLink router={this.router} routeName="counter">Counter</BaseLink></li>
+          <li><BaseLink router={this.router} routeName="stars">Stars</BaseLink></li>
+        </ul>
+      </nav>
+    );
+  }
+}
 
 export {Header, Styles};

@@ -1,3 +1,5 @@
+import Main from "../routes/Main";
+
 const appConfig = require("../../../config/main");
 
 import {Header} from "components";
@@ -29,7 +31,7 @@ class App extends React.Component<any, any> {
       <section className={Styles.container}>
         <Helmet {...appConfig.app.head}/>
         <Header />
-        {this.props.children}
+        <Main />
       </section>
     );
   }

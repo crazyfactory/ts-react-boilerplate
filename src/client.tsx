@@ -5,28 +5,31 @@ import "isomorphic-fetch";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-const {Router, browserHistory} = require("react-router");
-import {syncHistoryWithStore} from "react-router-redux";
+import {RouterProvider} from "react-router5";
 import {setStylesTarget} from "typestyle";
+import {App} from "./app/containers/App";
 import {configureStore} from "./app/redux/configureStore";
-import routes from "./app/routes/routes";
+import configureRouter from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
+const router = configureRouter(true);
 
 const store = configureStore(
-  browserHistory,
+  router,
   window.__INITIAL_STATE__
 );
 store.runSaga(rootSaga);
-const history = syncHistoryWithStore(browserHistory, store);
+const app = (
+  <Provider store={store} key="provider">
+    <RouterProvider router={router}>
+      <App/>
+    </RouterProvider>
+  </Provider>
+);
+
+router.start();
 
 ReactDOM.render(
-  <Provider store={store} key="provider">
-    <Router
-      history={history}
-    >
-      {routes}
-    </Router>
-  </Provider>,
+  app,
   document.getElementById("app")
 );
 
