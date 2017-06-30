@@ -13,7 +13,7 @@ import {ILanguage} from "../redux/modules/languageModule";
 
 declare type TComponent = React.ComponentClass<any> | React.SFC<any> | React.ClassType<any, any, any> | string;
 
-export class TestHelper<TProps, TState> {
+export class TestHelper<TProps extends object, TState> {
 
   protected state: Partial<IStore> = {};
   protected props: TProps;
@@ -73,8 +73,8 @@ export class TestHelper<TProps, TState> {
     );
   }
 
-  private getStore(): Store<IStore> {
-    return createStore<IStore>(rootReducer, (this.state as any));
+  private getStore(): Store<Partial<IStore>> {
+    return createStore<Partial<IStore>>(rootReducer, this.state);
   }
 
 }
