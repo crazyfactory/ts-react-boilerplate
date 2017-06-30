@@ -1,13 +1,15 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {renderComponent} from "../helpers/TestHelper";
+import {TestHelper} from "../helpers/TestHelper";
 import {IAction} from "../redux/modules/baseModule";
 import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
 import {About, UnconnectedAbout} from "./About";
 
 describe("<About />", () => {
-
-  const component = renderComponent(About, {language: {payload: {locale: "en-GB"}}});
+  const component = new TestHelper()
+    .withState({language: {payload: {locale: "en-GB", languageData: {}}}})
+    .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "current.language": "Current Language"}})
+    .mount(About);
 
   it("renders header with text", () => {
     expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");

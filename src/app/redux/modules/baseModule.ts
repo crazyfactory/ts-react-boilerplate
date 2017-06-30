@@ -7,7 +7,7 @@ export interface IAction<P> extends Action {
 
 export interface IState<P> {
   error?: boolean;
-  isFetching: boolean;
+  isFetching?: boolean;
   message?: string;
   payload: P;
 }
