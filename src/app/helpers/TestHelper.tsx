@@ -17,8 +17,6 @@ export class TestHelper<TProps extends object, TState> {
 
   protected state: Partial<IStore> = {};
   protected props: TProps;
-  protected locale: string;
-  protected languageData: object;
   private ComponentClass: TComponent;
 
   public withState(state: Partial<IStore>): TestHelper<TProps, TState> {
