@@ -8,6 +8,7 @@ class RegisterPage extends React.Component<null, null> {
     super();
     this.showResults = this.showResults.bind(this);
   }
+
   public showResults(values: IFormData): Promise<any> {
     return new Promise((resolve) => {
       setTimeout(
