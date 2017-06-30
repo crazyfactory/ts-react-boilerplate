@@ -8,6 +8,7 @@ import rootReducer from "../redux/rootReducer";
 
 /** Redux Mock Store Configuration */
 import {IStore} from "../redux/IStore";
+import {IState} from "../redux/modules/baseModule";
 import {ILanguage} from "../redux/modules/languageModule";
 
 declare type TComponent = React.ComponentClass<any> | React.SFC<any> | React.ClassType<any, any, any> | string;
@@ -30,9 +31,10 @@ export class TestHelper<TProps, TState> {
     return this;
   }
 
+  // sets translation data to the state AND does NOT set directly to intl provider
   public withTranslation(translation: ILanguage): TestHelper<TProps, TState> {
-    this.locale = translation.locale;
-    this.languageData = translation.languageData;
+    const languageState: IState<ILanguage> = {payload: translation};
+    this.state = {...this.state, language: languageState};
     return this;
   }
 
@@ -60,14 +62,12 @@ export class TestHelper<TProps, TState> {
         <ComponentClass {...this.props} />
       </Provider>
     );
-    return this.locale && this.languageData
-      ? this.getWithTranslation(providerComponent)
-      : providerComponent;
+    return this.state.language ? this.getWithTranslation(providerComponent) : providerComponent;
   }
 
   private getWithTranslation(component: JSX.Element): JSX.Element {
     return (
-      <IntlProvider locale={this.locale} messages={this.languageData}>
+      <IntlProvider locale={this.state.language.payload.locale} messages={this.state.language.payload.languageData}>
         {component}
       </IntlProvider>
     );

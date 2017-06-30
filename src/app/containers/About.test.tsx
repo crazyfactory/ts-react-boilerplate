@@ -7,7 +7,6 @@ import {About, UnconnectedAbout} from "./About";
 
 describe("<About />", () => {
   const component = new TestHelper()
-    .withState({language: {payload: {locale: "en-GB", languageData: {}}}})
     .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "current.language": "Current Language"}})
     .mount(About);
 
