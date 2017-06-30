@@ -1,5 +1,5 @@
 /** React Specific */
-import {mount, ReactWrapper} from "enzyme";
+import {mount, ReactWrapper, render, shallow, ShallowRendererProps, ShallowWrapper} from "enzyme";
 import * as React from "react";
 import {IntlProvider} from "react-intl";
 import {Provider} from "react-redux";
@@ -41,6 +41,16 @@ export class TestHelper<TProps, TTranslation> {
     return mount(
       this.getWrappedComponent()
     );
+  }
+
+  public shallow(component: TComponent, options?: ShallowRendererProps): ShallowWrapper<TProps, Partial<IStore>> {
+    this.ComponentClass = component;
+    return shallow(this.getWrappedComponent(), options);
+  }
+
+  public render(component: TComponent, renderOptions?: any): Cheerio {
+    this.ComponentClass = component;
+    return render(this.getWrappedComponent(), renderOptions);
   }
 
   private getWrappedComponent(): JSX.Element {
