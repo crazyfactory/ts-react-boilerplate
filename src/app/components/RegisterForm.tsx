@@ -18,7 +18,7 @@ interface IProps {
   onSubmit: (values: IFormData) => Promise<any>;
 }
 
-class RegisterForm extends React.Component<FormProps<IFormData, IProps, void> & IProps, void> {
+class RegisterForm extends React.Component<FormProps<IFormData, IProps, null> & IProps, null> {
   public render(): JSX.Element {
     const {handleSubmit, pristine, reset, submitting} = this.props;
 

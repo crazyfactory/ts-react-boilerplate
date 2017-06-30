@@ -1,31 +1,31 @@
 import {shallow} from "enzyme";
 import {Promise} from "es6-promise";
 import * as React from "react";
-import {renderComponent} from "../helpers/TestHelper";
+import {TestHelper} from "../helpers/TestHelper";
 import {RegisterForm, RegisterReduxForm} from "./RegisterForm";
 describe("<RegisterForm />", () => {
   it("without props", () => {
-    const component = renderComponent(RegisterReduxForm);
+    const component = new TestHelper().mount(RegisterReduxForm);
     expect(component).toMatchSnapshot();
   });
 
   it("when submitting button is disabled", () => {
-    const component = renderComponent(RegisterReduxForm, {}, {submitting: true});
+    const component = new TestHelper().withProps({submitting: true}).mount(RegisterReduxForm);
     expect(component).toMatchSnapshot();
   });
 
   it("when submitting button is enabled", () => {
-    const component = renderComponent(RegisterReduxForm, {}, {submitting: false});
+    const component = new TestHelper().withProps({submitting: false}).mount(RegisterReduxForm);
     expect(component).toMatchSnapshot();
   });
 
   it("when clear button is disabled", () => {
-    const component = renderComponent(RegisterReduxForm, {}, {pristine: true});
+    const component = new TestHelper().withProps({pristine: true}).mount(RegisterReduxForm);
     expect(component).toMatchSnapshot();
   });
 
   it("when clear button is enabled", () => {
-    const component = renderComponent(RegisterReduxForm, {}, {pristine: false, submitting: false});
+    const component = new TestHelper().withProps({pristine: false, submitting: false}).mount(RegisterReduxForm);
     expect(component).toMatchSnapshot();
   });
 

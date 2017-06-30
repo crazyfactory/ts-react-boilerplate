@@ -2,68 +2,59 @@ import {
   aol, email, matchedPwd, maxLength, minLength, minValue,
   numberType, renderField, required, tooOld
 } from "../helpers/FormHelper";
-import { renderComponent } from "../helpers/TestHelper";
+import { TestHelper } from "../helpers/TestHelper";
 
 describe("FormHelper", () => {
 
   describe("<renderField />", () => {
     it("without error and warning", () => {
-      const component = renderComponent(
-        renderField,
-        {},
-        {
-          input: {},
-          label: "username",
-          meta: {
-            active: false,
-            error: false,
-            touched: false,
-            warning: false
-          },
-          type: "text"
-        }
-      );
-
+      const props = {
+        input: {},
+        label: "username",
+        meta: {
+          active: false,
+          error: false,
+          touched: false,
+          warning: false
+        },
+        type: "text"
+      };
+      const renderer = new TestHelper();
+      const component = renderer.withProps(props).mount(renderField);
       expect(component).toMatchSnapshot();
     });
 
     it("with error when active or touched", () => {
-      const component = renderComponent(
-        renderField,
-        {},
-        {
-          input: {},
-          label: "username",
-          meta: {
-            active: true,
-            error: true,
-            touched: true,
-            warning: false
-          },
-          type: "text"
-        }
-      );
-
+      const props = {
+        input: {},
+        label: "username",
+        meta: {
+          active: true,
+          error: true,
+          touched: true,
+          warning: false
+        },
+        type: "text"
+      };
+      const renderer = new TestHelper();
+      const component = renderer.withProps(props).mount(renderField);
       expect(component).toMatchSnapshot();
     });
 
     it("with warning when active or touched", () => {
-      const component = renderComponent(
-        renderField,
-        {},
-        {
-          input: {},
-          label: "username",
-          meta: {
-            active: true,
-            error: false,
-            touched: true,
-            warning: true
-          },
-          type: "text"
-        }
-      );
-
+      const props = {
+        input: {},
+        label: "username",
+        meta: {
+          active: true,
+          error: false,
+          touched: true,
+          warning: true
+        },
+        type: "text"
+      };
+      const renderer = new TestHelper();
+      const component = renderer.withProps(props).mount(renderField);
       expect(component).toMatchSnapshot();
     });
   });

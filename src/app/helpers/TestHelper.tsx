@@ -15,7 +15,7 @@ declare type TComponent = React.ComponentClass<any> | React.SFC<any> | React.Cla
 
 export class TestHelper<TProps, TState> {
 
-  protected state: Partial<IStore>;
+  protected state: Partial<IStore> = {};
   protected props: TProps;
   protected locale: string;
   protected languageData: object;
