@@ -3,12 +3,12 @@ import * as React from "react";
 import {TestHelper} from "../helpers/TestHelper";
 import {IAction} from "../redux/modules/baseModule";
 import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
-import {About, UnconnectedAbout} from "./About";
+import {AboutPage, UnconnectedAbout} from "./AboutPage";
 
-describe("<About />", () => {
+describe("<AboutPage />", () => {
   const component = new TestHelper()
     .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "current.language": "Current Language"}})
-    .mount(About);
+    .mount(AboutPage);
 
   it("renders header with text", () => {
     expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");

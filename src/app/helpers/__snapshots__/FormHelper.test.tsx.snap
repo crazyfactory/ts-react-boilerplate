@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormHelper <renderField /> with error when active or touched 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Component
+    input={Object {}}
+    label="username"
+    meta={
+      Object {
+        "active": true,
+        "error": true,
+        "touched": true,
+        "warning": false,
+      }
+    }
+    type="text"
+  >
+    <div
+      className="fyjcn3x"
+    >
+      <label>
+        username
+      </label>
+      <div>
+        <input
+          className="f17g2th6"
+          placeholder="username"
+          type="text"
+        />
+        <div
+          className="f1w4o4fu"
+        >
+          <span
+            className="f1jvcvsh"
+          />
+        </div>
+      </div>
+    </div>
+  </Component>
+</Provider>
+`;
+
+exports[`FormHelper <renderField /> with warning when active or touched 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Component
+    input={Object {}}
+    label="username"
+    meta={
+      Object {
+        "active": true,
+        "error": false,
+        "touched": true,
+        "warning": true,
+      }
+    }
+    type="text"
+  >
+    <div
+      className="fyjcn3x"
+    >
+      <label>
+        username
+      </label>
+      <div>
+        <input
+          className="f17g2th6"
+          placeholder="username"
+          type="text"
+        />
+        <div
+          className="f1w4o4fu"
+        >
+          <span
+            className="fr6gy5q"
+          />
+        </div>
+      </div>
+    </div>
+  </Component>
+</Provider>
+`;
+
+exports[`FormHelper <renderField /> without error and warning 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Component
+    input={Object {}}
+    label="username"
+    meta={
+      Object {
+        "active": false,
+        "error": false,
+        "touched": false,
+        "warning": false,
+      }
+    }
+    type="text"
+  >
+    <div
+      className="fyjcn3x"
+    >
+      <label>
+        username
+      </label>
+      <div>
+        <input
+          className="f17g2th6"
+          placeholder="username"
+          type="text"
+        />
+      </div>
+    </div>
+  </Component>
+</Provider>
+`;

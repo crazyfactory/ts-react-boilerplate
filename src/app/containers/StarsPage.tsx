@@ -4,7 +4,7 @@ import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
 import {loadStars} from "../redux/modules/starsModule";
 
-class Stars extends React.Component<IStateToProps & IDispatchToProps, null> {
+class StarsPage extends React.Component<IStateToProps & IDispatchToProps, null> {
   public componentWillMount(): void {
     if (this.props.stargazers_count === -1) {
       this.props.dispatch(loadStars());
@@ -30,5 +30,5 @@ const mapStateToProps = (state: IStore) => ({
   isFetching: state.stars.isFetching,
   stargazers_count: state.stars.payload.stargazers_count
 });
-const connectedStars = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(Stars);
-export {Stars as UnconnectedStars, connectedStars as Stars}
+const connectedStars = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(StarsPage);
+export {StarsPage as UnconnectedStars, connectedStars as StarsPage}
