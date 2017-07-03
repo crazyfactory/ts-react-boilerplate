@@ -82,6 +82,9 @@ app.get("*", (req, res) => {
           // deep clone state because store will be changed during the second render in componentWillMount
           const initialState = JSON.parse(JSON.stringify(store.getState()));
 
+          // redux-form, not aware of ssr, will make a duplication of registeredFields on client
+          initialState.form = {};
+
           // tslint:disable-next-line
           console.time("second render");
 

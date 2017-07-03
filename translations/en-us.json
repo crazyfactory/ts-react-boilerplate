@@ -5,5 +5,6 @@
   "current.language": "Current Language",
   "stars": "Stars",
   "home": "Home",
-  "init": "Hello world"
+  "init": "Hello world",
+  "register": "Register"
 }

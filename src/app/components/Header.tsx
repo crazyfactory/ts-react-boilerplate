@@ -24,10 +24,11 @@ const Styles = {
 const Header = () => (
   <nav className={Styles.nav}>
     <ul>
-      <li><Link to="/">Home</Link></li>
+      <li><Link to="/"><FormattedMessage id="home" defaultMessage="Home" /></Link></li>
       <li><Link to="about"><FormattedMessage id="about" defaultMessage="About Us" /></Link></li>
       <li><Link to="counter"><FormattedMessage id="counter" defaultMessage="Counter" /></Link></li>
       <li><Link to="stars"><FormattedMessage id="stars" defaultMessage="Stars" /></Link></li>
+      <li><Link to="register"><FormattedMessage id="register" defaultMessage="Register" /></Link></li>
     </ul>
   </nav>
 );
