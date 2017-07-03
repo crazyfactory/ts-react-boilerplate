@@ -1,19 +1,10 @@
 import {shallow} from "enzyme";
 import * as React from "react";
 import {IFormData, RegisterReduxForm} from "../components/RegisterForm";
-import {TestHelper} from "../helpers/TestHelper";
 import {RegisterPage} from "./RegisterPage";
 describe("<RegisterPage />", () => {
-  it("without props", () => {
-    const component = new TestHelper().mount(RegisterPage);
-    expect(component).toMatchSnapshot();
-  });
-
-  it("with onSubmit props", () => {
-    const showResults = (values: IFormData): void => {
-      window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-    };
-    const component = new TestHelper().withProps({onSubmit: showResults}).mount(RegisterPage);
+  it("renders RegisterPage", () => {
+    const component = shallow(<RegisterPage />);
     expect(component).toMatchSnapshot();
   });
 

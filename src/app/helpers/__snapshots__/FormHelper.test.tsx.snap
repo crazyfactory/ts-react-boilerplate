@@ -1,144 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FormHelper <renderField /> with error when active or touched 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
+exports[`FormHelper <CustomField /> placeholder falls back to defaultMessage when languageData key does not exist 1`] = `
+<div
+  className="fyjcn3x"
 >
-  <Component
-    input={Object {}}
-    label="username"
-    meta={
-      Object {
-        "active": true,
-        "error": true,
-        "touched": true,
-        "warning": false,
-      }
-    }
-    type="text"
-  >
-    <div
-      className="fyjcn3x"
-    >
-      <label>
-        username
-      </label>
-      <div>
-        <input
-          className="f17g2th6"
-          placeholder="username"
-          type="text"
-        />
-        <div
-          className="f1w4o4fu"
-        >
-          <span
-            className="f1jvcvsh"
-          />
-        </div>
-      </div>
-    </div>
-  </Component>
-</Provider>
+  <FormattedMessage
+    defaultMessage="Username"
+    id="username"
+    values={Object {}}
+  />
+  <div>
+    <input
+      className="f17g2th6"
+      placeholder="Username"
+      type="text"
+    />
+  </div>
+</div>
 `;
 
-exports[`FormHelper <renderField /> with warning when active or touched 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
+exports[`FormHelper <CustomField /> with error when active or touched 1`] = `
+<div
+  className="fyjcn3x"
 >
-  <Component
-    input={Object {}}
-    label="username"
-    meta={
-      Object {
-        "active": true,
-        "error": false,
-        "touched": true,
-        "warning": true,
-      }
-    }
-    type="text"
-  >
+  <FormattedMessage
+    defaultMessage="Username"
+    id="username"
+    values={Object {}}
+  />
+  <div>
+    <input
+      className="f17g2th6"
+      placeholder="Username"
+      type="text"
+    />
     <div
-      className="fyjcn3x"
+      className="f1w4o4fu"
     >
-      <label>
-        username
-      </label>
-      <div>
-        <input
-          className="f17g2th6"
-          placeholder="username"
-          type="text"
+      <span
+        className="f1jvcvsh"
+      >
+        <FormattedMessage
+          defaultMessage="some error occurs"
+          id="error"
+          values={Object {}}
         />
-        <div
-          className="f1w4o4fu"
-        >
-          <span
-            className="fr6gy5q"
-          />
-        </div>
-      </div>
+      </span>
     </div>
-  </Component>
-</Provider>
+  </div>
+</div>
 `;
 
-exports[`FormHelper <renderField /> without error and warning 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
+exports[`FormHelper <CustomField /> with warning when active or touched 1`] = `
+<div
+  className="fyjcn3x"
 >
-  <Component
-    input={Object {}}
-    label="username"
-    meta={
-      Object {
-        "active": false,
-        "error": false,
-        "touched": false,
-        "warning": false,
-      }
-    }
-    type="text"
-  >
+  <FormattedMessage
+    defaultMessage="Username"
+    id="username"
+    values={Object {}}
+  />
+  <div>
+    <input
+      className="f17g2th6"
+      placeholder="Username"
+      type="text"
+    />
     <div
-      className="fyjcn3x"
+      className="f1w4o4fu"
     >
-      <label>
-        username
-      </label>
-      <div>
-        <input
-          className="f17g2th6"
-          placeholder="username"
-          type="text"
+      <span
+        className="fr6gy5q"
+      >
+        <FormattedMessage
+          defaultMessage="something needs to be warned"
+          id="warning"
+          values={Object {}}
         />
-      </div>
+      </span>
     </div>
-  </Component>
-</Provider>
+  </div>
+</div>
+`;
+
+exports[`FormHelper <CustomField /> without error and warning 1`] = `
+<div
+  className="fyjcn3x"
+>
+  <FormattedMessage
+    defaultMessage="Username"
+    id="username"
+    values={Object {}}
+  />
+  <div>
+    <input
+      className="f17g2th6"
+      placeholder="Username"
+      type="text"
+    />
+  </div>
+</div>
 `;

@@ -1,35 +1,33 @@
 import {shallow} from "enzyme";
 import {Promise} from "es6-promise";
 import * as React from "react";
-import {TestHelper} from "../helpers/TestHelper";
 import {RegisterForm, RegisterReduxForm} from "./RegisterForm";
 describe("<RegisterForm />", () => {
   it("without props", () => {
-    const component = new TestHelper().mount(RegisterReduxForm);
+    const component = <RegisterReduxForm />;
     expect(component).toMatchSnapshot();
   });
 
   it("when submitting button is disabled", () => {
-    const component = new TestHelper().withProps({submitting: true}).mount(RegisterReduxForm);
+    const component = <RegisterReduxForm submitting={true} />;
     expect(component).toMatchSnapshot();
   });
 
   it("when submitting button is enabled", () => {
-    const component = new TestHelper().withProps({submitting: false}).mount(RegisterReduxForm);
+    const component = <RegisterReduxForm submitting={false} />;
     expect(component).toMatchSnapshot();
   });
 
   it("when clear button is disabled", () => {
-    const component = new TestHelper().withProps({pristine: true}).mount(RegisterReduxForm);
+    const component = <RegisterReduxForm pristine={true} />;
     expect(component).toMatchSnapshot();
   });
 
   it("when clear button is enabled", () => {
-    const component = new TestHelper().withProps({pristine: false, submitting: false}).mount(RegisterReduxForm);
+    const component = <RegisterReduxForm pristine={false} submitting={false} />;
     expect(component).toMatchSnapshot();
   });
 
-  // Event simulation is limited for Shallow rendering, not sure why CounterPage.test.tsx works
   it("calls reset func when clear button is clicked", () => {
     const reset = jest.fn();
     const onSubmit = () => new Promise((resolve) => resolve());
@@ -40,7 +38,6 @@ describe("<RegisterForm />", () => {
     expect(reset).toHaveBeenCalled();
   });
 
-  // Event simulation is limited for Shallow rendering, not sure why CounterPage.test.tsx works
   it("calls handleSubmit func when form is submitted", () => {
     const handleSubmit = jest.fn();
     const onSubmit = () => new Promise((resolve) => resolve());
