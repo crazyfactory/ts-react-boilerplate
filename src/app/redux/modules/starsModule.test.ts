@@ -14,6 +14,12 @@ describe("starsModule", () => {
     });
 
     it("handles action of type STARS_REQUEST", () => {
+      const action = {type: LOAD_STARS};
+      const stateBeforeAndAfter: IState<IStars> = {isFetching: false, payload: {stargazers_count: 100}};
+      expect(starsReducer(stateBeforeAndAfter, action)).toEqual(stateBeforeAndAfter);
+    });
+
+    it("handles action of type STARS_REQUEST", () => {
       const action = {type: requestType.PENDING};
       const stateBefore: IState<IStars> = {isFetching: false, payload: null};
       const stateAfter: IState<IStars> = {isFetching: true, payload: null};

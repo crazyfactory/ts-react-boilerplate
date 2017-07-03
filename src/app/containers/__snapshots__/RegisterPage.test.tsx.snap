@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RegisterPage /> renders RegisterPage 1`] = `
+exports[`<RegisterPage /> matches snapshot 1`] = `
 <ReduxForm
   onSubmit={[Function]}
 />

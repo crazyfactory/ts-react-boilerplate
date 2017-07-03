@@ -1,4 +1,5 @@
 import * as React from "react";
+import {FormattedMessage} from "react-intl";
 import {style} from "typestyle";
 
 const Styles = {
@@ -12,10 +13,10 @@ class HomePage extends React.Component<any, any> {
     return (
       <div className={Styles.home}>
         <img src={require("../images/barbar.png")}/>
-        <p>Hello!</p>
+        <p><FormattedMessage id="hello" defaultMessage="Hello!" /></p>
       </div>
     );
   }
 }
 
-export {HomePage, Styles}
+export {HomePage}

@@ -1,7 +1,11 @@
 {
+  "hello": "Hello!",
   "about": "About",
   "about.us": "About Us",
+  "about.change": "Change Language",
   "counter": "Counter",
+  "counter.increment": "Increment",
+  "counter.decrement": "Decrement",
   "current.language": "Current Language",
   "stars": "Stars",
   "home": "Home",
@@ -25,5 +29,6 @@
   "field.numbertype": "Must be a number",
   "register.minage": "You must be at least {min} years old!",
   "register.tooold": "You are too old for this!",
-  "form.clearvalues": "Clear Values"
+  "form.clearvalues": "Clear Values",
+  "stars.fetching": "Fetching Stars.."
 }

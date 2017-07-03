@@ -52,4 +52,4 @@ class App extends React.Component<any, any> {
 }
 
 const connectedApp = connect((state) => ({languages: state.language}))(App);
-export {connectedApp as App, Styles}
+export {connectedApp as App}

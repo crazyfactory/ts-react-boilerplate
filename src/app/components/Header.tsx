@@ -33,4 +33,4 @@ const Header = () => (
   </nav>
 );
 
-export {Header, Styles};
+export {Header};

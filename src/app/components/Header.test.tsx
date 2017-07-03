@@ -1,5 +1,5 @@
 import {TestHelper} from "../helpers/TestHelper";
-import {Header, Styles} from "./Header";
+import {Header} from "./Header";
 
 describe("<Header />", () => {
 
@@ -9,7 +9,7 @@ describe("<Header />", () => {
     .mount(Header);
 
   it("Renders with correct style", () => {
-    expect(component.find("nav")).toHaveClassName(Styles.nav);
+    expect(component).toMatchSnapshot();
   });
 
 });

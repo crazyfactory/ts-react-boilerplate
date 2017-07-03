@@ -3,7 +3,7 @@ import * as React from "react";
 import {IFormData, RegisterReduxForm} from "../components/RegisterForm";
 import {RegisterPage} from "./RegisterPage";
 describe("<RegisterPage />", () => {
-  it("renders RegisterPage", () => {
+  it("matches snapshot", () => {
     const component = shallow(<RegisterPage />);
     expect(component).toMatchSnapshot();
   });

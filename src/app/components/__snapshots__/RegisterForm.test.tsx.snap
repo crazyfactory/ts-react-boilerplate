@@ -1,28 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RegisterForm /> when clear button is disabled 1`] = `
+exports[`<RegisterForm /> matches snapshot when clear button is disabled 1`] = `
 <ReduxForm
   pristine={true}
 />
 `;
 
-exports[`<RegisterForm /> when clear button is enabled 1`] = `
+exports[`<RegisterForm /> matches snapshot when clear button is enabled 1`] = `
 <ReduxForm
   pristine={false}
   submitting={false}
 />
 `;
 
-exports[`<RegisterForm /> when submitting button is disabled 1`] = `
+exports[`<RegisterForm /> matches snapshot when submitting button is disabled 1`] = `
 <ReduxForm
   submitting={true}
 />
 `;
 
-exports[`<RegisterForm /> when submitting button is enabled 1`] = `
+exports[`<RegisterForm /> matches snapshot when submitting button is enabled 1`] = `
 <ReduxForm
   submitting={false}
 />
 `;
 
-exports[`<RegisterForm /> without props 1`] = `<ReduxForm />`;
+exports[`<RegisterForm /> matches snapshot when without props 1`] = `<ReduxForm />`;

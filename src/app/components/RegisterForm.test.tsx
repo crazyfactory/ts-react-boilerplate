@@ -3,27 +3,27 @@ import {Promise} from "es6-promise";
 import * as React from "react";
 import {RegisterForm, RegisterReduxForm} from "./RegisterForm";
 describe("<RegisterForm />", () => {
-  it("without props", () => {
+  it("matches snapshot when without props", () => {
     const component = <RegisterReduxForm />;
     expect(component).toMatchSnapshot();
   });
 
-  it("when submitting button is disabled", () => {
+  it("matches snapshot when submitting button is disabled", () => {
     const component = <RegisterReduxForm submitting={true} />;
     expect(component).toMatchSnapshot();
   });
 
-  it("when submitting button is enabled", () => {
+  it("matches snapshot when submitting button is enabled", () => {
     const component = <RegisterReduxForm submitting={false} />;
     expect(component).toMatchSnapshot();
   });
 
-  it("when clear button is disabled", () => {
+  it("matches snapshot when clear button is disabled", () => {
     const component = <RegisterReduxForm pristine={true} />;
     expect(component).toMatchSnapshot();
   });
 
-  it("when clear button is enabled", () => {
+  it("matches snapshot when clear button is enabled", () => {
     const component = <RegisterReduxForm pristine={false} submitting={false} />;
     expect(component).toMatchSnapshot();
   });
