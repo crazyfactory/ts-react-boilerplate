@@ -1,10 +1,10 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {renderComponent} from "../helpers/TestHelper";
+import {TestHelper} from "../helpers/TestHelper";
 import {IStore} from "../redux/IStore";
 import {IAction} from "../redux/modules/baseModule";
 import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
-import {Counter, UnconnectedCounter} from "./Counter";
+import {CounterPage, UnconnectedCounter} from "./CounterPage";
 
 /** Mock App. State */
 const state: Partial<IStore> = {
@@ -20,7 +20,7 @@ describe("<Counter />", () => {
   let component;
 
   beforeEach(() => {
-    component = renderComponent(Counter, state);
+    component = (new TestHelper()).withState(state).mount(CounterPage);
   });
 
   it("renders header", () => {

@@ -4,7 +4,7 @@ import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
 import {decrement, increment} from "../redux/modules/counterModule";
 
-class Counter extends React.Component<IStateToProps & IDispatchToProps, null> {
+class CounterPage extends React.Component<IStateToProps & IDispatchToProps, null> {
   constructor() {
     super();
     this.handleIncrement = this.handleIncrement.bind(this);
@@ -45,6 +45,6 @@ const mapStateToProps = (state: IStore) => ({
   count: state.counter.payload.count
 });
 
-const connectedCounter = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(Counter);
+const connectedCounter = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(CounterPage);
 
-export {Counter as UnconnectedCounter, connectedCounter as Counter}
+export {CounterPage as UnconnectedCounter, connectedCounter as CounterPage}

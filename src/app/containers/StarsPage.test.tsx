@@ -1,10 +1,10 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {renderComponent} from "../helpers/TestHelper";
+import {TestHelper} from "../helpers/TestHelper";
 import {IStore} from "../redux/IStore";
 import {IAction} from "../redux/modules/baseModule";
 import {IStars, LOAD_STARS} from "../redux/modules/starsModule";
-import {Stars, UnconnectedStars} from "./Stars";
+import {StarsPage, UnconnectedStars} from "./StarsPage";
 
 describe("<Stars />", () => {
   it("renders stars", () => {
@@ -17,7 +17,8 @@ describe("<Stars />", () => {
       }
     };
 
-    const component = renderComponent(Stars, state);
+    const renderer = new TestHelper();
+    const component = renderer.withState(state).mount(StarsPage);
     expect(component.find("div")).toHaveText("61");
   });
 
@@ -31,7 +32,8 @@ describe("<Stars />", () => {
       }
     };
 
-    const component = renderComponent(Stars, state);
+    const renderer = new TestHelper();
+    const component = renderer.withState(state).mount(StarsPage);
     expect(component.find("div")).toHaveText("Fetching Stars..");
   });
 

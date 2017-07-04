@@ -7,15 +7,15 @@ const Styles = {
   })
 };
 
-class Home extends React.Component<any, any> {
+class HomePage extends React.Component<any, any> {
   public render(): JSX.Element {
     return (
       <div className={Styles.home}>
-        <img src={require("./barbar.png")}/>
+        <img src={require("../images/barbar.png")}/>
         <p>Hello!</p>
       </div>
     );
   }
 }
 
-export {Home, Styles}
+export {HomePage, Styles}

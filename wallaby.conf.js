@@ -11,7 +11,8 @@ module.exports = function () {
       {pattern: 'src/**/*.test.ts*', ignore: true}
     ],
     tests: [
-      {pattern: 'src/**/*.test.ts*'}
+      {pattern: 'src/**/*.test.ts*'},
+      {pattern: 'src/**/*.snap', ignore: true}
     ],
     env: {
       type: 'node',
