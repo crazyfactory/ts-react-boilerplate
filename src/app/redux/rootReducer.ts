@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import router5Reducer from "redux-router5/lib/router5Reducer";
+import {router5Reducer} from "redux-router5";
 import {IStore} from "./IStore";
 import {counterReducer} from "./modules/counterModule";
 import {starsReducer} from "./modules/starsModule";

@@ -1,7 +1,7 @@
 const appConfig = require("../../../config/main");
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
-import router5ReduxMiddleware from "redux-router5/lib/router5Middleware";
+import { router5Middleware } from "redux-router5";
 import createSagaMiddleware, { END } from "redux-saga";
 import {Router} from "router5";
 import {IStore} from "./IStore";
@@ -16,7 +16,7 @@ export function configureStore(router: Router, initialState?: IStore): IExtended
 
   const sagaMiddleware = createSagaMiddleware();
   const middlewares: Redux.Middleware[] = [
-    router5ReduxMiddleware(router),
+    router5Middleware(router),
     sagaMiddleware
   ];
 
