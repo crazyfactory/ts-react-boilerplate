@@ -22,19 +22,17 @@ const Styles = {
 };
 
 class Header extends React.Component <any, any> {
-  protected router: Router;
   constructor(props: any) {
     super(props);
-    this.router = props.router;
   }
   public render(): JSX.Element {
     return (
       <nav className={Styles.nav}>
         <ul>
-          <li><BaseLink router={this.router} routeName="main">Home</BaseLink></li>
-          <li><BaseLink router={this.router} routeName="about">About</BaseLink></li>
-          <li><BaseLink router={this.router} routeName="counter">Counter</BaseLink></li>
-          <li><BaseLink router={this.router} routeName="stars">Stars</BaseLink></li>
+          <li><BaseLink routeName="main">Home</BaseLink></li>
+          <li><BaseLink routeName="about">About</BaseLink></li>
+          <li><BaseLink routeName="counter">Counter</BaseLink></li>
+          <li><BaseLink routeName="stars">Stars</BaseLink></li>
         </ul>
       </nav>
     );
