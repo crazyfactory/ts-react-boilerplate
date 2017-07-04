@@ -1,5 +1,3 @@
-import {RouterProvider} from "react-router5";
-
 const appConfig = require("../config/main");
 
 import * as e6p from "es6-promise";
@@ -15,7 +13,6 @@ import rootSaga from "./app/sagas/rootSaga";
 import {Html} from "./app/containers";
 import {App} from "./app/containers/App";
 import configureRouter from "./app/routes/configureRouter";
-import Main from "./app/routes/Main";
 (e6p as any).polyfill();
 const manifest = require("../build/manifest.json");
 
@@ -50,7 +47,6 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.get("*", (req, res) => {
-
   if (!appConfig.ssr) {
     res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
       if (err) {
@@ -60,14 +56,14 @@ app.get("*", (req, res) => {
     return;
   }
 
-  const router = configureRouter(true);
+  const router = configureRouter();
 
   router.start(req.url, (error, state) => {
     if (error) {
       res.status(500).send(error);
       return;
     }
-    const store = configureStore(router, {router: state} as any);
+    const store = configureStore(router, {router: {route: state}} as any);
 
     store.runSaga(rootSaga).done.then(() => {
       // deep clone state because store will be changed during the second render in componentWillMount
@@ -79,9 +75,7 @@ app.get("*", (req, res) => {
       // render again from the initial data
       const markup = renderToString(
         <Provider store={store} key="provider">
-          <RouterProvider router={router}>
-            <App />
-          </RouterProvider>
+          <App />
         </Provider>
       );
 
@@ -100,9 +94,7 @@ app.get("*", (req, res) => {
     // first render to activate componentWillMount to dispatch actions for loading initial data
     renderToString(
       <Provider store={store} key="provider">
-        <RouterProvider router={router}>
-          <Main/>
-        </RouterProvider>
+        <App/>
       </Provider>
     );
 

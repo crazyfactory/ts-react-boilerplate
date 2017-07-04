@@ -1,6 +1,6 @@
 import * as React from "react";
-import {BaseLink} from "react-router5";
 import {style} from "typestyle";
+import {Link} from "./Link";
 
 const Styles = {
   nav: style({
@@ -28,10 +28,10 @@ class Header extends React.Component <any, any> {
     return (
       <nav className={Styles.nav}>
         <ul>
-          <li><BaseLink routeName="main">Home</BaseLink></li>
-          <li><BaseLink routeName="about">About</BaseLink></li>
-          <li><BaseLink routeName="counter">Counter</BaseLink></li>
-          <li><BaseLink routeName="stars">Stars</BaseLink></li>
+          <li><Link name="home">Home</Link></li>
+          <li><Link name="about">About</Link></li>
+          <li><Link name="counter">Counter</Link></li>
+          <li><Link name="stars">Stars</Link></li>
         </ul>
       </nav>
     );
