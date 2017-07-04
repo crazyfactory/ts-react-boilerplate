@@ -1,6 +1,5 @@
 import * as React from "react";
 import {BaseLink} from "react-router5";
-import {Router} from "router5";
 import {style} from "typestyle";
 
 const Styles = {
