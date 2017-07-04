@@ -20,22 +20,15 @@ const Styles = {
   })
 };
 
-class Header extends React.Component <any, any> {
-  constructor(props: any) {
-    super(props);
-  }
-  public render(): JSX.Element {
-    return (
-      <nav className={Styles.nav}>
-        <ul>
-          <li><Link name="home">Home</Link></li>
-          <li><Link name="about">About</Link></li>
-          <li><Link name="counter">Counter</Link></li>
-          <li><Link name="stars">Stars</Link></li>
-        </ul>
-      </nav>
-    );
-  }
-}
+const Header = () => (
+  <nav className={Styles.nav}>
+    <ul>
+      <li><Link name="home">Home</Link></li>
+      <li><Link name="about">About</Link></li>
+      <li><Link name="counter">Counter</Link></li>
+      <li><Link name="stars">Stars</Link></li>
+    </ul>
+  </nav>
+);
 
 export {Header, Styles};
