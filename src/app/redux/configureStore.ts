@@ -1,19 +1,24 @@
-const appConfig = require("../../../config/main");
+import * as createRavenMiddleware from "raven-for-redux";
+import * as Raven from "raven-js";
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
-import { router5Middleware } from "redux-router5";
+import {router5Middleware} from "redux-router5";
 import createSagaMiddleware, { END } from "redux-saga";
 import {Router} from "router5";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
 
-interface IExtendedStore extends Redux.Store<IStore> {
+const appConfig = require("../../../config/main");
+const localConfig = require("../../../config/main.local");
+
+interface IExtendedStore extends Redux.Store<Partial<IStore>> {
   runSaga: (rootSaga: any) => any;
   close: () => void;
 }
 
-export function configureStore(router: Router, initialState?: IStore): IExtendedStore {
+export function configureStore(router: Router, initialState?: Partial<IStore>): IExtendedStore {
 
+  const mergedConfig = {...appConfig, ...localConfig};
   const sagaMiddleware = createSagaMiddleware();
   const middlewares: Redux.Middleware[] = [
     router5Middleware(router),
@@ -21,12 +26,17 @@ export function configureStore(router: Router, initialState?: IStore): IExtended
   ];
 
   /** Add Only Dev. Middlewares */
-  if (appConfig.env !== "production" && process.env.BROWSER) {
+  if (mergedConfig.env !== "production" && process.env.BROWSER) {
     const logger = createLogger();
     middlewares.push(logger);
   }
 
-  const composeEnhancers = (appConfig.env !== "production" &&
+  if (mergedConfig.sentry && process.env.BROWSER) {
+    Raven.config(mergedConfig.sentry.dsn).setRelease(mergedConfig.sentry.release).install();
+    middlewares.unshift(createRavenMiddleware(Raven));
+  }
+
+  const composeEnhancers = (mergedConfig.env !== "production" &&
     typeof window === "object" &&
     (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === "function") &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({shouldHotReload: false})) || compose;
@@ -35,7 +45,7 @@ export function configureStore(router: Router, initialState?: IStore): IExtended
     applyMiddleware(...middlewares)
   ));
 
-  if (appConfig.env === "development" && (module as any).hot) {
+  if (mergedConfig.env === "development" && (module as any).hot) {
     (module as any).hot.accept("./rootReducer", () => {
       store.replaceReducer((require("./rootReducer").default));
     });

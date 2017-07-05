@@ -2,7 +2,7 @@ import createRouter, {MiddlewareFactory, Router} from "router5";
 import browserPlugin from "router5/plugins/browser";
 import routes from "./routes";
 
-export default function configureRouter(): Router {
+export function configureRouter(): Router {
   const router = createRouter(routes)
     .usePlugin(browserPlugin({useHash: false}));
 

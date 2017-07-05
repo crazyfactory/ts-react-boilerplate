@@ -1,22 +1,29 @@
 import {normalize, setupPage} from "csstips";
 import * as React from "react";
 import {Helmet} from "react-helmet";
+import {addLocaleData, IntlProvider} from "react-intl";
+import * as de from "react-intl/locale-data/de";
+import * as en from "react-intl/locale-data/en";
+import * as es from "react-intl/locale-data/es";
+import * as fr from "react-intl/locale-data/fr";
 import {connect} from "react-redux";
 import {routeNodeSelector} from "redux-router5";
+
 import {cssRaw, cssRule, style} from "typestyle";
 
 import {Header} from "../components";
-import {About, Counter, Home, Stars} from "./index";
+import {AboutPage, CounterPage, HomePage, StarsPage} from "./index";
 
 const appConfig = require("../../../config/main");
 
 // Global style
 cssRaw(`@import url(https://fonts.googleapis.com/css?family=Roboto);`);
 normalize();
-cssRule(`body`, {
-  fontFamily: "Roboto"
-});
 setupPage("#app");
+cssRule(`html, body`, {
+  fontFamily: "Roboto",
+  height: "auto"
+});
 
 // App container style
 const Styles = {
@@ -29,25 +36,36 @@ const Styles = {
 
 class App extends React.Component<any, any> {
   private components: any = {
-    about: About,
-    counter: Counter,
-    home: Home,
-    stars: Stars
+    about: AboutPage,
+    counter: CounterPage,
+    home: HomePage,
+    stars: StarsPage
   };
+  constructor() {
+    super();
+    addLocaleData([...en, ...es, ...fr, ...de]);
+  }
 
   public render(): JSX.Element {
     const { route } = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
-      <section className={Styles.container}>
-        <Helmet {...appConfig.app.head}/>
-        <Header />
-        {React.createElement(this.components[segment]) || <div>Not found</div>}
-      </section>
+      <IntlProvider locale={this.props.languages.payload.locale} messages={this.props.languages.payload.languageData}>
+        <section className={Styles.container}>
+          <Helmet {...appConfig.app.head}/>
+          <Header />
+          {React.createElement(this.components[segment]) || <div>Not found</div>}
+        </section>
+      </IntlProvider>
     );
   }
 }
 
-const connectedApp = connect(() => routeNodeSelector(""))(App);
+const mapStateToProps = (state) => ({
+  languages: state.language,
+  ...routeNodeSelector("")(state)
+});
+
+const connectedApp = connect(mapStateToProps)(App);
 
 export {connectedApp as App, Styles}

@@ -9,7 +9,7 @@ describe("starsSaga", () => {
     const gen = fetchStars();
 
     it("must call makeRequest of api.getStars", () => {
-      expect(gen.next().value).toEqual(call(makeRequest, dummyApi.getStars, requestType));
+      expect(gen.next().value).toEqual(call(makeRequest, requestType, dummyApi.getStars));
     });
 
     it("must be done", () => {
@@ -20,7 +20,7 @@ describe("starsSaga", () => {
   describe("watchStarsLoad", () => {
     const gen = watchStarsLoad();
 
-    it("must call takeLatest of STARS_REQUEST", () => {
+    it("should watch for LOAD_STARS action", () => {
       expect(gen.next().value).toEqual(takeLatest(LOAD_STARS, fetchStars));
     });
 

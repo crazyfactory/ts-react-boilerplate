@@ -1,7 +1,11 @@
-import {ICounter} from "models/counterModel";
-import {IStars} from "models/starsModel";
+import {ICounter} from "modules/counterModule";
+import {IStars} from "modules/starsModule";
+import {IState} from "./modules/baseModule";
+import {ILanguage} from "./modules/languageModule";
 
 export interface IStore {
-  counter: ICounter;
-  stars: IStars;
+  counter: IState<ICounter>;
+  language: IState<ILanguage>;
+  router: any;
+  stars: IState<IStars>;
 }

@@ -4,7 +4,7 @@ import {dummyApi} from "./dummyApi";
 import makeRequest from "./makeRequest";
 
 export function* fetchStars(): any {
-  yield call(makeRequest, dummyApi.getStars, requestType);
+  yield call(makeRequest, requestType, dummyApi.getStars);
 }
 
 export function* watchStarsLoad(): any {

@@ -1,3 +1,5 @@
+import {LanguageHelper} from "./app/helpers/LanguageHelper";
+
 const appConfig = require("../config/main");
 
 import * as e6p from "es6-promise";
@@ -8,11 +10,11 @@ import { renderToString } from "react-dom/server";
 
 import {Provider} from "react-redux";
 import {configureStore} from "./app/redux/configureStore";
+import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
-import {Html} from "./app/containers";
-import {App} from "./app/containers/App";
-import configureRouter from "./app/routes/configureRouter";
+import {App, Html} from "./app/containers";
+import {ILanguage} from "./app/redux/modules/languageModule";
 (e6p as any).polyfill();
 const manifest = require("../build/manifest.json");
 
@@ -22,6 +24,11 @@ const Chalk = require("chalk");
 const favicon = require("serve-favicon");
 
 const app = express();
+const translationHandler = (req, res) => {
+  const languageHelper = new LanguageHelper(req.params.lang);
+  const lang: ILanguage = {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferredLanguage()};
+  res.json(lang);
+};
 
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -46,28 +53,45 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
+app.get("/translation/:lang", translationHandler);
+
 app.get("*", (req, res) => {
+
   if (!appConfig.ssr) {
-    res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
-      if (err) {
-        console.error(err.message);
+    res.sendFile(path.resolve("./build/index.html"), {}, (error) => {
+      if (error) {
+        console.error(error.message);
       }
     });
     return;
   }
 
   const router = configureRouter();
-
-  router.start(req.url, (error, state) => {
+  router.start(req.url, (error, routeState) => {
     if (error) {
-      res.status(500).send(error);
+      res.status(500).send(error.message);
       return;
     }
-    const store = configureStore(router, {router: {route: state}} as any);
+
+    const languageHelper = new LanguageHelper(req.headers["accept-language"]);
+    const store = configureStore(router, {
+      language: {
+        payload: {
+          languageData: languageHelper.getRequestLanguageData(),
+          locale: languageHelper.getPreferredLanguage()
+        }
+      },
+      router: {
+        route: routeState
+      }
+    });
 
     store.runSaga(rootSaga).done.then(() => {
       // deep clone state because store will be changed during the second render in componentWillMount
       const initialState = JSON.parse(JSON.stringify(store.getState()));
+
+      // redux-form, not aware of ssr, will make a duplication of registeredFields on client
+      initialState.form = {};
 
       // tslint:disable-next-line
       console.time("second render");
@@ -83,6 +107,7 @@ app.get("*", (req, res) => {
       console.timeEnd("second render");
 
       res.status(200).send(renderHTML(markup, initialState));
+
     }).catch((err: any) => {
       console.error(err.message);
       res.status(500).send(err.message);
@@ -94,7 +119,7 @@ app.get("*", (req, res) => {
     // first render to activate componentWillMount to dispatch actions for loading initial data
     renderToString(
       <Provider store={store} key="provider">
-        <App/>
+        <App />
       </Provider>
     );
 
