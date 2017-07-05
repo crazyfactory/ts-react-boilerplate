@@ -1,5 +1,5 @@
-import * as React from "react";
 import {isEqual} from "lodash";
+import * as React from "react";
 import {connect} from "react-redux";
 import {actions} from "redux-router5";
 import {State as IRouterState} from "router5";

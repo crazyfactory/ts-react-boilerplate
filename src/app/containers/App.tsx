@@ -8,7 +8,6 @@ import * as es from "react-intl/locale-data/es";
 import * as fr from "react-intl/locale-data/fr";
 import {connect} from "react-redux";
 import {routeNodeSelector} from "redux-router5";
-
 import {cssRaw, cssRule, style} from "typestyle";
 
 import {Header} from "../components";
@@ -47,7 +46,7 @@ class App extends React.Component<any, any> {
   }
 
   public render(): JSX.Element {
-    const { route } = this.props;
+    const {route} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
       <IntlProvider locale={this.props.languages.payload.locale} messages={this.props.languages.payload.languageData}>
