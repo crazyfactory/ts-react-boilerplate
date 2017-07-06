@@ -1,18 +1,14 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {TestHelper} from "../helpers/TestHelper";
 import {IAction} from "../redux/modules/baseModule";
 import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
-import {AboutPage, UnconnectedAbout} from "./AboutPage";
+import {UnconnectedAbout} from "./AboutPage";
 
 /* tslint:disable:no-empty jsx-no-lambda */
 describe("<AboutPage />", () => {
-  const component = new TestHelper()
-    .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "about.change": "Change Language", "current.language": "Current Language"}})
-    .mount(AboutPage);
-
   it("matches snapshot", () => {
-    expect(component).toMatchSnapshot();
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
+    expect(shallowComponent).toMatchSnapshot();
   });
 
   it("calls switchLanguage() when button is clicked", () => {
