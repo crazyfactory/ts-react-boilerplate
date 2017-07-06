@@ -82,4 +82,4 @@ const mapStateToProps = (state: Partial<IStore>) => ({
 
 const connectedApp = connect<IStateToProps, null, null>(mapStateToProps, null)(App);
 
-export {connectedApp as App, App as UnconnectedApp, styles}
+export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles}

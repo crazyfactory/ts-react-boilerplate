@@ -1,14 +1,26 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {IAction} from "../redux/modules/baseModule";
+import {IAction, IState} from "../redux/modules/baseModule";
 import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
-import {UnconnectedAbout} from "./AboutPage";
+import {mapStateToProps, UnconnectedAbout} from "./AboutPage";
 
 /* tslint:disable:no-empty jsx-no-lambda */
 describe("<AboutPage />", () => {
+  const language: IState<ILanguage> = {
+    payload: {
+      languageData: {greeting: "Hello!"},
+      locale: "en-GB"
+    }
+  };
+
   it("matches snapshot", () => {
     const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
     expect(shallowComponent).toMatchSnapshot();
+  });
+
+  it("maps state to props correctly", () => {
+    const props = mapStateToProps({language});
+    expect(props.locale).toEqual("en-GB");
   });
 
   it("calls switchLanguage() when button is clicked", () => {

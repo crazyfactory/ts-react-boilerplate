@@ -94,10 +94,10 @@ interface IStateToProps {
   languageData: any;
 }
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: Partial<IStore>) => ({
   languageData: state.language.payload.languageData
 });
 
 const ConnectedCustomField = connect<IStateToProps, null, IRenderFieldProps<any>>(mapStateToProps, null)(CustomField);
 
-export {CustomField as UnconnectedCustomField, ConnectedCustomField as CustomField};
+export {CustomField as UnconnectedCustomField, ConnectedCustomField as CustomField, mapStateToProps};

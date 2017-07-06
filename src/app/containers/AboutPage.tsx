@@ -31,8 +31,8 @@ interface IStateToProps {
   locale: string;
 }
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: Partial<IStore>) => ({
   locale: state.language.payload.locale
 });
 const connectedAbout = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(AboutPage);
-export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage};
+export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage, mapStateToProps};

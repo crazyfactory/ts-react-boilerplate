@@ -42,10 +42,10 @@ interface IStateToProps {
   count: number;
 }
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: Partial<IStore>) => ({
   count: state.counter.payload.count
 });
 
 const connectedCounter = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(CounterPage);
 
-export {CounterPage as UnconnectedCounter, connectedCounter as CounterPage}
+export {CounterPage as UnconnectedCounter, connectedCounter as CounterPage, mapStateToProps}

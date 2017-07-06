@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FormHelper <CustomField /> placeholder falls back to defaultMessage when languageData key does not exist 1`] = `
+exports[`FormHelper <CustomField /> matches snapshot when placeholder falls back to defaultMessage when languageData key does not exist 1`] = `
 <div
   className="fyjcn3x"
 >
@@ -19,7 +19,7 @@ exports[`FormHelper <CustomField /> placeholder falls back to defaultMessage whe
 </div>
 `;
 
-exports[`FormHelper <CustomField /> with error when active or touched 1`] = `
+exports[`FormHelper <CustomField /> matches snapshot with error when active or touched 1`] = `
 <div
   className="fyjcn3x"
 >
@@ -51,7 +51,7 @@ exports[`FormHelper <CustomField /> with error when active or touched 1`] = `
 </div>
 `;
 
-exports[`FormHelper <CustomField /> with warning when active or touched 1`] = `
+exports[`FormHelper <CustomField /> matches snapshot with warning when active or touched 1`] = `
 <div
   className="fyjcn3x"
 >
@@ -83,7 +83,7 @@ exports[`FormHelper <CustomField /> with warning when active or touched 1`] = `
 </div>
 `;
 
-exports[`FormHelper <CustomField /> without error and warning 1`] = `
+exports[`FormHelper <CustomField /> matches snapshot without error and warning 1`] = `
 <div
   className="fyjcn3x"
 >

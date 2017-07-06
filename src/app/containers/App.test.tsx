@@ -4,7 +4,7 @@ import {IntlProvider} from "react-intl";
 import {State as IRouteState} from "router5";
 import {IState} from "../redux/modules/baseModule";
 import {ILanguage} from "../redux/modules/languageModule";
-import {styles, UnconnectedApp} from "./App";
+import {mapStateToProps, styles, UnconnectedApp} from "./App";
 
 describe("<App />", () => {
   const language: IState<ILanguage> = {
@@ -27,6 +27,15 @@ describe("<App />", () => {
   it("matches snapshot", () => {
     const component = shallow(<UnconnectedApp language={language} route={route}/>);
     expect(component).toMatchSnapshot();
+  });
+
+  it("maps state to props correctly", () => {
+    const props = mapStateToProps({
+      language,
+      router: {route}
+    });
+    expect(props.language).toEqual(language);
+    expect(props.route).toEqual(route);
   });
 
   it("renders with correct style", () => {

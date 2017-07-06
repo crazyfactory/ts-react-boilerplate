@@ -2,7 +2,7 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {IAction} from "../redux/modules/baseModule";
 import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
-import {UnconnectedCounter} from "./CounterPage";
+import {mapStateToProps, UnconnectedCounter} from "./CounterPage";
 
 /* tslint:disable:no-empty jsx-no-lambda */
 describe("<Counter />", () => {
@@ -14,6 +14,11 @@ describe("<Counter />", () => {
   it("matches snapshot when count <= 0", () => {
     const component = shallow(<UnconnectedCounter count={0} dispatch={jest.fn()} />);
     expect(component).toMatchSnapshot();
+  });
+
+  it("maps state to props correctly", () => {
+    const props = mapStateToProps({counter: {payload: {count: 5}}});
+    expect(props.count).toEqual(5);
   });
 
   it("calls handleIncrement() when increment button is clicked", () => {
