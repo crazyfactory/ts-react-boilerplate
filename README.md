@@ -19,17 +19,17 @@ This boilerplate uses the following libraries and tools:
 #### Core
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://github.com/facebook/react) & [React DOM](https://github.com/facebook/react) for views.
-- [React Router](https://github.com/reactjs/react-router) to handle in-app routing.
+- [Router5](https://github.com/router5) to handle in-app routing.
 - [Redux](https://github.com/reactjs/redux) for managing application state.
 - [React-Redux](https://github.com/reactjs/react-redux) to use React-Redux bindings.
-- [React-Router-Redux](https://github.com/reactjs/react-router-redux) to keep application state sync with route changes.
+- [React-Router5](https://github.com/router5) & [Redux-Router5](https://github.com/router5) integrate router5 with react and redux
 
 #### Utilities
 - [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
 - [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
 - [React Helmet](https://github.com/nfl/react-helmet)
-- [RavenJS](https://github.com/getsentry/raven-js) For capturing exceptions during run time
-- [raven-for-redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
+- [RavenJS](https://github.com/getsentry/raven-js) for capturing exceptions during run time
+- [Raven-for-Redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
