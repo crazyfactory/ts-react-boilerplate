@@ -67,27 +67,28 @@ This boilerplate uses the following libraries and tools:
 .
 ├── build                       # Built, ready to serve app.
 ├── config                      # Root folder for configurations.
-│   ├── test                    # Test configurations.
 │   ├── types                   # Global type definitions, written by us.
 │   ├── webpack                 # Webpack configurations.
-│   └── main.js                 # Generic App configurations.
+│   ├── main.js                 # Generic App configurations.
+│   └── main.local.js           # Local App configurations.
 ├── node_modules                # Node Packages.
 ├── src                         # Source code.
 │   ├── app                     # App folder.
 │   │ ├── components            # React Components.
 │   │ ├── containers            # React/Redux Containers.
 │   │ ├── helpers               # Helper Functions & Components.
-|   | ├── models                # Interfaces for different parts of app
+|   | ├── images                # Images folder.
 │   │ ├── redux                 # Redux related code aka data layer of the app.
 │   │ │   ├── modules           # Redux modules.   
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
-│   │ │   └── store.ts          # Redux store, contains global app state.    
+│   │ │   └── configureStore.ts # Redux store, contains global app state.    
 │   │ └── routes                # Routes.
 │   │ └── sagas                 # Saga files.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
 │   └── server.tsx              # Entry point for server side rendering.
+├── translations                # For json translations.
 ├── .babelrc                    # babel config.
 ├── .dockerignore               # Tells docker which files to ignore.
 ├── .editorconfig               # Configuration for editors.
