@@ -6,6 +6,16 @@ describe("counterModule", () => {
   describe("reducer", () => {
     const state: IState<ICounter> = {isFetching: false, payload: {count: 10}};
 
+    it("returns initial state when state and action type are undefined", () => {
+      const initialState: IState<ICounter> = {
+        isFetching: false,
+        payload: {
+          count: 0
+        }
+      };
+      expect(counter.counterReducer(undefined, {type: undefined})).toEqual(initialState);
+    });
+
     it("handles action of type INCREMENT", () => {
       const action: IAction<ICounter> = {type: counter.INCREMENT};
       expect(counter.counterReducer(state, action)).toEqual({

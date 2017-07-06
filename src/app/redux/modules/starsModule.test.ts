@@ -3,7 +3,7 @@ import {IStars, LOAD_STARS, loadStars, requestType, starsReducer} from "./starsM
 
 describe("starsModule", () => {
   describe("reducer", () => {
-    it("returns initial state with default language", () => {
+    it("returns initial state when state and action type are undefined", () => {
       const initialState: IState<IStars> = {
         isFetching: true,
         payload: {
