@@ -4,7 +4,9 @@ import "isomorphic-fetch";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
+import {RouterProvider} from "react-router5";
 import {setStylesTarget} from "typestyle";
+
 import {App} from "./app/containers";
 import {configureStore} from "./app/redux/configureStore";
 import {configureRouter} from "./app/routes/configureRouter";
@@ -24,7 +26,9 @@ store.runSaga(rootSaga);
 ReactDOM.render(
   <ReactHotLoader>
     <Provider store={store} key="provider">
-      <App/>
+      <RouterProvider router={router}>
+        <App/>
+      </RouterProvider>
     </Provider>
   </ReactHotLoader>,
   document.getElementById("app")
@@ -33,14 +37,17 @@ ReactDOM.render(
 setStylesTarget(document.getElementById("styles-target"));
 
 if ((module as any).hot) {
-  (module as any).hot.accept("./app/routes/routes", () => {
+  (module as any).hot.accept("./app/containers", () => {
     const {App} = require("./app/containers");
     ReactDOM.render(
       <ReactHotLoader>
         <Provider store={store}>
-          <App/>
+          <RouterProvider router={router}>
+            <App/>
+          </RouterProvider>
         </Provider>
       </ReactHotLoader>,
-      document.getElementById("app"));
+      document.getElementById("app")
+    );
   });
 }

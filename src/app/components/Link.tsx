@@ -1,32 +1,30 @@
-import {isEqual} from "lodash";
+import {object} from "prop-types";
 import * as React from "react";
 import {connect} from "react-redux";
 import {actions} from "redux-router5";
-import {State as IRouterState} from "router5";
+import {Router, State as IRouterState} from "router5";
 
 class Link extends React.Component<IStateToProps & IDispatchToProps & IOwnProps, null> {
-  public render(): JSX.Element {
-    const {children, name, params, options, route} = this.props;
+  public static contextTypes: React.ValidationMap<any> = {
+    router: object.isRequired
+  };
 
-    const href = this.buildUrl(name, params);
+  public context: {
+    router: Router;
+  };
+
+  public render(): JSX.Element {
+    const {children, name, params, options} = this.props;
+    const {navigateTo} = actions;
+
+    const href = this.context.router.buildPath(name, params);
     const onClick = (evt) => {
       evt.preventDefault();
-      this.props.dispatch(actions.navigateTo(name, params, options));
+      this.props.dispatch(navigateTo(name, params, options));
     };
-    const className = (route.name === name && (!params || isEqual(route.params, params))) ? "active" : "";
+    const className = this.context.router.isActive(name, params) ? "active" : "";
 
     return <a {...{className, href, onClick}}>{children}</a>;
-  }
-
-  // todo: now only assume query params, will implement other types of params
-  private buildUrl(name: string, params: {[key: string]: string}): string {
-    let url: string = name;
-    if (params) {
-      Object.keys(params).forEach((key) => {
-        url += `?${key}=${params[key]}`;
-      });
-    }
-    return url;
   }
 }
 

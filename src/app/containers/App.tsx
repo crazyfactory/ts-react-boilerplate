@@ -42,7 +42,7 @@ const Styles = {
 };
 
 class App extends React.Component<IStateToProps, null> {
-  private components: any = {
+  private components: {[key: string]: React.ComponentClass} = {
     about: AboutPage,
     counter: CounterPage,
     home: HomePage,
@@ -62,7 +62,7 @@ class App extends React.Component<IStateToProps, null> {
       <IntlProvider locale={language.payload.locale} messages={language.payload.languageData}>
         <section className={Styles.container}>
           <Helmet {...appConfig.app.head}/>
-          <Header />
+          <Header/>
           {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>Not found</div>}
         </section>
       </IntlProvider>
@@ -76,7 +76,7 @@ interface IStateToProps {
 }
 
 const mapStateToProps = (state: Partial<IStore>) => ({
-  languages: state.language,
+  language: state.language,
   ...routeNodeSelector("")(state)
 });
 

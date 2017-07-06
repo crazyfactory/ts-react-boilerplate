@@ -1,28 +1,25 @@
-import {LanguageHelper} from "./app/helpers/LanguageHelper";
-
-const appConfig = require("../config/main");
-
 import * as e6p from "es6-promise";
+(e6p as any).polyfill();
 import "isomorphic-fetch";
-
 import * as React from "react";
-import { renderToString } from "react-dom/server";
-
+import {renderToString} from "react-dom/server";
 import {Provider} from "react-redux";
-import {configureStore} from "./app/redux/configureStore";
-import {configureRouter} from "./app/routes/configureRouter";
-import rootSaga from "./app/sagas/rootSaga";
+import {RouterProvider} from "react-router5";
 
 import {App, Html} from "./app/containers";
+import {LanguageHelper} from "./app/helpers/LanguageHelper";
+import {configureStore} from "./app/redux/configureStore";
 import {ILanguage} from "./app/redux/modules/languageModule";
-(e6p as any).polyfill();
-const manifest = require("../build/manifest.json");
+import {configureRouter} from "./app/routes/configureRouter";
+import rootSaga from "./app/sagas/rootSaga";
 
 const express = require("express");
 const path = require("path");
 const Chalk = require("chalk");
 const favicon = require("serve-favicon");
 
+const appConfig = require("../config/main");
+const manifest = require("../build/manifest.json");
 const app = express();
 const translationHandler = (req, res) => {
   const languageHelper = new LanguageHelper(req.params.lang);
@@ -99,7 +96,9 @@ app.get("*", (req, res) => {
       // render again from the initial data
       const markup = renderToString(
         <Provider store={store} key="provider">
-          <App />
+          <RouterProvider router={router}>
+            <App/>
+          </RouterProvider>
         </Provider>
       );
 
@@ -119,7 +118,9 @@ app.get("*", (req, res) => {
     // first render to activate componentWillMount to dispatch actions for loading initial data
     renderToString(
       <Provider store={store} key="provider">
-        <App />
+        <RouterProvider router={router}>
+          <App/>
+        </RouterProvider>
       </Provider>
     );
 
