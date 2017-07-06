@@ -3,7 +3,7 @@ import {FormattedMessage} from "react-intl";
 import {Link} from "react-router";
 import {style} from "typestyle";
 
-const Styles = {
+const styles = {
   nav: style({
     $nest: {
       ul: {
@@ -22,7 +22,7 @@ const Styles = {
 };
 
 const Header = () => (
-  <nav className={Styles.nav}>
+  <nav className={styles.nav}>
     <ul>
       <li><Link to="/"><FormattedMessage id="home" defaultMessage="Home" /></Link></li>
       <li><Link to="about"><FormattedMessage id="about" defaultMessage="About Us" /></Link></li>
@@ -33,4 +33,4 @@ const Header = () => (
   </nav>
 );
 
-export {Header, Styles};
+export {Header};

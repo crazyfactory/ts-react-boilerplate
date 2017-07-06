@@ -20,7 +20,7 @@ class AboutPage extends React.Component<IStateToProps & IDispatchToProps, null> 
     return (
       <div>
         <h3><FormattedMessage id="current.language" defaultMessage="Current Language" />: {this.props.locale}</h3>
-        <button onClick={this.switchLanguage}>Change Language</button>
+        <button onClick={this.switchLanguage}><FormattedMessage id="about.change" defaultMessage="Change language"/></button>
         <h4><FormattedMessage id="about.us" defaultMessage="About Us" /></h4>
       </div>
     );

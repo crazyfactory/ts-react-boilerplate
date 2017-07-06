@@ -24,7 +24,7 @@ cssRule(`html, body`, {
 });
 
 // App container style
-const Styles = {
+const styles = {
   container: style({
     margin: 0,
     padding: 0,
@@ -41,7 +41,7 @@ class App extends React.Component<any, any> {
   public render(): JSX.Element {
     return (
       <IntlProvider locale={this.props.languages.payload.locale} messages={this.props.languages.payload.languageData}>
-        <section className={Styles.container}>
+        <section className={styles.container}>
           <Helmet {...appConfig.app.head}/>
           <Header />
           {this.props.children}
@@ -52,4 +52,4 @@ class App extends React.Component<any, any> {
 }
 
 const connectedApp = connect((state) => ({languages: state.language}))(App);
-export {connectedApp as App, Styles}
+export {connectedApp as App}

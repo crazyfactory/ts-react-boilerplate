@@ -1,4 +1,5 @@
 import * as React from "react";
+import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
 import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
@@ -24,12 +25,12 @@ class CounterPage extends React.Component<IStateToProps & IDispatchToProps, null
 
     return (
       <div>
-        <h4>Counter Example</h4>
+        <h4><FormattedMessage id="counter" defaultMessage="Counter"/></h4>
         <button name="incBtn" onClick={this.handleIncrement}>
-          INCREMENT
+          <FormattedMessage id="counter.increment" defaultMessage="Increment"/>
         </button>
         <button name="decBtn" onClick={this.handleDecrement} disabled={count <= 0}>
-          DECREMENT
+          <FormattedMessage id="counter.decrement" defaultMessage="Decrement"/>
         </button>
         <p>{count}</p>
       </div>

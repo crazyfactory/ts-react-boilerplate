@@ -1,4 +1,5 @@
 import * as React from "react";
+import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
 import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
@@ -15,7 +16,7 @@ class StarsPage extends React.Component<IStateToProps & IDispatchToProps, null> 
     const {isFetching, stargazers_count} = this.props;
     return (
       <div>
-        {isFetching ? "Fetching Stars.." : stargazers_count}
+        {isFetching ? <FormattedMessage id="stars.fetching" defaultMessage="Fetching Stars.." /> : stargazers_count}
       </div>
     );
   }
