@@ -8,11 +8,11 @@ import {AboutPage, UnconnectedAbout} from "./AboutPage";
 /* tslint:disable:no-empty jsx-no-lambda */
 describe("<AboutPage />", () => {
   const component = new TestHelper()
-    .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "current.language": "Current Language"}})
+    .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "about.change": "Change Language", "current.language": "Current Language"}})
     .mount(AboutPage);
 
-  it("renders header with text", () => {
-    expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");
+  it("matches snapshot", () => {
+    expect(component).toMatchSnapshot();
   });
 
   it("calls switchLanguage() when button is clicked", () => {

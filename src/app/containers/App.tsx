@@ -33,7 +33,7 @@ cssRule(`html, body`, {
 });
 
 // App container style
-const Styles = {
+const styles = {
   container: style({
     margin: 0,
     padding: 0,
@@ -60,7 +60,7 @@ class App extends React.Component<IStateToProps, null> {
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
       <IntlProvider locale={language.payload.locale} messages={language.payload.languageData}>
-        <section className={Styles.container}>
+        <section className={styles.container}>
           <Helmet {...appConfig.app.head}/>
           <Header/>
           {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>Not found</div>}
@@ -82,4 +82,4 @@ const mapStateToProps = (state: Partial<IStore>) => ({
 
 const connectedApp = connect<IStateToProps, null, null>(mapStateToProps, null)(App);
 
-export {connectedApp as App, App as UnconnectedApp, Styles}
+export {connectedApp as App, App as UnconnectedApp, styles}

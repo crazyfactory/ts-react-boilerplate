@@ -1,39 +1,19 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {TestHelper} from "../helpers/TestHelper";
-import {IStore} from "../redux/IStore";
 import {IAction} from "../redux/modules/baseModule";
 import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
-import {CounterPage, UnconnectedCounter} from "./CounterPage";
-
-/** Mock App. State */
-const state: Partial<IStore> = {
-  counter: {
-    isFetching: false,
-    payload: {
-      count: 1
-    }
-  }
-};
+import {UnconnectedCounter} from "./CounterPage";
 
 /* tslint:disable:no-empty jsx-no-lambda */
 describe("<Counter />", () => {
-  let component;
-
-  beforeEach(() => {
-    component = (new TestHelper()).withState(state).mount(CounterPage);
+  it("matches snapshot when count > 0", () => {
+    const component = shallow(<UnconnectedCounter count={10} dispatch={jest.fn()} />);
+    expect(component).toMatchSnapshot();
   });
 
-  it("renders header", () => {
-    expect(component.find("h4")).toHaveText("Counter Example");
-  });
-
-  it("renders Increment and Decrement buttons", () => {
-    expect(component.find("button")).toHaveLength(2);
-  });
-
-  it("renders counter value", () => {
-    expect(component.find("p")).toHaveText("1");
+  it("matches snapshot when count <= 0", () => {
+    const component = shallow(<UnconnectedCounter count={0} dispatch={jest.fn()} />);
+    expect(component).toMatchSnapshot();
   });
 
   it("calls handleIncrement() when increment button is clicked", () => {

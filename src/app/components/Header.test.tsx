@@ -1,12 +1,13 @@
-import {shallow} from "enzyme";
-import * as React from "react";
-import {Header, Styles} from "./Header";
+import {TestHelper} from "../helpers/TestHelper";
+import {Header} from "./Header";
 
 describe("<Header />", () => {
-  const component = shallow(<Header />);
+  const renderer = new TestHelper();
+  const component = renderer
+    .withTranslation({ languageData: { home: "Home", about: "About", counter: "Counter", stars: "Stars", register: "Register" }, locale: "en-GB" })
+    .mount(Header);
 
-  it("Renders with correct style", () => {
-    expect(component.find("nav")).toHaveClassName(Styles.nav);
+  it("matches snapshot", () => {
+    expect(component).toMatchSnapshot();
   });
-
 });

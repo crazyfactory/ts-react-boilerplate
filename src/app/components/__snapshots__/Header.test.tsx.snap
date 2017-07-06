@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> Renders with correct style 1`] = `
+<IntlProvider
+  locale="en-GB"
+  messages={
+    Object {
+      "about": "About",
+      "counter": "Counter",
+      "home": "Home",
+      "register": "Register",
+      "stars": "Stars",
+    }
+  }
+>
+  <Provider
+    store={
+      Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      }
+    }
+  >
+    <Header>
+      <nav
+        className="f8r6aqq"
+      >
+        <ul>
+          <li>
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/"
+            >
+              <a
+                onClick={[Function]}
+                style={Object {}}
+              >
+                <FormattedMessage
+                  defaultMessage="Home"
+                  id="home"
+                  values={Object {}}
+                >
+                  <span>
+                    Home
+                  </span>
+                </FormattedMessage>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="about"
+            >
+              <a
+                onClick={[Function]}
+                style={Object {}}
+              >
+                <FormattedMessage
+                  defaultMessage="About Us"
+                  id="about"
+                  values={Object {}}
+                >
+                  <span>
+                    About
+                  </span>
+                </FormattedMessage>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="counter"
+            >
+              <a
+                onClick={[Function]}
+                style={Object {}}
+              >
+                <FormattedMessage
+                  defaultMessage="Counter"
+                  id="counter"
+                  values={Object {}}
+                >
+                  <span>
+                    Counter
+                  </span>
+                </FormattedMessage>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="stars"
+            >
+              <a
+                onClick={[Function]}
+                style={Object {}}
+              >
+                <FormattedMessage
+                  defaultMessage="Stars"
+                  id="stars"
+                  values={Object {}}
+                >
+                  <span>
+                    Stars
+                  </span>
+                </FormattedMessage>
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="register"
+            >
+              <a
+                onClick={[Function]}
+                style={Object {}}
+              >
+                <FormattedMessage
+                  defaultMessage="Register"
+                  id="register"
+                  values={Object {}}
+                >
+                  <span>
+                    Register
+                  </span>
+                </FormattedMessage>
+              </a>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </Header>
+  </Provider>
+</IntlProvider>
+`;
