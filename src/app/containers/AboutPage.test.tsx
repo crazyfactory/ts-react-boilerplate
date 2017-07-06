@@ -5,6 +5,7 @@ import {IAction} from "../redux/modules/baseModule";
 import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
 import {AboutPage, UnconnectedAbout} from "./AboutPage";
 
+/* tslint:disable:no-empty jsx-no-lambda */
 describe("<AboutPage />", () => {
   const component = new TestHelper()
     .withTranslation({locale: "en-GB", languageData: {"about.us": "About Us", "current.language": "Current Language"}})
@@ -16,7 +17,7 @@ describe("<AboutPage />", () => {
 
   it("calls switchLanguage() when button is clicked", () => {
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
 
     expect(shallowComponent.find("button")).toBeDefined();
     expect(spy).not.toHaveBeenCalled();
