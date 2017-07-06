@@ -2,9 +2,9 @@ import {object} from "prop-types";
 import * as React from "react";
 import {connect} from "react-redux";
 import {actions} from "redux-router5";
-import {Router, State as IRouterState} from "router5";
+import {Router} from "router5";
 
-class Link extends React.Component<IStateToProps & IDispatchToProps & IOwnProps, null> {
+class Link extends React.Component<IDispatchToProps & IOwnProps, null> {
   public static contextTypes: React.ValidationMap<any> = {
     router: object.isRequired
   };
@@ -28,24 +28,16 @@ class Link extends React.Component<IStateToProps & IDispatchToProps & IOwnProps,
   }
 }
 
-interface IStateToProps {
-  route: IRouterState;
-}
-
 interface IDispatchToProps {
   dispatch: any;
 }
 
 interface IOwnProps {
   name: string;
-  params?: {[key: string]: string};
+  params?: {[key: string]: string | number};
   options?: any;
 }
 
-const mapStateToProps = (state) => ({
-  route: state.router.route
-});
+const connectedLink = connect<null, IDispatchToProps, IOwnProps>(null)(Link);
 
-const connectedLink = connect<IStateToProps, IDispatchToProps, IOwnProps>(mapStateToProps)(Link);
-
-export {connectedLink as Link};
+export {connectedLink as Link, Link as UnconnectedLink};
