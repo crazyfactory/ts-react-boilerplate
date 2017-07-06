@@ -82,7 +82,7 @@ This boilerplate uses the following libraries and tools:
 │   │ │   ├── modules           # Redux modules.   
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
 │   │ │   └── configureStore.ts # Redux store, contains global app state.    
-│   │ └── routes                # Routes.
+│   │ ├── routes                # Routes.
 │   │ └── sagas                 # Saga files.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
