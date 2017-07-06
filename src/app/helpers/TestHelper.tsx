@@ -3,13 +3,16 @@ import {mount, ReactWrapper, render, shallow, ShallowRendererProps, ShallowWrapp
 import * as React from "react";
 import {IntlProvider} from "react-intl";
 import {Provider} from "react-redux";
+import {RouterProvider} from "react-router5";
 import {createStore, Store} from "redux";
-import rootReducer from "../redux/rootReducer";
+import {Router} from "router5";
 
 /** Redux Mock Store Configuration */
 import {IStore} from "../redux/IStore";
 import {IState} from "../redux/modules/baseModule";
 import {ILanguage} from "../redux/modules/languageModule";
+import rootReducer from "../redux/rootReducer";
+import {configureRouter} from "../routes/configureRouter";
 
 declare type TComponent = React.ComponentClass<any> | React.SFC<any> | React.ClassType<any, any, any> | string;
 
@@ -18,6 +21,7 @@ export class TestHelper<TProps extends object, TState> {
   protected state: Partial<IStore> = {};
   protected props: TProps;
   private ComponentClass: TComponent;
+  private router: Router = configureRouter();
 
   public withState(state: Partial<IStore>): TestHelper<TProps, TState> {
     this.state = state;
@@ -57,7 +61,9 @@ export class TestHelper<TProps extends object, TState> {
     const ComponentClass = this.ComponentClass;
     const providerComponent = (
       <Provider store={this.getStore()}>
-        <ComponentClass {...this.props} />
+        <RouterProvider router={this.router}>
+          <ComponentClass {...this.props} />
+        </RouterProvider>
       </Provider>
     );
     return this.state.language ? this.getWithTranslation(providerComponent) : providerComponent;
