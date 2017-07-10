@@ -2,232 +2,41 @@
 
 exports[`<App /> matches snapshot 1`] = `
 <IntlProvider
-  locale="en"
-  messages={Object {}}
->
-  <Provider
-    store={
-      Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      }
+  locale="en-GB"
+  messages={
+    Object {
+      "greeting": "Hello!",
     }
+  }
+>
+  <section
+    className="f1whcvza"
   >
-    <Connect(App)>
-      <App
-        dispatch={[Function]}
-        languages={
+    <HelmetWrapper
+      encodeSpecialCharacters={true}
+      meta={
+        Array [
           Object {
-            "payload": Object {
-              "languageData": Object {},
-              "locale": "en",
-            },
-          }
-        }
-      >
-        <IntlProvider
-          locale="en"
-          messages={Object {}}
-        >
-          <section
-            className="f1whcvza"
-          >
-            <HelmetWrapper
-              encodeSpecialCharacters={true}
-              meta={
-                Array [
-                  Object {
-                    "charset": "utf-8",
-                  },
-                  Object {
-                    "content": "ie=edge",
-                    "http-equiv": "x-ua-compatible",
-                  },
-                  Object {
-                    "content": "width=device-width, initial-scale=1",
-                    "name": "viewport",
-                  },
-                  Object {
-                    "content": "React Redux Typescript",
-                    "name": "description",
-                  },
-                ]
-              }
-              title="Crazy Factory"
-            >
-              <SideEffect(NullComponent)
-                encodeSpecialCharacters={true}
-                meta={
-                  Array [
-                    Object {
-                      "charset": "utf-8",
-                    },
-                    Object {
-                      "content": "ie=edge",
-                      "http-equiv": "x-ua-compatible",
-                    },
-                    Object {
-                      "content": "width=device-width, initial-scale=1",
-                      "name": "viewport",
-                    },
-                    Object {
-                      "content": "React Redux Typescript",
-                      "name": "description",
-                    },
-                  ]
-                }
-                title="Crazy Factory"
-              >
-                <NullComponent
-                  encodeSpecialCharacters={true}
-                  meta={
-                    Array [
-                      Object {
-                        "charset": "utf-8",
-                      },
-                      Object {
-                        "content": "ie=edge",
-                        "http-equiv": "x-ua-compatible",
-                      },
-                      Object {
-                        "content": "width=device-width, initial-scale=1",
-                        "name": "viewport",
-                      },
-                      Object {
-                        "content": "React Redux Typescript",
-                        "name": "description",
-                      },
-                    ]
-                  }
-                  title="Crazy Factory"
-                />
-              </SideEffect(NullComponent)>
-            </HelmetWrapper>
-            <Header>
-              <nav
-                className="f8r6aqq"
-              >
-                <ul>
-                  <li>
-                    <Link
-                      onlyActiveOnIndex={false}
-                      style={Object {}}
-                      to="/"
-                    >
-                      <a
-                        onClick={[Function]}
-                        style={Object {}}
-                      >
-                        <FormattedMessage
-                          defaultMessage="Home"
-                          id="home"
-                          values={Object {}}
-                        >
-                          <span>
-                            Home
-                          </span>
-                        </FormattedMessage>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onlyActiveOnIndex={false}
-                      style={Object {}}
-                      to="about"
-                    >
-                      <a
-                        onClick={[Function]}
-                        style={Object {}}
-                      >
-                        <FormattedMessage
-                          defaultMessage="About Us"
-                          id="about"
-                          values={Object {}}
-                        >
-                          <span>
-                            About Us
-                          </span>
-                        </FormattedMessage>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onlyActiveOnIndex={false}
-                      style={Object {}}
-                      to="counter"
-                    >
-                      <a
-                        onClick={[Function]}
-                        style={Object {}}
-                      >
-                        <FormattedMessage
-                          defaultMessage="Counter"
-                          id="counter"
-                          values={Object {}}
-                        >
-                          <span>
-                            Counter
-                          </span>
-                        </FormattedMessage>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onlyActiveOnIndex={false}
-                      style={Object {}}
-                      to="stars"
-                    >
-                      <a
-                        onClick={[Function]}
-                        style={Object {}}
-                      >
-                        <FormattedMessage
-                          defaultMessage="Stars"
-                          id="stars"
-                          values={Object {}}
-                        >
-                          <span>
-                            Stars
-                          </span>
-                        </FormattedMessage>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      onlyActiveOnIndex={false}
-                      style={Object {}}
-                      to="register"
-                    >
-                      <a
-                        onClick={[Function]}
-                        style={Object {}}
-                      >
-                        <FormattedMessage
-                          defaultMessage="Register"
-                          id="register"
-                          values={Object {}}
-                        >
-                          <span>
-                            Register
-                          </span>
-                        </FormattedMessage>
-                      </a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </Header>
-          </section>
-        </IntlProvider>
-      </App>
-    </Connect(App)>
-  </Provider>
+            "charset": "utf-8",
+          },
+          Object {
+            "content": "ie=edge",
+            "http-equiv": "x-ua-compatible",
+          },
+          Object {
+            "content": "width=device-width, initial-scale=1",
+            "name": "viewport",
+          },
+          Object {
+            "content": "React Redux Typescript",
+            "name": "description",
+          },
+        ]
+      }
+      title="Crazy Factory"
+    />
+    <Header />
+    <HomePage />
+  </section>
 </IntlProvider>
 `;

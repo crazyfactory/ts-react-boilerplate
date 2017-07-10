@@ -1,8 +1,8 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {IAction} from "../redux/modules/baseModule";
+import {IAction, IState} from "../redux/modules/baseModule";
 import {IStars, LOAD_STARS} from "../redux/modules/starsModule";
-import {UnconnectedStars} from "./StarsPage";
+import {mapStateToProps, UnconnectedStars} from "./StarsPage";
 
 describe("<Stars />", () => {
   it("matches snapshot when rendering stars", () => {
@@ -13,6 +13,17 @@ describe("<Stars />", () => {
   it("matches snapshot when rendering fetching text", () => {
     const component = shallow(<UnconnectedStars isFetching={true} stargazers_count={-1} dispatch={jest.fn()} />);
     expect(component).toMatchSnapshot();
+  });
+
+  it("maps state to props correctly", () => {
+    const stars: IState<IStars> = {
+      isFetching: false,
+      payload: {
+        stargazers_count: 100
+      }
+    };
+    const props = mapStateToProps({stars});
+    expect(props).toEqual({isFetching: false, stargazers_count: 100});
   });
 
   it("dispatches LOAD_STARS action before rendering if stargazers_count === -1", () => {

@@ -27,9 +27,9 @@ interface IStateToProps {
   stargazers_count: number;
 }
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: Partial<IStore>) => ({
   isFetching: state.stars.isFetching,
   stargazers_count: state.stars.payload.stargazers_count
 });
 const connectedStars = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(StarsPage);
-export {StarsPage as UnconnectedStars, connectedStars as StarsPage}
+export {StarsPage as UnconnectedStars, connectedStars as StarsPage, mapStateToProps}

@@ -1,73 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AboutPage /> matches snapshot 1`] = `
-<IntlProvider
-  locale="en-GB"
-  messages={
-    Object {
-      "about.change": "Change Language",
-      "about.us": "About Us",
-      "current.language": "Current Language",
-    }
-  }
->
-  <Provider
-    store={
-      Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      }
-    }
+<div>
+  <h3>
+    <FormattedMessage
+      defaultMessage="Current Language"
+      id="current.language"
+      values={Object {}}
+    />
+    : 
+  </h3>
+  <button
+    onClick={[Function]}
   >
-    <Connect(AboutPage)>
-      <AboutPage
-        dispatch={[Function]}
-        locale="en-GB"
-      >
-        <div>
-          <h3>
-            <FormattedMessage
-              defaultMessage="Current Language"
-              id="current.language"
-              values={Object {}}
-            >
-              <span>
-                Current Language
-              </span>
-            </FormattedMessage>
-            : 
-            en-GB
-          </h3>
-          <button
-            onClick={[Function]}
-          >
-            <FormattedMessage
-              defaultMessage="Change language"
-              id="about.change"
-              values={Object {}}
-            >
-              <span>
-                Change Language
-              </span>
-            </FormattedMessage>
-          </button>
-          <h4>
-            <FormattedMessage
-              defaultMessage="About Us"
-              id="about.us"
-              values={Object {}}
-            >
-              <span>
-                About Us
-              </span>
-            </FormattedMessage>
-          </h4>
-        </div>
-      </AboutPage>
-    </Connect(AboutPage)>
-  </Provider>
-</IntlProvider>
+    <FormattedMessage
+      defaultMessage="Change language"
+      id="about.change"
+      values={Object {}}
+    />
+  </button>
+  <h4>
+    <FormattedMessage
+      defaultMessage="About Us"
+      id="about.us"
+      values={Object {}}
+    />
+  </h4>
+</div>
 `;

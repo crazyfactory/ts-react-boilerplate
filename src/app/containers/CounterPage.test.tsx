@@ -2,8 +2,9 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {IAction} from "../redux/modules/baseModule";
 import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
-import {UnconnectedCounter} from "./CounterPage";
+import {mapStateToProps, UnconnectedCounter} from "./CounterPage";
 
+/* tslint:disable:no-empty jsx-no-lambda */
 describe("<Counter />", () => {
   it("matches snapshot when count > 0", () => {
     const component = shallow(<UnconnectedCounter count={10} dispatch={jest.fn()} />);
@@ -15,9 +16,14 @@ describe("<Counter />", () => {
     expect(component).toMatchSnapshot();
   });
 
+  it("maps state to props correctly", () => {
+    const props = mapStateToProps({counter: {payload: {count: 5}}});
+    expect(props.count).toEqual(5);
+  });
+
   it("calls handleIncrement() when increment button is clicked", () => {
     const spy = jest.spyOn(UnconnectedCounter.prototype, "handleIncrement");
-    const shallowComponent = shallow(<UnconnectedCounter dispatch={jest.fn()} count={0}/>);
+    const shallowComponent = shallow(<UnconnectedCounter dispatch={() => {}} count={0}/>);
 
     expect(shallowComponent.find({name: "incBtn"})).toBeDefined();
     expect(spy).not.toHaveBeenCalled();
@@ -27,7 +33,7 @@ describe("<Counter />", () => {
 
   it("calls handleDecrement() when decrement button is clicked", () => {
     const spy = jest.spyOn(UnconnectedCounter.prototype, "handleDecrement");
-    const shallowComponent = shallow(<UnconnectedCounter dispatch={jest.fn()} count={0}/>);
+    const shallowComponent = shallow(<UnconnectedCounter dispatch={() => {}} count={0}/>);
 
     expect(shallowComponent.find({name: "decBtn"})).toBeDefined();
     expect(spy).not.toHaveBeenCalled();

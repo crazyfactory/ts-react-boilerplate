@@ -1,14 +1,16 @@
 import {shallow} from "enzyme";
 import * as React from "react";
+import {IState} from "../redux/modules/baseModule";
+import {ILanguage} from "../redux/modules/languageModule";
 import {
-  aol, email, matchedPwd, maxLength, minLength,
-  minValue, numberType, required, tooOld, UnconnectedCustomField
-} from "../helpers/FormHelper";
+aol, email, mapStateToProps, matchedPwd, maxLength, minLength,
+minValue, numberType, required, tooOld, UnconnectedCustomField
+} from "./FormHelper";
 
 describe("FormHelper", () => {
 
   describe("<CustomField />", () => {
-    it("without error and warning", () => {
+    it("matches snapshot without error and warning", () => {
       const props = {
         defaultMessage: "Username",
         languageData: {
@@ -27,7 +29,7 @@ describe("FormHelper", () => {
       expect(component).toMatchSnapshot();
     });
 
-    it("with error when active or touched", () => {
+    it("matches snapshot with error when active or touched", () => {
       const props = {
         defaultMessage: "Username",
         languageData: {
@@ -46,7 +48,7 @@ describe("FormHelper", () => {
       expect(component).toMatchSnapshot();
     });
 
-    it("with warning when active or touched", () => {
+    it("matches snapshot with warning when active or touched", () => {
       const props = {
         defaultMessage: "Username",
         languageData: {
@@ -65,7 +67,7 @@ describe("FormHelper", () => {
       expect(component).toMatchSnapshot();
     });
 
-    it("placeholder falls back to defaultMessage when languageData key does not exist", () => {
+    it("matches snapshot when placeholder falls back to defaultMessage when languageData key does not exist", () => {
       const props = {
         defaultMessage: "Username",
         languageData: {},
@@ -80,6 +82,17 @@ describe("FormHelper", () => {
       };
       const component = shallow(<UnconnectedCustomField {...props} />);
       expect(component).toMatchSnapshot();
+    });
+
+    it("maps state to props correctly", () => {
+      const language: IState<ILanguage> = {
+        payload: {
+          languageData: {greeting: "Hello!"},
+          locale: "en-GB"
+        }
+      };
+      const props = mapStateToProps({language});
+      expect(props.languageData).toEqual(language.payload.languageData);
     });
   });
 
