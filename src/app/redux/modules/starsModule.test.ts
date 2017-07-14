@@ -1,73 +1,71 @@
-import { expect } from "chai";
-import { IStarsAction } from "models/starsModel";
-import { fetchMock, mockStore } from "../../helpers/TestHelper";
-import * as stars from "./starsModule";
+import {IAction, IState} from "./baseModule";
+import {IStars, LOAD_STARS, loadStars, requestType, starsReducer} from "./starsModule";
 
-/** Mock Data */
-const githubResponse = {
-  stargazers_count: 999
-};
-
-const errResponse = {
-  message: "ERROR :-O"
-};
-
-/** Stargazers Module */
-describe("Stars Module", () => {
-
-  /** Action Creators */
-  describe("Action Creators", () => {
-
-    describe("Get Stars (Async)", () => {
-
-      afterEach(() => {
-        fetchMock.restore();
-      });
-
-      /** 200 */
-      it("dispatches Request and Success Actions on OK requests", (done) => {
-
-        fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
-          body: githubResponse,
-          status: 200
-        });
-
-        const expectedActions: IStarsAction[] = [
-          { type: stars.GET_REQUEST },
-          { type: stars.GET_SUCCESS, payload: { count: githubResponse.stargazers_count } }
-        ];
-
-        const store = mockStore({});
-
-        store.dispatch(stars.getStars())
-          .then(() => expect(store.getActions()).to.eql(expectedActions))
-          .then(() => done())
-          .catch((err) => done(err));
-      });
-
-      /** 400 */
-      it("dispatches Failure on failed requests", (done) => {
-
-        fetchMock.mock("https://api.github.com/repos/barbar/vortigern", {
-          body: errResponse,
-          status: 400
-        });
-
-        const expectedActions: IStarsAction[] = [
-          { type: stars.GET_REQUEST },
-          { type: stars.GET_FAILURE, payload: { message: errResponse } }
-        ];
-
-        const store = mockStore({});
-
-        store.dispatch(stars.getStars())
-          .then(() => expect(store.getActions()).to.eql(expectedActions))
-          .then(() => done())
-          .catch((err) => done(err));
-      });
-
+describe("starsModule", () => {
+  describe("reducer", () => {
+    it("returns initial state when state and action type are undefined", () => {
+      const initialState: IState<IStars> = {
+        isFetching: true,
+        payload: {
+          stargazers_count: -1
+        }
+      };
+      expect(starsReducer(undefined, {type: undefined})).toEqual(initialState);
     });
 
+    it("handles action of type LOAD_STARS", () => {
+      const action = {type: LOAD_STARS};
+      const stateBeforeAndAfter: IState<IStars> = {isFetching: false, payload: {stargazers_count: 100}};
+      expect(starsReducer(stateBeforeAndAfter, action)).toEqual(stateBeforeAndAfter);
+    });
+
+    it("handles action of type STARS_REQUEST", () => {
+      const action = {type: requestType.PENDING};
+      const stateBefore: IState<IStars> = {isFetching: false, payload: null};
+      const stateAfter: IState<IStars> = {isFetching: true, payload: null};
+      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it("handles action of type STARS_SUCCESS", () => {
+      const action: IAction<IStars> = {
+        payload: {
+          stargazers_count: 99
+        },
+        type: requestType.SUCCESS
+      };
+      const stateBefore: IState<IStars> = {isFetching: true, payload: null};
+      const stateAfter: IState<IStars> = {
+        isFetching: false,
+        payload: {
+          stargazers_count: 99
+        }
+      };
+      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it("handles action of type STARS_FAILURE", () => {
+      const action: IAction<IStars> = {type: requestType.FAILURE, message: "error!"};
+      const stateBefore: IState<IStars> = {isFetching: true, payload: null};
+      const stateAfter: IState<IStars> = {error: true, isFetching: false, message: "error!", payload: null};
+      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+    });
+
+    it("handles actions with unknown type", () => {
+      const action: IAction<IStars> = {type: ""};
+      const stateBefore: IState<IStars> = {isFetching: false, payload: null};
+      const stateAfter: IState<IStars> = {isFetching: false, payload: null};
+      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+    });
   });
 
+  describe("action creator", () => {
+    describe("loadStars()", () => {
+      it("creates correct action", () => {
+        const expectedValue: IAction<IStars> = {
+          type: LOAD_STARS
+        };
+        expect(loadStars()).toEqual(expectedValue);
+      });
+    });
+  });
 });

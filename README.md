@@ -19,16 +19,17 @@ This boilerplate uses the following libraries and tools:
 #### Core
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://github.com/facebook/react) & [React DOM](https://github.com/facebook/react) for views.
-- [React Router](https://github.com/reactjs/react-router) to handle in-app routing.
+- [Router5](https://github.com/router5) to handle in-app routing.
 - [Redux](https://github.com/reactjs/redux) for managing application state.
 - [React-Redux](https://github.com/reactjs/react-redux) to use React-Redux bindings.
-- [React-Router-Redux](https://github.com/reactjs/react-router-redux) to keep application state sync with route changes.
+- [React-Router5](https://github.com/router5) & [Redux-Router5](https://github.com/router5) integrate router5 with react and redux
 
 #### Utilities
 - [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
-- [Redux Thunk](https://github.com/gaearon/redux-thunk) for dispatching async actions.
-- [Redux Connect](https://github.com/makeomatic/redux-connect) for resolving async props in react-router.
+- [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
 - [React Helmet](https://github.com/nfl/react-helmet)
+- [RavenJS](https://github.com/getsentry/raven-js) for capturing exceptions during run time
+- [Raven-for-Redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
@@ -56,44 +57,38 @@ This boilerplate uses the following libraries and tools:
 - [Chalk](https://github.com/chalk/chalk) for colored terminal logs.
 
 #### Testing
-- [Karma](https://github.com/karma-runner/karma) as test runner with following plugins
-  - [Karma-Webpack](https://github.com/webpack/karma-webpack)
-  - [Karma-Typescript](https://github.com/monounity/karma-typescript)
-  - [Karma-Mocha](https://github.com/karma-runner/karma-mocha)
-  - [Karma-Chai](https://github.com/xdissent/karma-chai)
-  - [Karma-Coverage](https://github.com/karma-runner/karma-coverage)
-  - [Karma-PhantomJS Launcher](https://github.com/karma-runner/karma-phantomjs-launcher)
-- [Mocha](https://github.com/mochajs/mocha) as testing framework.
-- [Chai](https://github.com/chaijs/chai) as assertion library.
+- [Jest](https://github.com/facebook/jest) as test runner.
+- [TS Jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
-- [Chai Enzyme](https://github.com/producthunt/chai-enzyme) for asserting React Components.
-- [Fetch Mock](https://github.com/wheresrhys/fetch-mock) for testing async actions.
-- [Redux Mock Store](https://github.com/arnaudbenard/redux-mock-store) for creating mock stores.
+- [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
 
 ## Directory Structure
 ```bash
 .
 ├── build                       # Built, ready to serve app.
 ├── config                      # Root folder for configurations.
-│   ├── test                    # Test configurations.
 │   ├── types                   # Global type definitions, written by us.
 │   ├── webpack                 # Webpack configurations.
-│   └── main.js                 # Generic App configurations.
+│   ├── main.js                 # Generic App configurations.
+│   └── main.local.js           # Local App configurations.
 ├── node_modules                # Node Packages.
 ├── src                         # Source code.
 │   ├── app                     # App folder.
 │   │ ├── components            # React Components.
 │   │ ├── containers            # React/Redux Containers.
 │   │ ├── helpers               # Helper Functions & Components.
+|   | ├── images                # Images folder.
 │   │ ├── redux                 # Redux related code aka data layer of the app.
 │   │ │   ├── modules           # Redux modules.   
 │   │ │   ├── reducers.ts       # Main reducers file to combine them.  
-│   │ │   └── store.ts          # Redux store, contains global app state.    
-│   │ └── routes.tsx            # Routes.
+│   │ │   └── configureStore.ts # Redux store, contains global app state.    
+│   │ ├── routes                # Routes.
+│   │ └── sagas                 # Saga files.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
 │   └── server.tsx              # Entry point for server side rendering.
+├── translations                # For json translations.
 ├── .babelrc                    # babel config.
 ├── .dockerignore               # Tells docker which files to ignore.
 ├── .editorconfig               # Configuration for editors.
@@ -102,6 +97,7 @@ This boilerplate uses the following libraries and tools:
 ├── Dockerfile                  # Dockerfile.
 ├── LICENSE                     # License file
 ├── package.json                # Package configuration.
+├── package-lock.json           # Package lock
 ├── README.md                   # This file
 ├── tsconfig.json               # TypeScript transpiler configuration.
 ├── tslint.json                 # Configures tslint.
@@ -144,6 +140,20 @@ $ npm test
 ```
 
 For Windows users, we recommend using the shortcuts instead of setting environment variables because they work a little different on Windows.
+
+#### Raven
+Create main.local.js in config folder and export an object that has `sentry` key like so:
+```
+module.exports = {
+  sentry: {
+    dsn: YOUR_DSN,
+    release: YOUR_RELEASE_VERSION
+  }
+  
+  // other configs
+  ...
+}
+```
 
 ## Credits
 

@@ -1,35 +1,53 @@
 import * as e6p from "es6-promise";
 (e6p as any).polyfill();
 import "isomorphic-fetch";
-
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-const { Router, browserHistory } = require("react-router");
-import { syncHistoryWithStore } from "react-router-redux";
-const { ReduxAsyncConnect } = require("redux-connect");
-import "isomorphic-fetch";
-import { setStylesTarget } from "typestyle";
-import { configureStore } from "./app/redux/configureStore";
-import routes from "./app/routes/routes";
+import {Provider} from "react-redux";
+import {RouterProvider} from "react-router5";
+import {setStylesTarget} from "typestyle";
 
-const store = configureStore(
-  browserHistory,
-  window.__INITIAL_STATE__
-);
-const history = syncHistoryWithStore(browserHistory, store);
-const connectedCmp = (props) => <ReduxAsyncConnect {...props} />;
+import {App} from "./app/containers";
+import {configureStore} from "./app/redux/configureStore";
+import {configureRouter} from "./app/routes/configureRouter";
+import rootSaga from "./app/sagas/rootSaga";
+
+const appConfig = require("../config/main");
+
+const ReactHotLoader = appConfig.env !== "production"
+  ? require("react-hot-loader").AppContainer
+  : ({ children }) => React.Children.only(children);
+
+const router = configureRouter();
+const store = configureStore(router, window.__INITIAL_STATE__);
+router.start();
+store.runSaga(rootSaga);
 
 ReactDOM.render(
-  <Provider store={store} key="provider">
-    <Router
-      history={history}
-      render={connectedCmp}
-    >
-      {routes}
-    </Router>
-  </Provider>,
+  <ReactHotLoader>
+    <Provider store={store} key="provider">
+      <RouterProvider router={router}>
+        <App/>
+      </RouterProvider>
+    </Provider>
+  </ReactHotLoader>,
   document.getElementById("app")
 );
 
 setStylesTarget(document.getElementById("styles-target"));
+
+if ((module as any).hot) {
+  (module as any).hot.accept("./app/containers", () => {
+    const {App} = require("./app/containers");
+    ReactDOM.render(
+      <ReactHotLoader>
+        <Provider store={store}>
+          <RouterProvider router={router}>
+            <App/>
+          </RouterProvider>
+        </Provider>
+      </ReactHotLoader>,
+      document.getElementById("app")
+    );
+  });
+}

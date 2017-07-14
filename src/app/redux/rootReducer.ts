@@ -1,15 +1,16 @@
-import { routerReducer } from "react-router-redux";
-import { combineReducers } from "redux";
-import { IStore } from "./IStore";
-import { counterReducer } from "./modules/counterModule";
-import { starsReducer } from "./modules/starsModule";
-
-const { reducer } = require("redux-connect");
+import {combineReducers} from "redux";
+import {reducer as formReducer} from "redux-form";
+import {router5Reducer} from "redux-router5";
+import {IStore} from "./IStore";
+import {counterReducer} from "./modules/counterModule";
+import {languageReducer} from "./modules/languageModule";
+import {starsReducer} from "./modules/starsModule";
 
 const rootReducer: Redux.Reducer<IStore> = combineReducers<IStore>({
   counter: counterReducer,
-  reduxAsyncConnect: reducer,
-  routing: routerReducer,
+  form: formReducer,
+  language: languageReducer,
+  router: router5Reducer,
   stars: starsReducer
 });
 

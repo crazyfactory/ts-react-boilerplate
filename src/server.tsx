@@ -1,28 +1,31 @@
-const appConfig = require("../config/main");
-
 import * as e6p from "es6-promise";
-import "isomorphic-fetch";
-
-import * as React from "react";
-import * as ReactDOMServer from "react-dom/server";
-
-import {Provider} from "react-redux";
-import {createMemoryHistory, match} from "react-router";
-import {syncHistoryWithStore} from "react-router-redux";
-import {configureStore} from "./app/redux/configureStore";
-import routes from "./app/routes/routes";
-
-import {Html} from "./app/containers";
 (e6p as any).polyfill();
-const { ReduxAsyncConnect, loadOnServer } = require("redux-connect");
-const manifest = require("../build/manifest.json");
+import "isomorphic-fetch";
+import * as React from "react";
+import {renderToString} from "react-dom/server";
+import {Provider} from "react-redux";
+import {RouterProvider} from "react-router5";
+
+import {App, Html} from "./app/containers";
+import {LanguageHelper} from "./app/helpers/LanguageHelper";
+import {configureStore} from "./app/redux/configureStore";
+import {ILanguage} from "./app/redux/modules/languageModule";
+import {configureRouter} from "./app/routes/configureRouter";
+import rootSaga from "./app/sagas/rootSaga";
 
 const express = require("express");
 const path = require("path");
 const Chalk = require("chalk");
 const favicon = require("serve-favicon");
 
+const appConfig = require("../config/main");
+const manifest = require("../build/manifest.json");
 const app = express();
+const translationHandler = (req, res) => {
+  const languageHelper = new LanguageHelper(req.params.lang);
+  const lang: ILanguage = {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferredLanguage()};
+  res.json(lang);
+};
 
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -37,7 +40,7 @@ if (process.env.NODE_ENV !== "production") {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
     quiet: true,
-    stats: { colors: true }
+    stats: {colors: true}
   }));
 
   app.use(require("webpack-hot-middleware")(webpackCompiler));
@@ -47,41 +50,86 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
+app.get("/translation/:lang", translationHandler);
+
 app.get("*", (req, res) => {
-  const location = req.url;
-  const memoryHistory = createMemoryHistory(req.originalUrl);
-  const store = configureStore(memoryHistory);
-  const history = syncHistoryWithStore(memoryHistory, store);
 
-  match({ history, routes, location },
-        (error, redirectLocation, renderProps) => {
+  if (!appConfig.ssr) {
+    res.sendFile(path.resolve("./build/index.html"), {}, (error) => {
       if (error) {
-        res.status(500).send(error.message);
-      } else if (redirectLocation) {
-        res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      } else if (renderProps) {
-        const asyncRenderData = Object.assign({}, renderProps, { store });
-
-        loadOnServer(asyncRenderData).then(() => {
-          const markup = ReactDOMServer.renderToString(
-            <Provider store={store} key="provider">
-              <ReduxAsyncConnect {...renderProps} />
-            </Provider>
-          );
-          if (appConfig.ssr) {
-            res.status(200).send(renderHTML(markup, store));
-          }else {
-            res.sendFile(path.resolve("./build/index.html"), {}, (err) => {
-              if (err) {
-                console.error(err);
-              }
-            });
-          }
-        });
-      } else {
-        res.status(404).send("Not Found?");
+        console.error(error.message);
       }
     });
+    return;
+  }
+
+  const router = configureRouter();
+  router.start(req.url, (error, routeState) => {
+    if (error) {
+      res.status(500).send(error.message);
+      return;
+    }
+
+    const languageHelper = new LanguageHelper(req.headers["accept-language"]);
+    const store = configureStore(router, {
+      language: {
+        payload: {
+          languageData: languageHelper.getRequestLanguageData(),
+          locale: languageHelper.getPreferredLanguage()
+        }
+      },
+      router: {
+        route: routeState
+      }
+    });
+
+    store.runSaga(rootSaga).done.then(() => {
+      // deep clone state because store will be changed during the second render in componentWillMount
+      const initialState = JSON.parse(JSON.stringify(store.getState()));
+
+      // redux-form, not aware of ssr, will make a duplication of registeredFields on client
+      initialState.form = {};
+
+      // tslint:disable-next-line
+      console.time("second render");
+
+      // render again from the initial data
+      const markup = renderToString(
+        <Provider store={store} key="provider">
+          <RouterProvider router={router}>
+            <App/>
+          </RouterProvider>
+        </Provider>
+      );
+
+      // tslint:disable-next-line
+      console.timeEnd("second render");
+
+      res.status(200).send(renderHTML(markup, initialState));
+
+    }).catch((err: any) => {
+      console.error(err.message);
+      res.status(500).send(err.message);
+    });
+
+    // tslint:disable-next-line
+    console.time("first render");
+
+    // first render to activate componentWillMount to dispatch actions for loading initial data
+    renderToString(
+      <Provider store={store} key="provider">
+        <RouterProvider router={router}>
+          <App/>
+        </RouterProvider>
+      </Provider>
+    );
+
+    // tslint:disable-next-line
+    console.timeEnd("first render");
+
+    // dispatching END will cause the root saga to terminate after all fired tasks terminate
+    store.close();
+  });
 });
 
 app.listen(appConfig.port, appConfig.host, (err) => {
@@ -94,9 +142,9 @@ app.listen(appConfig.port, appConfig.host, (err) => {
   }
 });
 
-function renderHTML(markup: string, store: any): string {
-  const html = ReactDOMServer.renderToString(
-    <Html markup={markup} manifest={manifest} store={store} />
+function renderHTML(markup: string, initialState: any): string {
+  const html = renderToString(
+    <Html markup={markup} manifest={manifest} initialState={initialState}/>
   );
 
   return `<!doctype html> ${html}`;

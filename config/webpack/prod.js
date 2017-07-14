@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
-
+var utils = require('./utils');
 var config = {
   bail: true,
 
@@ -17,13 +17,13 @@ var config = {
       './src/vendor/main.ts',
       'react',
       'react-dom',
-      'react-router',
       'react-helmet',
       'react-redux',
-      'react-router-redux',
+      'react-router5',
+      'redux-router5',
       'redux',
-      'redux-connect',
-      'redux-thunk'
+      'redux-saga',
+      'router5',
     ]
   },
 
@@ -34,14 +34,15 @@ var config = {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         enforce: 'pre',
         test: /\.tsx?$/,
         loader: 'tslint-loader'
       },
       {
         test: /\.tsx?$/,
-        loader: 'react-hot-loader!awesome-typescript-loader'
+        loader: 'awesome-typescript-loader'
       },
       {
         test: /\.jsx$/,
@@ -102,22 +103,10 @@ var config = {
   ]
 };
 
-const copySync = (src, dest, overwrite) => {
-  if (overwrite && fs.existsSync(dest)) {
-    fs.unlinkSync(dest);
-  }
-  const data = fs.readFileSync(src);
-  fs.writeFileSync(dest, data);
-}
+utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
 
-const createIfDoesntExist = dest => {
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest);
-  }
-}
-
-createIfDoesntExist('./build');
-createIfDoesntExist('./build/public');
-copySync('./src/favicon.ico', './build/public/favicon.ico', true);
+utils.createIfDoesntExist('./build');
+utils.createIfDoesntExist('./build/public');
+utils.copySync('./src/favicon.ico', './build/public/favicon.ico', true);
 
 module.exports = config;

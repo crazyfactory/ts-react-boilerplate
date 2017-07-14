@@ -1,12 +1,11 @@
-import { chai, renderComponent } from "../helpers/TestHelper";
-import { Header, Styles } from "./Header";
+import {shallow} from "enzyme";
+import * as React from "react";
+import {Header} from "./Header";
 
 describe("<Header />", () => {
+  const component = shallow(<Header />, {context: {router: {}}});
 
-    const component = renderComponent(Header);
-
-    it("Renders with correct style", () => {
-        chai.expect(component).to.have.className(Styles.nav);
-    });
-
+  it("matches snapshot", () => {
+    expect(component).toMatchSnapshot();
+  });
 });

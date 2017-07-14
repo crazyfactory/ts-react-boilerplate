@@ -1,6 +1,6 @@
 # Build Folder
 build
-
+config/main.local.js
 # Logs
 logs
 *.log
@@ -40,3 +40,4 @@ node_modules
 !.idea/runConfigurations/
 !.idea/inspectionProfiles/
 .awcache/
+.jest/cache/
