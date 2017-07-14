@@ -88,7 +88,7 @@
     "url-loader": "^0.5.7",
     "validate-commit-msg": "^2.12.1",
     "wallaby-webpack": "0.0.38",
-    "webpack": "^3.0.0",
+    "webpack": "^3.2.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.2.0",
     "webpack-hot-middleware": "^2.15.0",
