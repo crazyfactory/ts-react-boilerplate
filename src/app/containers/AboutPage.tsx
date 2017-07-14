@@ -5,7 +5,7 @@ import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
 import {switchLanguage} from "../redux/modules/languageModule";
 
-class About extends React.Component<IStateToProps & IDispatchToProps, null> {
+class AboutPage extends React.Component<IStateToProps & IDispatchToProps, null> {
   constructor() {
     super();
     this.switchLanguage = this.switchLanguage.bind(this);
@@ -20,7 +20,7 @@ class About extends React.Component<IStateToProps & IDispatchToProps, null> {
     return (
       <div>
         <h3><FormattedMessage id="current.language" defaultMessage="Current Language" />: {this.props.locale}</h3>
-        <button onClick={this.switchLanguage}>Change Language</button>
+        <button onClick={this.switchLanguage}><FormattedMessage id="about.change" defaultMessage="Change language"/></button>
         <h4><FormattedMessage id="about.us" defaultMessage="About Us" /></h4>
       </div>
     );
@@ -31,8 +31,8 @@ interface IStateToProps {
   locale: string;
 }
 
-const mapStateToProps = (state: IStore) => ({
+const mapStateToProps = (state: Partial<IStore>) => ({
   locale: state.language.payload.locale
 });
-const connectedAbout = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(About);
-export {About as UnconnectedAbout, connectedAbout as About};
+const connectedAbout = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(AboutPage);
+export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage, mapStateToProps};

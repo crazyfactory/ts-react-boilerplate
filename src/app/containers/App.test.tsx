@@ -1,12 +1,61 @@
-import {renderComponent} from "../helpers/TestHelper";
-import {App, Styles} from "./App";
+import {shallow} from "enzyme";
+import * as React from "react";
+import {IntlProvider} from "react-intl";
+import {State as IRouteState} from "router5";
+import {IState} from "../redux/modules/baseModule";
+import {ILanguage} from "../redux/modules/languageModule";
+import {mapStateToProps, styles, UnconnectedApp} from "./App";
 
 describe("<App />", () => {
+  const language: IState<ILanguage> = {
+    payload: {
+      languageData: {greeting: "Hello!"},
+      locale: "en-GB"
+    }
+  };
+  const route: IRouteState = {
+    name: "home",
+    params: {},
+    path: "/"
+  };
+  const routeUnavailable: IRouteState = {
+    name: "unavailable",
+    params: {},
+    path: "/"
+  };
 
-  const component = renderComponent(App, {language: {payload: {locale: "en"}}});
-
-  it("Renders with correct style", () => {
-    expect(component.find("section")).toHaveClassName(Styles.container);
+  it("matches snapshot", () => {
+    const component = shallow(<UnconnectedApp language={language} route={route}/>);
+    expect(component).toMatchSnapshot();
   });
 
+  it("maps state to props correctly", () => {
+    const props = mapStateToProps({
+      language,
+      router: {route}
+    });
+    expect(props.language).toEqual(language);
+    expect(props.route).toEqual(route);
+  });
+
+  it("renders with correct style", () => {
+    const component = shallow(<UnconnectedApp language={language} route={route}/>);
+    expect(component.find("section")).toHaveClassName(styles.container);
+  });
+
+  it("renders IntlProvider with correct props", () => {
+    const component = shallow(<UnconnectedApp language={language} route={route} />);
+    expect(component.find(IntlProvider)).toHaveProp("locale", language.payload.locale);
+    expect(component.find(IntlProvider)).toHaveProp("messages", language.payload.languageData);
+  });
+
+  it("renders Not Found when route is null", () => {
+    const component = shallow(<UnconnectedApp language={language} route={null} />);
+    expect(component.find("div")).toHaveText("Not found");
+  });
+
+  it("renders Not Found when segment is undefined", () => {
+    const component = shallow(<UnconnectedApp language={language} route={routeUnavailable} />);
+    expect(component.find("div")).toHaveText("Not found");
+  });
 });

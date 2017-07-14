@@ -1,12 +1,11 @@
-import {renderComponent} from "../helpers/TestHelper";
-import {Header, Styles} from "./Header";
+import {shallow} from "enzyme";
+import * as React from "react";
+import {Header} from "./Header";
 
 describe("<Header />", () => {
+  const component = shallow(<Header />, {context: {router: {}}});
 
-  const component = renderComponent(Header);
-
-  it("Renders with correct style", () => {
-    expect(component.find("nav")).toHaveClassName(Styles.nav);
+  it("matches snapshot", () => {
+    expect(component).toMatchSnapshot();
   });
-
 });

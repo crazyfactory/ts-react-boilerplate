@@ -3,7 +3,7 @@ import {ILanguage, languageReducer, requestType, SET_LANGUAGE, SWITCH_LANGUAGE, 
 
 describe("languageModule", () => {
   describe("reducer", () => {
-    it("returns initial state with default language", () => {
+    it("returns initial state when state and action type are undefined", () => {
       const initialState: IState<ILanguage> = {
         isFetching: false,
         payload: {

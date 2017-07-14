@@ -3,7 +3,7 @@ import {IStars, LOAD_STARS, loadStars, requestType, starsReducer} from "./starsM
 
 describe("starsModule", () => {
   describe("reducer", () => {
-    it("returns initial state with default language", () => {
+    it("returns initial state when state and action type are undefined", () => {
       const initialState: IState<IStars> = {
         isFetching: true,
         payload: {
@@ -11,6 +11,12 @@ describe("starsModule", () => {
         }
       };
       expect(starsReducer(undefined, {type: undefined})).toEqual(initialState);
+    });
+
+    it("handles action of type LOAD_STARS", () => {
+      const action = {type: LOAD_STARS};
+      const stateBeforeAndAfter: IState<IStars> = {isFetching: false, payload: {stargazers_count: 100}};
+      expect(starsReducer(stateBeforeAndAfter, action)).toEqual(stateBeforeAndAfter);
     });
 
     it("handles action of type STARS_REQUEST", () => {

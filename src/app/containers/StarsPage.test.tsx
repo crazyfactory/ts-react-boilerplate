@@ -1,38 +1,29 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {renderComponent} from "../helpers/TestHelper";
-import {IStore} from "../redux/IStore";
-import {IAction} from "../redux/modules/baseModule";
+import {IAction, IState} from "../redux/modules/baseModule";
 import {IStars, LOAD_STARS} from "../redux/modules/starsModule";
-import {Stars, UnconnectedStars} from "./Stars";
+import {mapStateToProps, UnconnectedStars} from "./StarsPage";
 
 describe("<Stars />", () => {
-  it("renders stars", () => {
-    const state: Partial<IStore> = {
-      stars: {
-        isFetching: false,
-        payload: {
-          stargazers_count: 61
-        }
-      }
-    };
-
-    const component = renderComponent(Stars, state);
-    expect(component.find("div")).toHaveText("61");
+  it("matches snapshot when rendering stars", () => {
+    const component = shallow(<UnconnectedStars isFetching={false} stargazers_count={61} dispatch={jest.fn()} />);
+    expect(component).toMatchSnapshot();
   });
 
-  it("renders fetching", () => {
-    const state: Partial<IStore> = {
-      stars: {
-        isFetching: true,
-        payload: {
-          stargazers_count: -1
-        }
+  it("matches snapshot when rendering fetching text", () => {
+    const component = shallow(<UnconnectedStars isFetching={true} stargazers_count={-1} dispatch={jest.fn()} />);
+    expect(component).toMatchSnapshot();
+  });
+
+  it("maps state to props correctly", () => {
+    const stars: IState<IStars> = {
+      isFetching: false,
+      payload: {
+        stargazers_count: 100
       }
     };
-
-    const component = renderComponent(Stars, state);
-    expect(component.find("div")).toHaveText("Fetching Stars..");
+    const props = mapStateToProps({stars});
+    expect(props).toEqual({isFetching: false, stargazers_count: 100});
   });
 
   it("dispatches LOAD_STARS action before rendering if stargazers_count === -1", () => {

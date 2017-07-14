@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Counter /> matches snapshot when count <= 0 1`] = `
+<div>
+  <h4>
+    <FormattedMessage
+      defaultMessage="Counter"
+      id="counter"
+      values={Object {}}
+    />
+  </h4>
+  <button
+    name="incBtn"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      defaultMessage="Increment"
+      id="counter.increment"
+      values={Object {}}
+    />
+  </button>
+  <button
+    disabled={true}
+    name="decBtn"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      defaultMessage="Decrement"
+      id="counter.decrement"
+      values={Object {}}
+    />
+  </button>
+  <p>
+    0
+  </p>
+</div>
+`;
+
+exports[`<Counter /> matches snapshot when count > 0 1`] = `
+<div>
+  <h4>
+    <FormattedMessage
+      defaultMessage="Counter"
+      id="counter"
+      values={Object {}}
+    />
+  </h4>
+  <button
+    name="incBtn"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      defaultMessage="Increment"
+      id="counter.increment"
+      values={Object {}}
+    />
+  </button>
+  <button
+    disabled={false}
+    name="decBtn"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      defaultMessage="Decrement"
+      id="counter.decrement"
+      values={Object {}}
+    />
+  </button>
+  <p>
+    10
+  </p>
+</div>
+`;

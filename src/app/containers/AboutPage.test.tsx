@@ -1,21 +1,31 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {renderComponent} from "../helpers/TestHelper";
-import {IAction} from "../redux/modules/baseModule";
+import {IAction, IState} from "../redux/modules/baseModule";
 import {ILanguage, SWITCH_LANGUAGE} from "../redux/modules/languageModule";
-import {About, UnconnectedAbout} from "./About";
+import {mapStateToProps, UnconnectedAbout} from "./AboutPage";
 
-describe("<About />", () => {
+/* tslint:disable:no-empty jsx-no-lambda */
+describe("<AboutPage />", () => {
+  const language: IState<ILanguage> = {
+    payload: {
+      languageData: {greeting: "Hello!"},
+      locale: "en-GB"
+    }
+  };
 
-  const component = renderComponent(About, {language: {payload: {locale: "en-GB"}}});
+  it("matches snapshot", () => {
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
+    expect(shallowComponent).toMatchSnapshot();
+  });
 
-  it("renders header with text", () => {
-    expect(component.find("h4 FormattedMessage")).toHaveProp("id", "about.us");
+  it("maps state to props correctly", () => {
+    const props = mapStateToProps({language});
+    expect(props.locale).toEqual("en-GB");
   });
 
   it("calls switchLanguage() when button is clicked", () => {
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
 
     expect(shallowComponent.find("button")).toBeDefined();
     expect(spy).not.toHaveBeenCalled();

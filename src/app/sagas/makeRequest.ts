@@ -1,6 +1,6 @@
 import {Promise} from "es6-promise";
 import {put} from "redux-saga/effects";
-const { call } = require("redux-saga/effects");
+const {call} = require("redux-saga/effects");
 import {IRequestType} from "../helpers/promiseReducer";
 
 export default function* makeRequest(requestType: IRequestType, apiMethod: (payload: any) => Promise<any>, ...args: any[]): any {

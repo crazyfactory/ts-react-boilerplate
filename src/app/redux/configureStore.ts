@@ -1,26 +1,27 @@
-import {History} from "history";
-const appConfig = require("../../../config/main");
-const localConfig = require("../../../config/main.local");
 import * as createRavenMiddleware from "raven-for-redux";
 import * as Raven from "raven-js";
-import {routerMiddleware} from "react-router-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 import {createLogger} from "redux-logger";
+import {router5Middleware} from "redux-router5";
 import createSagaMiddleware, { END } from "redux-saga";
+import {Router} from "router5";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
 
-interface IExtendedStore extends Redux.Store<IStore> {
+const appConfig = require("../../../config/main");
+const localConfig = require("../../../config/main.local");
+
+interface IExtendedStore extends Redux.Store<Partial<IStore>> {
   runSaga: (rootSaga: any) => any;
   close: () => void;
 }
 
-export function configureStore(history: History, initialState?: IStore): IExtendedStore {
+export function configureStore(router: Router, initialState?: Partial<IStore>): IExtendedStore {
 
   const mergedConfig = {...appConfig, ...localConfig};
   const sagaMiddleware = createSagaMiddleware();
   const middlewares: Redux.Middleware[] = [
-    routerMiddleware(history),
+    router5Middleware(router),
     sagaMiddleware
   ];
 

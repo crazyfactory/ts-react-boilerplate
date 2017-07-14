@@ -17,12 +17,13 @@ var config = {
       './src/vendor/main.ts',
       'react',
       'react-dom',
-      'react-router',
       'react-helmet',
       'react-redux',
-      'react-router-redux',
+      'react-router5',
+      'redux-router5',
       'redux',
-      'redux-saga'
+      'redux-saga',
+      'router5',
     ]
   },
 
@@ -41,7 +42,7 @@ var config = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'react-hot-loader!awesome-typescript-loader'
+        loader: 'awesome-typescript-loader'
       },
       {
         test: /\.jsx$/,
