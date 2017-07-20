@@ -63,7 +63,7 @@
     "@types/redux-devtools": "^3.0.38",
     "@types/redux-devtools-dock-monitor": "^1.1.31",
     "@types/redux-devtools-log-monitor": "^1.0.31",
-    "@types/redux-form": "^6.6.3",
+    "@types/redux-form": "^7.0.0",
     "@types/webpack": "^3.0.0",
     "awesome-typescript-loader": "^3.0.0-beta.18",
     "babel-core": "^6.22.1",
