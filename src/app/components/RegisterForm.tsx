@@ -20,7 +20,7 @@ interface IProps {
 }
 
 /*tslint:disable:jsx-no-multiline-js*/
-class RegisterForm extends React.Component<InjectedFormProps<IFormData, IProps> & IProps, null> {
+class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, IProps>> & IProps, null> {
   public render(): JSX.Element {
     const {handleSubmit, pristine, reset, submitting} = this.props;
 
