@@ -1,10 +1,10 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
-import { Field, FormProps } from "redux-form";
+import {InjectedFormProps} from "redux-form";
 const { reduxForm } = require("redux-form");
 import {
-  aol, CustomField, email, matchedPwd, maxLength, minLength,
-  minValue, numberType, required, tooOld
+  aol, CustomField, email, FieldExtra, matchedPwd,
+  maxLength, minLength, minValue, numberType, required, tooOld
 } from "../helpers/FormHelper";
 
 export interface IFormData {
@@ -20,13 +20,13 @@ interface IProps {
 }
 
 /*tslint:disable:jsx-no-multiline-js*/
-class RegisterForm extends React.Component<FormProps<IFormData, IProps, null> & IProps, null> {
+class RegisterForm extends React.Component<InjectedFormProps<IFormData, IProps> & IProps, null> {
   public render(): JSX.Element {
     const {handleSubmit, pristine, reset, submitting} = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
-        <Field
+        <FieldExtra
           name="username"
           type="text"
           component={CustomField}
@@ -34,7 +34,7 @@ class RegisterForm extends React.Component<FormProps<IFormData, IProps, null> & 
           defaultMessage="Username"
           validate={[required("username.required", "Username is required"), maxLength("characters.max", "Must be {max} characters or less")(15)]}
         />
-        <Field
+        <FieldExtra
           name="password"
           type="password"
           component={CustomField}
@@ -42,7 +42,7 @@ class RegisterForm extends React.Component<FormProps<IFormData, IProps, null> & 
           defaultMessage="Password"
           validate={[required("password.required", "Password is required"), minLength("characters.min", "Must be {min} characters or more")(8)]}
         />
-        <Field
+        <FieldExtra
           name="confirmPassword"
           type="password"
           component={CustomField}
@@ -50,7 +50,7 @@ class RegisterForm extends React.Component<FormProps<IFormData, IProps, null> & 
           defaultMessage="Confirm Password"
           validate={[required("confirmpassword.required", "Please confirm your password"), matchedPwd("password.unmatched", "Passwords are not matched")]}
         />
-        <Field
+        <FieldExtra
           name="email"
           type="email"
           component={CustomField}
@@ -59,7 +59,7 @@ class RegisterForm extends React.Component<FormProps<IFormData, IProps, null> & 
           validate={email("email.invalid", "Invalid email format")}
           warn={aol("email.aol", "Really? You still use AOL for your email?")}
         />
-        <Field
+        <FieldExtra
           name="age"
           type="number"
           component={CustomField}
