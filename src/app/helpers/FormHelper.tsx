@@ -5,21 +5,6 @@ import {Field, GenericField, WrappedFieldInputProps, WrappedFieldMetaProps} from
 import {style} from "typestyle";
 import {IStore} from "../redux/IStore";
 
-interface IFlexWrappedFieldProps {
-  input?: Partial<WrappedFieldInputProps>;
-  meta?: Partial<WrappedFieldMetaProps>;
-}
-
-// While waiting for this pull request https://github.com/DefinitelyTyped/DefinitelyTyped/pull/17693,
-// we overrides meta as any for now
-interface IRenderFieldProps extends IFlexWrappedFieldProps {
-  defaultMessage: string;
-  languageId: string;
-  type?: string;
-}
-
-export const FieldExtra = Field as new () => GenericField<IRenderFieldProps>;
-
 export const required = (id, defaultMessage) => (value) => (value ? undefined : {id, defaultMessage});
 
 export const maxLength = (id, defaultMessage) => (max) => (value) => value && value.length > max ? {id, defaultMessage, values: {max}} : undefined;
@@ -60,7 +45,7 @@ const styles = {
 /*tslint:enable:object-literal-sort-keys*/
 
 /*tslint:disable:jsx-no-multiline-js*/
-class CustomField extends React.Component<IStateToProps & IRenderFieldProps, null> {
+class CustomField extends React.Component<IProps & IStateToProps & IFlexWrappedFieldProps, null> {
   public render(): JSX.Element {
     const {defaultMessage, input, languageId, type, meta: {active, touched, error, warning}} = this.props;
     return (
@@ -96,14 +81,27 @@ class CustomField extends React.Component<IStateToProps & IRenderFieldProps, nul
   }
 }
 
+interface IProps {
+  defaultMessage: string;
+  languageId: string;
+  type?: string;
+}
+
 interface IStateToProps {
   languageData: any;
 }
+
+interface IFlexWrappedFieldProps {
+  input?: Partial<WrappedFieldInputProps>;
+  meta?: Partial<WrappedFieldMetaProps>;
+}
+
+export const FieldForCustomField = Field as new () => GenericField<IProps>;
 
 const mapStateToProps = (state: Partial<IStore>) => ({
   languageData: state.language.payload.languageData
 });
 
-const ConnectedCustomField = connect<IStateToProps, null, IRenderFieldProps>(mapStateToProps, null)(CustomField);
+const ConnectedCustomField = connect<IStateToProps, null, IProps & IFlexWrappedFieldProps>(mapStateToProps, null)(CustomField);
 
 export {CustomField as UnconnectedCustomField, ConnectedCustomField as CustomField, mapStateToProps};
