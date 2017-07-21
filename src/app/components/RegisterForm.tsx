@@ -3,7 +3,7 @@ import {FormattedMessage} from "react-intl";
 import {InjectedFormProps} from "redux-form";
 const { reduxForm } = require("redux-form");
 import {
-  aol, CustomField, email, FieldForCustomField, matchedPwd,
+  aol, CustomField, CustomFieldRenderer, email, matchedPwd,
   maxLength, minLength, minValue, numberType, required, tooOld
 } from "../helpers/FormHelper";
 
@@ -26,7 +26,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
 
     return (
       <form onSubmit={handleSubmit}>
-        <FieldForCustomField
+        <CustomFieldRenderer
           name="username"
           type="text"
           component={CustomField}
@@ -34,7 +34,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           defaultMessage="Username"
           validate={[required("username.required", "Username is required"), maxLength("characters.max", "Must be {max} characters or less")(15)]}
         />
-        <FieldForCustomField
+        <CustomFieldRenderer
           name="password"
           type="password"
           component={CustomField}
@@ -42,7 +42,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           defaultMessage="Password"
           validate={[required("password.required", "Password is required"), minLength("characters.min", "Must be {min} characters or more")(8)]}
         />
-        <FieldForCustomField
+        <CustomFieldRenderer
           name="confirmPassword"
           type="password"
           component={CustomField}
@@ -50,7 +50,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           defaultMessage="Confirm Password"
           validate={[required("confirmpassword.required", "Please confirm your password"), matchedPwd("password.unmatched", "Passwords are not matched")]}
         />
-        <FieldForCustomField
+        <CustomFieldRenderer
           name="email"
           type="email"
           component={CustomField}
@@ -59,7 +59,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           validate={email("email.invalid", "Invalid email format")}
           warn={aol("email.aol", "Really? You still use AOL for your email?")}
         />
-        <FieldForCustomField
+        <CustomFieldRenderer
           name="age"
           type="number"
           component={CustomField}
