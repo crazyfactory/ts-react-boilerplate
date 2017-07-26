@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+var utils = require('./utils');
 
 var config = {
   // Enable sourcemaps for debugging webpack's output.
@@ -15,6 +16,7 @@ var config = {
 
   entry: {
     app: [
+      'react-hot-loader/patch',
       'webpack-hot-middleware/client?reload=true',
       './src/client.tsx',
       './src/vendor/main.ts'
@@ -32,7 +34,7 @@ var config = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'react-hot-loader!awesome-typescript-loader'
+        loader: 'awesome-typescript-loader'
       },
       {
         test: /\.jsx$/,
@@ -85,27 +87,10 @@ var config = {
   ]
 };
 
-const copySync = (src, dest, overwrite) =>
-{
-  if (overwrite && fs.existsSync(dest))
-  {
-    fs.unlinkSync(dest);
-  }
-  const data = fs.readFileSync(src);
-  fs.writeFileSync(dest, data);
-}
-
-const createIfDoesntExist = dest =>
-{
-  if (!fs.existsSync(dest))
-  {
-    fs.mkdirSync(dest);
-  }
-}
-
-createIfDoesntExist('./build');
-createIfDoesntExist('./build/public');
-copySync('./src/favicon.ico', './build/public/favicon.ico', true);
-copySync('./src/index.html', './build/index.html');
+utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
+utils.createIfDoesntExist('./build');
+utils.createIfDoesntExist('./build/public');
+utils.copySync('./src/favicon.ico', './build/public/favicon.ico', true);
+utils.copySync('./src/index.html', './build/index.html');
 
 module.exports = config;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomePage /> matches snapshot 1`] = `
+<div
+  className="fsuivmx"
+>
+  <img
+    src={Object {}}
+  />
+  <p>
+    <FormattedMessage
+      defaultMessage="Hello!"
+      id="hello"
+      values={Object {}}
+    />
+  </p>
+</div>
+`;

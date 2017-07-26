@@ -5,20 +5,22 @@ import makeRequest from "./makeRequest";
 describe("makeRequest", () => {
   const promiseFunction = () => Promise.resolve("success!");
   const gen = makeRequest(
-    promiseFunction,
     {
       FAILURE: "FAILURE_ACTION",
       PENDING: "PENDING_ACTION",
       SUCCESS: "SUCCESS_ACTION"
-    }
+    },
+    promiseFunction,
+    "arg1",
+    "arg2"
   );
 
   it("must dispatch actionPending", () => {
     expect(gen.next().value).toEqual(put({type: "PENDING_ACTION"}));
   });
 
-  it("must call apiMethod", () => {
-    expect(gen.next().value).toEqual(call(promiseFunction));
+  it("must call apiMethod with correct arguments", () => {
+    expect(gen.next().value).toEqual(call(promiseFunction, "arg1", "arg2"));
   });
 
   it("must dispatch actionSuccess if promise is resolved", () => {

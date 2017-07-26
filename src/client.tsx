@@ -1,33 +1,53 @@
 import * as e6p from "es6-promise";
 (e6p as any).polyfill();
 import "isomorphic-fetch";
-
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-const {Router, browserHistory} = require("react-router");
-import {syncHistoryWithStore} from "react-router-redux";
+import {RouterProvider} from "react-router5";
 import {setStylesTarget} from "typestyle";
+
+import {App} from "./app/containers";
 import {configureStore} from "./app/redux/configureStore";
-import routes from "./app/routes/routes";
+import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
-const store = configureStore(
-  browserHistory,
-  window.__INITIAL_STATE__
-);
+const appConfig = require("../config/main");
+
+const ReactHotLoader = appConfig.env !== "production"
+  ? require("react-hot-loader").AppContainer
+  : ({ children }) => React.Children.only(children);
+
+const router = configureRouter();
+const store = configureStore(router, window.__INITIAL_STATE__);
+router.start();
 store.runSaga(rootSaga);
-const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-  <Provider store={store} key="provider">
-    <Router
-      history={history}
-    >
-      {routes}
-    </Router>
-  </Provider>,
+  <ReactHotLoader>
+    <Provider store={store} key="provider">
+      <RouterProvider router={router}>
+        <App/>
+      </RouterProvider>
+    </Provider>
+  </ReactHotLoader>,
   document.getElementById("app")
 );
 
 setStylesTarget(document.getElementById("styles-target"));
+
+if ((module as any).hot) {
+  (module as any).hot.accept("./app/containers", () => {
+    const {App} = require("./app/containers");
+    ReactDOM.render(
+      <ReactHotLoader>
+        <Provider store={store}>
+          <RouterProvider router={router}>
+            <App/>
+          </RouterProvider>
+        </Provider>
+      </ReactHotLoader>,
+      document.getElementById("app")
+    );
+  });
+}

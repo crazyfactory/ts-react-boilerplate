@@ -1,8 +1,9 @@
 import * as React from "react";
-import {Link} from "react-router";
+import {FormattedMessage} from "react-intl";
 import {style} from "typestyle";
+import {Link} from "./Link";
 
-const Styles = {
+const styles = {
   nav: style({
     $nest: {
       ul: {
@@ -21,14 +22,15 @@ const Styles = {
 };
 
 const Header = () => (
-  <nav className={Styles.nav}>
+  <nav className={styles.nav}>
     <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="about">About</Link></li>
-      <li><Link to="counter">Counter</Link></li>
-      <li><Link to="stars">Stars</Link></li>
+      <li><Link name="home"><FormattedMessage id="home" defaultMessage="Home" /></Link></li>
+      <li><Link name="about"><FormattedMessage id="about" defaultMessage="About Us" /></Link></li>
+      <li><Link name="counter"><FormattedMessage id="counter" defaultMessage="Counter" /></Link></li>
+      <li><Link name="stars"><FormattedMessage id="stars" defaultMessage="Stars" /></Link></li>
+      <li><Link name="register"><FormattedMessage id="register" defaultMessage="Register" /></Link></li>
     </ul>
   </nav>
 );
 
-export {Header, Styles};
+export {Header};

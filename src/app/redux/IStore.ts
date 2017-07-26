@@ -1,7 +1,19 @@
-import {ICounter} from "models/counterModel";
-import {IStars} from "models/starsModel";
+import {State as IRouteState} from "router5";
+import {IState} from "./modules/baseModule";
+import {ICounter} from "./modules/counterModule";
+import {ILanguage} from "./modules/languageModule";
+import {IStars} from "./modules/starsModule";
+
+export interface IRouteReduxState {
+  route: IRouteState;
+  previousRoute?: IRouteState;
+  transitionRoute?: IRouteState;
+  transitionError?: string;
+}
 
 export interface IStore {
-  counter: ICounter;
-  stars: IStars;
+  counter: IState<ICounter>;
+  language: IState<ILanguage>;
+  router: IRouteReduxState;
+  stars: IState<IStars>;
 }

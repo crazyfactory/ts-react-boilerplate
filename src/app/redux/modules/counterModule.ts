@@ -1,28 +1,48 @@
-import {ICounter, ICounterAction} from "models/counterModel";
+import {IAction, IState} from "./baseModule";
 
-/** Action Types */
 export const INCREMENT: string = "counter/INCREMENT";
 export const DECREMENT: string = "counter/DECREMENT";
 
-/** Counter: Initial State */
-const initialState: ICounter = {
-  count: 0
+export interface ICounter {
+  count: number;
+}
+
+const initialState: IState<ICounter> = {
+  isFetching: false,
+  payload: {
+    count: 0
+  }
 };
 
-/** Reducer: CounterReducer */
-export function counterReducer(state: ICounter = initialState, action?: ICounterAction): ICounter {
+export function counterReducer(state: IState<ICounter> = initialState, action?: IAction<ICounter>): IState<ICounter> {
   switch (action.type) {
     case INCREMENT:
       return {
-        count: state.count + 1
+        ...state,
+        payload: {
+          count: state.payload.count + 1
+        }
       };
-
     case DECREMENT:
       return {
-        count: ((state.count - 1 > 0) ? state.count - 1 : 0)
+        ...state,
+        payload: {
+          count: ((state.payload.count - 1 > 0) ? state.payload.count - 1 : 0)
+        }
       };
-
     default:
       return state;
   }
+}
+
+export function increment(): IAction<ICounter> {
+  return {
+    type: INCREMENT
+  };
+}
+
+export function decrement(): IAction<ICounter> {
+  return {
+    type: DECREMENT
+  };
 }
