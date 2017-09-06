@@ -19,6 +19,19 @@ interface IProps {
   onSubmit: (values: IFormData) => Promise<any>;
 }
 
+const usernameRequired = required("username.required", "Username is required");
+const usernameMaxLength = maxLength("characters.max", "Must be {max} characters or less")(15);
+const passwordRequired = required("password.required", "Password is required");
+const passwordMinLength = minLength("characters.min", "Must be {min} characters or more")(8);
+const confirmPasswordRequired = required("confirmpassword.required", "Please confirm your password");
+const matchedPassword = matchedPwd("password.unmatched", "Passwords are not matched");
+const emailInvalid = email("email.invalid", "Invalid email format");
+const aolWarn = aol("email.aol", "Really? You still use AOL for your email?");
+const ageRequired = required("age.required", "Age is required");
+const ageNumberType = numberType("field.numbertype", "Must be a number");
+const ageMin = minValue("register.minage", "You must be at least {min} years old!")(18);
+const ageTooOld = tooOld("register.tooold", "You are too old for this!");
+
 /*tslint:disable:jsx-no-multiline-js*/
 class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, IProps>> & IProps, null> {
   public render(): JSX.Element {
@@ -32,7 +45,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           component={CustomField}
           languageId="username"
           defaultMessage="Username"
-          validate={[required("username.required", "Username is required"), maxLength("characters.max", "Must be {max} characters or less")(15)]}
+          validate={[usernameRequired, usernameMaxLength]}
         />
         <CustomFieldRenderer
           name="password"
@@ -40,7 +53,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           component={CustomField}
           languageId="password"
           defaultMessage="Password"
-          validate={[required("password.required", "Password is required"), minLength("characters.min", "Must be {min} characters or more")(8)]}
+          validate={[passwordRequired, passwordMinLength]}
         />
         <CustomFieldRenderer
           name="confirmPassword"
@@ -48,7 +61,7 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           component={CustomField}
           languageId="confirmpassword"
           defaultMessage="Confirm Password"
-          validate={[required("confirmpassword.required", "Please confirm your password"), matchedPwd("password.unmatched", "Passwords are not matched")]}
+          validate={[confirmPasswordRequired, matchedPassword]}
         />
         <CustomFieldRenderer
           name="email"
@@ -56,8 +69,8 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           component={CustomField}
           languageId="email"
           defaultMessage="Email"
-          validate={email("email.invalid", "Invalid email format")}
-          warn={aol("email.aol", "Really? You still use AOL for your email?")}
+          validate={emailInvalid}
+          warn={aolWarn}
         />
         <CustomFieldRenderer
           name="age"
@@ -66,11 +79,11 @@ class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, 
           languageId="age"
           defaultMessage="Age"
           validate={[
-            required("age.required", "Age is required"),
-            numberType("field.numbertype", "Must be a number"),
-            minValue("register.minage", "You must be at least {min} years old!")(18)
+            ageRequired,
+            ageNumberType,
+            ageMin
           ]}
-          warn={tooOld("register.tooold", "You are too old for this!")}
+          warn={ageTooOld}
         />
         <div>
           <button type="submit" disabled={submitting}><FormattedMessage id="submit" defaultMessage="Submit" /></button>
