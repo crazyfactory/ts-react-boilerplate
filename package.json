@@ -47,7 +47,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/base16": "^1.0.1",
-    "@types/enzyme": "^2.8.1",
+    "@types/enzyme": "^3.1.0",
     "@types/isomorphic-fetch": "0.0.34",
     "@types/jest": "^21.1.0",
     "@types/node": "^8.0.2",
