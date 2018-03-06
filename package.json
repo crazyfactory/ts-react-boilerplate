@@ -65,7 +65,7 @@
     "@types/redux-devtools-log-monitor": "^1.0.31",
     "@types/redux-form": "^7.0.5",
     "@types/webpack": "^3.0.0",
-    "awesome-typescript-loader": "^3.0.0-beta.18",
+    "awesome-typescript-loader": "^4.0.0",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.22.0",
