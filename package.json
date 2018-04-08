@@ -92,7 +92,7 @@
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.2.0",
     "webpack-hot-middleware": "^2.15.0",
-    "webpack-manifest-plugin": "^1.1.0"
+    "webpack-manifest-plugin": "^2.0.0"
   },
   "dependencies": {
     "chalk": "^2.0.1",
