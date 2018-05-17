@@ -117,7 +117,7 @@
     "redux-saga": "^0.15.4",
     "router5": "^5.1.0",
     "serve-favicon": "^2.3.2",
-    "typestyle": "^1.0.0"
+    "typestyle": "^2.0.0"
   },
   "jest": {
     "mapCoverage": true,
