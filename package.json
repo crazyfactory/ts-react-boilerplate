@@ -96,7 +96,7 @@
   },
   "dependencies": {
     "chalk": "^2.0.1",
-    "csstips": "^0.2.2",
+    "csstips": "^0.3.0",
     "csx": "^8.2.1",
     "es6-promise": "^4.0.5",
     "express": "^4.14.0",
