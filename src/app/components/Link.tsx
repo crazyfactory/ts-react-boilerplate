@@ -38,6 +38,6 @@ interface IOwnProps {
   options?: any;
 }
 
-const connectedLink = connect<null, IDispatchToProps, IOwnProps>(null)(Link);
+const connectedLink = connect(null)(Link);
 
 export {connectedLink as Link, Link as UnconnectedLink};

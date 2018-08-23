@@ -6,8 +6,8 @@ import {IDispatchToProps} from "../redux/modules/baseModule";
 import {switchLanguage} from "../redux/modules/languageModule";
 
 class AboutPage extends React.Component<IStateToProps & IDispatchToProps, null> {
-  constructor() {
-    super();
+  constructor(props: IStateToProps & IDispatchToProps) {
+    super(props);
     this.switchLanguage = this.switchLanguage.bind(this);
   }
 

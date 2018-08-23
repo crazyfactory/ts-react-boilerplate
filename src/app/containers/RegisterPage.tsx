@@ -3,9 +3,9 @@ import * as React from "react";
 import {RegisterReduxForm} from "../components";
 import {IFormData} from "../components/RegisterForm";
 
-class RegisterPage extends React.Component<null, null> {
-  constructor() {
-    super();
+class RegisterPage extends React.Component {
+  constructor(props: null) {
+    super(props);
     this.showResults = this.showResults.bind(this);
   }
 

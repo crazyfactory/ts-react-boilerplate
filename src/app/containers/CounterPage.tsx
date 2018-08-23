@@ -6,8 +6,8 @@ import {IDispatchToProps} from "../redux/modules/baseModule";
 import {decrement, increment} from "../redux/modules/counterModule";
 
 class CounterPage extends React.Component<IStateToProps & IDispatchToProps, null> {
-  constructor() {
-    super();
+  constructor(props: IStateToProps & IDispatchToProps) {
+    super(props);
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
   }

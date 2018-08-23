@@ -41,7 +41,7 @@ const styles = {
   })
 };
 
-class App extends React.Component<IStateToProps, null> {
+class App extends React.Component<IStateToProps> {
   private components: {[key: string]: React.ComponentClass} = {
     about: AboutPage,
     counter: CounterPage,
@@ -50,8 +50,8 @@ class App extends React.Component<IStateToProps, null> {
     stars: StarsPage
   };
 
-  constructor() {
-    super();
+  constructor(props: IStateToProps) {
+    super(props);
     addLocaleData([...en, ...es, ...fr, ...de]);
   }
 
@@ -80,6 +80,6 @@ const mapStateToProps = (state: Partial<IStore>) => ({
   ...routeNodeSelector("")(state)
 });
 
-const connectedApp = connect<IStateToProps, null, null>(mapStateToProps, null)(App);
+const connectedApp = connect<IStateToProps>(mapStateToProps)(App);
 
 export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles}
