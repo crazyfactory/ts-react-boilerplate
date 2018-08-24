@@ -45,10 +45,6 @@ var config = {
         loader: 'awesome-typescript-loader'
       },
       {
-        test: /\.jsx$/,
-        loader: 'babel-loader'
-      },
-      {
         test: /\.eot(\?.*)?$/,
         loader: 'file-loader?name=fonts/[hash].[ext]'
       },

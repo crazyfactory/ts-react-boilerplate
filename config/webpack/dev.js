@@ -34,11 +34,8 @@ var config = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader'
+        loader: 'awesome-typescript-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.eot(\?.*)?$/,

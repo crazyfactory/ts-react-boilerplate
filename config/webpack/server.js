@@ -32,25 +32,29 @@ var config = {
   module: {
     loaders: [
       {
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader'
-      },
-      {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        test: /\.eot(\?.*)?$/,
+        loader: 'file-loader?name=fonts/[hash].[ext]'
       },
       {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        test: /\.(woff|woff2)(\?.*)?$/,
+        loader: 'file-loader?name=fonts/[hash].[ext]'
+      },
+      {
+        test: /\.ttf(\?.*)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=fonts/[hash].[ext]'
+      },
+      {
+        test: /\.svg(\?.*)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=fonts/[hash].[ext]'
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
       }
     ]
   },
