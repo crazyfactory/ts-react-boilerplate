@@ -23,7 +23,7 @@ const store = configureStore(router, window.__INITIAL_STATE__);
 router.start();
 store.runSaga(rootSaga);
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <ReactHotLoader>
     <Provider store={store} key="provider">
       <RouterProvider router={router}>
@@ -39,7 +39,7 @@ setStylesTarget(document.getElementById("styles-target"));
 if ((module as any).hot) {
   (module as any).hot.accept("./app/containers", () => {
     const {App} = require("./app/containers");
-    ReactDOM.render(
+    ReactDOM.hydrate(
       <ReactHotLoader>
         <Provider store={store}>
           <RouterProvider router={router}>
