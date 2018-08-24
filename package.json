@@ -2,6 +2,26 @@
   "name": "ts-react-boilerplate",
   "description": "A universal boilerplate for building web applications w/ TypeScript, React, Redux and more.",
   "main": "build/server.js",
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "unfeat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "build",
+        "ci",
+        "chore",
+        "revert",
+        "followup",
+        "improve"
+      ]
+    }
+  },
   "scripts": {
     "precommit": "npm run lint",
     "prepush": "npm run build && npm run build:prod && npm run test:no-cache",
