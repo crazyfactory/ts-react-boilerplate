@@ -1,7 +1,7 @@
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
-import {Field, GenericField, WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form";
+import {Field, GenericField, WrappedFieldInputProps, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 import {style} from "typestyle";
 import {IStore} from "../redux/IStore";
 
@@ -102,6 +102,6 @@ const mapStateToProps = (state: Partial<IStore>) => ({
   languageData: state.language.payload.languageData
 });
 
-const ConnectedCustomField = connect<IStateToProps, null, IProps & IFlexWrappedFieldProps>(mapStateToProps, null)(CustomField);
+const ConnectedCustomField = connect<IStateToProps, null, IProps & WrappedFieldProps>(mapStateToProps)(CustomField);
 
 export {CustomField as UnconnectedCustomField, ConnectedCustomField as CustomField, mapStateToProps};
