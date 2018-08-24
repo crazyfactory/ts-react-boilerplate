@@ -58,7 +58,7 @@ var config = {
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+        loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
       }
     ]
   },
