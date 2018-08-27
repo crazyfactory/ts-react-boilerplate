@@ -79,7 +79,10 @@ app.get("*", (req, res) => {
         }
       },
       router: {
-        route: routeState
+        previousRoute: null,
+        route: routeState,
+        transitionError: null,
+        transitionRoute: null
       }
     });
 

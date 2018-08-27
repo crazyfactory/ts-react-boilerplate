@@ -7,7 +7,7 @@ import * as en from "react-intl/locale-data/en";
 import * as es from "react-intl/locale-data/es";
 import * as fr from "react-intl/locale-data/fr";
 import {connect} from "react-redux";
-import {routeNodeSelector} from "redux-router5";
+import {createRouteNodeSelector} from "redux-router5";
 import {State as IRouteState} from "router5";
 import {cssRaw, cssRule, style} from "typestyle";
 
@@ -75,9 +75,9 @@ interface IStateToProps {
   route: IRouteState;
 }
 
-const mapStateToProps = (state: Partial<IStore>) => ({
+const mapStateToProps = (state: Pick<IStore, "language" | "router">) => ({
   language: state.language,
-  ...routeNodeSelector("")(state)
+  ...createRouteNodeSelector("")(state)
 });
 
 const connectedApp = connect<IStateToProps>(mapStateToProps)(App);

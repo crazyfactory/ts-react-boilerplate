@@ -14,6 +14,7 @@ describe("<App />", () => {
     }
   };
   const route: IRouteState = {
+    meta: {id: 1, params: {}, options: {}, redirected: false},
     name: "home",
     params: {},
     path: "/"
@@ -32,7 +33,7 @@ describe("<App />", () => {
   it("maps state to props correctly", () => {
     const props = mapStateToProps({
       language,
-      router: {route}
+      router: {route, previousRoute: route, transitionRoute: null, transitionError: null}
     });
     expect(props.language).toEqual(language);
     expect(props.route).toEqual(route);
