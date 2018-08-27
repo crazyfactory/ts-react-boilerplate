@@ -42,7 +42,7 @@ interface IStateToProps {
   count: number;
 }
 
-const mapStateToProps = (state: Partial<IStore>) => ({
+const mapStateToProps = (state: Pick<IStore, "counter">) => ({
   count: state.counter.payload.count
 });
 

@@ -98,7 +98,7 @@ interface IFlexWrappedFieldProps {
 
 export const CustomFieldRenderer = Field as new () => GenericField<IProps>;
 
-const mapStateToProps = (state: Partial<IStore>) => ({
+const mapStateToProps = (state: Pick<IStore, "language">) => ({
   languageData: state.language.payload.languageData
 });
 

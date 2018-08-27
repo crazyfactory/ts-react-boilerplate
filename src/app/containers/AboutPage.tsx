@@ -31,7 +31,7 @@ interface IStateToProps {
   locale: string;
 }
 
-const mapStateToProps = (state: Partial<IStore>) => ({
+const mapStateToProps = (state: Pick<IStore, "language">) => ({
   locale: state.language.payload.locale
 });
 const connectedAbout = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(AboutPage);

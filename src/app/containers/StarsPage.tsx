@@ -27,7 +27,7 @@ interface IStateToProps {
   stargazers_count: number;
 }
 
-const mapStateToProps = (state: Partial<IStore>) => ({
+const mapStateToProps = (state: Pick<IStore, "stars">) => ({
   isFetching: state.stars.isFetching,
   stargazers_count: state.stars.payload.stargazers_count
 });
