@@ -22,10 +22,15 @@ class Html extends React.Component<IHtmlProps, {}> {
       <script src={src} key={i}/>
     );
 
-    /* tslint:disable-next-line:react-no-dangerous-html */
+    /* tslint:disable:react-no-dangerous-html */
     const initialStateScript = (
-      <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
-              charSet="UTF-8"/>);
+      <script
+        dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
+              charSet="UTF-8"
+      />
+    );
+    /* tslint:enable:react-no-dangerous-html */
+
     return (
       <html>
       <head>
@@ -58,4 +63,4 @@ class Html extends React.Component<IHtmlProps, {}> {
 
 }
 
-export {Html}
+export {Html};

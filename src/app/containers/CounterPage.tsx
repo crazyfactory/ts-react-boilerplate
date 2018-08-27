@@ -48,4 +48,4 @@ const mapStateToProps = (state: Pick<IStore, "counter">) => ({
 
 const connectedCounter = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(CounterPage);
 
-export {CounterPage as UnconnectedCounter, connectedCounter as CounterPage, mapStateToProps}
+export {CounterPage as UnconnectedCounter, connectedCounter as CounterPage, mapStateToProps};

@@ -82,4 +82,4 @@ const mapStateToProps = (state: Pick<IStore, "language" | "router">) => ({
 
 const connectedApp = connect<IStateToProps>(mapStateToProps)(App);
 
-export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles}
+export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles};

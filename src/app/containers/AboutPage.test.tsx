@@ -14,7 +14,7 @@ describe("<AboutPage />", () => {
   };
 
   it("matches snapshot", () => {
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
     expect(shallowComponent).toMatchSnapshot();
   });
 
@@ -25,7 +25,7 @@ describe("<AboutPage />", () => {
 
   it("calls switchLanguage() when button is clicked", () => {
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={() => {}} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
 
     expect(shallowComponent.find("button")).toBeDefined();
     expect(spy).not.toHaveBeenCalled();

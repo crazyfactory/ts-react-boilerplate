@@ -19,4 +19,4 @@ class HomePage extends React.Component<any, any> {
   }
 }
 
-export {HomePage}
+export {HomePage};

@@ -32,4 +32,4 @@ const mapStateToProps = (state: Pick<IStore, "stars">) => ({
   stargazers_count: state.stars.payload.stargazers_count
 });
 const connectedStars = connect<IStateToProps, IDispatchToProps, null>(mapStateToProps)(StarsPage);
-export {StarsPage as UnconnectedStars, connectedStars as StarsPage, mapStateToProps}
+export {StarsPage as UnconnectedStars, connectedStars as StarsPage, mapStateToProps};
