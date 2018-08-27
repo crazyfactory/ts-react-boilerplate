@@ -71,7 +71,6 @@
     ],
     "use-isnan": true,
     "use-named-parameter": true,
-    "typeof-compare": true,
     "class-name": true,
     "comment-format": [
       true,
