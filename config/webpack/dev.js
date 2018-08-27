@@ -6,6 +6,8 @@ var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 var utils = require('./utils');
 
 var config = {
+  mode: 'development',
+
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
 
@@ -79,9 +81,12 @@ var config = {
         NODE_ENV: JSON.stringify('development')
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
+    new webpack.HotModuleReplacementPlugin()
+  ],
+
+  optimization: {
+    noEmitOnErrors: true
+  }
 };
 
 utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');

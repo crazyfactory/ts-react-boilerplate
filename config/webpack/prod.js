@@ -2,8 +2,11 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var utils = require('./utils');
 var config = {
+  mode: 'production',
+
   bail: true,
 
   resolve: {
@@ -77,17 +80,6 @@ var config = {
         },
       }
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'js/[name].[chunkhash].js',
-      minChunks: Infinity
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
     new ManifestPlugin({
       fileName: '../manifest.json'
     }),
@@ -97,7 +89,17 @@ var config = {
         NODE_ENV: JSON.stringify('production')
       }
     })
-  ]
+  ],
+
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin()
+    ],
+    splitChunks: {
+      name: 'vendor',
+      minChunks: 2
+    }
+  }
 };
 
 utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');

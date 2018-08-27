@@ -12,6 +12,7 @@ fs.readdirSync('node_modules')
   });
 
 var config = {
+  mode: 'production',
   externals: nodeModules,
   target: 'node',
 
@@ -30,7 +31,7 @@ var config = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
