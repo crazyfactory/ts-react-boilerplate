@@ -33,13 +33,9 @@ if (process.env.NODE_ENV !== "production") {
   const webpackCompiler = webpack(webpackConfig);
 
   app.use(require("webpack-dev-middleware")(webpackCompiler, {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
     lazy: false,
-    noInfo: true,
+    logLevel: "info",
     publicPath: webpackConfig.output.publicPath,
-    quiet: true,
     stats: {colors: true}
   }));
 
