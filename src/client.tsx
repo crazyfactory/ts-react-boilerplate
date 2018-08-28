@@ -50,4 +50,9 @@ if ((module as any).hot) {
       document.getElementById("app")
     );
   });
+
+  (module as any).hot.accept("./app/sagas/rootSaga", () => {
+    store.close();
+    store.runSaga(require("./app/sagas/rootSaga").default);
+  });
 }
