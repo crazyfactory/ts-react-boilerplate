@@ -12,7 +12,7 @@ fs.readdirSync('node_modules')
   });
 
 var config = {
-  mode: 'production',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   externals: nodeModules,
   target: 'node',
 
