@@ -38,7 +38,7 @@ setStylesTarget(document.getElementById("styles-target"));
 
 if ((module as any).hot) {
   (module as any).hot.accept("./app/containers", () => {
-    const {App: NewApp} = require("./app/containers/App");
+    const {App: NewApp} = require("./app/containers");
     ReactDOM.hydrate(
       <ReactHotLoader>
         <Provider store={store}>
