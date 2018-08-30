@@ -1,4 +1,3 @@
-import {Promise} from "es6-promise";
 import {ILanguage} from "../redux/modules/languageModule";
 import {IStars} from "../redux/modules/starsModule";
 

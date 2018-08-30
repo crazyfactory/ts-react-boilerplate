@@ -1,4 +1,3 @@
-import {Promise} from "es6-promise";
 import {call, put} from "redux-saga/effects";
 import makeRequest from "./makeRequest";
 
