@@ -1,8 +1,6 @@
-var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var utils = require('./utils');
 var config = {
   mode: 'production',
@@ -20,11 +18,13 @@ var config = {
       './src/vendor/main.ts',
       'react',
       'react-dom',
+      'react-intl',
       'react-helmet',
       'react-redux',
       'react-router5',
       'redux-router5',
       'redux',
+      'redux-form',
       'redux-saga',
       'router5',
     ]
@@ -92,12 +92,14 @@ var config = {
   ],
 
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin()
-    ],
     splitChunks: {
-      name: 'vendor',
-      minChunks: 2
+      cacheGroups: {
+        commons: {
+          name: 'vendor',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
     }
   }
 };
