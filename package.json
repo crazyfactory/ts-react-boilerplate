@@ -22,8 +22,12 @@
       ]
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "scripts": {
-    "precommit": "npm run lint",
     "prepush": "npm run build && npm run build:prod && npm run test:no-cache",
     "commitmsg": "validate-commit-msg",
     "clean": "rimraf build && rimraf .jest/cache",
@@ -67,7 +71,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/enzyme": "^3.1.13",
-    "@types/isomorphic-fetch": "0.0.34",
     "@types/jest": "^23.3.1",
     "@types/node": "^8.0.2",
     "@types/prop-types": "^15.5.5",
@@ -79,13 +82,12 @@
     "@types/react-intl": "^2.3.9",
     "@types/react-redux": "^6.0.6",
     "@types/redux-form": "^7.4.6",
-    "@types/webpack": "^3.0.0",
     "awesome-typescript-loader": "^5.2.0",
-    "cross-env": "^5.0.1",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.4.4",
     "enzyme-adapter-react-16": "^1.2.0",
     "file-loader": "^2.0.0",
-    "husky": "^0.14.0",
+    "husky": "^1.0.0-rc.13",
     "jest": "^23.5.0",
     "jest-enzyme": "^6.0.3",
     "react-addons-test-utils": "^15.6.2",
