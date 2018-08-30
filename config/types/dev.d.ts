@@ -10,8 +10,6 @@ interface Window {
   __INITIAL_STATE__?: any;
 }
 
-type Set<T> = any;
-
 declare namespace jest {
   interface Matchers<R> {
     toBeChecked(): void;
