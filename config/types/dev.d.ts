@@ -10,6 +10,7 @@ interface Window {
   __INITIAL_STATE__?: any;
 }
 
+// jest-enzyme index.d.ts does not work
 declare namespace jest {
   interface Matchers<R> {
     toBeChecked(): void;

@@ -9,7 +9,6 @@ const styles = {
       ul: {
         $nest: {
           li: {
-            color: "blue",
             display: "inline",
             padding: "5px"
           }

@@ -1,9 +1,11 @@
+import {color} from "csx";
 import * as React from "react";
 import {FormattedMessage} from "react-intl";
 import {style} from "typestyle";
 
 const styles = {
   home: style({
+    color: color("#125588").fade("80%").toString(),
     textAlign: "center"
   })
 };
