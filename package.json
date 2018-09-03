@@ -86,7 +86,7 @@
     "file-loader": "^2.0.0",
     "husky": "^1.0.0-rc.13",
     "jest": "^23.5.0",
-    "jest-enzyme": "^6.0.3",
+    "jest-enzyme": "^6.0.4",
     "react-hot-loader": "^4.3.5",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.1.4",
