@@ -2,6 +2,7 @@ import {Action} from "redux";
 import {call, CallEffect, put, PutEffect} from "redux-saga/effects";
 import {IPromiseActions} from "../helpers/promiseReducer";
 
+// tslint:disable:max-line-length
 export default function* makeRequest(requestType: IPromiseActions, apiMethod: (payload: any) => Promise<any>, ...args: any[]): IterableIterator<PutEffect<Action> | CallEffect> {
   try {
     yield put({type: requestType.PENDING});

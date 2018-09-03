@@ -34,8 +34,8 @@ describe("<App />", () => {
 
   it("maps state to props correctly", () => {
     const props = mapStateToProps({
-      settings: language,
-      router: {route, previousRoute: route, transitionRoute: null, transitionError: null}
+      router: {route, previousRoute: route, transitionRoute: null, transitionError: null},
+      settings: language
     });
     expect(props.language).toEqual(language);
     expect(props.route).toEqual(route);

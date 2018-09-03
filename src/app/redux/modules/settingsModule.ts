@@ -23,6 +23,7 @@ const initialState: IState<ISettings, IMeta> = {
   }
 };
 
+// tslint:disable:max-line-length
 export function settingsReducer(state: IState<ISettings, IMeta> = initialState, action: IAction<ISettings, IMeta>): IState<ISettings, IMeta> {
   if (action.type === CHANGE_LOCALE) {
     return {

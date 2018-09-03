@@ -5,23 +5,41 @@ import {Field, GenericField, WrappedFieldInputProps, WrappedFieldMetaProps, Wrap
 import {style} from "typestyle";
 import {IStore} from "../redux/IStore";
 
-export const required = (id, defaultMessage) => (value) => (value ? undefined : {id, defaultMessage});
+export const required = (id, defaultMessage) => {
+  return (value) => (value ? undefined : {id, defaultMessage});
+};
 
-export const maxLength = (id, defaultMessage) => (max) => (value) => value && value.length > max ? {id, defaultMessage, values: {max}} : undefined;
+export const maxLength = (id, defaultMessage) => {
+  return (max) => (value) => value && value.length > max ? {id, defaultMessage, values: {max}} : undefined;
+};
 
-export const minLength = (id, defaultMessage) => (min) => (value) => value && value.length < min ? {id, defaultMessage, values: {min}} : undefined;
+export const minLength = (id, defaultMessage) => {
+  return (min) => (value) => value && value.length < min ? {id, defaultMessage, values: {min}} : undefined;
+};
 
-export const numberType = (id, defaultMessage) => (value) => value && isNaN(Number(value)) ? {id, defaultMessage} : undefined;
+export const numberType = (id, defaultMessage) => {
+  return (value) => value && isNaN(Number(value)) ? {id, defaultMessage} : undefined;
+};
 
-export const minValue = (id, defaultMessage) => (min) => (value) => value < min ? {id, defaultMessage, values: {min}} : undefined;
+export const minValue = (id, defaultMessage) => {
+  return (min) => (value) => value < min ? {id, defaultMessage, values: {min}} : undefined;
+};
 
-export const matchedPwd = (id, defaultMessage) => (value, otherValues) => value !== otherValues.password ? {id, defaultMessage} : undefined;
+export const matchedPwd = (id, defaultMessage) => {
+  return (value, otherValues) => value !== otherValues.password ? {id, defaultMessage} : undefined;
+};
 
-export const email = (id, defaultMessage) => (value) => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? {id, defaultMessage} : undefined;
+export const email = (id, defaultMessage) => {
+  return (value) => {
+    return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? {id, defaultMessage} : undefined;
+  };
+};
 
 export const tooOld = (id, defaultMessage) => (value) => value && value > 65 ? {id, defaultMessage} : undefined;
 
-export const aol = (id, defaultMessage) => (value) => value && /.+@aol\.com/.test(value) ? {id, defaultMessage} : undefined;
+export const aol = (id, defaultMessage) => {
+  return (value) => value && /.+@aol\.com/.test(value) ? {id, defaultMessage} : undefined;
+};
 
 /*tslint:disable:object-literal-sort-keys*/
 const styles = {
@@ -52,7 +70,11 @@ class CustomField extends React.Component<IProps & IStateToProps & IFlexWrappedF
       <div className={styles.row}>
         <FormattedMessage id={languageId} defaultMessage={defaultMessage} />
         <div>
-          <input {...input} placeholder={this.props.translations[languageId] || defaultMessage} type={type} className={styles.inputItem} />
+          <input {...input}
+                 placeholder={this.props.translations[languageId] || defaultMessage}
+                 type={type}
+                 className={styles.inputItem}
+          />
           {
             (active || touched) &&
             (
