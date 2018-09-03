@@ -8,7 +8,7 @@ interface IHtmlProps {
   initialState?: any;
 }
 
-class Html extends React.Component<IHtmlProps, {}> {
+class Html extends React.Component<IHtmlProps> {
   public render(): JSX.Element {
     const head = Helmet.renderStatic();
     const {markup, initialState} = this.props;

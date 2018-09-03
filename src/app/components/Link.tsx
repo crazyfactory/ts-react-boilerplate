@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {actions} from "redux-router5";
 import {Router} from "router5";
 
-class Link extends React.Component<IDispatchToProps & IOwnProps, null> {
+class Link extends React.Component<IDispatchToProps & IOwnProps> {
   public static contextTypes: React.ValidationMap<any> = {
     router: object.isRequired
   };

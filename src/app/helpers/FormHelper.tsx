@@ -45,7 +45,7 @@ const styles = {
 /*tslint:enable:object-literal-sort-keys*/
 
 /*tslint:disable:jsx-no-multiline-js*/
-class CustomField extends React.Component<IProps & IStateToProps & IFlexWrappedFieldProps, null> {
+class CustomField extends React.Component<IProps & IStateToProps & IFlexWrappedFieldProps> {
   public render(): JSX.Element {
     const {defaultMessage, input, languageId, type, meta: {active, touched, error, warning}} = this.props;
     return (

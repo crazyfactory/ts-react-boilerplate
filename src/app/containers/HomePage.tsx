@@ -10,7 +10,7 @@ const styles = {
   })
 };
 
-class HomePage extends React.Component<any, any> {
+class HomePage extends React.Component {
   public render(): JSX.Element {
     return (
       <div className={styles.home}>
