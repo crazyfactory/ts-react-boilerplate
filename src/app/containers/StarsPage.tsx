@@ -6,7 +6,9 @@ import {IDispatchToProps} from "../redux/modules/baseModule";
 import {loadStars} from "../redux/modules/starsModule";
 
 class StarsPage extends React.Component<IStateToProps & IDispatchToProps> {
-  public componentWillMount(): void {
+  constructor(props: IStateToProps & IDispatchToProps) {
+    super(props);
+
     if (this.props.stargazersCount === -1) {
       this.props.dispatch(loadStars());
     }
