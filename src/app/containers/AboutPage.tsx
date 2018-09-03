@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
+import {FormattedMessage, InjectedIntlProps, injectIntl} from "react-intl";
 import {connect} from "react-redux";
 import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
@@ -36,5 +36,8 @@ interface IStateToProps {
 const mapStateToProps = (state: Pick<IStore, "settings">) => ({
   locale: state.settings.meta.locale
 });
-const connectedAbout = connect<IStateToProps, IDispatchToProps>(mapStateToProps)(AboutPage);
+const connectedAbout = injectIntl(
+  connect<IStateToProps, IDispatchToProps, InjectedIntlProps>(mapStateToProps)(AboutPage)
+);
+
 export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage, mapStateToProps};
