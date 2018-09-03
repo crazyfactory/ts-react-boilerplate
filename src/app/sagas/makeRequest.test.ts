@@ -19,7 +19,7 @@ describe("makeRequest", () => {
   });
 
   it("must call apiMethod with correct arguments", () => {
-    expect(gen.next().value).toEqual(call(promiseFunction, "arg1", "arg2"));
+    expect(gen.next().value).toEqual(call(promiseFunction, "arg1", "arg2", undefined, undefined, undefined, undefined));
   });
 
   it("must dispatch actionSuccess if promise is resolved", () => {
