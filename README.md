@@ -17,7 +17,7 @@ ___
 This boilerplate uses the following libraries and tools:
 
 #### Core
-- [Typescript](https://www.typescriptlang.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [React](https://github.com/facebook/react) & [React DOM](https://github.com/facebook/react) for views.
 - [Router5](https://github.com/router5) to handle in-app routing.
 - [Redux](https://github.com/reactjs/redux) for managing application state.
