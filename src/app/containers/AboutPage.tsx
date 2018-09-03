@@ -3,7 +3,7 @@ import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
 import {IStore} from "../redux/IStore";
 import {IDispatchToProps} from "../redux/modules/baseModule";
-import {switchLanguage} from "../redux/modules/languageModule";
+import {changeLocale} from "../redux/modules/settingsModule";
 
 class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
@@ -13,7 +13,7 @@ class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
 
   public switchLanguage(): void {
     const locale = this.props.locale === "en-GB" ? "de" : "en-GB";
-    this.props.dispatch(switchLanguage(locale));
+    this.props.dispatch(changeLocale(locale));
   }
 
   public render(): JSX.Element {
@@ -31,8 +31,8 @@ interface IStateToProps {
   locale: string;
 }
 
-const mapStateToProps = (state: Pick<IStore, "language">) => ({
-  locale: state.language.payload.locale
+const mapStateToProps = (state: Pick<IStore, "settings">) => ({
+  locale: state.settings.meta.locale
 });
 const connectedAbout = connect<IStateToProps, IDispatchToProps>(mapStateToProps)(AboutPage);
 export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage, mapStateToProps};

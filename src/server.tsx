@@ -9,7 +9,7 @@ import {RouterProvider} from "react-router5";
 import {App, Html} from "./app/containers";
 import {LanguageHelper} from "./app/helpers/LanguageHelper";
 import {configureStore} from "./app/redux/configureStore";
-import {ILanguage} from "./app/redux/modules/languageModule";
+import {ISettings} from "./app/redux/modules/settingsModule";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
@@ -23,7 +23,7 @@ const manifest = require("../build/manifest.json");
 const app = express();
 const translationHandler = (req, res) => {
   const languageHelper = new LanguageHelper(req.params.lang);
-  const lang: ILanguage = {languageData: languageHelper.getRequestLanguageData(), locale: languageHelper.getPreferredLanguage()};
+  const lang: ISettings = {translations: languageHelper.getRequestLanguageData()};
   res.json(lang);
 };
 
@@ -66,19 +66,22 @@ app.get("*", (req, res) => {
       return;
     }
 
-    const languageHelper = new LanguageHelper(req.headers["accept-language"]);
+    const languageHelper = new LanguageHelper(req.headers["accept-settings"]);
     const store = configureStore(router, {
-      language: {
-        payload: {
-          languageData: languageHelper.getRequestLanguageData(),
-          locale: languageHelper.getPreferredLanguage()
-        }
-      },
       router: {
         previousRoute: null,
         route: routeState,
         transitionError: null,
         transitionRoute: null
+      },
+      settings: {
+        meta: {
+          currency: "EUR",
+          locale: languageHelper.getPreferredLanguage()
+        },
+        payload: {
+          translations: languageHelper.getRequestLanguageData()
+        }
       }
     });
 

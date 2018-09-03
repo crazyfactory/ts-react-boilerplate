@@ -1,7 +1,7 @@
 import {shallow} from "enzyme";
 import * as React from "react";
 import {IState} from "../redux/modules/baseModule";
-import {ILanguage} from "../redux/modules/languageModule";
+import {IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
 import {
 aol, email, mapStateToProps, matchedPwd, maxLength, minLength,
 minValue, numberType, required, tooOld, UnconnectedCustomField
@@ -13,15 +13,15 @@ describe("FormHelper", () => {
     it("matches snapshot without error and warning", () => {
       const props = {
         defaultMessage: "Username",
-        languageData: {
-          username: "Username"
-        },
         languageId: "username",
         meta: {
           active: false,
           error: false,
           touched: false,
           warning: false
+        },
+        translations: {
+          username: "Username"
         },
         type: "text"
       };
@@ -32,15 +32,15 @@ describe("FormHelper", () => {
     it("matches snapshot with error when active or touched", () => {
       const props = {
         defaultMessage: "Username",
-        languageData: {
-          username: "Username"
-        },
         languageId: "username",
         meta: {
           active: true,
           error: {id: "error", defaultMessage: "some error occurs"},
           touched: true,
           warning: false
+        },
+        translations: {
+          username: "Username"
         },
         type: "text"
       };
@@ -51,9 +51,6 @@ describe("FormHelper", () => {
     it("matches snapshot with warning when active or touched", () => {
       const props = {
         defaultMessage: "Username",
-        languageData: {
-          username: "Username"
-        },
         languageId: "username",
         meta: {
           active: true,
@@ -61,22 +58,8 @@ describe("FormHelper", () => {
           touched: true,
           warning: {id: "warning", defaultMessage: "something needs to be warned"}
         },
-        type: "text"
-      };
-      const component = shallow(<UnconnectedCustomField {...props} />);
-      expect(component).toMatchSnapshot();
-    });
-
-    it("matches snapshot when placeholder falls back to defaultMessage when languageData key does not exist", () => {
-      const props = {
-        defaultMessage: "Username",
-        languageData: {},
-        languageId: "username",
-        meta: {
-          active: false,
-          error: false,
-          touched: false,
-          warning: false
+        translations: {
+          username: "Username"
         },
         type: "text"
       };
@@ -84,15 +67,34 @@ describe("FormHelper", () => {
       expect(component).toMatchSnapshot();
     });
 
+    it("matches snapshot when placeholder falls back to defaultMessage when translations key does not exist", () => {
+      const props = {
+        defaultMessage: "Username",
+        languageId: "username",
+        meta: {
+          active: false,
+          error: false,
+          touched: false,
+          warning: false
+        },
+        translations: {},
+        type: "text"
+      };
+      const component = shallow(<UnconnectedCustomField {...props} />);
+      expect(component).toMatchSnapshot();
+    });
+
     it("maps state to props correctly", () => {
-      const language: IState<ILanguage> = {
-        payload: {
-          languageData: {greeting: "Hello!"},
+      const language: IState<ISettings, ISettingsMeta> = {
+        meta: {
           locale: "en-GB"
+        },
+        payload: {
+          translations: {greeting: "Hello!"}
         }
       };
-      const props = mapStateToProps({language});
-      expect(props.languageData).toEqual(language.payload.languageData);
+      const props = mapStateToProps({settings: language});
+      expect(props.translations).toEqual(language.payload.translations);
     });
   });
 

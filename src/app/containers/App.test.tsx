@@ -3,14 +3,16 @@ import * as React from "react";
 import {IntlProvider} from "react-intl";
 import {State as IRouteState} from "router5";
 import {IState} from "../redux/modules/baseModule";
-import {ILanguage} from "../redux/modules/languageModule";
+import {IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
 import {mapStateToProps, styles, UnconnectedApp} from "./App";
 
 describe("<App />", () => {
-  const language: IState<ILanguage> = {
-    payload: {
-      languageData: {greeting: "Hello!"},
+  const language: IState<ISettings, ISettingsMeta> = {
+    meta: {
       locale: "en-GB"
+    },
+    payload: {
+      translations: {greeting: "Hello!"}
     }
   };
   const route: IRouteState = {
@@ -32,7 +34,7 @@ describe("<App />", () => {
 
   it("maps state to props correctly", () => {
     const props = mapStateToProps({
-      language,
+      settings: language,
       router: {route, previousRoute: route, transitionRoute: null, transitionError: null}
     });
     expect(props.language).toEqual(language);
@@ -46,8 +48,8 @@ describe("<App />", () => {
 
   it("renders IntlProvider with correct props", () => {
     const component = shallow(<UnconnectedApp language={language} route={route} />);
-    expect(component.find(IntlProvider)).toHaveProp("locale", language.payload.locale);
-    expect(component.find(IntlProvider)).toHaveProp("messages", language.payload.languageData);
+    expect(component.find(IntlProvider)).toHaveProp("locale", language.meta.locale);
+    expect(component.find(IntlProvider)).toHaveProp("messages", language.payload.translations);
   });
 
   it("renders Not Found when route is null", () => {

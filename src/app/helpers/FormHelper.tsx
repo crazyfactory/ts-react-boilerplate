@@ -52,7 +52,7 @@ class CustomField extends React.Component<IProps & IStateToProps & IFlexWrappedF
       <div className={styles.row}>
         <FormattedMessage id={languageId} defaultMessage={defaultMessage} />
         <div>
-          <input {...input} placeholder={this.props.languageData[languageId] || defaultMessage} type={type} className={styles.inputItem} />
+          <input {...input} placeholder={this.props.translations[languageId] || defaultMessage} type={type} className={styles.inputItem} />
           {
             (active || touched) &&
             (
@@ -88,7 +88,7 @@ interface IProps {
 }
 
 interface IStateToProps {
-  languageData: any;
+  translations: any;
 }
 
 interface IFlexWrappedFieldProps {
@@ -98,8 +98,8 @@ interface IFlexWrappedFieldProps {
 
 export const CustomFieldRenderer = Field as new () => GenericField<IProps>;
 
-const mapStateToProps = (state: Pick<IStore, "language">) => ({
-  languageData: state.language.payload.languageData
+const mapStateToProps = (state: Pick<IStore, "settings">) => ({
+  translations: state.settings.payload.translations
 });
 
 const ConnectedCustomField = connect<IStateToProps, null, IProps & WrappedFieldProps>(mapStateToProps)(CustomField);

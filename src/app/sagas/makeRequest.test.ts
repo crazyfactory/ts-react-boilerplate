@@ -5,9 +5,9 @@ describe("makeRequest", () => {
   const promiseFunction = () => Promise.resolve("success!");
   const gen = makeRequest(
     {
-      FAILURE: "FAILURE_ACTION",
+      FULFILLED: "FULFILLED_ACTION",
       PENDING: "PENDING_ACTION",
-      SUCCESS: "SUCCESS_ACTION"
+      REJECTED: "REJECTED_ACTION"
     },
     promiseFunction,
     "arg1",
@@ -23,11 +23,11 @@ describe("makeRequest", () => {
   });
 
   it("must dispatch actionSuccess if promise is resolved", () => {
-    expect(gen.next("data").value).toEqual(put({type: "SUCCESS_ACTION", payload: "data"}));
+    expect(gen.next("data").value).toEqual(put({type: "FULFILLED_ACTION", payload: "data"}));
   });
 
   it("must dispatch actionFailure if promise is rejected", () => {
-    expect(gen.throw({message: "error!"}).value).toEqual(put({type: "FAILURE_ACTION", message: "error!"}));
+    expect(gen.throw({message: "error!"}).value).toEqual(put({type: "REJECTED_ACTION", message: "error!"}));
   });
 
   it("must be done", () => {

@@ -14,7 +14,7 @@ import {cssRaw, cssRule, style} from "typestyle";
 import {Header} from "../components";
 import {IStore} from "../redux/IStore";
 import {IState} from "../redux/modules/baseModule";
-import {ILanguage} from "../redux/modules/languageModule";
+import {IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
 import {AboutPage} from "./AboutPage";
 import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
@@ -59,7 +59,7 @@ class App extends React.Component<IStateToProps> {
     const {language, route} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
-      <IntlProvider locale={language.payload.locale} messages={language.payload.languageData}>
+      <IntlProvider locale={language.meta.locale} messages={language.payload.translations}>
         <section className={styles.container}>
           <Helmet {...appConfig.app.head}/>
           <Header/>
@@ -71,12 +71,12 @@ class App extends React.Component<IStateToProps> {
 }
 
 interface IStateToProps {
-  language: IState<ILanguage>;
+  language: IState<ISettings, ISettingsMeta>;
   route: IRouteState;
 }
 
-const mapStateToProps = (state: Pick<IStore, "language" | "router">) => ({
-  language: state.language,
+const mapStateToProps = (state: Pick<IStore, "settings" | "router">) => ({
+  language: state.settings,
   ...createRouteNodeSelector("")(state)
 });
 

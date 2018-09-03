@@ -1,10 +1,11 @@
 import {call, CallEffect, ForkEffect, takeLatest} from "redux-saga/effects";
-import {LOAD_STARS, requestType} from "../redux/modules/starsModule";
+import {promiseAction} from "../helpers/promiseReducer";
+import {LOAD_STARS} from "../redux/modules/starsModule";
 import {dummyApi} from "./dummyApi";
 import makeRequest from "./makeRequest";
 
 export function* fetchStars(): IterableIterator<CallEffect> {
-  yield call(makeRequest, requestType, dummyApi.getStars);
+  yield call(makeRequest, promiseAction(LOAD_STARS), dummyApi.getStars);
 }
 
 export function* watchStarsLoad(): IterableIterator<ForkEffect> {

@@ -1,12 +1,7 @@
-import promiseReducer, {IRequestType} from "../../helpers/promiseReducer";
+import promiseReducer from "../../helpers/promiseReducer";
 import {IAction, IState} from "./baseModule";
 
 export const LOAD_STARS: string = "stars/LOAD_STARS";
-export const requestType: IRequestType = {
-  FAILURE: "stars/FAILURE",
-  PENDING: "stars/PENDING",
-  SUCCESS: "stars/SUCCESS"
-};
 
 export interface IStars {
   stargazers_count: number;
@@ -24,7 +19,7 @@ export function starsReducer(state: IState<IStars> = initialState, action: IActi
   if (action.type === LOAD_STARS) {
     return state;
   }
-  return promiseReducer<IStars>(requestType, state, action);
+  return promiseReducer<IStars>(LOAD_STARS, state, action);
 }
 
 export function loadStars(): IAction<IStars> {
