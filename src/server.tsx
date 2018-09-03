@@ -66,7 +66,7 @@ app.get("*", (req, res) => {
       return;
     }
 
-    const languageHelper = new LanguageHelper(req.headers["accept-settings"]);
+    const languageHelper = new LanguageHelper(req.headers["accept-language"]);
     const store = configureStore(router, {
       router: {
         previousRoute: null,
