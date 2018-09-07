@@ -1,6 +1,6 @@
 import * as createRavenMiddleware from "raven-for-redux";
 import * as Raven from "raven-js";
-import {applyMiddleware, compose, createStore} from "redux";
+import {applyMiddleware, compose, createStore, Middleware, Store} from "redux";
 import {createLogger} from "redux-logger";
 import {router5Middleware} from "redux-router5";
 import createSagaMiddleware, { END } from "redux-saga";
@@ -11,7 +11,7 @@ import rootReducer from "./rootReducer";
 const appConfig = require("../../../config/main");
 const localConfig = require("../../../config/main.local");
 
-interface IExtendedStore extends Redux.Store<Partial<IStore>> {
+interface IExtendedStore extends Store<Partial<IStore>> {
   runSaga: (rootSaga: any) => any;
   close: () => void;
 }
@@ -20,7 +20,7 @@ export function configureStore(router: Router, initialState?: Partial<IStore>): 
 
   const mergedConfig = {...appConfig, ...localConfig};
   const sagaMiddleware = createSagaMiddleware();
-  const middlewares: Redux.Middleware[] = [
+  const middlewares: Middleware[] = [
     router5Middleware(router),
     sagaMiddleware
   ];
@@ -31,8 +31,8 @@ export function configureStore(router: Router, initialState?: Partial<IStore>): 
     middlewares.push(logger);
   }
 
-  if (mergedConfig.sentry && process.env.BROWSER) {
-    Raven.config(mergedConfig.sentry.dsn).setRelease(mergedConfig.sentry.release).install();
+  if (mergedConfig.sentry.dsn.length && process.env.BROWSER) {
+    Raven.config(mergedConfig.sentry.dsn, mergedConfig.sentry.options).install();
     middlewares.unshift(createRavenMiddleware(Raven));
   }
 

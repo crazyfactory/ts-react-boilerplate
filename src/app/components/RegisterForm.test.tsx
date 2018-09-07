@@ -1,5 +1,4 @@
 import {shallow} from "enzyme";
-import {Promise} from "es6-promise";
 import * as React from "react";
 import {RegisterForm, RegisterReduxForm} from "./RegisterForm";
 describe("<RegisterForm />", () => {

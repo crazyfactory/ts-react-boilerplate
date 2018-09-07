@@ -1,9 +1,10 @@
-var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var utils = require('./utils');
 var config = {
+  mode: 'production',
+
   bail: true,
 
   resolve: {
@@ -17,11 +18,13 @@ var config = {
       './src/vendor/main.ts',
       'react',
       'react-dom',
+      'react-intl',
       'react-helmet',
       'react-redux',
       'react-router5',
       'redux-router5',
       'redux',
+      'redux-form',
       'redux-saga',
       'router5',
     ]
@@ -42,11 +45,8 @@ var config = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader'
+        loader: 'awesome-typescript-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.eot(\?.*)?$/,
@@ -80,17 +80,6 @@ var config = {
         },
       }
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'js/[name].[chunkhash].js',
-      minChunks: Infinity
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
     new ManifestPlugin({
       fileName: '../manifest.json'
     }),
@@ -100,7 +89,19 @@ var config = {
         NODE_ENV: JSON.stringify('production')
       }
     })
-  ]
+  ],
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'vendor',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
+    }
+  }
 };
 
 utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');

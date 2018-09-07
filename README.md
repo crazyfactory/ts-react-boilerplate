@@ -21,37 +21,36 @@ This boilerplate uses the following libraries and tools:
 - [React](https://github.com/facebook/react) & [React DOM](https://github.com/facebook/react) for views.
 - [Router5](https://github.com/router5) to handle in-app routing.
 - [Redux](https://github.com/reactjs/redux) for managing application state.
-- [React-Redux](https://github.com/reactjs/react-redux) to use React-Redux bindings.
-- [React-Router5](https://github.com/router5) & [Redux-Router5](https://github.com/router5) integrate router5 with react and redux
+- [React Redux](https://github.com/reactjs/react-redux) to use React-Redux bindings.
+- [React Router5](https://github.com/router5) & [Redux-Router5](https://github.com/router5) integrate router5 with react and redux
 
 #### Utilities
-- [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
 - [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
+- [React Intl](https://github.com/yahoo/react-intl) internationalize React apps
+- [Redux Form](https://github.com/erikras/redux-form) keep form state in a Redux store
+- [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
 - [React Helmet](https://github.com/nfl/react-helmet)
 - [RavenJS](https://github.com/getsentry/raven-js) for capturing exceptions during run time
-- [Raven-for-Redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
+- [Raven for Redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
+- [TypeStyle](https://github.com/typestyle/typestyle) make css typesafe
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
   - [Awesome TypeScript Loader](https://github.com/s-panferov/awesome-typescript-loader) as ts loader.
-  - [Babel Loader](https://github.com/babel/babel-loader) as js loader.
   - [React Hot Loader](https://github.com/gaearon/react-hot-loader) for providing hot reload capability to our development server
-  - [TypeStyle](https://github.com/typestyle/typestyle)
   - [File Loader](https://github.com/webpack/file-loader)
   - [URL Loader](https://github.com/webpack/url-loader)
-  - [Sourcemap Loader](https://github.com/webpack/source-map-loader)
   - [Manifest Plugin](https://github.com/danethurber/webpack-manifest-plugin)
-  - [tslint Loader](https://github.com/wbuchwalter/tslint-loader) for using tslint as preloader on build process.
+  - [TS Lint Loader](https://github.com/wbuchwalter/tslint-loader) for using tslint as preloader on build process.
 
 #### Dev & Prod Server
-- [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
-  - [Webpack Dev Middleware](https://github.com/webpack/webpack-dev-middleware)
-  - [Webpack Hot Middleware](https://github.com/webpack/webpack-hot-middleware)
+- [Webpack Dev Middleware](https://github.com/webpack/webpack-dev-middleware)
+- [Webpack Hot Middleware](https://github.com/webpack/webpack-hot-middleware)
 - [Express](https://github.com/expressjs/express) for running server both on client and server side.
 - [Serve Favicon](https://github.com/expressjs/serve-favicon) for serving favicon.
 
 #### Developer Experience
-- [tslint](https://github.com/palantir/tslint) for linting TypeScript files.
+- [TS Lint](https://github.com/palantir/tslint) for linting TypeScript files.
 - [Redux Logger](https://github.com/theaqua/redux-logger)
 - [Redux DevTools](https://github.com/gaearon/redux-devtools)
 - [Chalk](https://github.com/chalk/chalk) for colored terminal logs.
@@ -61,6 +60,7 @@ This boilerplate uses the following libraries and tools:
 - [TS Jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
 - [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
+- [Wallaby](http://wallabyjs.com) intelligent test runner for JavaScript that continuously runs your tests.
 
 ## Directory Structure
 ```bash
@@ -75,21 +75,21 @@ This boilerplate uses the following libraries and tools:
 ├── src                         # Source code.
 │   ├── app                     # App folder.
 │   │ ├── components            # React Components.
-│   │ ├── containers            # React/Redux Containers.
+│   │ ├── containers            # React Containers.
 │   │ ├── helpers               # Helper Functions & Components.
-|   | ├── images                # Images folder.
+│   │ ├── images                # Images folder.
 │   │ ├── redux                 # Redux related code aka data layer of the app.
 │   │ │   ├── modules           # Redux modules.   
-│   │ │   ├── reducers.ts       # Main reducers file to combine them.  
+│   │ │   ├── rootReducer.ts    # Main reducers file to combine them.  
 │   │ │   └── configureStore.ts # Redux store, contains global app state.    
 │   │ ├── routes                # Routes.
 │   │ └── sagas                 # Saga files.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
+│   ├── index.html              # html file for client side rendering
 │   └── server.tsx              # Entry point for server side rendering.
 ├── translations                # For json translations.
-├── .babelrc                    # babel config.
 ├── .dockerignore               # Tells docker which files to ignore.
 ├── .editorconfig               # Configuration for editors.
 ├── .gitignore                  # Tells git which files to ignore.

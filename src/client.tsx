@@ -23,7 +23,7 @@ const store = configureStore(router, window.__INITIAL_STATE__);
 router.start();
 store.runSaga(rootSaga);
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <ReactHotLoader>
     <Provider store={store} key="provider">
       <RouterProvider router={router}>
@@ -38,16 +38,21 @@ setStylesTarget(document.getElementById("styles-target"));
 
 if ((module as any).hot) {
   (module as any).hot.accept("./app/containers", () => {
-    const {App} = require("./app/containers");
-    ReactDOM.render(
+    const {App: NewApp} = require("./app/containers");
+    ReactDOM.hydrate(
       <ReactHotLoader>
         <Provider store={store}>
           <RouterProvider router={router}>
-            <App/>
+            <NewApp/>
           </RouterProvider>
         </Provider>
       </ReactHotLoader>,
       document.getElementById("app")
     );
+  });
+
+  (module as any).hot.accept("./app/sagas/rootSaga", () => {
+    store.close();
+    store.runSaga(require("./app/sagas/rootSaga").default);
   });
 }

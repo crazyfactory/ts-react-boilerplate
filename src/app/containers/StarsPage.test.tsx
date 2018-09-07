@@ -6,12 +6,12 @@ import {mapStateToProps, UnconnectedStars} from "./StarsPage";
 
 describe("<Stars />", () => {
   it("matches snapshot when rendering stars", () => {
-    const component = shallow(<UnconnectedStars isFetching={false} stargazers_count={61} dispatch={jest.fn()} />);
+    const component = shallow(<UnconnectedStars isFetching={false} stargazersCount={61} dispatch={jest.fn()} />);
     expect(component).toMatchSnapshot();
   });
 
   it("matches snapshot when rendering fetching text", () => {
-    const component = shallow(<UnconnectedStars isFetching={true} stargazers_count={-1} dispatch={jest.fn()} />);
+    const component = shallow(<UnconnectedStars isFetching={true} stargazersCount={-1} dispatch={jest.fn()} />);
     expect(component).toMatchSnapshot();
   });
 
@@ -23,22 +23,22 @@ describe("<Stars />", () => {
       }
     };
     const props = mapStateToProps({stars});
-    expect(props).toEqual({isFetching: false, stargazers_count: 100});
+    expect(props).toEqual({errorMessage: undefined, isFetching: false, stargazersCount: 100});
   });
 
-  it("dispatches LOAD_STARS action before rendering if stargazers_count === -1", () => {
+  it("dispatches LOAD_STARS action before rendering if stargazersCount === -1", () => {
     const dispatch = jest.fn();
     const expectedValue: IAction<IStars> = {
       type: LOAD_STARS
     };
     expect(dispatch).not.toHaveBeenCalled();
-    shallow(<UnconnectedStars dispatch={dispatch} isFetching={false} stargazers_count={-1}/>);
+    shallow(<UnconnectedStars dispatch={dispatch} isFetching={false} stargazersCount={-1}/>);
     expect(dispatch).toHaveBeenCalledWith(expectedValue);
   });
 
-  it("does not dispatch LOAD_STARS action before rendering if stargazers_count !== -1", () => {
+  it("does not dispatch LOAD_STARS action before rendering if stargazersCount !== -1", () => {
     const dispatch = jest.fn();
-    shallow(<UnconnectedStars dispatch={dispatch} isFetching={false} stargazers_count={10}/>);
+    shallow(<UnconnectedStars dispatch={dispatch} isFetching={false} stargazersCount={10}/>);
     expect(dispatch).not.toHaveBeenCalled();
   });
 });

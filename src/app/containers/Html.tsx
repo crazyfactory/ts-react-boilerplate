@@ -8,7 +8,7 @@ interface IHtmlProps {
   initialState?: any;
 }
 
-class Html extends React.Component<IHtmlProps, {}> {
+class Html extends React.Component<IHtmlProps> {
   public render(): JSX.Element {
     const head = Helmet.renderStatic();
     const {markup, initialState} = this.props;
@@ -22,10 +22,15 @@ class Html extends React.Component<IHtmlProps, {}> {
       <script src={src} key={i}/>
     );
 
-    /* tslint:disable-next-line:react-no-dangerous-html */
+    /* tslint:disable:react-no-dangerous-html */
     const initialStateScript = (
-      <script dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
-              charSet="UTF-8"/>);
+      <script
+        dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
+              charSet="UTF-8"
+      />
+    );
+    /* tslint:enable:react-no-dangerous-html */
+
     return (
       <html>
       <head>
@@ -52,10 +57,10 @@ class Html extends React.Component<IHtmlProps, {}> {
       if (!this.props.manifest[src]) {
         return;
       }
-      return "/public/" + this.props.manifest[src];
+      return this.props.manifest[src];
     }).filter((file) => file !== undefined);
   }
 
 }
 
-export {Html}
+export {Html};

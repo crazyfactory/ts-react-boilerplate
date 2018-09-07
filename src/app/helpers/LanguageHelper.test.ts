@@ -7,13 +7,13 @@ const languages: string[] = ["en-US, en", "en-GB, en;q=0.7", "de"];
 
 describe("LanguageHelper", () => {
 
-  it("constructor accepts language and we're able to get it", () => {
+  it("constructor accepts settings and we're able to get it", () => {
     const lang = new LanguageHelper(languages[0]);
     expect(lang.getRequestLang()).toBe("en-US, en");
   });
 
   describe("getPreferredLanguage()", () => {
-    it("returns the most preferred language", () => {
+    it("returns the most preferred settings", () => {
       const lang = new LanguageHelper(languages[0]);
       expect(lang.getPreferredLanguage()).toBe("en-US");
     });
@@ -40,15 +40,15 @@ describe("LanguageHelper", () => {
       fs = require("fs");
     });
 
-    it("should return a language data object for a valid requested language", () => {
+    it("should return a settings data object for a valid requested settings", () => {
       const lang = new LanguageHelper("de");
       fs.__setFileContents("de.json", JSON.stringify({hello: "world"}));
       expect(lang.getRequestLanguageData()).toEqual({hello: "world"});
     });
 
-    it("should return a default language data object for an invalid requested language", () => {
+    it("should return a default settings data object for an invalid requested settings", () => {
       fs.__setFileContents("en-gb.json", JSON.stringify({hello: "world"}));
-      const lang = new LanguageHelper("invalid language");
+      const lang = new LanguageHelper("invalid settings");
       expect(lang.getRequestLanguageData()).toEqual({hello: "world"});
     });
   });

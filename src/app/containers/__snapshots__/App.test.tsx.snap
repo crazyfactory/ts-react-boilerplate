@@ -13,6 +13,7 @@ exports[`<App /> matches snapshot 1`] = `
     className="f1whcvza"
   >
     <HelmetWrapper
+      defer={true}
       encodeSpecialCharacters={true}
       meta={
         Array [

@@ -22,13 +22,17 @@ describe("<Link />", () => {
 
   it("renders href correctly", () => {
     let component;
-    component = shallow(<UnconnectedLink name="home" dispatch={() => {}} />, {context: {router}});
+    component = shallow(<UnconnectedLink name="home" dispatch={jest.fn()} />, {context: {router}});
     expect(component.find("a")).toHaveProp("href", "/");
 
-    component = shallow(<UnconnectedLink name="product" params={{id: 10}} dispatch={() => {}} />, {context: {router}});
+    component = shallow(
+      <UnconnectedLink name="product" params={{id: 10}} dispatch={jest.fn()} />, {context: {router}}
+    );
     expect(component.find("a")).toHaveProp("href", "/product/10");
 
-    component = shallow(<UnconnectedLink name="account.order" params={{id: 10}} dispatch={() => {}} />, {context: {router}});
+    component = shallow(
+      <UnconnectedLink name="account.order" params={{id: 10}} dispatch={jest.fn()} />, {context: {router}}
+    );
     expect(component.find("a")).toHaveProp("href", "/account/order/10");
   });
 
@@ -39,7 +43,9 @@ describe("<Link />", () => {
       path: "/"
     });
 
-    const component = shallow(<UnconnectedLink name="account.order" params={{id: 10}} dispatch={() => {}} />, {context: {router}});
+    const component = shallow(
+      <UnconnectedLink name="account.order" params={{id: 10}} dispatch={jest.fn()} />, {context: {router}}
+    );
     expect(component.find("a")).toHaveClassName("active");
   });
 
@@ -50,7 +56,7 @@ describe("<Link />", () => {
       path: "/"
     });
 
-    const component = shallow(<UnconnectedLink name="about" dispatch={() => {}} />, {context: {router}});
+    const component = shallow(<UnconnectedLink name="about" dispatch={jest.fn()} />, {context: {router}});
     expect(component.find("a")).not.toHaveClassName("active");
   });
 

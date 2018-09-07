@@ -1,4 +1,3 @@
-var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
@@ -6,6 +5,8 @@ var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 var utils = require('./utils');
 
 var config = {
+  mode: 'development',
+
   // Enable sourcemaps for debugging webpack's output.
   devtool: 'source-map',
 
@@ -34,11 +35,8 @@ var config = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader'
+        loader: 'awesome-typescript-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.eot(\?.*)?$/,
@@ -58,7 +56,7 @@ var config = {
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+        loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
       }
     ]
   },
@@ -82,9 +80,12 @@ var config = {
         NODE_ENV: JSON.stringify('development')
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
+    new webpack.HotModuleReplacementPlugin()
+  ],
+
+  optimization: {
+    noEmitOnErrors: true
+  }
 };
 
 utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');

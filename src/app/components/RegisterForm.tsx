@@ -33,7 +33,7 @@ const ageMin = minValue("register.minage", "You must be at least {min} years old
 const ageTooOld = tooOld("register.tooold", "You are too old for this!");
 
 /*tslint:disable:jsx-no-multiline-js*/
-class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, IProps>> & IProps, null> {
+class RegisterForm extends React.Component<Partial<InjectedFormProps<IFormData, IProps>> & IProps> {
   public render(): JSX.Element {
     const {handleSubmit, pristine, reset, submitting} = this.props;
 

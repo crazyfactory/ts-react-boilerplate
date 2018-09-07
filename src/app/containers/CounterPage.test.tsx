@@ -23,7 +23,7 @@ describe("<Counter />", () => {
 
   it("calls handleIncrement() when increment button is clicked", () => {
     const spy = jest.spyOn(UnconnectedCounter.prototype, "handleIncrement");
-    const shallowComponent = shallow(<UnconnectedCounter dispatch={() => {}} count={0}/>);
+    const shallowComponent = shallow(<UnconnectedCounter dispatch={jest.fn()} count={0}/>);
 
     expect(shallowComponent.find({name: "incBtn"})).toBeDefined();
     expect(spy).not.toHaveBeenCalled();
@@ -33,7 +33,7 @@ describe("<Counter />", () => {
 
   it("calls handleDecrement() when decrement button is clicked", () => {
     const spy = jest.spyOn(UnconnectedCounter.prototype, "handleDecrement");
-    const shallowComponent = shallow(<UnconnectedCounter dispatch={() => {}} count={0}/>);
+    const shallowComponent = shallow(<UnconnectedCounter dispatch={jest.fn()} count={0}/>);
 
     expect(shallowComponent.find({name: "decBtn"})).toBeDefined();
     expect(spy).not.toHaveBeenCalled();

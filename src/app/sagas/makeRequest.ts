@@ -1,14 +1,15 @@
-import {Promise} from "es6-promise";
-import {put} from "redux-saga/effects";
-const {call} = require("redux-saga/effects");
-import {IRequestType} from "../helpers/promiseReducer";
+import {Action} from "redux";
+import {call, CallEffect, put, PutEffect} from "redux-saga/effects";
+import {IPromiseActions} from "../helpers/promiseReducer";
 
-export default function* makeRequest(requestType: IRequestType, apiMethod: (payload: any) => Promise<any>, ...args: any[]): any {
-  try {
-    yield put({type: requestType.PENDING});
-    const payload = yield call(apiMethod, ...args);
-    yield put({type: requestType.SUCCESS, payload});
-  } catch (e) {
-    yield put({type: requestType.FAILURE, message: e.message});
+// tslint:disable:max-line-length
+export default function* makeRequest(requestType: IPromiseActions, apiMethod: (payload: any) => Promise<any>, ...args: any[]): IterableIterator<PutEffect<Action> | CallEffect> {
+  yield put({type: requestType.PENDING});
+  const [arg0, arg1, arg2, arg3, arg4, arg5, ...rest] = args; // we do this because of redux saga typing limitation
+  const payload = yield call(apiMethod, arg0, arg1, arg2, arg3, arg4, arg5, ...rest);
+  if (payload.error) {
+    yield put({type: requestType.REJECTED, message: payload.error});
+  } else {
+    yield put({type: requestType.FULFILLED, payload});
   }
 }

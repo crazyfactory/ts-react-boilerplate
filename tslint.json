@@ -16,13 +16,7 @@
     "no-eval": true,
     "no-exec-script": true,
     "no-function-constructor-with-string-args": true,
-    "no-http-string": [
-      true,
-      "http://www.example.com/?.*",
-      "http://api.example.com/?.*",
-      "http://www.examples.com/?.*",
-      "http://jsonplaceholder.typicode.com/?.*"
-    ],
+    "no-http-string": true,
     "no-inner-html": true,
     "no-octal-literal": true,
     "no-reserved-keywords": false,
@@ -51,7 +45,7 @@
     "no-constant-condition": true,
     "no-control-regex": true,
     "no-debugger": true,
-    "no-duplicate-case": true,
+    "no-duplicate-switch-case": true,
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-increment-decrement": true,
@@ -60,7 +54,7 @@
     "no-jquery-raw-elements": true,
     "no-regex-spaces": true,
     "no-sparse-arrays": true,
-    "no-stateless-class": true,
+    "no-unnecessary-class": true,
     "no-string-literal": true,
     "no-unnecessary-bind": true,
     "no-unnecessary-override": true,
@@ -77,7 +71,6 @@
     ],
     "use-isnan": true,
     "use-named-parameter": true,
-    "valid-typeof": true,
     "class-name": true,
     "comment-format": [
       true,
@@ -107,7 +100,7 @@
     ],
     "max-line-length": [
       true,
-      200
+      120
     ],
     "member-access": true,
     "member-ordering": [
@@ -120,7 +113,7 @@
     "new-parens": true,
     "no-construct": true,
     "no-default-export": false,
-    "no-empty-interfaces": true,
+    "no-empty-interface": true,
     "no-for-in": true,
     "no-function-expression": true,
     "no-inferrable-types": false,
@@ -129,11 +122,11 @@
     "no-relative-imports": false,
     "no-require-imports": false,
     "no-shadowed-variable": true,
-    "no-typeof-undefined": true,
+    "no-typeof-undefined": false,
     "no-unnecessary-local-variable": true,
     "no-var-keyword": true,
     "no-var-requires": false,
-    "no-var-self": true,
+    "no-this-assignment": true,
     "object-literal-sort-keys": true,
     "one-variable-per-declaration": true,
     "prefer-array-literal": true,
@@ -226,6 +219,8 @@
     "no-unexternalized-strings": false,
     "prefer-type-cast": false,
     "no-angle-bracket-type-assertion": true,
-    "jsx-alignment": false
+    "jsx-alignment": false,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-submodule-imports": false
   }
 }

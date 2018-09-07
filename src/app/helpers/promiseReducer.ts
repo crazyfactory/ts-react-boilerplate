@@ -1,26 +1,35 @@
 import {IAction, IState} from "../redux/modules/baseModule";
 
-export interface IRequestType {
+export interface IPromiseActions {
+  FULFILLED: string;
   PENDING: string;
-  SUCCESS: string;
-  FAILURE: string;
+  REJECTED: string;
 }
 
-export default function promiseReducer<P>(actionType: IRequestType, state: IState<P>, action: IAction<P>): IState<P> {
+export const promiseAction = (baseAction: string): IPromiseActions => {
+  return {
+    FULFILLED: baseAction + "_FULFILLED",
+    PENDING: baseAction + "_PENDING",
+    REJECTED: baseAction + "_REJECTED"
+  };
+};
+
+// tslint:disable:max-line-length
+export default function promiseReducer<P, M = {}>(baseAction: string, state: IState<P, M>, action: IAction<P, M>): IState<P, M> {
   switch (action.type) {
-    case actionType.PENDING:
+    case promiseAction(baseAction).PENDING:
       return {
         ...state,
         isFetching: true
       };
 
-    case actionType.SUCCESS:
+    case promiseAction(baseAction).FULFILLED:
       return {
         ...state,
         isFetching: false,
         payload: action.payload
       };
-    case actionType.FAILURE:
+    case promiseAction(baseAction).REJECTED:
       return {
         ...state,
         error: true,

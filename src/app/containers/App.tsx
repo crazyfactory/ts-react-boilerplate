@@ -7,14 +7,14 @@ import * as en from "react-intl/locale-data/en";
 import * as es from "react-intl/locale-data/es";
 import * as fr from "react-intl/locale-data/fr";
 import {connect} from "react-redux";
-import {routeNodeSelector} from "redux-router5";
+import {createRouteNodeSelector} from "redux-router5";
 import {State as IRouteState} from "router5";
 import {cssRaw, cssRule, style} from "typestyle";
 
 import {Header} from "../components";
 import {IStore} from "../redux/IStore";
 import {IState} from "../redux/modules/baseModule";
-import {ILanguage} from "../redux/modules/languageModule";
+import {IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
 import {AboutPage} from "./AboutPage";
 import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
@@ -41,7 +41,7 @@ const styles = {
   })
 };
 
-class App extends React.Component<IStateToProps, null> {
+class App extends React.Component<IStateToProps> {
   private components: {[key: string]: React.ComponentClass} = {
     about: AboutPage,
     counter: CounterPage,
@@ -50,8 +50,8 @@ class App extends React.Component<IStateToProps, null> {
     stars: StarsPage
   };
 
-  constructor() {
-    super();
+  constructor(props: IStateToProps) {
+    super(props);
     addLocaleData([...en, ...es, ...fr, ...de]);
   }
 
@@ -59,7 +59,7 @@ class App extends React.Component<IStateToProps, null> {
     const {language, route} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
-      <IntlProvider locale={language.payload.locale} messages={language.payload.languageData}>
+      <IntlProvider locale={language.meta.locale} messages={language.payload.translations}>
         <section className={styles.container}>
           <Helmet {...appConfig.app.head}/>
           <Header/>
@@ -71,15 +71,15 @@ class App extends React.Component<IStateToProps, null> {
 }
 
 interface IStateToProps {
-  language: IState<ILanguage>;
+  language: IState<ISettings, ISettingsMeta>;
   route: IRouteState;
 }
 
-const mapStateToProps = (state: Partial<IStore>) => ({
-  language: state.language,
-  ...routeNodeSelector("")(state)
+const mapStateToProps = (state: Pick<IStore, "settings" | "router">) => ({
+  language: state.settings,
+  ...createRouteNodeSelector("")(state)
 });
 
-const connectedApp = connect<IStateToProps, null, null>(mapStateToProps, null)(App);
+const connectedApp = connect<IStateToProps>(mapStateToProps)(App);
 
-export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles}
+export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles};
