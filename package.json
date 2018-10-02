@@ -38,7 +38,7 @@
     "prestart": "npm run build -s",
     "start": "node build/server.js",
     "start:prod": "cross-env NODE_ENV=production npm start",
-    "test": "jest",
+    "test": "jest --maxWorkers=4",
     "test:no-cache": "jest --no-cache",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish \"src/**/**.ts*\" -e \"src/**/**.snap\"",
