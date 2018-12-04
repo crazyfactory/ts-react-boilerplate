@@ -1,6 +1,6 @@
 import * as PromiseReducer from "../../helpers/promiseReducer";
 import {IAction, IState} from "./baseModule";
-import {CHANGE_LOCALE, changeLocale, IMeta, ISettings, settingsReducer} from "./settingsModule";
+import {CHANGE_LANGUAGE, invokeChangeLanguage, IMeta, ISettings, settingsReducer} from "./settingsModule";
 
 describe("languageModule", () => {
   describe("reducer", () => {
@@ -19,7 +19,7 @@ describe("languageModule", () => {
         meta: {
           locale: "de"
         },
-        type: CHANGE_LOCALE
+        type: CHANGE_LANGUAGE
       };
       expect(settingsReducer(state, action)).toEqual({
         isFetching: false,
@@ -48,7 +48,7 @@ describe("languageModule", () => {
       spiedFn.mockClear();
       expect(spiedFn).not.toHaveBeenCalled();
       settingsReducer(state, {type: "some type"});
-      expect(spiedFn).toHaveBeenCalledWith(CHANGE_LOCALE, state, {type: "some type"});
+      expect(spiedFn).toHaveBeenCalledWith(CHANGE_LANGUAGE, state, {type: "some type"});
     });
 
     it("has default initialState", () => {
@@ -67,7 +67,7 @@ describe("languageModule", () => {
       spiedFn.mockClear();
       expect(spiedFn).not.toHaveBeenCalled();
       settingsReducer(undefined, {type: "some type"});
-      expect(spiedFn).toHaveBeenLastCalledWith(CHANGE_LOCALE, initialState, {type: "some type"});
+      expect(spiedFn).toHaveBeenLastCalledWith(CHANGE_LANGUAGE, initialState, {type: "some type"});
     });
   });
 
@@ -78,9 +78,9 @@ describe("languageModule", () => {
           meta: {
             locale: "de"
           },
-          type: CHANGE_LOCALE
+          type: CHANGE_LANGUAGE
         };
-        expect(changeLocale("de")).toEqual(expected);
+        expect(invokeChangeLanguage("de")).toEqual(expected);
       });
     });
   });

@@ -1,7 +1,7 @@
 import {call, takeLatest} from "redux-saga/effects";
 import {promiseAction} from "../helpers/promiseReducer";
 import {IAction} from "../redux/modules/baseModule";
-import {CHANGE_LOCALE, IMeta, ISettings} from "../redux/modules/settingsModule";
+import {CHANGE_LANGUAGE, IMeta, ISettings} from "../redux/modules/settingsModule";
 import {dummyApi} from "./dummyApi";
 import makeRequest from "./makeRequest";
 import {fetchTranslations, watchChangeLocale} from "./settingsSaga";
@@ -18,7 +18,7 @@ describe("SettingsSaga", () => {
 
     it("must call makeRequest of api.getTranslations", () => {
       expect(gen.next().value).toEqual(
-        call(makeRequest, promiseAction(CHANGE_LOCALE), dummyApi.getTranslations, action.meta.locale)
+        call(makeRequest, promiseAction(CHANGE_LANGUAGE), dummyApi.getTranslations, action.meta.locale)
       );
     });
 
@@ -29,8 +29,8 @@ describe("SettingsSaga", () => {
 
   describe("changeLocaleListener", () => {
     const gen = watchChangeLocale();
-    it("should watch for CHANGE_LOCALE action", () => {
-      expect(gen.next().value).toEqual(takeLatest(CHANGE_LOCALE, fetchTranslations));
+    it("should watch for CHANGE_LANGUAGE action", () => {
+      expect(gen.next().value).toEqual(takeLatest(CHANGE_LANGUAGE, fetchTranslations));
     });
 
     it("must be done", () => {

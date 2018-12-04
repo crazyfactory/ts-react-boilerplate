@@ -1,20 +1,12 @@
 import {normalize, setupPage} from "csstips";
 import * as React from "react";
 import {Helmet} from "react-helmet";
-import {addLocaleData, IntlProvider} from "react-intl";
-import * as de from "react-intl/locale-data/de";
-import * as en from "react-intl/locale-data/en";
-import * as es from "react-intl/locale-data/es";
-import * as fr from "react-intl/locale-data/fr";
 import {connect} from "react-redux";
-import {createRouteNodeSelector} from "redux-router5";
+import {createRouteNodeSelector, RouterState} from "redux-router5";
 import {State as IRouteState} from "router5";
 import {cssRaw, cssRule, style} from "typestyle";
-
 import {Header} from "../components";
 import {IStore} from "../redux/IStore";
-import {IState} from "../redux/modules/baseModule";
-import {IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
 import {AboutPage} from "./AboutPage";
 import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
@@ -52,31 +44,26 @@ class App extends React.Component<IStateToProps> {
 
   constructor(props: IStateToProps) {
     super(props);
-    addLocaleData([...en, ...es, ...fr, ...de]);
   }
 
   public render(): JSX.Element {
-    const {language, route} = this.props;
+    const {route} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
-      <IntlProvider locale={language.meta.locale} messages={language.payload.translations}>
-        <section className={styles.container}>
-          <Helmet {...appConfig.app.head}/>
-          <Header/>
-          {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>Not found</div>}
-        </section>
-      </IntlProvider>
+      <section className={styles.container}>
+        <Helmet {...appConfig.app.head}/>
+        <Header/>
+        {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>Not found</div>}
+      </section>
     );
   }
 }
 
 interface IStateToProps {
-  language: IState<ISettings, ISettingsMeta>;
   route: IRouteState;
 }
 
-const mapStateToProps = (state: Pick<IStore, "settings" | "router">) => ({
-  language: state.settings,
+const mapStateToProps = (state: Pick<IStore, "settings" | "router">): IStateToProps & Partial<RouterState> => ({
   ...createRouteNodeSelector("")(state)
 });
 

@@ -37,7 +37,7 @@ describe("<App />", () => {
       router: {route, previousRoute: route, transitionRoute: null, transitionError: null},
       settings: language
     });
-    expect(props.language).toEqual(language);
+    expect(props.settings).toEqual(language);
     expect(props.route).toEqual(route);
   });
 

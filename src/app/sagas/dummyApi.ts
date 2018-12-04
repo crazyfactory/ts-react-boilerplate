@@ -1,4 +1,4 @@
-import {ISettings} from "../redux/modules/settingsModule";
+import {ITranslations} from "../redux/modules/settingsModule";
 import {IStars} from "../redux/modules/starsModule";
 
 // Don't forget to enable this in production!
@@ -13,7 +13,7 @@ export const dummyApi = {
       return res.json().then((json) => ({error: json.message}));
     });
   },
-  getTranslations: (payload: string): Promise<ISettings> => {
+  getTranslations: (payload: string): Promise<ITranslations> => {
     return fetch(`http://localhost:8889/translation/${payload}`).then((res) => res.json());
   }
 };

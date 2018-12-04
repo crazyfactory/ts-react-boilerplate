@@ -7,7 +7,7 @@ export class LanguageHelper {
   }
 
   public static getDefaultLanguage(): string {
-    return "en-GB";
+    return "en-US";
   }
 
   public static isSupported(language: string): boolean {
@@ -19,7 +19,7 @@ export class LanguageHelper {
   }
 
   private static getSupportedLanguagesArray(): string[] {
-    return ["en-GB", "en-US", "de"];
+    return ["en-US", "de"];
   }
 
   private static getLanguageData(language: string): object {
@@ -27,7 +27,7 @@ export class LanguageHelper {
   }
 
   public getRequestLanguageData(): any {
-    return LanguageHelper.getLanguageData(LanguageHelper.isSupported(this.preferedLang) ? this.preferedLang : "en-GB");
+    return LanguageHelper.getLanguageData(LanguageHelper.isSupported(this.preferedLang) ? this.preferedLang : "en-US");
   }
 
   public getRequestLang(): string {

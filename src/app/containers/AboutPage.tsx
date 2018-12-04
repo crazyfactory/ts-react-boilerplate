@@ -1,9 +1,8 @@
 import * as React from "react";
-import {FormattedMessage, InjectedIntlProps, injectIntl} from "react-intl";
 import {connect} from "react-redux";
+import {Dispatch} from "redux";
 import {IStore} from "../redux/IStore";
-import {IDispatchToProps} from "../redux/modules/baseModule";
-import {changeLocale} from "../redux/modules/settingsModule";
+import {invokeChangeLanguage} from "../redux/modules/settingsModule";
 
 class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
@@ -12,14 +11,14 @@ class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
   }
 
   public switchLanguage(): void {
-    const locale = this.props.locale === "en-GB" ? "de" : "en-GB";
-    this.props.dispatch(changeLocale(locale));
+    const language = this.props.language === "en-US" ? "de" : "en-US";
+    this.props.invokeChangeLanguage(language);
   }
 
   public render(): JSX.Element {
     return (
       <div>
-        <h3><FormattedMessage id="current.language" defaultMessage="Current Language" />: {this.props.locale}</h3>
+        <h3><FormattedMessage id="current.language" defaultMessage="Current Language" />: {this.props.language}</h3>
         <button onClick={this.switchLanguage}>
           <FormattedMessage id="about.change" defaultMessage="Change language"/>
         </button>
@@ -30,14 +29,23 @@ class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
 }
 
 interface IStateToProps {
-  locale: string;
+  language: string;
 }
 
-const mapStateToProps = (state: Pick<IStore, "settings">) => ({
-  locale: state.settings.meta.locale
+interface IDispatchToProps {
+  invokeChangeLanguage: (language: string) => void;
+}
+
+const mapStateToProps = (state: Pick<IStore, "settings">): IStateToProps => ({
+  language: state.settings.language
 });
-const connectedAbout = injectIntl(
-  connect<IStateToProps, IDispatchToProps, InjectedIntlProps>(mapStateToProps)(AboutPage)
-);
+
+const mapDispatchToProps = (dispatch: Dispatch): IDispatchToProps => {
+  return {
+    invokeChangeLanguage: (language: string) => dispatch(invokeChangeLanguage(language))
+  };
+};
+
+const connectedAbout = connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps)(AboutPage);
 
 export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage, mapStateToProps};

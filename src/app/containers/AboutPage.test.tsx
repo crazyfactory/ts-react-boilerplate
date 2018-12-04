@@ -1,7 +1,7 @@
 import {shallow} from "enzyme";
 import * as React from "react";
 import {IAction, IState} from "../redux/modules/baseModule";
-import {CHANGE_LOCALE, IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
+import {CHANGE_LANGUAGE, IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
 import {mapStateToProps, UnconnectedAbout} from "./AboutPage";
 
 /* tslint:disable:no-empty jsx-no-lambda */
@@ -16,7 +16,7 @@ describe("<AboutPage />", () => {
   };
 
   it("matches snapshot", () => {
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} language=""/>);
     expect(shallowComponent).toMatchSnapshot();
   });
 
@@ -27,7 +27,7 @@ describe("<AboutPage />", () => {
 
   it("calls switchLanguage() when button is clicked", () => {
     const spy = jest.spyOn(UnconnectedAbout.prototype, "switchLanguage");
-    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} locale=""/>);
+    const shallowComponent = shallow(<UnconnectedAbout dispatch={jest.fn()} language=""/>);
 
     expect(shallowComponent.find("button")).toBeDefined();
     expect(spy).not.toHaveBeenCalled();
@@ -36,14 +36,14 @@ describe("<AboutPage />", () => {
   });
 
   describe("switchLanguage()", () => {
-    it("dispatches CHANGE_LOCALE action to en-GB", () => {
+    it("dispatches CHANGE_LANGUAGE action to en-GB", () => {
       const dispatch = jest.fn();
-      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale="" />);
+      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} language="" />);
       const expectedValue: IAction<ISettings, ISettingsMeta> = {
         meta: {
           locale: "en-GB"
         },
-        type: CHANGE_LOCALE
+        type: CHANGE_LANGUAGE
       };
 
       expect(dispatch).not.toHaveBeenCalled();
@@ -51,14 +51,14 @@ describe("<AboutPage />", () => {
       expect(dispatch).toHaveBeenCalledWith(expectedValue);
     });
 
-    it("dispatches CHANGE_LOCALE action to de", () => {
+    it("dispatches CHANGE_LANGUAGE action to de", () => {
       const dispatch = jest.fn();
-      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} locale="en-GB"/>);
+      const shallowComponent = shallow(<UnconnectedAbout dispatch={dispatch} language="en-GB"/>);
       const expectedValue: IAction<ISettings, ISettingsMeta> = {
         meta: {
           locale: "de"
         },
-        type: CHANGE_LOCALE
+        type: CHANGE_LANGUAGE
       };
 
       expect(dispatch).not.toHaveBeenCalled();
