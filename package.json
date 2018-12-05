@@ -118,7 +118,7 @@
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "^6.0.0",
     "react-router5": "^6.3.0",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
