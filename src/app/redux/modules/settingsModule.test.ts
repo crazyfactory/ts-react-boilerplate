@@ -1,6 +1,5 @@
-import * as PromiseReducer from "../../helpers/promiseReducer";
-import {IAction, IState} from "./baseModule";
-import {CHANGE_LANGUAGE, invokeChangeLanguage, IMeta, ISettings, settingsReducer} from "./settingsModule";
+import {IAction} from "./baseModule";
+import {settingsReducer} from "./settingsModule";
 
 describe("languageModule", () => {
   describe("reducer", () => {

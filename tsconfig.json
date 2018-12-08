@@ -10,7 +10,7 @@
     "outDir": "build",
     "module": "commonjs",
     "target": "es5",
-    "lib": ["es5", "scripthost", "dom", "es2015.promise", "es2015.generator", "es2015.iterable"],
+    "lib": ["es5", "scripthost", "dom", "es2015"],
     "sourceMap": true,
     "inlineSourceMap": false,
     "inlineSources": false,
