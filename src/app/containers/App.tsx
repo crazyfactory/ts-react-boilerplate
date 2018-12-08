@@ -3,15 +3,16 @@ import * as React from "react";
 import {Helmet} from "react-helmet";
 import {connect} from "react-redux";
 import {createRouteNodeSelector, RouterState} from "redux-router5";
+import {createSelector} from "reselect";
 import {State as IRouteState} from "router5";
 import {cssRaw, cssRule, style} from "typestyle";
 import {Header} from "../components";
+import {Translator} from "../models/Translator";
+import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
+import {translationsSelector} from "../selectors/translationsSelector";
 import {AboutPage} from "./AboutPage";
-import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
-import {RegisterPage} from "./RegisterPage";
-import {StarsPage} from "./StarsPage";
 
 const appConfig = require("../../../config/main");
 
@@ -36,24 +37,17 @@ const styles = {
 class App extends React.Component<IStateToProps> {
   private components: {[key: string]: React.ComponentClass} = {
     about: AboutPage,
-    counter: CounterPage,
-    home: HomePage,
-    register: RegisterPage,
-    stars: StarsPage
+    home: HomePage
   };
 
-  constructor(props: IStateToProps) {
-    super(props);
-  }
-
   public render(): JSX.Element {
-    const {route} = this.props;
+    const {route, translations: {notFound}} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
       <section className={styles.container}>
         <Helmet {...appConfig.app.head}/>
         <Header/>
-        {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>Not found</div>}
+        {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>{notFound}</div>}
       </section>
     );
   }
@@ -61,10 +55,24 @@ class App extends React.Component<IStateToProps> {
 
 interface IStateToProps {
   route: IRouteState;
+  translations: {
+    notFound: string;
+  };
 }
 
-const mapStateToProps = (state: Pick<IStore, "settings" | "router">): IStateToProps & Partial<RouterState> => ({
-  ...createRouteNodeSelector("")(state)
+const componentTranslationsSelector = createSelector(
+  translationsSelector,
+  (translations) => {
+    const translator: ITranslator = new Translator(translations);
+    return {
+      notFound: translator.translate("Not Found")
+    };
+  }
+);
+
+const mapStateToProps = (state: Pick<IStore, "router" | "settings">): IStateToProps & Partial<RouterState> => ({
+  ...createRouteNodeSelector("")(state),
+  translations: componentTranslationsSelector(state)
 });
 
 const connectedApp = connect<IStateToProps>(mapStateToProps)(App);

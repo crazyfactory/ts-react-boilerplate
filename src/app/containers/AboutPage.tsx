@@ -2,11 +2,11 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {createSelector} from "reselect";
-import {oc} from "../helpers/oc";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
 import {invokeChangeLanguage} from "../redux/modules/settingsModule";
+import {translationsSelector} from "../selectors/translationsSelector";
 
 class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
@@ -45,8 +45,6 @@ interface IStateToProps {
 interface IDispatchToProps {
   invokeChangeLanguage: (language: string) => void;
 }
-
-const translationsSelector = (state: Pick<IStore, "settings">) => oc(state).settings.translations();
 
 const componentTranslationsSelector = createSelector(
   translationsSelector,
