@@ -18,17 +18,24 @@ const initialState: ISettingsState = {
   translations: {}
 };
 
+type CHANGE_LANGUAGE_INVOKED = INVOKED;
 type CHANGE_LANGUAGE_PENDING = PENDING;
 type CHANGE_LANGUAGE_FULFILLED = FULFILLED;
 type CHANGE_LANGUAGE_REJECTED = REJECTED;
 
 export function settingsReducer(
   state: ISettingsState = initialState,
-  action: IAction<null, CHANGE_LANGUAGE_PENDING> |
+  action: IAction<string, CHANGE_LANGUAGE_INVOKED> |
+    IAction<null, CHANGE_LANGUAGE_PENDING> |
     IAction<ITranslations, CHANGE_LANGUAGE_FULFILLED> |
     IAction<null, CHANGE_LANGUAGE_REJECTED, string>
 ): ISettingsState {
   switch (action.type) {
+    case changeLanguage.actionTypes.INVOKED:
+      return {
+        ...state,
+        language: action.payload
+      };
     case changeLanguage.actionTypes.PENDING:
       return {
         ...state,
@@ -37,6 +44,8 @@ export function settingsReducer(
     case changeLanguage.actionTypes.FULFILLED:
       return {
         ...state,
+        error: "",
+        pending: false,
         translations: action.payload
       };
     case changeLanguage.actionTypes.REJECTED:

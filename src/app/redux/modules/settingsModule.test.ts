@@ -1,85 +1,113 @@
-import {IAction} from "./baseModule";
-import {settingsReducer} from "./settingsModule";
+import {IAction, INVOKED, PENDING} from "./baseModule";
+import {changeLanguage, invokeChangeLanguage, ISettingsState, settingsReducer} from "./settingsModule";
 
-describe("languageModule", () => {
+describe("settingsModule", () => {
   describe("reducer", () => {
-    it("returns state object with new meta", () => {
-      const state: IState<ISettings, IMeta> = {
-        isFetching: false,
-        meta: {
-          currency: "USD",
-          locale: "en-US"
-        },
-        payload: {
-          translations: {}
-        }
-      };
-      const action: IAction<ISettings, IMeta> = {
-        meta: {
-          locale: "de"
-        },
-        type: CHANGE_LANGUAGE
-      };
-      expect(settingsReducer(state, action)).toEqual({
-        isFetching: false,
-        meta: {
-          currency: "USD",
-          locale: "de"
-        },
-        payload: {
-          translations: {}
-        }
+    describe("returns correct state", () => {
+      it("when action.type = changeLanguage.actionTypes.PENDING", () => {
+        const stateBefore: ISettingsState = {
+          error: "",
+          language: "en-US",
+          pending: false,
+          translations: {Hi: "Hi"}
+        };
+        const stateAfter = settingsReducer(stateBefore, {payload: "de-DE", type: changeLanguage.actionTypes.INVOKED});
+        expect(stateAfter).toEqual({
+          error: "",
+          language: "de-DE",
+          pending: false,
+          translations: {Hi: "Hi"}
+        });
+      });
+
+      it("when action.type = changeLanguage.actionTypes.PENDING", () => {
+        const stateBefore: ISettingsState = {
+          error: "",
+          language: "de-DE",
+          pending: false,
+          translations: {Hi: "Hi"}
+        };
+        const stateAfter = settingsReducer(stateBefore, {type: changeLanguage.actionTypes.PENDING});
+        expect(stateAfter).toEqual({
+          error: "",
+          language: "de-DE",
+          pending: true,
+          translations: {Hi: "Hi"}
+        });
+      });
+
+      it("when action.type = changeLanguage.actionTypes.FULFILLED", () => {
+        const stateBefore: ISettingsState = {
+          error: "",
+          language: "de-DE",
+          pending: true,
+          translations: {Hi: "Hi"}
+        };
+        const stateAfter = settingsReducer(
+          stateBefore,
+          {payload: {Hi: "Hallo"}, type: changeLanguage.actionTypes.FULFILLED}
+        );
+        expect(stateAfter).toEqual({
+          error: "",
+          language: "de-DE",
+          pending: false,
+          translations: {Hi: "Hallo"}
+        });
+      });
+
+      it("when action.type = changeLanguage.actionTypes.REJECTED", () => {
+        const stateBefore: ISettingsState = {
+          error: "",
+          language: "de-DE",
+          pending: true,
+          translations: {Hi: "Hi"}
+        };
+        const stateAfter = settingsReducer(
+          stateBefore,
+          {message: "Error occurred!", type: changeLanguage.actionTypes.REJECTED}
+        );
+        expect(stateAfter).toEqual({
+          error: "Error occurred!",
+          language: "de-DE",
+          pending: false,
+          translations: {Hi: "Hi"}
+        });
+      });
+
+      it("when action.type is unknown", () => {
+        const stateBefore: ISettingsState = {
+          error: "",
+          language: "en-US",
+          pending: false,
+          translations: {Hi: "Hi"}
+        };
+
+        const stateAfter = settingsReducer(stateBefore, {type: "Foo" as PENDING});
+        expect(stateAfter).toBe(stateBefore);
       });
     });
 
-    it("calls promiseReducer with correct arguments", () => {
-      const state: IState<ISettings, IMeta> = {
-        isFetching: false,
-        meta: {
-          currency: "USD",
-          locale: "en-US"
-        },
-        payload: {
-          translations: {a: "a", b: "b"}
-        }
-      };
-      const spiedFn = jest.spyOn(PromiseReducer, "default");
-      spiedFn.mockClear();
-      expect(spiedFn).not.toHaveBeenCalled();
-      settingsReducer(state, {type: "some type"});
-      expect(spiedFn).toHaveBeenCalledWith(CHANGE_LANGUAGE, state, {type: "some type"});
-    });
-
     it("has default initialState", () => {
-      const initialState: IState<ISettings, IMeta> = {
-        isFetching: false,
-        meta: {
-          currency: "EUR",
-          locale: "en-US" // window.navigator.settings in jest is set to en-US
-        },
-        payload: {
-          translations: {}
-        }
+      const initialState: ISettingsState = {
+        error: "",
+        language: "en-US",
+        pending: false,
+        translations: {}
       };
 
-      const spiedFn = jest.spyOn(PromiseReducer, "default");
-      spiedFn.mockClear();
-      expect(spiedFn).not.toHaveBeenCalled();
-      settingsReducer(undefined, {type: "some type"});
-      expect(spiedFn).toHaveBeenLastCalledWith(CHANGE_LANGUAGE, initialState, {type: "some type"});
+      const stateAfter = settingsReducer(undefined, {type: "Foo" as PENDING});
+      expect(stateAfter).toEqual(initialState);
     });
   });
 
   describe("action creator", () => {
-    describe("fetchTranslations()", () => {
+    describe("invokeChangeLanguage()", () => {
       it("creates correct action", () => {
-        const expected: IAction<ISettings, IMeta> = {
-          meta: {
-            locale: "de"
-          },
-          type: CHANGE_LANGUAGE
+        const expected: IAction<string, INVOKED> = {
+          payload: "de-DE",
+          type: changeLanguage.actionTypes.INVOKED
         };
-        expect(invokeChangeLanguage("de")).toEqual(expected);
+        expect(invokeChangeLanguage("de-DE")).toEqual(expected);
       });
     });
   });
