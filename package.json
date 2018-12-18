@@ -125,7 +125,7 @@
     "redux-logger": "^3.0.6",
     "redux-router5": "^6.0.3",
     "redux-saga": "^0.16.0",
-    "router5": "^6.4.2",
+    "router5": "^7.0.0",
     "serve-favicon": "^2.5.0",
     "typestyle": "^2.0.1"
   },
