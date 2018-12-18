@@ -119,7 +119,7 @@
     "react-helmet": "^5.2.0",
     "react-intl": "^2.4.0",
     "react-redux": "^5.0.7",
-    "react-router5": "^6.3.0",
+    "react-router5": "^7.0.0",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-logger": "^3.0.6",
