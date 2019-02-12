@@ -18,7 +18,6 @@ var config = {
       './src/vendor/main.ts',
       'react',
       'react-dom',
-      'react-intl',
       'react-helmet',
       'react-redux',
       'react-router5',

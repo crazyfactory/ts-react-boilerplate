@@ -1,6 +1,5 @@
 import {color} from "csx";
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
 import {style} from "typestyle";
 
 const styles = {
@@ -15,7 +14,7 @@ class HomePage extends React.Component {
     return (
       <div className={styles.home}>
         <img src={require("../images/barbar.png")}/>
-        <p><FormattedMessage id="hello" defaultMessage="Hello!" /></p>
+        <p>Hello</p>
       </div>
     );
   }
