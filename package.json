@@ -5,20 +5,21 @@
   "config": {
     "validate-commit-msg": {
       "types": [
-        "feat",
-        "unfeat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "perf",
-        "test",
         "build",
-        "ci",
         "chore",
-        "revert",
+        "ci",
+        "cleanup",
+        "docs",
+        "feat",
+        "fix",
         "followup",
-        "improve"
+        "improve",
+        "perf",
+        "refactor",
+        "revert",
+        "style",
+        "test",
+        "unfeat"
       ]
     }
   },
