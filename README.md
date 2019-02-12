@@ -26,7 +26,6 @@ This boilerplate uses the following libraries and tools:
 
 #### Utilities
 - [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
-- [Redux Form](https://github.com/erikras/redux-form) keep form state in a Redux store
 - [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
 - [React Helmet](https://github.com/nfl/react-helmet)
 - [RavenJS](https://github.com/getsentry/raven-js) for capturing exceptions during run time

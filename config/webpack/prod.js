@@ -23,7 +23,6 @@ var config = {
       'react-router5',
       'redux-router5',
       'redux',
-      'redux-form',
       'redux-saga',
       'router5',
     ]
