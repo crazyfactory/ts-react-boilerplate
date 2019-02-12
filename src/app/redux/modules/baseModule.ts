@@ -5,12 +5,9 @@ export interface IAction<P, T = string, M = string> extends Action<T> {
   message?: M;
 }
 
-export interface IDispatchToProps {
-  dispatch: (actionCreator: IAction<any, any>) => any;
-}
-
 export interface IBaseState {
   error: string;
+  loaded: boolean;
   pending: boolean;
 }
 

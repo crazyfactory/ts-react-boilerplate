@@ -1,16 +1,27 @@
 import * as React from "react";
-import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
+import {Dispatch} from "redux";
 import {IStore} from "../redux/IStore";
-import {IDispatchToProps} from "../redux/modules/baseModule";
 import {loadStars} from "../redux/modules/starsModule";
 
-class StarsPage extends React.Component<IStateToProps & IDispatchToProps> {
+interface IStateToProps {
+  count: number;
+  error: string;
+  loaded: boolean;
+  pending: boolean;
+}
+
+interface IDispatchToProps {
+  loadStars: () => void;
+}
+
+interface IProps extends IStateToProps, IDispatchToProps {}
+
+class StarsPage extends React.Component<IProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
     super(props);
-
-    if (this.props.stargazersCount === -1) {
-      this.props.dispatch(loadStars());
+    if (!this.props.loaded) {
+      this.props.loadStars();
     }
   }
 
@@ -23,25 +34,28 @@ class StarsPage extends React.Component<IStateToProps & IDispatchToProps> {
   }
 
   private renderStars(): JSX.Element | string | number {
-    const {errorMessage, isFetching, stargazersCount} = this.props;
-    if (isFetching) {
-      return <FormattedMessage id="stars.fetching" defaultMessage="Fetching Stars.." />;
+    const {count, error, pending} = this.props;
+    if (pending) {
+      return <div>Fetching stars...</div>;
     } else {
-      return errorMessage ? errorMessage : stargazersCount;
+      return error ? error : count;
     }
   }
 }
 
-interface IStateToProps {
-  isFetching: boolean;
-  stargazersCount: number;
-  errorMessage?: string;
+function mapStateToProps(state: Pick<IStore, "stars">): IStateToProps {
+  return {
+    count: state.stars.count,
+    error: state.stars.error,
+    loaded: state.stars.loaded,
+    pending: state.stars.pending
+  };
 }
 
-const mapStateToProps = (state: Pick<IStore, "stars">) => ({
-  errorMessage: state.stars.message,
-  isFetching: state.stars.isFetching,
-  stargazersCount: state.stars.payload.stargazers_count
-});
-const connectedStars = connect<IStateToProps, IDispatchToProps>(mapStateToProps)(StarsPage);
-export {StarsPage as UnconnectedStars, connectedStars as StarsPage, mapStateToProps};
+function mapDispatchToProps(dispatch: Dispatch): IDispatchToProps {
+  return {
+    loadStars: () => dispatch(loadStars.invoke(null))
+  };
+}
+const connected = connect(mapStateToProps, mapDispatchToProps)(StarsPage);
+export {connected as StarsPage, mapStateToProps, StarsPage as UnconnectedStars};
