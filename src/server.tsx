@@ -1,4 +1,5 @@
 import * as e6p from "es6-promise";
+import {Request, Response} from "express";
 (e6p as any).polyfill();
 import "isomorphic-fetch";
 import * as React from "react";
@@ -20,10 +21,6 @@ const favicon = require("serve-favicon");
 const appConfig = require("../config/main");
 const manifest = require("../build/manifest.json");
 const app = express();
-const translationsHandler = (req, res) => {
-  const languageHelper = new LanguageHelper(req.params.lang);
-  res.json(languageHelper.getTranslations());
-};
 
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -44,9 +41,12 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.get("/translations/:lang", translationsHandler);
+app.get("/translations/:language", (req: Request, res: Response) => {
+  const languageHelper = new LanguageHelper(req.params.language);
+  res.json(languageHelper.getTranslations());
+});
 
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
   if (!appConfig.ssr) {
     res.sendFile(path.resolve("./build/index.html"), {}, (error) => {
       if (error) {
@@ -63,7 +63,7 @@ app.get("*", (req, res) => {
       return;
     }
 
-    const languageHelper = new LanguageHelper(req.headers["accept-language"]);
+    const languageHelper = new LanguageHelper(req.headers["accept-language"] as string);
     const store = configureStore(router, {
       router: {
         previousRoute: null,
