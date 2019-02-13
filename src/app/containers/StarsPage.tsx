@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {IStore} from "../redux/IStore";
-import {loadStars} from "../redux/modules/starsModule";
+import {loadStars as loadStarsActionCreator} from "../redux/modules/starsModule";
 
 interface IStateToProps {
   count: number;
@@ -54,8 +54,9 @@ function mapStateToProps(state: Pick<IStore, "stars">): IStateToProps {
 
 function mapDispatchToProps(dispatch: Dispatch): IDispatchToProps {
   return {
-    loadStars: () => dispatch(loadStars.invoke(null))
+    loadStars: () => dispatch(loadStarsActionCreator.invoke(null))
   };
 }
+
 const connected = connect(mapStateToProps, mapDispatchToProps)(StarsPage);
-export {connected as StarsPage, mapStateToProps, StarsPage as UnconnectedStars};
+export {connected as StarsPage, mapDispatchToProps, mapStateToProps, StarsPage as UnconnectedStars};

@@ -4,14 +4,14 @@ export interface IStarsState extends IBaseState {
   count: number;
 }
 
-export const loadStars = getPromiseAction<null, null, number, null>("STARS/LOAD_STARS");
-
 const initialState: IStarsState = {
   count: 0,
   error: "",
   loaded: false,
   pending: false
 };
+
+export const loadStars = getPromiseAction<null, null, number, null>("STARS/LOAD_STARS");
 
 export function starsReducer(
   state: IStarsState = initialState,
