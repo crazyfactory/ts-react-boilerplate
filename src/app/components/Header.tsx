@@ -2,7 +2,7 @@ import * as React from "react";
 import {style} from "typestyle";
 import {Link} from "./Link";
 
-const styles = {
+const classNames = {
   nav: style({
     $nest: {
       ul: {
@@ -19,16 +19,13 @@ const styles = {
   })
 };
 
-const Header = () => (
-  <nav className={styles.nav}>
+export const Header = () => (
+  <nav className={classNames.nav}>
     <ul>
       <li><Link name="home">Home</Link></li>
       <li><Link name="about">About Us</Link></li>
       <li><Link name="counter">Counter</Link></li>
       <li><Link name="stars">Stars</Link></li>
-      <li><Link name="register">Register</Link></li>
     </ul>
   </nav>
 );
-
-export {Header};
