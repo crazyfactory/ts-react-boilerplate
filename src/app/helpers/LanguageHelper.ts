@@ -1,10 +1,10 @@
 import * as fs from "fs";
 
 export class LanguageHelper {
-  private readonly preferredLang: string;
+  private readonly preferredLanguage: string;
 
   constructor(private requestedLanguage: string) {
-    this.preferredLang = this.requestedLanguage.split(",")[0];
+    this.preferredLanguage = this.requestedLanguage.split(",")[0];
   }
 
   public static getDefaultLanguage(): string {
@@ -23,19 +23,21 @@ export class LanguageHelper {
     return ["en", "de"];
   }
 
-  private static getLanguageData(language: string): object {
+  private static getTranslations(language: string): object {
     return JSON.parse(fs.readFileSync(LanguageHelper.getLanguageFileLocation(language)).toString());
   }
 
-  public getRequestLanguageData(): any {
-    return LanguageHelper.getLanguageData(LanguageHelper.isSupported(this.preferredLang) ? this.preferredLang : "en");
+  public getTranslations(): any {
+    return LanguageHelper.getTranslations(
+      LanguageHelper.isSupported(this.preferredLanguage) ? this.preferredLanguage : "en"
+    );
   }
 
-  public getRequestedLang(): string {
+  public getRequestedLanguage(): string {
     return this.requestedLanguage;
   }
 
   public getPreferredLanguage(): string {
-    return this.preferredLang;
+    return this.preferredLanguage;
   }
 }

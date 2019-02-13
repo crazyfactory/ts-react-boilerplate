@@ -9,7 +9,6 @@ import {RouterProvider} from "react-router5";
 import {App, Html} from "./app/containers";
 import {LanguageHelper} from "./app/helpers/LanguageHelper";
 import {configureStore} from "./app/redux/configureStore";
-import {ITranslations} from "./app/redux/modules/settingsModule";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
@@ -23,8 +22,7 @@ const manifest = require("../build/manifest.json");
 const app = express();
 const translationHandler = (req, res) => {
   const languageHelper = new LanguageHelper(req.params.lang);
-  const lang: ITranslations = {translations: languageHelper.getRequestLanguageData()};
-  res.json(lang);
+  res.json(languageHelper.getTranslations());
 };
 
 if (process.env.NODE_ENV !== "production") {
@@ -78,7 +76,7 @@ app.get("*", (req, res) => {
         language: "en",
         loaded: false,
         pending: false,
-        translations: languageHelper.getRequestLanguageData()
+        translations: languageHelper.getTranslations()
       }
     });
 

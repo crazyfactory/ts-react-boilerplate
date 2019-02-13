@@ -7,49 +7,51 @@ const languages: string[] = ["en, en", "en-GB, en;q=0.7", "de"];
 
 describe("LanguageHelper", () => {
 
-  it("constructor accepts settings and we're able to get it", () => {
-    const lang = new LanguageHelper(languages[0]);
-    expect(lang.getRequestedLang()).toBe("en, en");
+  describe("constructor", () => {
+    it("constructor accepts settings and we're able to get it", () => {
+      const languageHelper = new LanguageHelper(languages[0]);
+      expect(languageHelper.getRequestedLanguage()).toBe("en, en");
+    });
   });
 
   describe("getPreferredLanguage()", () => {
     it("returns the most preferred settings", () => {
-      const lang = new LanguageHelper(languages[0]);
-      expect(lang.getPreferredLanguage()).toBe("en");
+      const languageHelper = new LanguageHelper(languages[0]);
+      expect(languageHelper.getPreferredLanguage()).toBe("en");
     });
   });
 
   describe("getDefaultLanguage()", () => {
-    it("should return en-GB", () => {
-      expect(LanguageHelper.getDefaultLanguage()).toBe("en-GB");
+    it("returns en", () => {
+      expect(LanguageHelper.getDefaultLanguage()).toBe("en");
     });
   });
 
   describe("isSupported()", () => {
-    it("should return true for 'de'", () => {
+    it("returns true for en and de", () => {
+      expect(LanguageHelper.isSupported("en")).toBeTruthy();
       expect(LanguageHelper.isSupported("de")).toBeTruthy();
       expect(LanguageHelper.isSupported("blah")).toBeFalsy();
     });
   });
 
-  // not hundred percent sure how to test this one.
-  describe("getRequestLanguageData()", () => {
+  describe("getTranslations()", () => {
     let fs: IFS;
 
     beforeEach(() => {
       fs = require("fs");
     });
 
-    it("should return a settings data object for a valid requested settings", () => {
-      const lang = new LanguageHelper("de");
-      fs.__setFileContents("de.json", JSON.stringify({hello: "world"}));
-      expect(lang.getRequestLanguageData()).toEqual({hello: "world"});
+    it("returns settings data object for valid requested settings", () => {
+      const languageHelper = new LanguageHelper("de");
+      fs.__setFileContents("de.json", JSON.stringify({hello: "hallo"}));
+      expect(languageHelper.getTranslations()).toEqual({hello: "hallo"});
     });
 
-    it("should return a default settings data object for an invalid requested settings", () => {
-      fs.__setFileContents("en-gb.json", JSON.stringify({hello: "world"}));
-      const lang = new LanguageHelper("invalid settings");
-      expect(lang.getRequestLanguageData()).toEqual({hello: "world"});
+    it("returns default settings data object for invalid requested settings", () => {
+      fs.__setFileContents("en.json", JSON.stringify({hello: "hello"}));
+      const languageHelper = new LanguageHelper("invalid settings");
+      expect(languageHelper.getTranslations()).toEqual({hello: "hello"});
     });
   });
 });
