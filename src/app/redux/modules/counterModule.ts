@@ -1,47 +1,47 @@
-import {IAction, IState} from "./baseModule";
+import {IAction, IBaseState} from "./baseModule";
+
+export interface ICounterState extends IBaseState {
+  count: number;
+}
+
+const initialState: ICounterState = {
+  count: 0,
+  error: "",
+  loaded: false,
+  pending: false
+};
 
 export const INCREMENT: string = "counter/INCREMENT";
 export const DECREMENT: string = "counter/DECREMENT";
 
-export interface ICounter {
-  count: number;
-}
-
-const initialState: IState<ICounter> = {
-  isFetching: false,
-  payload: {
-    count: 0
-  }
-};
-
-export function counterReducer(state: IState<ICounter> = initialState, action?: IAction<ICounter>): IState<ICounter> {
+export function counterReducer(
+  state: ICounterState = initialState,
+  action: IAction<null, typeof INCREMENT> |
+    IAction<null, typeof DECREMENT>
+): ICounterState {
   switch (action.type) {
     case INCREMENT:
       return {
         ...state,
-        payload: {
-          count: state.payload.count + 1
-        }
+        count: state.count + 1
       };
     case DECREMENT:
       return {
         ...state,
-        payload: {
-          count: ((state.payload.count - 1 > 0) ? state.payload.count - 1 : 0)
-        }
+        count: ((state.count - 1 > 0) ? state.count - 1 : 0)
       };
     default:
       return state;
   }
 }
 
-export function increment(): IAction<ICounter> {
+export function increment(): IAction<number, typeof INCREMENT> {
   return {
     type: INCREMENT
   };
 }
 
-export function decrement(): IAction<ICounter> {
+export function decrement(): IAction<null, typeof DECREMENT> {
   return {
     type: DECREMENT
   };
