@@ -8,7 +8,7 @@ const languages: string[] = ["en, en", "en-GB, en;q=0.7", "de"];
 describe("LanguageHelper", () => {
 
   describe("constructor", () => {
-    it("constructor accepts settings and we're able to get it", () => {
+    it("accepts settings and we're able to get it", () => {
       const languageHelper = new LanguageHelper(languages[0]);
       expect(languageHelper.getRequestedLanguage()).toBe("en, en");
     });
