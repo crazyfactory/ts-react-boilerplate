@@ -9,7 +9,7 @@ interface IHtmlProps {
   initialState?: Partial<IStore>;
 }
 
-class Html extends React.Component<IHtmlProps> {
+export class Html extends React.Component<IHtmlProps> {
   public render(): JSX.Element {
     const head = Helmet.renderStatic();
     const {markup, initialState} = this.props;
@@ -27,7 +27,7 @@ class Html extends React.Component<IHtmlProps> {
     const initialStateScript = (
       <script
         dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
-              charSet="UTF-8"
+        charSet="UTF-8"
       />
     );
     /* tslint:enable:react-no-dangerous-html */
@@ -44,10 +44,10 @@ class Html extends React.Component<IHtmlProps> {
         <link rel="shortcut icon" href="/favicon.ico"/>
       </head>
       <body>
-      {/* tslint:disable-next-line:react-no-dangerous-html */}
-      <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
-      {initialStateScript}
-      {renderScripts}
+        {/* tslint:disable-next-line:react-no-dangerous-html */}
+        <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
+        {initialStateScript}
+        {renderScripts}
       </body>
       </html>
     );
@@ -61,7 +61,4 @@ class Html extends React.Component<IHtmlProps> {
       return this.props.manifest[src];
     }).filter((file) => file !== undefined);
   }
-
 }
-
-export {Html};
