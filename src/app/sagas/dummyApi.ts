@@ -10,6 +10,6 @@ export const dummyApi = {
       .then((json) => json.stargazers_count);
   },
   getTranslations: (payload: string): Promise<ITranslations> => {
-    return fetch(`http://localhost:8889/translation/${payload}`).then((res) => res.json());
+    return fetch(`http://localhost:8889/translations/${payload}`).then((res) => res.json());
   }
 };

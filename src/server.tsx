@@ -20,7 +20,7 @@ const favicon = require("serve-favicon");
 const appConfig = require("../config/main");
 const manifest = require("../build/manifest.json");
 const app = express();
-const translationHandler = (req, res) => {
+const translationsHandler = (req, res) => {
   const languageHelper = new LanguageHelper(req.params.lang);
   res.json(languageHelper.getTranslations());
 };
@@ -44,7 +44,7 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.get("/translation/:lang", translationHandler);
+app.get("/translations/:lang", translationsHandler);
 
 app.get("*", (req, res) => {
   if (!appConfig.ssr) {
