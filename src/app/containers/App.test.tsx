@@ -2,7 +2,8 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {State as IRouteState} from "router5";
 import {ISettingsState} from "../redux/modules/settingsModule";
-import {mapStateToProps, styles, UnconnectedApp} from "./App";
+import {classNames, mapStateToProps, UnconnectedApp} from "./App";
+import {HomePage} from "./HomePage";
 
 describe("<App />", () => {
   const route: IRouteState = {
@@ -19,6 +20,7 @@ describe("<App />", () => {
   const settings: ISettingsState = {
     error: "",
     language: "en",
+    loaded: true,
     pending: false,
     translations: {"Not Found": "Not Found"}
   };
@@ -34,17 +36,22 @@ describe("<App />", () => {
   });
 
   it("renders with correct style", () => {
-    const component = shallow(<UnconnectedApp route={route} translations={translations}/>);
-    expect(component.find("section")).toHaveClassName(styles.container);
+    const wrapper = shallow(<UnconnectedApp route={route} translations={translations}/>);
+    expect(wrapper.find("section")).toHaveClassName(classNames.container);
+  });
+
+  it("renders HomePage", () => {
+    const wrapper = shallow(<UnconnectedApp route={route} translations={translations}/>);
+    expect(wrapper.find(HomePage).length).toBe(1);
   });
 
   it("renders Not Found when route is null", () => {
-    const component = shallow(<UnconnectedApp route={null} translations={translations}/>);
-    expect(component.find("div")).toHaveText("Not Found");
+    const wrapper = shallow(<UnconnectedApp route={null} translations={translations}/>);
+    expect(wrapper.find("div")).toHaveText("Not Found");
   });
 
   it("renders Not Found when segment is undefined", () => {
-    const component = shallow(<UnconnectedApp route={routeUnavailable} translations={translations}/>);
-    expect(component.find("div")).toHaveText("Not Found");
+    const wrapper = shallow(<UnconnectedApp route={routeUnavailable} translations={translations}/>);
+    expect(wrapper.find("div")).toHaveText("Not Found");
   });
 });

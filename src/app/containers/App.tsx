@@ -25,8 +25,7 @@ cssRule(`html, body`, {
   height: "auto"
 });
 
-// App container style
-const styles = {
+const classNames = {
   container: style({
     margin: 0,
     padding: 0,
@@ -44,7 +43,7 @@ class App extends React.Component<IStateToProps> {
     const {route, translations: {notFound}} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
     return (
-      <section className={styles.container}>
+      <section className={classNames.container}>
         <Helmet {...appConfig.app.head}/>
         <Header/>
         {segment && this.components[segment] ? React.createElement(this.components[segment]) : <div>{notFound}</div>}
@@ -75,6 +74,6 @@ const mapStateToProps = (state: Pick<IStore, "router" | "settings">): IStateToPr
   translations: componentTranslationsSelector(state)
 });
 
-const connectedApp = connect<IStateToProps>(mapStateToProps)(App);
+const connected = connect(mapStateToProps)(App);
 
-export {connectedApp as App, App as UnconnectedApp, mapStateToProps, styles};
+export {classNames, connected as App, App as UnconnectedApp, mapStateToProps};
