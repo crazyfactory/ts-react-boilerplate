@@ -10,6 +10,7 @@ import {RouterProvider} from "react-router5";
 import {App, Html} from "./app/containers";
 import {LanguageHelper} from "./app/helpers/LanguageHelper";
 import {configureStore} from "./app/redux/configureStore";
+import {IStore} from "./app/redux/IStore";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
@@ -74,14 +75,14 @@ app.get("*", (req: Request, res: Response) => {
       settings: {
         error: "",
         language: "en",
-        loaded: false,
+        loaded: true,
         pending: false,
         translations: languageHelper.getTranslations()
       }
     });
 
     store.runSaga(rootSaga).toPromise().then(() => {
-      // deep clone state because store will be changed during the second render in componentWillMount
+      // deep clone state because store will be changed during the second render in constructor
       const initialState = JSON.parse(JSON.stringify(store.getState()));
 
       // tslint:disable-next-line
@@ -109,7 +110,7 @@ app.get("*", (req: Request, res: Response) => {
     // tslint:disable-next-line
     console.time("first render");
 
-    // first render to activate componentWillMount to dispatch actions for loading initial data
+    // first render to activate constructor to dispatch actions for loading initial data
     renderToString(
       <Provider store={store} key="provider">
         <RouterProvider router={router}>
@@ -136,7 +137,7 @@ app.listen(appConfig.port, appConfig.host, (err) => {
   }
 });
 
-function renderHTML(markup: string, initialState: any): string {
+function renderHTML(markup: string, initialState: Partial<IStore>): string {
   const html = renderToString(
     <Html markup={markup} manifest={manifest} initialState={initialState}/>
   );
