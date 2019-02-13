@@ -1,11 +1,12 @@
 import * as React from "react";
 import {Helmet} from "react-helmet";
 import {getStyles} from "typestyle";
+import {IStore} from "../redux/IStore";
 
 interface IHtmlProps {
   manifest?: object;
   markup?: string;
-  initialState?: any;
+  initialState?: Partial<IStore>;
 }
 
 class Html extends React.Component<IHtmlProps> {
