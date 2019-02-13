@@ -26,19 +26,11 @@ class StarsPage extends React.Component<IProps> {
   }
 
   public render(): JSX.Element {
-    return (
-      <div>
-        {this.renderStars()}
-      </div>
-    );
-  }
-
-  private renderStars(): JSX.Element | string | number {
     const {count, error, pending} = this.props;
     if (pending) {
       return <div>Fetching stars...</div>;
     } else {
-      return error ? error : count;
+      return error ? <div>{error}</div> : <div>{count}</div>;
     }
   }
 }
