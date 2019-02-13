@@ -1,54 +1,52 @@
 import {FULFILLED, getPromiseAction, IAction, IBaseState, INVOKED, PENDING, REJECTED} from "./baseModule";
 
-export const changeLanguage = getPromiseAction<string, null, any, string>("settings/CHANGE_LANGUAGE");
+export type TLanguage = "en" | "de";
 
 export interface ITranslations {
   [key: string]: string;
 }
 
 export interface ISettingsState extends IBaseState {
-  language: string;
+  language: TLanguage;
   translations: ITranslations;
 }
 
 const initialState: ISettingsState = {
   error: "",
-  language: "en-US",
+  language: "en",
+  loaded: false,
   pending: false,
   translations: {}
 };
 
-type CHANGE_LANGUAGE_INVOKED = INVOKED;
-type CHANGE_LANGUAGE_PENDING = PENDING;
-type CHANGE_LANGUAGE_FULFILLED = FULFILLED;
-type CHANGE_LANGUAGE_REJECTED = REJECTED;
+export const setLanguage = getPromiseAction<TLanguage, null, any, string>("SETTINGS/SET_LANGUAGE");
 
 export function settingsReducer(
   state: ISettingsState = initialState,
-  action: IAction<string, CHANGE_LANGUAGE_INVOKED> |
-    IAction<null, CHANGE_LANGUAGE_PENDING> |
-    IAction<ITranslations, CHANGE_LANGUAGE_FULFILLED> |
-    IAction<null, CHANGE_LANGUAGE_REJECTED, string>
+  action: IAction<TLanguage, INVOKED> |
+    IAction<null, PENDING> |
+    IAction<ITranslations, FULFILLED> |
+    IAction<null, REJECTED>
 ): ISettingsState {
   switch (action.type) {
-    case changeLanguage.actionTypes.INVOKED:
+    case setLanguage.actionTypes.INVOKED:
       return {
         ...state,
         language: action.payload
       };
-    case changeLanguage.actionTypes.PENDING:
+    case setLanguage.actionTypes.PENDING:
       return {
         ...state,
         pending: true
       };
-    case changeLanguage.actionTypes.FULFILLED:
+    case setLanguage.actionTypes.FULFILLED:
       return {
         ...state,
         error: "",
         pending: false,
         translations: action.payload
       };
-    case changeLanguage.actionTypes.REJECTED:
+    case setLanguage.actionTypes.REJECTED:
       return {
         ...state,
         error: action.message,
@@ -57,11 +55,4 @@ export function settingsReducer(
     default:
       return state;
   }
-}
-
-export function invokeChangeLanguage(language: string): IAction<string, INVOKED> {
-  return {
-    payload: language,
-    type: changeLanguage.actionTypes.INVOKED
-  };
 }

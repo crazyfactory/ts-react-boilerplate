@@ -18,7 +18,7 @@ describe("<App />", () => {
   };
   const settings: ISettingsState = {
     error: "",
-    language: "en-US",
+    language: "en",
     pending: false,
     translations: {"Not Found": "Not Found"}
   };

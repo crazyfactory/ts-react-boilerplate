@@ -5,18 +5,33 @@ import {createSelector} from "reselect";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
-import {invokeChangeLanguage} from "../redux/modules/settingsModule";
+import {setLanguage as setLanguageActionCreator, TLanguage} from "../redux/modules/settingsModule";
 import {translationsSelector} from "../selectors/translationsSelector";
 
-class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
+interface IStateToProps {
+  language: string;
+  translations: {
+    aboutUs: string;
+    change: string;
+    currentLanguage: string;
+  };
+}
+
+interface IDispatchToProps {
+  setLanguage: (language: string) => void;
+}
+
+interface IProps extends IStateToProps, IDispatchToProps {}
+
+class AboutPage extends React.Component<IProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
     super(props);
     this.switchLanguage = this.switchLanguage.bind(this);
   }
 
   public switchLanguage(): void {
-    const language = this.props.language === "en-US" ? "de" : "en-US";
-    this.props.invokeChangeLanguage(language);
+    const language = this.props.language === "en" ? "de" : "en";
+    this.props.setLanguage(language);
   }
 
   public render(): JSX.Element {
@@ -33,27 +48,14 @@ class AboutPage extends React.Component<IStateToProps & IDispatchToProps> {
   }
 }
 
-interface IStateToProps {
-  language: string;
-  translations: {
-    aboutUs: string;
-    change: string;
-    currentLanguage: string;
-  };
-}
-
-interface IDispatchToProps {
-  invokeChangeLanguage: (language: string) => void;
-}
-
 const componentTranslationsSelector = createSelector(
   translationsSelector,
   (translations) => {
     const translator: ITranslator = new Translator(translations);
     return {
-      aboutUs: translator.translate("about.us"),
-      change: translator.translate("about.change"),
-      currentLanguage: translator.translate("current.language")
+      aboutUs: translator.translate("About us"),
+      change: translator.translate("Change language"),
+      currentLanguage: translator.translate("Current language")
     };
   }
 );
@@ -65,10 +67,9 @@ export const mapStateToProps = (state: Pick<IStore, "settings">): IStateToProps 
 
 export const mapDispatchToProps = (dispatch: Dispatch): IDispatchToProps => {
   return {
-    invokeChangeLanguage: (language: string) => dispatch(invokeChangeLanguage(language))
+    setLanguage: (language: TLanguage) => dispatch(setLanguageActionCreator.invoke(language))
   };
 };
 
-const connectedAbout = connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps)(AboutPage);
-
-export {AboutPage as UnconnectedAbout, connectedAbout as AboutPage};
+const connected = connect(mapStateToProps, mapDispatchToProps)(AboutPage);
+export {AboutPage as UnconnectedAbout, connected as AboutPage};

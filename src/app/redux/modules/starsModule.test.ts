@@ -1,6 +1,6 @@
 import {promiseAction} from "../../helpers/promiseReducer";
 import {IAction, IState} from "./baseModule";
-import {IStars, LOAD_STARS, loadStars, starsReducer} from "./starsModule";
+import {IStars, LOAD_STARS, loadStarsCount, starsReducer} from "./starsModule";
 
 describe("starsModule", () => {
   describe("reducer", () => {
@@ -65,7 +65,7 @@ describe("starsModule", () => {
         const expectedValue: IAction<IStars> = {
           type: LOAD_STARS
         };
-        expect(loadStars()).toEqual(expectedValue);
+        expect(loadStarsCount()).toEqual(expectedValue);
       });
     });
   });

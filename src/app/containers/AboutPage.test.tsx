@@ -1,15 +1,16 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {invokeChangeLanguage, ISettingsState} from "../redux/modules/settingsModule";
+import {ISettingsState, setLanguage as setLanguageActionCreator} from "../redux/modules/settingsModule";
 import {mapDispatchToProps, mapStateToProps, UnconnectedAbout} from "./AboutPage";
 
 /* tslint:disable:no-empty jsx-no-lambda */
 describe("<AboutPage />", () => {
   const settings: ISettingsState = {
     error: "",
-    language: "en-US",
+    language: "en",
+    loaded: true,
     pending: false,
-    translations: {"about.us": "About Us", "about.change": "Change", "current.language": "Current Language"}
+    translations: {"About us": "About Us", "Change language": "Change", "Current language": "Current Language"}
   };
 
   const translations = {
@@ -20,26 +21,37 @@ describe("<AboutPage />", () => {
 
   it("maps state to props correctly", () => {
     const props = mapStateToProps({settings});
-    expect(props.language).toEqual("en-US");
+    expect(props.language).toBe("en");
+    expect(props.translations).toEqual(translations);
   });
 
   it("maps dispatch to props correctly", () => {
-    const mockFn = jest.fn();
-    const props = mapDispatchToProps(mockFn);
-    expect(mockFn).not.toHaveBeenCalled();
-    props.invokeChangeLanguage("de-DE");
-    expect(mockFn).toHaveBeenCalledWith(invokeChangeLanguage("de-DE"));
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+    expect(dispatch).not.toHaveBeenCalled();
+    props.setLanguage("de");
+    expect(dispatch).toHaveBeenCalledWith(setLanguageActionCreator.invoke("de"));
   });
 
-  it("calls invokeChangeLanguage() when button is clicked", () => {
-    const mockFn = jest.fn();
-    const shallowComponent = shallow(
-      <UnconnectedAbout invokeChangeLanguage={mockFn} language="" translations={translations}/>
+  it("calls setLanguage() to de", () => {
+    const setLanguage = jest.fn();
+    const wrapper = shallow(
+      <UnconnectedAbout setLanguage={setLanguage} language="en" translations={translations}/>
     );
+    expect(wrapper.find("button")).toBeDefined();
+    expect(setLanguage).not.toHaveBeenCalled();
+    wrapper.find("button").simulate("click");
+    expect(setLanguage).toHaveBeenCalledWith("de");
+  });
 
-    expect(shallowComponent.find("button")).toBeDefined();
-    expect(mockFn).not.toHaveBeenCalled();
-    shallowComponent.find("button").simulate("click");
-    expect(mockFn).toHaveBeenCalled();
+  it("calls setLanguage() to en", () => {
+    const setLanguage = jest.fn();
+    const wrapper = shallow(
+      <UnconnectedAbout setLanguage={setLanguage} language="de" translations={translations}/>
+    );
+    expect(wrapper.find("button")).toBeDefined();
+    expect(setLanguage).not.toHaveBeenCalled();
+    wrapper.find("button").simulate("click");
+    expect(setLanguage).toHaveBeenCalledWith("en");
   });
 });

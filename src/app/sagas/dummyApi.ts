@@ -4,6 +4,11 @@ import {ITranslations} from "../redux/modules/settingsModule";
 // tslint:disable:no-http-string
 
 export const dummyApi = {
+  getStarsCount: (): Promise<number> => {
+    return fetch("https://api.github.com/repos/barbar/vortigern")
+      .then((res) => res.json())
+      .then((json) => json.stargazers_count);
+  },
   getTranslations: (payload: string): Promise<ITranslations> => {
     return fetch(`http://localhost:8889/translation/${payload}`).then((res) => res.json());
   }

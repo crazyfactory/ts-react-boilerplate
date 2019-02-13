@@ -3,19 +3,19 @@ import {IFS} from "../../../__mocks__/.fs";
 jest.mock("fs");
 import {LanguageHelper} from "./LanguageHelper";
 
-const languages: string[] = ["en-US, en", "en-GB, en;q=0.7", "de"];
+const languages: string[] = ["en, en", "en-GB, en;q=0.7", "de"];
 
 describe("LanguageHelper", () => {
 
   it("constructor accepts settings and we're able to get it", () => {
     const lang = new LanguageHelper(languages[0]);
-    expect(lang.getRequestLang()).toBe("en-US, en");
+    expect(lang.getRequestedLang()).toBe("en, en");
   });
 
   describe("getPreferredLanguage()", () => {
     it("returns the most preferred settings", () => {
       const lang = new LanguageHelper(languages[0]);
-      expect(lang.getPreferredLanguage()).toBe("en-US");
+      expect(lang.getPreferredLanguage()).toBe("en");
     });
   });
 

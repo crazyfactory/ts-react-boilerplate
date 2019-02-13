@@ -11,7 +11,7 @@ const initialState: IStarsState = {
   pending: false
 };
 
-export const loadStars = getPromiseAction<null, null, number, null>("STARS/LOAD_STARS");
+export const loadStarsCount = getPromiseAction<null, null, number, null>("STARS/LOAD_STARS_COUNT");
 
 export function starsReducer(
   state: IStarsState = initialState,
@@ -20,12 +20,12 @@ export function starsReducer(
     IAction<null, REJECTED>
 ): IStarsState {
   switch (action.type) {
-    case loadStars.actionTypes.PENDING:
+    case loadStarsCount.actionTypes.PENDING:
       return {
         ...state,
         pending: true
       };
-    case loadStars.actionTypes.FULFILLED:
+    case loadStarsCount.actionTypes.FULFILLED:
       return {
         ...state,
         count: action.payload,
@@ -33,7 +33,7 @@ export function starsReducer(
         loaded: true,
         pending: false
       };
-    case loadStars.actionTypes.REJECTED:
+    case loadStarsCount.actionTypes.REJECTED:
       return {
         ...state,
         error: action.message,

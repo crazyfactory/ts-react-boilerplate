@@ -76,7 +76,8 @@ app.get("*", (req, res) => {
       },
       settings: {
         error: "",
-        language: "en-US",
+        language: "en",
+        loaded: false,
         pending: false,
         translations: languageHelper.getRequestLanguageData()
       }

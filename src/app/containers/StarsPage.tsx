@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {IStore} from "../redux/IStore";
-import {loadStars as loadStarsActionCreator} from "../redux/modules/starsModule";
+import {loadStarsCount as loadStarsActionCreator} from "../redux/modules/starsModule";
 
 interface IStateToProps {
   count: number;
@@ -12,7 +12,7 @@ interface IStateToProps {
 }
 
 interface IDispatchToProps {
-  loadStars: () => void;
+  loadStarsCount: () => void;
 }
 
 interface IProps extends IStateToProps, IDispatchToProps {}
@@ -21,7 +21,7 @@ class StarsPage extends React.Component<IProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
     super(props);
     if (!this.props.loaded) {
-      this.props.loadStars();
+      this.props.loadStarsCount();
     }
   }
 
@@ -46,7 +46,7 @@ function mapStateToProps(state: Pick<IStore, "stars">): IStateToProps {
 
 function mapDispatchToProps(dispatch: Dispatch): IDispatchToProps {
   return {
-    loadStars: () => dispatch(loadStarsActionCreator.invoke(null))
+    loadStarsCount: () => dispatch(loadStarsActionCreator.invoke(null))
   };
 }
 
