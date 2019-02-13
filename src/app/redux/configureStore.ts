@@ -3,7 +3,7 @@ import * as Raven from "raven-js";
 import {applyMiddleware, compose, createStore, Middleware, Store} from "redux";
 import {createLogger} from "redux-logger";
 import {router5Middleware} from "redux-router5";
-import createSagaMiddleware, { END } from "redux-saga";
+import createSagaMiddleware, {END, Task} from "redux-saga";
 import {Router} from "router5";
 import {IStore} from "./IStore";
 import rootReducer from "./rootReducer";
@@ -12,7 +12,7 @@ const appConfig = require("../../../config/main");
 const localConfig = require("../../../config/main.local");
 
 interface IExtendedStore extends Store<Partial<IStore>> {
-  runSaga: (rootSaga: any) => any;
+  runSaga: (rootSaga: any) => Task;
   close: () => void;
 }
 

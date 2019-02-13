@@ -49,7 +49,6 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.get("/translation/:lang", translationHandler);
 
 app.get("*", (req, res) => {
-
   if (!appConfig.ssr) {
     res.sendFile(path.resolve("./build/index.html"), {}, (error) => {
       if (error) {
@@ -83,7 +82,7 @@ app.get("*", (req, res) => {
       }
     });
 
-    store.runSaga(rootSaga).done.then(() => {
+    store.runSaga(rootSaga).toPromise().then(() => {
       // deep clone state because store will be changed during the second render in componentWillMount
       const initialState = JSON.parse(JSON.stringify(store.getState()));
 
