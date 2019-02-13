@@ -1,23 +1,21 @@
 import {color} from "csx";
 import * as React from "react";
-import {style} from "typestyle";
+import {stylesheet} from "typestyle";
 
-const styles = {
-  home: style({
+const classNames = stylesheet({
+  container: {
     color: color("#125588").fade("80%").toString(),
     textAlign: "center"
-  })
-};
+  }
+});
 
-class HomePage extends React.Component {
+export class HomePage extends React.Component {
   public render(): JSX.Element {
     return (
-      <div className={styles.home}>
-        <img src={require("../images/barbar.png")}/>
+      <div className={classNames.container}>
+        <img alt={"barbar"} src={require("../images/barbar.png")}/>
         <p>Hello</p>
       </div>
     );
   }
 }
-
-export {HomePage};
