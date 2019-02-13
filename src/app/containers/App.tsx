@@ -12,7 +12,9 @@ import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
 import {translationsSelector} from "../selectors/translationsSelector";
 import {AboutPage} from "./AboutPage";
+import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
+import {StarsPage} from "./StarsPage";
 
 const appConfig = require("../../../config/main");
 
@@ -36,7 +38,9 @@ const classNames = {
 class App extends React.Component<IStateToProps> {
   private components: {[key: string]: React.ComponentClass} = {
     about: AboutPage,
-    home: HomePage
+    counter: CounterPage,
+    home: HomePage,
+    stars: StarsPage
   };
 
   public render(): JSX.Element {
@@ -64,7 +68,7 @@ const componentTranslationsSelector = createSelector(
   (translations) => {
     const translator: ITranslator = new Translator(translations);
     return {
-      notFound: translator.translate("Not Found")
+      notFound: translator.translate("Not found")
     };
   }
 );
