@@ -1,76 +1,64 @@
-// import {runSaga} from "redux-saga";
-// import {takeLatest} from "redux-saga/effects";
-// import {setLanguage} from "../redux/modules/settingsModule";
-// import {dummyApi} from "./dummyApi";
-// import {fetchTranslations, watchChangeLocale} from "./settingsSaga";
-//
-// describe("SettingsSaga", () => {
-//   describe("fetchTranslations", () => {
-//     it("dispatches and calls correctly in case of success", () => {
-//       jest.spyOn(dummyApi, "getTranslations").mockImplementation(() => {
-//         return {hi: "Hallo"};
-//       });
-//
-//       const dispatched = [];
-//       runSaga(
-//         {dispatch: (action) => dispatched.push(action)},
-//         fetchTranslations,
-//         {
-//           payload: "de-DE",
-//           type: setLanguage.actionTypes.INVOKED
-//         }
-//       );
-//
-//       expect(dispatched).toEqual([
-//         {
-//           payload: null,
-//           type: setLanguage.actionTypes.PENDING
-//         },
-//         {
-//           payload: {hi: "Hallo"},
-//           type: setLanguage.actionTypes.FULFILLED
-//         }
-//       ]);
-//       expect(dummyApi.getTranslations).toHaveBeenCalledWith("de-DE");
-//     });
-//
-//     it("dispatches and calls correctly in case of error", () => {
-//       jest.spyOn(dummyApi, "getTranslations").mockImplementation(() => {
-//         throw new Error("Something wrong!");
-//       });
-//
-//       const dispatched = [];
-//       runSaga(
-//         {dispatch: (action) => dispatched.push(action)},
-//         fetchTranslations,
-//         {
-//           payload: "de-DE",
-//           type: setLanguage.actionTypes.INVOKED
-//         }
-//       );
-//
-//       expect(dispatched).toEqual([
-//         {
-//           payload: null,
-//           type: setLanguage.actionTypes.PENDING
-//         },
-//         {
-//           message: "Error: Something wrong!",
-//           type: setLanguage.actionTypes.REJECTED
-//         }
-//       ]);
-//       expect(dummyApi.getTranslations).toHaveBeenCalledWith("de-DE");
-//     });
-//   });
-//
-//   describe("watchChangeLocale", () => {
-//     const gen = watchChangeLocale();
-//     it("should watch for CHANGE_LANGUAGE action", () => {
-//       expect(gen.next().value).toEqual(takeLatest(setLanguage.actionTypes.INVOKED, fetchTranslations));
-//     });
-//
-//     it("must be done", () => {
-//       expect(gen.next()).toEqual({done: true, value: undefined});
-//     });
-//   });
-// });
+jest.mock("./dummyApi");
+import {runSaga} from "redux-saga";
+import * as ReduxSagaEffects from "redux-saga/effects";
+import {setLanguage} from "../redux/modules/settingsModule";
+import {dummyApi} from "./dummyApi";
+import {SettingsSaga} from "./settingsSaga";
+
+describe("SettingsSaga", () => {
+  describe("fetchTranslations", () => {
+    it("gets translations and sets fulfilled", () => {
+      expect.assertions(1);
+      const dispatched = [];
+      (dummyApi as any).getTranslations.mockResolvedValue({"Translation Key": "Translation Value"});
+      return runSaga(
+        {
+          dispatch: (action) => dispatched.push(action)
+        },
+        (new SettingsSaga()).fetchTranslations,
+        {
+          payload: "en",
+          type: ""
+        }
+      ).toPromise().then(() => {
+        expect(dispatched).toEqual([
+          {payload: null, type: "SETTINGS/SET_LANGUAGE_PENDING"},
+          {payload: {"Translation Key": "Translation Value"}, type: "SETTINGS/SET_LANGUAGE_FULFILLED"}
+        ]);
+      });
+    });
+
+    it("gets rejected and sets rejected", () => {
+      expect.assertions(1);
+      const dispatched = [];
+      (dummyApi as any).getTranslations.mockRejectedValue("Error");
+      return runSaga(
+        {
+          dispatch: (action) => dispatched.push(action)
+        },
+        (new SettingsSaga()).fetchTranslations,
+        {
+          payload: "en",
+          type: ""
+        }
+      ).toPromise().then(() => {
+        expect(dispatched).toEqual([
+          {payload: null, type: "SETTINGS/SET_LANGUAGE_PENDING"},
+          {message: "Error", type: "SETTINGS/SET_LANGUAGE_REJECTED"}
+        ]);
+      });
+    });
+  });
+
+  describe("registerListeners", () => {
+    it("listens for setLanguage INVOKED and calls fetchTranslations", () => {
+      const spied = jest.spyOn(ReduxSagaEffects, "fork");
+      const settingsSaga = new SettingsSaga();
+      settingsSaga.watch();
+      const gen = spied.mock.calls[0][0]();
+      expect(
+        gen.next().value
+      ).toEqual(ReduxSagaEffects.takeLatest(setLanguage.actionTypes.INVOKED, settingsSaga.fetchTranslations));
+    });
+  });
+});
