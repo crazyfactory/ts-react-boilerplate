@@ -127,6 +127,7 @@
     "reselect": "^4.0.0",
     "router5": "^6.4.2",
     "serve-favicon": "^2.5.0",
+    "typesafe-actions": "^3.0.0",
     "typestyle": "^2.0.1"
   },
   "jest": {

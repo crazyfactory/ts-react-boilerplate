@@ -1,4 +1,6 @@
-import {FULFILLED, getPromiseAction, IAction, IBaseState, INVOKED, PENDING, REJECTED} from "./baseModule";
+import {ActionType, getType} from "typesafe-actions";
+import {IBaseState} from "./baseModule";
+import * as settingsActionCreators from "./settingsActionCreators";
 
 export type TLanguage = "en" | "de";
 
@@ -19,34 +21,29 @@ const initialState: ISettingsState = {
   translations: {}
 };
 
-export const setLanguage = getPromiseAction<TLanguage, null, any, string>("SETTINGS/SET_LANGUAGE");
-
 export function settingsReducer(
   state: ISettingsState = initialState,
-  action: IAction<TLanguage, INVOKED> |
-    IAction<null, PENDING> |
-    IAction<ITranslations, FULFILLED> |
-    IAction<null, REJECTED>
+  action: ActionType<typeof settingsActionCreators>
 ): ISettingsState {
   switch (action.type) {
-    case setLanguage.actionTypes.INVOKED:
+    case getType(settingsActionCreators.setLanguage.invoke):
       return {
         ...state,
         language: action.payload
       };
-    case setLanguage.actionTypes.PENDING:
+    case getType(settingsActionCreators.setLanguage.setPending):
       return {
         ...state,
         pending: true
       };
-    case setLanguage.actionTypes.FULFILLED:
+    case getType(settingsActionCreators.setLanguage.setFulfilled):
       return {
         ...state,
         error: "",
         pending: false,
         translations: action.payload
       };
-    case setLanguage.actionTypes.REJECTED:
+    case getType(settingsActionCreators.setLanguage.setRejected):
       return {
         ...state,
         error: action.message,

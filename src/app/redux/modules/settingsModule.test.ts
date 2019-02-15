@@ -1,114 +1,99 @@
-// import {IAction, INVOKED, PENDING} from "./baseModule";
-// import {setLanguage, invokeChangeLanguage, ISettingsState, settingsReducer} from "./settingsModule";
-//
-// describe("settingsModule", () => {
-//   describe("reducer", () => {
-//     describe("returns correct state", () => {
-//       it("when action.type = changeLanguage.actionTypes.PENDING", () => {
-//         const stateBefore: ISettingsState = {
-//           error: "",
-//           language: "en",
-//           pending: false,
-//           translations: {Hi: "Hi"}
-//         };
-//         const stateAfter = settingsReducer(stateBefore, {payload: "de-DE", type: setLanguage.actionTypes.INVOKED});
-//         expect(stateAfter).toEqual({
-//           error: "",
-//           language: "de-DE",
-//           pending: false,
-//           translations: {Hi: "Hi"}
-//         });
-//       });
-//
-//       it("when action.type = changeLanguage.actionTypes.PENDING", () => {
-//         const stateBefore: ISettingsState = {
-//           error: "",
-//           language: "de-DE",
-//           pending: false,
-//           translations: {Hi: "Hi"}
-//         };
-//         const stateAfter = settingsReducer(stateBefore, {type: setLanguage.actionTypes.PENDING});
-//         expect(stateAfter).toEqual({
-//           error: "",
-//           language: "de-DE",
-//           pending: true,
-//           translations: {Hi: "Hi"}
-//         });
-//       });
-//
-//       it("when action.type = changeLanguage.actionTypes.FULFILLED", () => {
-//         const stateBefore: ISettingsState = {
-//           error: "",
-//           language: "de-DE",
-//           pending: true,
-//           translations: {Hi: "Hi"}
-//         };
-//         const stateAfter = settingsReducer(
-//           stateBefore,
-//           {payload: {Hi: "Hallo"}, type: setLanguage.actionTypes.FULFILLED}
-//         );
-//         expect(stateAfter).toEqual({
-//           error: "",
-//           language: "de-DE",
-//           pending: false,
-//           translations: {Hi: "Hallo"}
-//         });
-//       });
-//
-//       it("when action.type = changeLanguage.actionTypes.REJECTED", () => {
-//         const stateBefore: ISettingsState = {
-//           error: "",
-//           language: "de-DE",
-//           pending: true,
-//           translations: {Hi: "Hi"}
-//         };
-//         const stateAfter = settingsReducer(
-//           stateBefore,
-//           {message: "Error occurred!", type: setLanguage.actionTypes.REJECTED}
-//         );
-//         expect(stateAfter).toEqual({
-//           error: "Error occurred!",
-//           language: "de-DE",
-//           pending: false,
-//           translations: {Hi: "Hi"}
-//         });
-//       });
-//
-//       it("when action.type is unknown", () => {
-//         const stateBefore: ISettingsState = {
-//           error: "",
-//           language: "en",
-//           pending: false,
-//           translations: {Hi: "Hi"}
-//         };
-//
-//         const stateAfter = settingsReducer(stateBefore, {type: "Foo" as PENDING});
-//         expect(stateAfter).toBe(stateBefore);
-//       });
-//     });
-//
-//     it("has default initialState", () => {
-//       const initialState: ISettingsState = {
-//         error: "",
-//         language: "en",
-//         pending: false,
-//         translations: {}
-//       };
-//
-//       const stateAfter = settingsReducer(undefined, {type: "Foo" as PENDING});
-//       expect(stateAfter).toEqual(initialState);
-//     });
-//   });
-//
-//   describe("action creator", () => {
-//     describe("invokeChangeLanguage()", () => {
-//       it("creates correct action", () => {
-//         const expected: IAction<string, INVOKED> = {
-//           payload: "de-DE",
-//           type: setLanguage.actionTypes.INVOKED
-//         };
-//         expect(invokeChangeLanguage("de-DE")).toEqual(expected);
-//       });
-//     });
-//   });
-// });
+import {setLanguage} from "./settingsActionCreators";
+import {ISettingsState, settingsReducer} from "./settingsModule";
+
+describe("settingsModule", () => {
+  describe("reducer", () => {
+    describe("returns correct state", () => {
+      it("returns initial state when state and action type are undefined", () => {
+        const initialState: ISettingsState = {
+          error: "",
+          language: "en",
+          loaded: false,
+          pending: false,
+          translations: {}
+        };
+        expect(settingsReducer(undefined, {type: undefined} as any)).toEqual(initialState);
+      });
+
+      it("handle invoke action", () => {
+        const state: ISettingsState = {
+          error: "",
+          language: "en",
+          loaded: false,
+          pending: false,
+          translations: {}
+        };
+        expect(settingsReducer(state, setLanguage.invoke("de"))).toEqual({
+          error: "",
+          language: "de",
+          loaded: false,
+          pending: false,
+          translations: {}
+        });
+      });
+
+      it("handle pending action", () => {
+        const state: ISettingsState = {
+          error: "",
+          language: "en",
+          loaded: false,
+          pending: false,
+          translations: {}
+        };
+        expect(settingsReducer(state, setLanguage.setPending(null))).toEqual({
+          error: "",
+          language: "en",
+          loaded: false,
+          pending: true,
+          translations: {}
+        });
+      });
+
+      it("handle fulfilled action", () => {
+        const state: ISettingsState = {
+          error: "",
+          language: "de",
+          loaded: false,
+          pending: false,
+          translations: {}
+        };
+        expect(settingsReducer(state, setLanguage.setFulfilled({Hello: "Hallo"}))).toEqual({
+          error: "",
+          language: "de",
+          loaded: false,
+          pending: true,
+          translations: {Hello: "Hallo"}
+        });
+      });
+
+      it("handle rejected action", () => {
+        const state: ISettingsState = {
+          error: "",
+          language: "de",
+          loaded: false,
+          pending: false,
+          translations: {}
+        };
+        expect(settingsReducer(state, setLanguage.setRejected(null))).toEqual({
+          error: "",
+          language: "de",
+          loaded: false,
+          pending: true,
+          translations: {Hello: "Hallo"}
+        });
+      });
+
+      it("when action.type is unknown", () => {
+        const stateBefore: ISettingsState = {
+          error: "",
+          language: "en",
+          pending: false,
+          translations: {Hi: "Hi"}
+        };
+
+        const stateAfter = settingsReducer(stateBefore, {type: "Foo" as PENDING});
+        expect(stateAfter).toBe(stateBefore);
+      });
+    });
+  });
+});

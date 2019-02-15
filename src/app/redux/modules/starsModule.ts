@@ -1,4 +1,6 @@
-import {FULFILLED, getPromiseAction, IAction, IBaseState, PENDING, REJECTED} from "./baseModule";
+import {ActionType, getType} from "typesafe-actions";
+import {IBaseState} from "./baseModule";
+import * as starsActionCreators from "./starsActionCreators";
 
 export interface IStarsState extends IBaseState {
   count: number;
@@ -11,21 +13,17 @@ const initialState: IStarsState = {
   pending: false
 };
 
-export const loadStarsCount = getPromiseAction<null, null, number, null>("STARS/LOAD_STARS_COUNT");
-
 export function starsReducer(
   state: IStarsState = initialState,
-  action: IAction<null, PENDING> |
-    IAction<number, FULFILLED> |
-    IAction<null, REJECTED>
+  action: ActionType<typeof starsActionCreators>
 ): IStarsState {
   switch (action.type) {
-    case loadStarsCount.actionTypes.PENDING:
+    case getType(starsActionCreators.loadStarsCount.setPending):
       return {
         ...state,
         pending: true
       };
-    case loadStarsCount.actionTypes.FULFILLED:
+    case getType(starsActionCreators.loadStarsCount.setFulfilled):
       return {
         ...state,
         count: action.payload,
@@ -33,7 +31,7 @@ export function starsReducer(
         loaded: true,
         pending: false
       };
-    case loadStarsCount.actionTypes.REJECTED:
+    case getType(starsActionCreators.loadStarsCount.setRejected):
       return {
         ...state,
         error: action.message,
