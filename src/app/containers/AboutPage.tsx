@@ -5,7 +5,8 @@ import {createSelector} from "reselect";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
-import {setLanguage as setLanguageActionCreator, TLanguage} from "../redux/modules/settingsModule";
+import {setLanguage as setLanguageActionCreator} from "../redux/modules/settingsActionCreators";
+import {TLanguage} from "../redux/modules/settingsModule";
 import {translationsSelector} from "../selectors/translationsSelector";
 
 interface IStateToProps {

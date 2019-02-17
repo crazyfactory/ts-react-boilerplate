@@ -1,6 +1,7 @@
 import autobind from "autobind-decorator";
 import {call, CallEffect, ForkEffect, put, PutEffect, takeLatest} from "redux-saga/effects";
-import {loadStarsCount} from "../redux/modules/starsModule";
+import {getType} from "typesafe-actions";
+import {loadStarsCount} from "../redux/modules/starsActionCreators";
 import {BaseSaga} from "./BaseSaga";
 import {dummyApi} from "./dummyApi";
 
@@ -12,11 +13,11 @@ export class StarsSaga extends BaseSaga {
       const translations = yield call(dummyApi.getStarsCount);
       yield put(loadStarsCount.setFulfilled(translations));
     } catch (e) {
-      yield put(loadStarsCount.setRejected(e.toString()));
+      yield put(loadStarsCount.setRejected(null, e.toString()));
     }
   }
 
   protected *registerListeners(): IterableIterator<ForkEffect> {
-    yield takeLatest(loadStarsCount.actionTypes.INVOKED, this.fetchStarsCount);
+    yield takeLatest(getType(loadStarsCount.invoke), this.fetchStarsCount);
   }
 }

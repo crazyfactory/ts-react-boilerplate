@@ -1,7 +1,8 @@
 jest.mock("./dummyApi");
 import {runSaga} from "redux-saga";
 import * as ReduxSagaEffects from "redux-saga/effects";
-import {setLanguage} from "../redux/modules/settingsModule";
+import {getType} from "typesafe-actions";
+import {setLanguage} from "../redux/modules/settingsActionCreators";
 import {dummyApi} from "./dummyApi";
 import {SettingsSaga} from "./settingsSaga";
 
@@ -58,7 +59,7 @@ describe("SettingsSaga", () => {
       const gen = spied.mock.calls[0][0]();
       expect(
         gen.next().value
-      ).toEqual(ReduxSagaEffects.takeLatest(setLanguage.actionTypes.INVOKED, settingsSaga.fetchTranslations));
+      ).toEqual(ReduxSagaEffects.takeLatest(getType(setLanguage.invoke), settingsSaga.fetchTranslations));
     });
   });
 });

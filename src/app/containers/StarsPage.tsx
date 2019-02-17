@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {IStore} from "../redux/IStore";
-import {loadStarsCount as loadStarsActionCreator} from "../redux/modules/starsModule";
+import {loadStarsCount as loadStarsActionCreator} from "../redux/modules/starsActionCreators";
 
 interface IStateToProps {
   count: number;
