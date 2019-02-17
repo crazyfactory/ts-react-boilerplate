@@ -35,6 +35,13 @@ const classNames = {
   })
 };
 
+interface IStateToProps {
+  route: IRouteState;
+  translations: {
+    notFound: string;
+  };
+}
+
 class App extends React.Component<IStateToProps> {
   private components: {[key: string]: React.ComponentClass} = {
     about: AboutPage,
@@ -54,13 +61,6 @@ class App extends React.Component<IStateToProps> {
       </section>
     );
   }
-}
-
-interface IStateToProps {
-  route: IRouteState;
-  translations: {
-    notFound: string;
-  };
 }
 
 const componentTranslationsSelector = createSelector(

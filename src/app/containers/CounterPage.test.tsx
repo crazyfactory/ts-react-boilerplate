@@ -1,71 +1,73 @@
-// import {shallow} from "enzyme";
-// import * as React from "react";
-// import {IAction} from "../redux/modules/baseModule";
-// import {DECREMENT, ICounter, INCREMENT} from "../redux/modules/counterModule";
-// import {mapStateToProps, UnconnectedCounter} from "./CounterPage";
-//
-// /* tslint:disable:no-empty jsx-no-lambda */
-// describe("<Counter />", () => {
-//   it("matches snapshot when count > 0", () => {
-//     const component = shallow(<UnconnectedCounter count={10} dispatch={jest.fn()} />);
-//     expect(component).toMatchSnapshot();
-//   });
-//
-//   it("matches snapshot when count <= 0", () => {
-//     const component = shallow(<UnconnectedCounter count={0} dispatch={jest.fn()} />);
-//     expect(component).toMatchSnapshot();
-//   });
-//
-//   it("maps state to props correctly", () => {
-//     const props = mapStateToProps({counter: {payload: {count: 5}}});
-//     expect(props.count).toEqual(5);
-//   });
-//
-//   it("calls handleIncrement() when increment button is clicked", () => {
-//     const spy = jest.spyOn(UnconnectedCounter.prototype, "handleIncrement");
-//     const shallowComponent = shallow(<UnconnectedCounter dispatch={jest.fn()} count={0}/>);
-//
-//     expect(shallowComponent.find({name: "incBtn"})).toBeDefined();
-//     expect(spy).not.toHaveBeenCalled();
-//     shallowComponent.find({name: "incBtn"}).simulate("click");
-//     expect(spy).toHaveBeenCalled();
-//   });
-//
-//   it("calls handleDecrement() when decrement button is clicked", () => {
-//     const spy = jest.spyOn(UnconnectedCounter.prototype, "handleDecrement");
-//     const shallowComponent = shallow(<UnconnectedCounter dispatch={jest.fn()} count={0}/>);
-//
-//     expect(shallowComponent.find({name: "decBtn"})).toBeDefined();
-//     expect(spy).not.toHaveBeenCalled();
-//     shallowComponent.find({name: "decBtn"}).simulate("click");
-//     expect(spy).toHaveBeenCalled();
-//   });
-//
-//   describe("handleIncrement()", () => {
-//     it("dispatches INCREMENT action", () => {
-//       const dispatch = jest.fn();
-//       const shallowComponent = shallow(<UnconnectedCounter dispatch={dispatch} count={0}/>);
-//       const expectedValue: IAction<ICounter> = {
-//         type: INCREMENT
-//       };
-//
-//       expect(dispatch).not.toHaveBeenCalled();
-//       (shallowComponent as any).instance().handleIncrement();
-//       expect(dispatch).toHaveBeenCalledWith(expectedValue);
-//     });
-//   });
-//
-//   describe("handleDecrement()", () => {
-//     it("dispatches DECREMENT action", () => {
-//       const dispatch = jest.fn();
-//       const shallowComponent = shallow(<UnconnectedCounter dispatch={dispatch} count={0}/>);
-//       const expectedValue: IAction<ICounter> = {
-//         type: DECREMENT
-//       };
-//
-//       expect(dispatch).not.toHaveBeenCalled();
-//       (shallowComponent as any).instance().handleDecrement();
-//       expect(dispatch).toHaveBeenCalledWith(expectedValue);
-//     });
-//   });
-// });
+import {shallow} from "enzyme";
+import * as React from "react";
+import {
+  decrement as decrementActionCreator,
+  increment as incrementActionCreator
+} from "../redux/modules/counterActionCreators";
+import {ICounterState} from "../redux/modules/counterModule";
+import {ISettingsState} from "../redux/modules/settingsModule";
+import {mapDispatchToProps, mapStateToProps, UnconnectedCounterPage} from "./CounterPage";
+
+describe("<Counter />", () => {
+  const translations = {
+    counter: "Counter",
+    decrement: "Decrement",
+    increment: "Increment"
+  };
+
+  it("maps state to props correctly", () => {
+    const settings: ISettingsState = {
+      error: "",
+      language: "en",
+      loaded: true,
+      pending: false,
+      translations: {Counter: "Counter", Decrement: "Decrement", Increment: "Increment"}
+    };
+    const counter: ICounterState = {
+      count: 10,
+      error: "",
+      loaded: false,
+      pending: false
+    };
+    const props = mapStateToProps({counter, settings});
+    expect(props).toEqual({
+      count: 10,
+      translations
+    });
+  });
+
+  it("map dispatch to props correctly", () => {
+    const dispatch = jest.fn();
+    const props = mapDispatchToProps(dispatch);
+
+    expect(dispatch).not.toHaveBeenCalledWith(decrementActionCreator());
+    props.decrement();
+    expect(dispatch).toHaveBeenCalledWith(decrementActionCreator());
+
+    expect(dispatch).not.toHaveBeenCalledWith(incrementActionCreator());
+    props.increment();
+    expect(dispatch).toHaveBeenCalledWith(incrementActionCreator());
+  });
+
+  it("calls increment() when increment button is clicked", () => {
+    const spied = jest.fn();
+    const wrapper = shallow(
+      <UnconnectedCounterPage count={0} increment={spied} decrement={jest.fn()} translations={translations}/>
+    );
+    expect(wrapper.find({name: "incBtn"})).toBeDefined();
+    expect(spied).not.toHaveBeenCalled();
+    wrapper.find({name: "incBtn"}).simulate("click");
+    expect(spied).toHaveBeenCalled();
+  });
+
+  it("calls decrement() when decrement button is clicked", () => {
+    const spied = jest.fn();
+    const wrapper = shallow(
+      <UnconnectedCounterPage count={0} increment={jest.fn()} decrement={spied} translations={translations}/>
+    );
+    expect(wrapper.find({name: "decBtn"})).toBeDefined();
+    expect(spied).not.toHaveBeenCalled();
+    wrapper.find({name: "decBtn"}).simulate("click");
+    expect(spied).toHaveBeenCalled();
+  });
+});

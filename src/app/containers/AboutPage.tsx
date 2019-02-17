@@ -73,4 +73,4 @@ export const mapDispatchToProps = (dispatch: Dispatch): IDispatchToProps => {
 };
 
 const connected = connect(mapStateToProps, mapDispatchToProps)(AboutPage);
-export {AboutPage as UnconnectedAbout, connected as AboutPage};
+export {AboutPage as UnconnectedAboutPage, connected as AboutPage};

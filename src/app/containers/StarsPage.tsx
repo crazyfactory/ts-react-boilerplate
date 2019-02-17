@@ -69,4 +69,4 @@ function mapDispatchToProps(dispatch: Dispatch): IDispatchToProps {
 }
 
 const connected = connect(mapStateToProps, mapDispatchToProps)(StarsPage);
-export {connected as StarsPage, mapDispatchToProps, mapStateToProps, StarsPage as UnconnectedStars};
+export {connected as StarsPage, mapDispatchToProps, mapStateToProps, StarsPage as UnconnectedStarsPage};

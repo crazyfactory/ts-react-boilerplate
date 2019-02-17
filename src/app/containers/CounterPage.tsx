@@ -73,4 +73,4 @@ function mapDispatchToProps(dispatch: Dispatch): IDispatchToProps {
 
 const connected = connect(mapStateToProps, mapDispatchToProps)(CounterPage);
 
-export {connected as CounterPage, CounterPage as UnconnectedCounter, mapDispatchToProps, mapStateToProps};
+export {connected as CounterPage, CounterPage as UnconnectedCounterPage, mapDispatchToProps, mapStateToProps};

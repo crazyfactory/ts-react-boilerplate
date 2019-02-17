@@ -22,7 +22,7 @@ describe("<App />", () => {
     language: "en",
     loaded: true,
     pending: false,
-    translations: {"Not Found": "Not Found"}
+    translations: {"Not found": "Not Found"}
   };
   const translations = {notFound: "Not Found"};
 
