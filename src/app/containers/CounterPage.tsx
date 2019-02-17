@@ -37,7 +37,7 @@ class CounterPage extends React.Component<IProps> {
           {translations.increment}
         </button>
         <button name="decBtn" onClick={decrement} disabled={count <= 0}>
-          {translations.increment}
+          {translations.decrement}
         </button>
         <p>{count}</p>
       </div>
