@@ -19,7 +19,7 @@ describe("SettingsSaga", () => {
         (new SettingsSaga()).fetchTranslations,
         {
           payload: "en",
-          type: ""
+          type: "SETTINGS/SET_LANGUAGE"
         }
       ).toPromise().then(() => {
         expect(dispatched).toEqual([
@@ -40,12 +40,12 @@ describe("SettingsSaga", () => {
         (new SettingsSaga()).fetchTranslations,
         {
           payload: "en",
-          type: ""
+          type: "SETTINGS/SET_LANGUAGE"
         }
       ).toPromise().then(() => {
         expect(dispatched).toEqual([
           {payload: null, type: "SETTINGS/SET_LANGUAGE_PENDING"},
-          {message: "Error", type: "SETTINGS/SET_LANGUAGE_REJECTED"}
+          {message: "Error", payload: null, type: "SETTINGS/SET_LANGUAGE_REJECTED"}
         ]);
       });
     });

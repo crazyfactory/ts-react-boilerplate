@@ -10,8 +10,8 @@ export class StarsSaga extends BaseSaga {
   public *fetchStarsCount(): IterableIterator<CallEffect | PutEffect<any>> {
     try {
       yield put(loadStarsCount.setPending(null));
-      const translations = yield call(dummyApi.getStarsCount);
-      yield put(loadStarsCount.setFulfilled(translations));
+      const count = yield call(dummyApi.getStarsCount);
+      yield put(loadStarsCount.setFulfilled(count));
     } catch (e) {
       yield put(loadStarsCount.setRejected(null, e.toString()));
     }
