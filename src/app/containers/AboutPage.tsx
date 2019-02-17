@@ -27,25 +27,25 @@ interface IProps extends IStateToProps, IDispatchToProps {}
 class AboutPage extends React.Component<IProps> {
   constructor(props: IStateToProps & IDispatchToProps) {
     super(props);
-    this.switchLanguage = this.switchLanguage.bind(this);
-  }
-
-  public switchLanguage(): void {
-    const language = this.props.language === "en" ? "de" : "en";
-    this.props.setLanguage(language);
+    this.handleLanguageChange = this.handleLanguageChange.bind(this);
   }
 
   public render(): JSX.Element {
-    const {language, translations: {aboutUs, change, currentLanguage}} = this.props;
+    const {language, translations} = this.props;
     return (
       <div>
-        <h3>{aboutUs}: {language}</h3>
-        <button onClick={this.switchLanguage}>
-          {change}
+        <h3>{translations.aboutUs}: {language}</h3>
+        <button onClick={this.handleLanguageChange}>
+          {translations.change}
         </button>
-        <h4>{currentLanguage}</h4>
+        <h4>{translations.currentLanguage}</h4>
       </div>
     );
+  }
+
+  private handleLanguageChange(): void {
+    const language = this.props.language === "en" ? "de" : "en";
+    this.props.setLanguage(language);
   }
 }
 

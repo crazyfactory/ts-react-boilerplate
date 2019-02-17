@@ -1,14 +1,21 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {createSelector} from "reselect";
+import {Translator} from "../models/Translator";
+import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
 import {loadStarsCount as loadStarsActionCreator} from "../redux/modules/starsActionCreators";
+import {translationsSelector} from "../selectors/translationsSelector";
 
 interface IStateToProps {
   count: number;
   error: string;
   loaded: boolean;
   pending: boolean;
+  translations: {
+    fetchingStars: string;
+  };
 }
 
 interface IDispatchToProps {
@@ -26,21 +33,32 @@ class StarsPage extends React.Component<IProps> {
   }
 
   public render(): JSX.Element {
-    const {count, error, pending} = this.props;
+    const {count, error, pending, translations} = this.props;
     if (pending) {
-      return <div>Fetching stars...</div>;
+      return <div>{translations.fetchingStars}</div>;
     } else {
       return error ? <div>{error}</div> : <div>{count}</div>;
     }
   }
 }
 
-function mapStateToProps(state: Pick<IStore, "stars">): IStateToProps {
+const componentTranslationsSelector = createSelector(
+  translationsSelector,
+  (translations) => {
+    const translator: ITranslator = new Translator(translations);
+    return {
+      fetchingStars: translator.translate("Fetching stars...")
+    };
+  }
+);
+
+function mapStateToProps(state: Pick<IStore, "settings" | "stars">): IStateToProps {
   return {
     count: state.stars.count,
     error: state.stars.error,
     loaded: state.stars.loaded,
-    pending: state.stars.pending
+    pending: state.stars.pending,
+    translations: componentTranslationsSelector(state)
   };
 }
 
