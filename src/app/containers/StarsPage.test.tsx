@@ -16,7 +16,7 @@ describe("<Stars />", () => {
       language: "en",
       loaded: true,
       pending: false,
-      translations: {"Fetching Stars...": "Fetching Stars..."}
+      translations: {"Fetching stars...": "Fetching Stars..."}
     };
     const stars: IStarsState = {
       count: 100,

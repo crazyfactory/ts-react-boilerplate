@@ -70,4 +70,4 @@ function mapStateToProps(state: Pick<IStore, "settings">): IStateToProps {
 }
 
 const connected = connect(mapStateToProps)(Header);
-export {connected as Header, Header as UnconnectedHeader};
+export {connected as Header, Header as UnconnectedHeader, mapStateToProps};

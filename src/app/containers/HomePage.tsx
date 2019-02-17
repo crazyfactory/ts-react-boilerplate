@@ -50,4 +50,4 @@ function mapStateToProps(state: Pick<IStore, "settings">): IStateToProps {
 }
 
 const connected = connect(mapStateToProps)(HomePage);
-export {connected as HomePage, HomePage as UnconnectedHomePage};
+export {connected as HomePage, HomePage as UnconnectedHomePage, mapStateToProps};
