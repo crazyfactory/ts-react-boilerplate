@@ -10,7 +10,7 @@ describe("counterModule", () => {
         loaded: false,
         pending: false
       };
-      expect(counterReducer(undefined, {type: undefined} as any)).toEqual(initialState);
+      expect(counterReducer(undefined, {type: undefined})).toEqual(initialState);
     });
 
     it("handles action of type INCREMENT", () => {

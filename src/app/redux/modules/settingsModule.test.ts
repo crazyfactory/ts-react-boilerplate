@@ -11,7 +11,7 @@ describe("settingsModule", () => {
         pending: false,
         translations: {}
       };
-      expect(settingsReducer(undefined, {type: undefined} as any)).toEqual(initialState);
+      expect(settingsReducer(undefined, {type: undefined})).toEqual(initialState);
     });
 
     it("handles invoke action", () => {
@@ -53,7 +53,7 @@ describe("settingsModule", () => {
         error: "",
         language: "de",
         loaded: false,
-        pending: false,
+        pending: true,
         translations: {}
       };
       expect(settingsReducer(state, setLanguage.setFulfilled({Hello: "Hallo"}))).toEqual({
@@ -70,7 +70,7 @@ describe("settingsModule", () => {
         error: "",
         language: "de",
         loaded: false,
-        pending: false,
+        pending: true,
         translations: {}
       };
       expect(settingsReducer(state, setLanguage.setRejected(null, "Error"))).toEqual({
