@@ -31,7 +31,7 @@ export function configureStore(router: Router, initialState?: Partial<IStore>): 
     middlewares.push(logger);
   }
 
-  if (mergedConfig.sentry.dsn.length && process.env.BROWSER) {
+  if (mergedConfig.sentry && mergedConfig.sentry.dsn && process.env.BROWSER) {
     Raven.config(mergedConfig.sentry.dsn, mergedConfig.sentry.options).install();
     middlewares.unshift(createRavenMiddleware(Raven));
   }
