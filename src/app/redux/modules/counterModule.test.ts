@@ -65,12 +65,7 @@ describe("counterModule", () => {
         loaded: false,
         pending: false
       };
-      expect(counterReducer(state, {type: "unknown"} as any)).toEqual({
-        count: 10,
-        error: "",
-        loaded: false,
-        pending: false
-      });
+      expect(counterReducer(state, {type: "unknown"} as any)).toBe(state);
     });
   });
 });

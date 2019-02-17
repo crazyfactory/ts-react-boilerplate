@@ -40,6 +40,7 @@ export function settingsReducer(
       return {
         ...state,
         error: "",
+        loaded: true,
         pending: false,
         translations: action.payload
       };
@@ -47,6 +48,7 @@ export function settingsReducer(
       return {
         ...state,
         error: action.message,
+        loaded: true,
         pending: false
       };
     default:
