@@ -34,11 +34,11 @@ export function setupCss(): void {
   }
 
   a:active, a:visited {
-    color: ${Color.PRIMARY};
+    color: ${Color.BLUE};
   }
 
   :focus {
-    outline-color: ${Color.PRIMARY};
+    outline-color: ${Color.BLUE};
   }
 
   input, textarea, select, button {

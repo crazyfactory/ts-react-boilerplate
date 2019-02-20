@@ -43,7 +43,8 @@
     "test:no-cache": "jest --no-cache",
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish --project tsconfig.json \"src/**/**.ts*\" -e \"src/**/**.snap\"",
-    "lint:fix": "npm run lint -s -- --fix"
+    "lint:fix": "npm run lint -s -- --fix",
+    "doc": "tsc && styleguidist server --config styleguide.config.js"
   },
   "author": "Crazy Factory <dev@crazy-factory.com>",
   "homepage": "https://github.com/crazyfactory/ts-react-boilerplate.git",
@@ -89,7 +90,10 @@
     "husky": "^1.3.1",
     "jest": "^24.1.0",
     "jest-enzyme": "^7.0.1",
+    "mini-html-webpack-plugin": "^0.2.3",
+    "react-docgen-typescript": "^1.12.3",
     "react-hot-loader": "^4.7.0",
+    "react-styleguidist": "^8.0.6",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.0",
     "tslint": "^5.12.1",

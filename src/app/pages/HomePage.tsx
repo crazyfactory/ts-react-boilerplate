@@ -10,7 +10,7 @@ import {translationsSelector} from "../selectors/translationsSelector";
 
 const classNames = stylesheet({
   container: {
-    color: Color.PRIMARY,
+    color: Color.BLUE,
     textAlign: "center"
   }
 });
