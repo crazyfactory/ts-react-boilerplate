@@ -6,7 +6,7 @@ import * as React from "react";
 import {renderToString} from "react-dom/server";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";
-
+import {config as appConfig} from "../config";
 import {App, Html} from "./app/containers";
 import {LanguageHelper} from "./app/helpers/LanguageHelper";
 import {configureStore} from "./app/redux/configureStore";
@@ -18,8 +18,6 @@ const express = require("express");
 const path = require("path");
 const Chalk = require("chalk");
 const favicon = require("serve-favicon");
-
-const appConfig = require("../config/main");
 const manifest = require("../build/manifest.json");
 const app = express();
 

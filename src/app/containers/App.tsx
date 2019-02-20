@@ -6,6 +6,7 @@ import {createRouteNodeSelector, RouterState} from "redux-router5";
 import {createSelector} from "reselect";
 import {State as IRouteState} from "router5";
 import {cssRaw, cssRule, style} from "typestyle";
+import {config as appConfig} from "../../../config";
 import {Header} from "../components";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
@@ -15,8 +16,6 @@ import {AboutPage} from "./AboutPage";
 import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
 import {StarsPage} from "./StarsPage";
-
-const appConfig = require("../../../config/main");
 
 // Global style
 cssRaw(`@import url(https://fonts.googleapis.com/css?family=Roboto);`);

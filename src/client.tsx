@@ -6,13 +6,11 @@ import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";
 import {setStylesTarget} from "typestyle";
-
+import {config as appConfig} from "../config";
 import {App} from "./app/containers";
 import {configureStore} from "./app/redux/configureStore";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
-
-const appConfig = require("../config/main");
 
 const ReactHotLoader = appConfig.env !== "production"
   ? require("react-hot-loader").AppContainer
