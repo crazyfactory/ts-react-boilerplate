@@ -1,9 +1,9 @@
-import * as Sentry from "@sentry/browser";
+import {addBreadcrumb} from "@sentry/browser";
 import {Middleware, Store} from "redux";
 import {IStore} from "../IStore";
 
 export const sentryMiddleware: Middleware = (store: Store<IStore>) => (next) => (action) => {
-  Sentry.addBreadcrumb({
+  addBreadcrumb({
     category: "redux-action",
     data: {
       action,

@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/browser";
+import {init} from "@sentry/browser";
 import {applyMiddleware, compose, createStore, Middleware, Store} from "redux";
 import {createLogger} from "redux-logger";
 import {router5Middleware} from "redux-router5";
@@ -30,7 +30,7 @@ export function configureStore(router: Router, initialState?: Partial<IStore>): 
   if (appConfig.sentry && appConfig.sentry.dsn && process.env.BROWSER) {
     middlewares.unshift(sentryMiddleware);
 
-    Sentry.init({
+    init({
       dsn: appConfig.sentry.dsn,
       ...appConfig.sentry.options
     });
