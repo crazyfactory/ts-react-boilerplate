@@ -6,16 +6,16 @@ import {createSelector} from "reselect";
 import {State as IRouteState} from "router5";
 import {stylesheet} from "typestyle";
 import {config as appConfig} from "../../../config";
-import {Header} from "../components";
 import {setupCss} from "../helpers/setupCss";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
+import {AboutPage} from "../pages/AboutPage";
+import {CounterPage} from "../pages/CounterPage";
+import {HomePage} from "../pages/HomePage";
+import {StarsPage} from "../pages/StarsPage";
 import {IStore} from "../redux/IStore";
 import {translationsSelector} from "../selectors/translationsSelector";
-import {AboutPage} from "./AboutPage";
-import {CounterPage} from "./CounterPage";
-import {HomePage} from "./HomePage";
-import {StarsPage} from "./StarsPage";
+import {Header} from "./Header";
 
 setupCss();
 
