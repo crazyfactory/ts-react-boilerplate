@@ -19,7 +19,7 @@ const ReactHotLoader = appConfig.env !== "production"
 const router = configureRouter();
 const store = configureStore(router, window.__INITIAL_STATE__);
 router.start();
-store.runSaga(rootSaga);
+let sagaTask = store.runSaga(rootSaga);
 
 ReactDOM.hydrate(
   <ReactHotLoader>
@@ -50,7 +50,9 @@ if ((module as any).hot) {
   });
 
   (module as any).hot.accept("./app/sagas/rootSaga", () => {
-    store.close();
-    store.runSaga(require("./app/sagas/rootSaga").default);
+    sagaTask.cancel();
+    sagaTask.toPromise().then(() => {
+      sagaTask = store.runSaga(require("./app/sagas/rootSaga").default);
+    });
   });
 }
