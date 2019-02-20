@@ -1,7 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
+var TerserPlugin = require('terser-webpack-plugin');
 var utils = require('./utils');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var config = {
   mode: 'production',
 
@@ -74,18 +76,17 @@ var config = {
         BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
+    // Uncomment this to analyze bundle
+    // new BundleAnalyzerPlugin()
   ],
 
   optimization: {
+    minimizer: [
+      new TerserPlugin()
+    ],
     splitChunks: {
-      cacheGroups: {
-        commons: {
-          name: 'vendor',
-          chunks: 'initial',
-          minChunks: 2
-        }
-      }
+      chunks: 'all'
     }
   }
 };
