@@ -13,19 +13,7 @@ var config = {
   },
 
   entry: {
-    app: './src/client.tsx',
-    vendor: [
-      './src/vendor/main.ts',
-      'react',
-      'react-dom',
-      'react-helmet',
-      'react-redux',
-      'react-router5',
-      'redux-router5',
-      'redux',
-      'redux-saga',
-      'router5',
-    ]
+    app: './src/client.tsx'
   },
 
   output: {
