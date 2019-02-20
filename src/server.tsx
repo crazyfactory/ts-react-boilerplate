@@ -1,11 +1,14 @@
 import * as e6p from "es6-promise";
-import {Request, Response} from "express";
 (e6p as any).polyfill();
+import Chalk from "chalk";
+import * as express from "express";
 import "isomorphic-fetch";
+import * as path from "path";
 import * as React from "react";
 import {renderToString} from "react-dom/server";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";
+import * as favicon from "serve-favicon";
 import {config as appConfig} from "../config";
 import {App, Html} from "./app/containers";
 import {LanguageHelper} from "./app/helpers/LanguageHelper";
@@ -14,11 +17,6 @@ import {IStore} from "./app/redux/IStore";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
-const express = require("express");
-const path = require("path");
-const Chalk = require("chalk");
-const favicon = require("serve-favicon");
-const manifest = require("../build/manifest.json");
 const app = express();
 
 if (process.env.NODE_ENV !== "production") {
@@ -40,12 +38,12 @@ app.use(favicon(path.join(__dirname, "public/favicon.ico")));
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-app.get("/translations/:language", (req: Request, res: Response) => {
+app.get("/translations/:language", (req: express.Request, res: express.Response) => {
   const languageHelper = new LanguageHelper(req.params.language);
   res.json(languageHelper.getTranslations());
 });
 
-app.get("*", (req: Request, res: Response) => {
+app.get("*", (req: express.Request, res: express.Response) => {
   if (!appConfig.ssr) {
     res.sendFile(path.resolve("./build/index.html"), {}, (error) => {
       if (error) {
@@ -136,9 +134,9 @@ app.listen(appConfig.port, appConfig.host, (err) => {
 });
 
 function renderHTML(markup: string, initialState: Partial<IStore>): string {
+  const manifest = require("../build/manifest.json");
   const html = renderToString(
     <Html markup={markup} manifest={manifest} initialState={initialState}/>
   );
-
   return `<!doctype html> ${html}`;
 }
