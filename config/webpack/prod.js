@@ -1,10 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
-var ManifestPlugin = require('webpack-manifest-plugin');
-var TerserPlugin = require('terser-webpack-plugin');
-var utils = require('./utils');
-var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-var config = {
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ManifestPlugin = require('webpack-manifest-plugin');
+const utils = require('./utils');
+
+const config = {
   mode: 'production',
 
   bail: true,
@@ -92,7 +93,6 @@ var config = {
 };
 
 utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
-
 utils.createIfDoesntExist('./build');
 utils.createIfDoesntExist('./build/public');
 utils.copySync('./src/favicon.ico', './build/public/favicon.ico', true);
