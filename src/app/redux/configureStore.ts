@@ -1,11 +1,11 @@
-import * as createRavenMiddleware from "raven-for-redux";
-import * as Raven from "raven-js";
+import * as Sentry from "@sentry/browser";
 import {applyMiddleware, compose, createStore, Middleware, Store} from "redux";
 import {createLogger} from "redux-logger";
 import {router5Middleware} from "redux-router5";
 import createSagaMiddleware, {END, Task} from "redux-saga";
 import {Router} from "router5";
 import {IStore} from "./IStore";
+import {sentryMiddleware} from "./middlewares/sentryMiddleware";
 import rootReducer from "./rootReducer";
 
 const appConfig = require("../../../config/main");
@@ -32,8 +32,12 @@ export function configureStore(router: Router, initialState?: Partial<IStore>): 
   }
 
   if (mergedConfig.sentry && mergedConfig.sentry.dsn && process.env.BROWSER) {
-    Raven.config(mergedConfig.sentry.dsn, mergedConfig.sentry.options).install();
-    middlewares.unshift(createRavenMiddleware(Raven));
+    middlewares.unshift(sentryMiddleware);
+
+    Sentry.init({
+      dsn: mergedConfig.sentry.dsn,
+      ...mergedConfig.sentry.options
+    });
   }
 
   const composeEnhancers = (mergedConfig.env !== "production" &&

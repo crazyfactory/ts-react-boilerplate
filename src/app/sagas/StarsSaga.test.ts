@@ -47,7 +47,7 @@ describe("StarsSaga", () => {
         const spied = jest.spyOn(ReduxSagaEffects, "fork");
         const starsSaga = new StarsSaga();
         starsSaga.watch();
-        const gen = spied.mock.calls[0][0]();
+        const gen = (spied.mock.calls[0][0] as any)();
         expect(
           gen.next().value
         ).toEqual(ReduxSagaEffects.takeLatest(getType(loadStarsCount.invoke), starsSaga.fetchStarsCount));
