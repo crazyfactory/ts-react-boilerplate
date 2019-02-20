@@ -26,7 +26,7 @@ class HomePage extends React.Component<IStateToProps> {
     const {translations} = this.props;
     return (
       <div className={classNames.container}>
-        <img alt={"barbar"} src={require("../images/barbar.png")}/>
+        <img alt={"barbar"} src={require("../images/crazy.png")}/>
         <p>{translations.hello}</p>
       </div>
     );

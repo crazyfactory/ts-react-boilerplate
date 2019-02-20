@@ -5,7 +5,7 @@ import {ITranslations} from "../redux/modules/settingsModule";
 
 export const dummyApi = {
   getStarsCount: (): Promise<number> => {
-    return fetch("https://api.github.com/repos/barbar/vortigern")
+    return fetch("https://api.github.com/repos/crazyfactory/ts-react-boilerplate")
       .then((res) => res.json())
       .then((json) => json.stargazers_count);
   },
