@@ -120,7 +120,7 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-helmet": "^5.2.0",
-    "react-redux": "^6.0.0",
+    "react-redux": "^6.0.1",
     "react-router5": "^6.5.3",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
