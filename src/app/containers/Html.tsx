@@ -1,10 +1,11 @@
+import autobind from "autobind-decorator";
 import * as React from "react";
 import {Helmet} from "react-helmet";
 import {getStyles} from "typestyle";
 import {IStore} from "../redux/IStore";
 
 interface IHtmlProps {
-  manifest?: object;
+  manifest?: {[key: string]: string};
   markup?: string;
   initialState?: Partial<IStore>;
 }
@@ -18,10 +19,7 @@ export class Html extends React.Component<IHtmlProps> {
     const renderStyles = <style id="styles-target">{getStyles()}</style>;
 
     // Scripts
-    const scripts = this.resolve(["vendor.js", "app.js"]);
-    const renderScripts = scripts.map((src, i) =>
-      <script src={src} key={i}/>
-    );
+    const scripts = this.getScriptFileNames().map((src, i) => <script src={src} key={i}/>);
 
     const initialStateScript = (
       <script
@@ -45,18 +43,21 @@ export class Html extends React.Component<IHtmlProps> {
         {/* tslint:disable-next-line:react-no-dangerous-html */}
         <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
         {initialStateScript}
-        {renderScripts}
+        {scripts}
       </body>
       </html>
     );
   }
 
-  private resolve(files: string[]): string[] {
-    return files.map((src) => {
-      if (!this.props.manifest[src]) {
-        return;
+  @autobind
+  private getScriptFileNames(): string[] {
+    const {manifest} = this.props;
+    const scriptFileNames: string[] = [];
+    Object.keys(manifest).forEach((key: string) => {
+      if (manifest[key].endsWith(".js")) {
+        scriptFileNames.push(manifest[key]);
       }
-      return this.props.manifest[src];
-    }).filter((file) => file !== undefined);
+    });
+    return scriptFileNames;
   }
 }
