@@ -1,8 +1,8 @@
 import {shallow} from "enzyme";
 import * as React from "react";
+import {Link} from "../components/Link";
 import {ISettingsState} from "../redux/modules/settingsModule";
 import {mapStateToProps, UnconnectedHeader} from "./Header";
-import {Link} from "./Link";
 
 describe("<Header />", () => {
   const translations = {

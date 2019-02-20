@@ -1,9 +1,9 @@
 import {shallow} from "enzyme";
 import * as React from "react";
 import {State as IRouteState} from "router5";
+import {HomePage} from "../pages/HomePage";
 import {ISettingsState} from "../redux/modules/settingsModule";
 import {classNames, mapStateToProps, UnconnectedApp} from "./App";
-import {HomePage} from "./HomePage";
 
 describe("<App />", () => {
   const route: IRouteState = {

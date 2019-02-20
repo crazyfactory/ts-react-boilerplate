@@ -7,7 +7,7 @@ import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";
 import {setStylesTarget} from "typestyle";
 import {config as appConfig} from "../config";
-import {App} from "./app/containers";
+import {App} from "./app/containers/App";
 import {configureStore} from "./app/redux/configureStore";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
@@ -35,8 +35,8 @@ ReactDOM.hydrate(
 setStylesTarget(document.getElementById("styles-target"));
 
 if ((module as any).hot) {
-  (module as any).hot.accept("./app/containers", () => {
-    const {App: NewApp} = require("./app/containers");
+  (module as any).hot.accept("./app/containers/App", () => {
+    const {App: NewApp} = require("./app/containers/App");
     ReactDOM.hydrate(
       <ReactHotLoader>
         <Provider store={store}>

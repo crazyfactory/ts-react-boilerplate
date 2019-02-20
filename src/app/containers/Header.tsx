@@ -2,11 +2,11 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {stylesheet} from "typestyle";
+import {Link} from "../components/Link";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
 import {translationsSelector} from "../selectors/translationsSelector";
-import {Link} from "./Link";
 
 const classNames = stylesheet({
   nav: {
