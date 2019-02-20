@@ -111,8 +111,6 @@
     "@sentry/browser": "^4.6.1",
     "autobind-decorator": "^2.4.0",
     "chalk": "^2.4.2",
-    "csstips": "^0.3.0",
-    "csx": "^9.0.0",
     "es6-promise": "^4.2.6",
     "express": "^4.16.4",
     "isomorphic-fetch": "^2.2.1",

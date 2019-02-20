@@ -1,8 +1,8 @@
-import {color} from "csx";
 import * as React from "react";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {stylesheet} from "typestyle";
+import {Color} from "../constants/Color";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
@@ -10,7 +10,7 @@ import {translationsSelector} from "../selectors/translationsSelector";
 
 const classNames = stylesheet({
   container: {
-    color: color("#125588").fade("80%").toString(),
+    color: Color.PRIMARY,
     textAlign: "center"
   }
 });

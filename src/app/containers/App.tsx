@@ -1,13 +1,13 @@
-import {normalize, setupPage} from "csstips";
 import * as React from "react";
 import {Helmet} from "react-helmet";
 import {connect} from "react-redux";
 import {createRouteNodeSelector, RouterState} from "redux-router5";
 import {createSelector} from "reselect";
 import {State as IRouteState} from "router5";
-import {cssRaw, cssRule, style} from "typestyle";
+import {stylesheet} from "typestyle";
 import {config as appConfig} from "../../../config";
 import {Header} from "../components";
+import {setupCss} from "../helpers/setupCss";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
@@ -17,22 +17,15 @@ import {CounterPage} from "./CounterPage";
 import {HomePage} from "./HomePage";
 import {StarsPage} from "./StarsPage";
 
-// Global style
-cssRaw(`@import url(https://fonts.googleapis.com/css?family=Roboto);`);
-normalize();
-setupPage("#app");
-cssRule(`html, body`, {
-  fontFamily: "Roboto",
-  height: "auto"
-});
+setupCss();
 
-const classNames = {
-  container: style({
+const classNames = stylesheet({
+  container: {
     margin: 0,
     padding: 0,
     textAlign: "center"
-  })
-};
+  }
+});
 
 interface IStateToProps {
   route: IRouteState;

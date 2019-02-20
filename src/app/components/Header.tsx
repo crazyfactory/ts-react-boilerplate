@@ -1,15 +1,15 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {createSelector} from "reselect";
-import {style} from "typestyle";
+import {stylesheet} from "typestyle";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
 import {translationsSelector} from "../selectors/translationsSelector";
 import {Link} from "./Link";
 
-const classNames = {
-  nav: style({
+const classNames = stylesheet({
+  nav: {
     $nest: {
       ul: {
         $nest: {
@@ -22,8 +22,8 @@ const classNames = {
         padding: 0
       }
     }
-  })
-};
+  }
+});
 
 interface IStateToProps {
   translations: {
