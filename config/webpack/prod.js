@@ -1,5 +1,4 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -83,9 +82,6 @@ const config = {
   ],
 
   optimization: {
-    minimizer: [
-      new TerserPlugin()
-    ],
     splitChunks: {
       chunks: 'all'
     }
