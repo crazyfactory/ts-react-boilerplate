@@ -6,7 +6,10 @@ const {
 } = MiniHtmlWebpackPlugin;
 
 module.exports = {
-  webpackConfig: require('./config/webpack/dev'),
+  webpackConfig: Object.assign({}, require('./config/webpack/dev'), {
+    // quick fix for broken hmr. See https://github.com/styleguidist/react-styleguidist/issues/1206.
+    cache: false
+  }),
   template: ({css, js, title, publicPath}) =>
     `
       <!doctype html>
