@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ManifestPlugin = require('webpack-manifest-plugin');
-const utils = require('./utils');
+const utils = require('../utils');
 
 const config = {
   mode: 'production',

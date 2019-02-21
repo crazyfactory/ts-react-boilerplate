@@ -2,7 +2,7 @@ const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const path = require('path');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const utils = require('./utils');
+const utils = require('../utils');
 
 const config = {
   mode: 'development',

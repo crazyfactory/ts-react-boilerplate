@@ -1,6 +1,6 @@
 var path = require('path');
 var fs = require('fs');
-var utils = require('./utils');
+var utils = require('../utils');
 
 var nodeModules = {};
 fs.readdirSync('node_modules')

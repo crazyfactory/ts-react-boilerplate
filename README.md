@@ -77,6 +77,7 @@ React Style Guidist
 ├── build                       # Built, ready to serve app.
 ├── config                      # Root folder for configurations.
 │   ├── types                   # Global type definitions, written by us.
+│   ├── utils                   # Utils for config.
 │   ├── webpack                 # Webpack configurations.
 │   ├── index.js                # Combines main.js and main.local.js
 │   ├── main.js                 # Default App configurations.
