@@ -44,7 +44,7 @@
     "test:watch": "jest --watch",
     "lint": "tslint -t stylish --project tsconfig.json \"src/**/**.ts*\" -e \"src/**/**.snap\"",
     "lint:fix": "npm run lint -s -- --fix",
-    "doc": "tsc && styleguidist server --config styleguide.config.js"
+    "doc": "styleguidist server --config styleguide.config.js"
   },
   "author": "Crazy Factory <dev@crazy-factory.com>",
   "homepage": "https://github.com/crazyfactory/ts-react-boilerplate.git",

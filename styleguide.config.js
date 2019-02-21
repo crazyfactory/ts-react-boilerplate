@@ -81,6 +81,6 @@ module.exports = {
   skipComponentsWithoutExample: true,
   serverPort: 6060,
   context: {
-    Constants: resolve(__dirname, './src/app/shared/constants')
+    Constants: resolve(__dirname, './src/app/constants')
   }
 };
