@@ -12,6 +12,7 @@ export class Translator implements ITranslator {
     if (this.translations[key]) {
       return this.translations[key];
     }
-    console.error(`Translations: no key: "${key}" found`);
+    console.warn(`Translations: no key: "${key}" found`);
+    return key;
   }
 }

@@ -9,6 +9,7 @@ import {setStylesTarget} from "typestyle";
 import {config as appConfig} from "../config";
 import {App} from "./app/containers/App";
 import {configureStore} from "./app/redux/configureStore";
+import {setLanguage} from "./app/redux/modules/settingsActionCreators";
 import {configureRouter} from "./app/routes/configureRouter";
 import rootSaga from "./app/sagas/rootSaga";
 
@@ -16,12 +17,16 @@ const ReactHotLoader = appConfig.env !== "production"
   ? require("react-hot-loader").AppContainer
   : ({ children }) => React.Children.only(children);
 
+const renderOrHydrate = appConfig.ssr ? ReactDOM.hydrate : ReactDOM.render;
+
 const router = configureRouter();
 const store = configureStore(router, window.__INITIAL_STATE__);
-router.start();
 let sagaTask = store.runSaga(rootSaga);
-
-ReactDOM.hydrate(
+if (!appConfig.ssr) {
+  store.dispatch(setLanguage.invoke("en"));
+}
+router.start();
+renderOrHydrate(
   <ReactHotLoader>
     <Provider store={store} key="provider">
       <RouterProvider router={router}>
@@ -37,7 +42,7 @@ setStylesTarget(document.getElementById("styles-target"));
 if ((module as any).hot) {
   (module as any).hot.accept("./app/containers/App", () => {
     const {App: NewApp} = require("./app/containers/App");
-    ReactDOM.hydrate(
+    renderOrHydrate(
       <ReactHotLoader>
         <Provider store={store}>
           <RouterProvider router={router}>
