@@ -16,12 +16,14 @@ const classNames = stylesheet({
   primary: {
     backgroundColor: Color.BLUE,
     border: `1px solid ${Color.BLUE}`,
-    color: Color.WHITE
+    color: Color.WHITE,
+    cursor: "pointer"
   },
   secondary: {
     backgroundColor: Color.WHITE,
     border: `1px solid ${Color.GREY}`,
-    color: Color.GREY
+    color: Color.GREY,
+    cursor: "pointer"
   }
 });
 

@@ -14,7 +14,20 @@ Secondary Button
 
 Disabled Button
 ```
-  <Button disabled={true}
+  <Button disabled={true}>
     Disabled
+  </Button>
+```
+
+Styled Button
+```
+  const style = {
+    border: 0,
+    borderRadius: 5,
+    backgroundColor: Constants.Color.BLACK,
+    color: Constants.Color.BLUE
+  };
+  <Button style={style}>
+    Styled
   </Button>
 ```
