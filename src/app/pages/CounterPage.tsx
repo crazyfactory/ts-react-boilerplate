@@ -2,6 +2,8 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {createSelector} from "reselect";
+import {stylesheet} from "typestyle";
+import {Button} from "../components/Button";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
@@ -10,6 +12,12 @@ import {
   increment as incrementActionCreator
 } from "../redux/modules/counterActionCreators";
 import {translationsSelector} from "../selectors/translationsSelector";
+
+const classNames = stylesheet({
+  moveRight: {
+    marginLeft: "8px"
+  }
+});
 
 interface IStateToProps {
   count: number;
@@ -33,12 +41,12 @@ class CounterPage extends React.Component<IProps> {
     return (
       <div>
         <h4>{translations.counter}</h4>
-        <button name="incBtn" onClick={increment}>
-          {translations.increment}
-        </button>
-        <button name="decBtn" onClick={decrement} disabled={count <= 0}>
+        <Button name="decBtn" onClick={decrement} disabled={count <= 0}>
           {translations.decrement}
-        </button>
+        </Button>
+        <Button className={classNames.moveRight} name="incBtn" onClick={increment}>
+          {translations.increment}
+        </Button>
         <p>{count}</p>
       </div>
     );

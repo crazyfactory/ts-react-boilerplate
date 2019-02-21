@@ -2,6 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {createSelector} from "reselect";
+import {Button} from "../components/Button";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
@@ -35,9 +36,9 @@ class AboutPage extends React.Component<IProps> {
     return (
       <div>
         <h3>{translations.aboutUs}: {language}</h3>
-        <button onClick={this.handleLanguageChange}>
+        <Button onClick={this.handleLanguageChange}>
           {translations.change}
-        </button>
+        </Button>
         <h4>{translations.currentLanguage}</h4>
       </div>
     );

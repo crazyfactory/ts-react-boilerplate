@@ -1,5 +1,6 @@
 import {shallow} from "enzyme";
 import * as React from "react";
+import {Button} from "../components/Button";
 import {setLanguage as setLanguageActionCreator} from "../redux/modules/settingsActionCreators";
 import {ISettingsState} from "../redux/modules/settingsModule";
 import {mapDispatchToProps, mapStateToProps, UnconnectedAboutPage} from "./AboutPage";
@@ -38,9 +39,9 @@ describe("<AboutPage />", () => {
     const wrapper = shallow(
       <UnconnectedAboutPage setLanguage={setLanguage} language="en" translations={translations}/>
     );
-    expect(wrapper.find("button")).toBeDefined();
+    expect(wrapper.find(Button)).toBeDefined();
     expect(setLanguage).not.toHaveBeenCalled();
-    wrapper.find("button").simulate("click");
+    wrapper.find(Button).simulate("click");
     expect(setLanguage).toHaveBeenCalledWith("de");
   });
 
@@ -49,9 +50,9 @@ describe("<AboutPage />", () => {
     const wrapper = shallow(
       <UnconnectedAboutPage setLanguage={setLanguage} language="de" translations={translations}/>
     );
-    expect(wrapper.find("button")).toBeDefined();
+    expect(wrapper.find(Button)).toBeDefined();
     expect(setLanguage).not.toHaveBeenCalled();
-    wrapper.find("button").simulate("click");
+    wrapper.find(Button).simulate("click");
     expect(setLanguage).toHaveBeenCalledWith("en");
   });
 });
