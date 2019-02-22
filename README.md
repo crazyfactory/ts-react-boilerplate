@@ -65,7 +65,7 @@ and impure things like accessing the browser cache) in React/Redux applications 
 - [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
 - [Wallaby](http://wallabyjs.com) intelligent test runner for JavaScript that continuously runs your tests.
 
-### Doc
+#### Doc
 - [React Style Guidist](https://github.com/styleguidist/react-styleguidist) - isolates React component development
 environment with a living style guide
 - [React Docgen Typescript](https://github.com/styleguidist/react-docgen-typescript) - Typescript parser for
@@ -157,7 +157,7 @@ $ npm run build:prod
 $ npm test
 
 # Too see doc, run this command, and go to localhost:6060. Any component that has .md file with the same name will be
-doc-generated.
+# doc-generated.
 $ npm run doc
 ```
 
