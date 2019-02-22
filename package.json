@@ -38,7 +38,7 @@
     "postbuild": "webpack --config config/webpack/server.js",
     "prestart": "npm run build -s",
     "start": "node build/server.js",
-    "start:prod": "npm run build:prod && node build/server.js",
+    "start:prod": "npm run build:prod && cross-env NODE_ENV=production node build/server.js",
     "test": "jest",
     "test:no-cache": "jest --no-cache",
     "test:watch": "jest --watch",
