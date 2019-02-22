@@ -1,48 +1,34 @@
-import {IAction, IState} from "./baseModule";
+import {ActionType, getType} from "typesafe-actions";
+import {IBaseState} from "./baseModule";
+import * as counterActionCreators from "./counterActionCreators";
 
-export const INCREMENT: string = "counter/INCREMENT";
-export const DECREMENT: string = "counter/DECREMENT";
-
-export interface ICounter {
+export interface ICounterState extends IBaseState {
   count: number;
 }
 
-const initialState: IState<ICounter> = {
-  isFetching: false,
-  payload: {
-    count: 0
-  }
+const initialState: ICounterState = {
+  count: 0,
+  error: "",
+  loaded: false,
+  pending: false
 };
 
-export function counterReducer(state: IState<ICounter> = initialState, action?: IAction<ICounter>): IState<ICounter> {
+export function counterReducer(
+  state: ICounterState = initialState,
+  action: ActionType<typeof counterActionCreators>
+): ICounterState {
   switch (action.type) {
-    case INCREMENT:
+    case getType(counterActionCreators.increment):
       return {
         ...state,
-        payload: {
-          count: state.payload.count + 1
-        }
+        count: state.count + 1
       };
-    case DECREMENT:
+    case getType(counterActionCreators.decrement):
       return {
         ...state,
-        payload: {
-          count: ((state.payload.count - 1 > 0) ? state.payload.count - 1 : 0)
-        }
+        count: ((state.count - 1 > 0) ? state.count - 1 : 0)
       };
     default:
       return state;
   }
-}
-
-export function increment(): IAction<ICounter> {
-  return {
-    type: INCREMENT
-  };
-}
-
-export function decrement(): IAction<ICounter> {
-  return {
-    type: DECREMENT
-  };
 }

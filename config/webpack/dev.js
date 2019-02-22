@@ -1,10 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
-var ManifestPlugin = require('webpack-manifest-plugin');
-var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-var utils = require('./utils');
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const path = require('path');
+const webpack = require('webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const utils = require('../utils');
 
-var config = {
+const config = {
   mode: 'development',
 
   // Enable sourcemaps for debugging webpack's output.

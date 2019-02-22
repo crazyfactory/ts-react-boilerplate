@@ -1,47 +1,57 @@
-import promiseReducer from "../../helpers/promiseReducer";
-import {IAction, IState} from "./baseModule";
+import {ActionType, getType} from "typesafe-actions";
+import {IBaseState} from "./baseModule";
+import * as settingsActionCreators from "./settingsActionCreators";
 
-export const CHANGE_LOCALE = "settings/CHANGE_LOCALE";
+export type TLanguage = "en" | "de";
 
-export interface IMeta {
-  currency?: string;
-  locale?: string;
+export interface ITranslations {
+  [key: string]: string;
 }
 
-export interface ISettings {
-  translations: {[key: string]: string};
+export interface ISettingsState extends IBaseState {
+  language: TLanguage;
+  translations: ITranslations;
 }
 
-const initialState: IState<ISettings, IMeta> = {
-  isFetching: false,
-  meta: {
-    currency: "EUR",
-    locale: typeof window !== "undefined" ? window.navigator.language : "en-GB"
-  },
-  payload: {
-    translations: {}
-  }
+const initialState: ISettingsState = {
+  error: "",
+  language: "en",
+  loaded: false,
+  pending: false,
+  translations: {}
 };
 
-// tslint:disable:max-line-length
-export function settingsReducer(state: IState<ISettings, IMeta> = initialState, action: IAction<ISettings, IMeta>): IState<ISettings, IMeta> {
-  if (action.type === CHANGE_LOCALE) {
-    return {
-      ...state,
-      meta: {
-        ...state.meta,
-        ...action.meta
-      }
-    };
+export function settingsReducer(
+  state: ISettingsState = initialState,
+  action: ActionType<typeof settingsActionCreators>
+): ISettingsState {
+  switch (action.type) {
+    case getType(settingsActionCreators.setLanguage.invoke):
+      return {
+        ...state,
+        language: action.payload
+      };
+    case getType(settingsActionCreators.setLanguage.setPending):
+      return {
+        ...state,
+        pending: true
+      };
+    case getType(settingsActionCreators.setLanguage.setFulfilled):
+      return {
+        ...state,
+        error: "",
+        loaded: true,
+        pending: false,
+        translations: action.payload
+      };
+    case getType(settingsActionCreators.setLanguage.setRejected):
+      return {
+        ...state,
+        error: action.message,
+        loaded: true,
+        pending: false
+      };
+    default:
+      return state;
   }
-  return promiseReducer<ISettings>(CHANGE_LOCALE, state, action);
-}
-
-export function changeLocale(locale: string): IAction<ISettings, IMeta> {
-  return {
-    meta: {
-      locale
-    },
-    type: CHANGE_LOCALE
-  };
 }

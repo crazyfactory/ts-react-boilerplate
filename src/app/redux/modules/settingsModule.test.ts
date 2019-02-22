@@ -1,87 +1,96 @@
-import * as PromiseReducer from "../../helpers/promiseReducer";
-import {IAction, IState} from "./baseModule";
-import {CHANGE_LOCALE, changeLocale, IMeta, ISettings, settingsReducer} from "./settingsModule";
+import {setLanguage} from "./settingsActionCreators";
+import {ISettingsState, settingsReducer} from "./settingsModule";
 
-describe("languageModule", () => {
+describe("settingsModule", () => {
   describe("reducer", () => {
-    it("returns state object with new meta", () => {
-      const state: IState<ISettings, IMeta> = {
-        isFetching: false,
-        meta: {
-          currency: "USD",
-          locale: "en-US"
-        },
-        payload: {
-          translations: {}
-        }
+    it("returns initial state when state and action type are undefined", () => {
+      const initialState: ISettingsState = {
+        error: "",
+        language: "en",
+        loaded: false,
+        pending: false,
+        translations: {}
       };
-      const action: IAction<ISettings, IMeta> = {
-        meta: {
-          locale: "de"
-        },
-        type: CHANGE_LOCALE
+      expect(settingsReducer(undefined, {type: undefined})).toEqual(initialState);
+    });
+
+    it("handles invoke action", () => {
+      const state: ISettingsState = {
+        error: "",
+        language: "en",
+        loaded: false,
+        pending: false,
+        translations: {}
       };
-      expect(settingsReducer(state, action)).toEqual({
-        isFetching: false,
-        meta: {
-          currency: "USD",
-          locale: "de"
-        },
-        payload: {
-          translations: {}
-        }
+      expect(settingsReducer(state, setLanguage.invoke("de"))).toEqual({
+        error: "",
+        language: "de",
+        loaded: false,
+        pending: false,
+        translations: {}
       });
     });
 
-    it("calls promiseReducer with correct arguments", () => {
-      const state: IState<ISettings, IMeta> = {
-        isFetching: false,
-        meta: {
-          currency: "USD",
-          locale: "en-US"
-        },
-        payload: {
-          translations: {a: "a", b: "b"}
-        }
+    it("handles pending action", () => {
+      const state: ISettingsState = {
+        error: "",
+        language: "en",
+        loaded: false,
+        pending: false,
+        translations: {}
       };
-      const spiedFn = jest.spyOn(PromiseReducer, "default");
-      spiedFn.mockClear();
-      expect(spiedFn).not.toHaveBeenCalled();
-      settingsReducer(state, {type: "some type"});
-      expect(spiedFn).toHaveBeenCalledWith(CHANGE_LOCALE, state, {type: "some type"});
-    });
-
-    it("has default initialState", () => {
-      const initialState: IState<ISettings, IMeta> = {
-        isFetching: false,
-        meta: {
-          currency: "EUR",
-          locale: "en-US" // window.navigator.settings in jest is set to en-US
-        },
-        payload: {
-          translations: {}
-        }
-      };
-
-      const spiedFn = jest.spyOn(PromiseReducer, "default");
-      spiedFn.mockClear();
-      expect(spiedFn).not.toHaveBeenCalled();
-      settingsReducer(undefined, {type: "some type"});
-      expect(spiedFn).toHaveBeenLastCalledWith(CHANGE_LOCALE, initialState, {type: "some type"});
-    });
-  });
-
-  describe("action creator", () => {
-    describe("fetchTranslations()", () => {
-      it("creates correct action", () => {
-        const expected: IAction<ISettings, IMeta> = {
-          meta: {
-            locale: "de"
-          },
-          type: CHANGE_LOCALE
-        };
-        expect(changeLocale("de")).toEqual(expected);
+      expect(settingsReducer(state, setLanguage.setPending(null))).toEqual({
+        error: "",
+        language: "en",
+        loaded: false,
+        pending: true,
+        translations: {}
       });
+    });
+
+    it("handles fulfilled action", () => {
+      const state: ISettingsState = {
+        error: "",
+        language: "de",
+        loaded: false,
+        pending: true,
+        translations: {}
+      };
+      expect(settingsReducer(state, setLanguage.setFulfilled({Hello: "Hallo"}))).toEqual({
+        error: "",
+        language: "de",
+        loaded: true,
+        pending: false,
+        translations: {Hello: "Hallo"}
+      });
+    });
+
+    it("handles rejected action", () => {
+      const state: ISettingsState = {
+        error: "",
+        language: "de",
+        loaded: false,
+        pending: true,
+        translations: {}
+      };
+      expect(settingsReducer(state, setLanguage.setRejected(null, "Error"))).toEqual({
+        error: "Error",
+        language: "de",
+        loaded: true,
+        pending: false,
+        translations: {}
+      });
+    });
+
+    it("handles actions with unknown type", () => {
+      const state: ISettingsState = {
+        error: "",
+        language: "en",
+        loaded: false,
+        pending: false,
+        translations: {Hello: "Hallo"}
+      };
+      expect(settingsReducer(state, {type: "unknown"} as any)).toBe(state);
     });
   });
 });

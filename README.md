@@ -19,25 +19,28 @@ This boilerplate uses the following libraries and tools:
 #### Core
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://github.com/facebook/react) & [React DOM](https://github.com/facebook/react) for views.
-- [Router5](https://github.com/router5) to handle in-app routing.
-- [Redux](https://github.com/reactjs/redux) for managing application state.
+- [Router5](https://github.com/router5) handles in-app routing.
+- [Redux](https://github.com/reactjs/redux) manages application state.
 - [React Redux](https://github.com/reactjs/react-redux) to use React-Redux bindings.
-- [React Router5](https://github.com/router5) & [Redux-Router5](https://github.com/router5) integrate router5 with react and redux
+- [React Router5](https://github.com/router5) & [Redux-Router5](https://github.com/router5) integrate router5 with react
+and redux.
 
 #### Utilities
-- [Redux Saga](https://github.com/redux-saga/redux-saga) make side effects (i.e. asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
-- [React Intl](https://github.com/yahoo/react-intl) internationalize React apps
-- [Redux Form](https://github.com/erikras/redux-form) keep form state in a Redux store
-- [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with [ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
+- [Reselect](https://github.com/reduxjs/reselect/) computes derived data, allowing Redux to store the minimal possible
+state.
+- [Redux Saga](https://github.com/redux-saga/redux-saga) makes side effects (i.e. asynchronous things like data fetching
+and impure things like accessing the browser cache) in React/Redux applications easier and better.
+- [Isomorphic Fetch](https://github.com/matthew-andrews/isomorphic-fetch) with
+[ES6-Promise](https://github.com/stefanpenner/es6-promise) for using fetch api on both client & server side.
 - [React Helmet](https://github.com/nfl/react-helmet)
-- [RavenJS](https://github.com/getsentry/raven-js) for capturing exceptions during run time
-- [Raven for Redux](https://github.com/captbaritone/raven-for-redux) for error using sentry (use `config/main.local.js` to enable sentry)
-- [TypeStyle](https://github.com/typestyle/typestyle) make css typesafe
+- [Sentry Browser](https://github.com/getsentry/sentry-javascript) captures exceptions during run time.
+- [TypeStyle](https://github.com/typestyle/typestyle) makes css typesafe.
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
   - [Awesome TypeScript Loader](https://github.com/s-panferov/awesome-typescript-loader) as ts loader.
-  - [React Hot Loader](https://github.com/gaearon/react-hot-loader) for providing hot reload capability to our development server
+  - [React Hot Loader](https://github.com/gaearon/react-hot-loader) provides hot reload capability to our development
+  server
   - [File Loader](https://github.com/webpack/file-loader)
   - [URL Loader](https://github.com/webpack/url-loader)
   - [Manifest Plugin](https://github.com/danethurber/webpack-manifest-plugin)
@@ -62,28 +65,42 @@ This boilerplate uses the following libraries and tools:
 - [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
 - [Wallaby](http://wallabyjs.com) intelligent test runner for JavaScript that continuously runs your tests.
 
+### Doc
+- [React Style Guidist](https://github.com/styleguidist/react-styleguidist) - isolates React component development
+environment with a living style guide
+- [React Docgen Typescript](https://github.com/styleguidist/react-docgen-typescript) - Typescript parser for
+React Style Guidist
+
 ## Directory Structure
 ```bash
 .
 ├── build                       # Built, ready to serve app.
 ├── config                      # Root folder for configurations.
 │   ├── types                   # Global type definitions, written by us.
+│   ├── utils                   # Utils for config.
 │   ├── webpack                 # Webpack configurations.
-│   ├── main.js                 # Generic App configurations.
+│   ├── index.js                # Combines main.js and main.local.js
+│   ├── main.js                 # Default App configurations.
 │   └── main.local.js           # Local App configurations.
 ├── node_modules                # Node Packages.
 ├── src                         # Source code.
 │   ├── app                     # App folder.
-│   │ ├── components            # React Components.
-│   │ ├── containers            # React Containers.
-│   │ ├── helpers               # Helper Functions & Components.
+│   │ ├── components            # Unconnected Components.
+│   │ ├── constants             # Constants that are used throughout project like Color and FontSize
+│   │ ├── containers            # Redux-Connected Components.
+│   │ ├── helpers               # Helper Functions.
 │   │ ├── images                # Images folder.
+│   │ ├── models                # Models folder.
+│   │ ├── pages                 # Page-like Components.
 │   │ ├── redux                 # Redux related code aka data layer of the app.
-│   │ │   ├── modules           # Redux modules.   
-│   │ │   ├── rootReducer.ts    # Main reducers file to combine them.  
-│   │ │   └── configureStore.ts # Redux store, contains global app state.    
+│   │ │   ├── middlewares       # Redux middlewares.     
+│   │ │   ├── modules           # Redux modules.     
+│   │ │   ├── configureStore.ts # Redux store, contains global app state.
+│   │ │   ├── IStore.ts         # Store shape.
+│   │ │   └── rootReducer.ts    # Main reducers file to combine them.    
 │   │ ├── routes                # Routes.
-│   │ └── sagas                 # Saga files.
+│   │ ├── sagas                 # Saga files.
+│   │ └── selectors             # Redux selectors.
 │   ├── vendor                  # Dealing with resources
 │   ├── client.tsx              # Entry point for client side rendering.
 │   ├── favicon.ico             # Favicon
@@ -99,6 +116,7 @@ This boilerplate uses the following libraries and tools:
 ├── package.json                # Package configuration.
 ├── package-lock.json           # Package lock
 ├── README.md                   # This file
+├── styleguide.config.js        # Config for doc
 ├── tsconfig.json               # TypeScript transpiler configuration.
 ├── tslint.json                 # Configures tslint.
 └── wallaby.conf.js             # Configuraton for wallaby testing
@@ -137,11 +155,16 @@ $ npm run build:prod
 
 # Testing
 $ npm test
+
+# Too see doc, run this command, and go to localhost:6060. Any component that has .md file with the same name will be
+doc-generated.
+$ npm run doc
 ```
 
-For Windows users, we recommend using the shortcuts instead of setting environment variables because they work a little different on Windows.
+For Windows users, we recommend using the shortcuts instead of setting environment variables because they work a little
+different on Windows.
 
-#### Raven
+#### Sentry
 Create main.local.js in config folder and export an object that has `sentry` key like so:
 ```
 module.exports = {

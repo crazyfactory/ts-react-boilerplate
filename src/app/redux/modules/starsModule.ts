@@ -1,29 +1,44 @@
-import promiseReducer from "../../helpers/promiseReducer";
-import {IAction, IState} from "./baseModule";
+import {ActionType, getType} from "typesafe-actions";
+import {IBaseState} from "./baseModule";
+import * as starsActionCreators from "./starsActionCreators";
 
-export const LOAD_STARS: string = "stars/LOAD_STARS";
-
-export interface IStars {
-  stargazers_count: number;
+export interface IStarsState extends IBaseState {
+  count: number;
 }
 
-const initialState: IState<IStars> = {
-  isFetching: true,
-  payload: {
-    stargazers_count: -1
-  }
+const initialState: IStarsState = {
+  count: 0,
+  error: "",
+  loaded: false,
+  pending: false
 };
 
-export function starsReducer(state: IState<IStars> = initialState, action: IAction<IStars>): IState<IStars> {
-  // an example how you can deal with action type other than requesting types in promiseReducer
-  if (action.type === LOAD_STARS) {
-    return state;
+export function starsReducer(
+  state: IStarsState = initialState,
+  action: ActionType<typeof starsActionCreators>
+): IStarsState {
+  switch (action.type) {
+    case getType(starsActionCreators.loadStarsCount.setPending):
+      return {
+        ...state,
+        pending: true
+      };
+    case getType(starsActionCreators.loadStarsCount.setFulfilled):
+      return {
+        ...state,
+        count: action.payload,
+        error: "",
+        loaded: true,
+        pending: false
+      };
+    case getType(starsActionCreators.loadStarsCount.setRejected):
+      return {
+        ...state,
+        error: action.message,
+        loaded: true,
+        pending: false
+      };
+    default:
+      return state;
   }
-  return promiseReducer<IStars>(LOAD_STARS, state, action);
-}
-
-export function loadStars(): IAction<IStars> {
-  return {
-    type: LOAD_STARS
-  };
 }

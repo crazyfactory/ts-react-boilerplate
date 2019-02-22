@@ -1,10 +1,10 @@
-import {all, AllEffect, fork} from "redux-saga/effects";
-import {watchChangeLocale} from "./settingsSaga";
-import {watchStarsLoad} from "./starsSaga";
+import {all, AllEffect} from "redux-saga/effects";
+import {SettingsSaga} from "./SettingsSaga";
+import {StarsSaga} from "./StarsSaga";
 
-export default function* rootSaga(): IterableIterator<AllEffect> {
+export default function* rootSaga(): IterableIterator<AllEffect<any>> {
   yield all([
-    fork(watchChangeLocale),
-    fork(watchStarsLoad)
+    (new SettingsSaga()).watch(),
+    (new StarsSaga()).watch()
   ]);
 }

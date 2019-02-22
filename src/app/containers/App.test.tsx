@@ -1,20 +1,11 @@
 import {shallow} from "enzyme";
 import * as React from "react";
-import {IntlProvider} from "react-intl";
 import {State as IRouteState} from "router5";
-import {IState} from "../redux/modules/baseModule";
-import {IMeta as ISettingsMeta, ISettings} from "../redux/modules/settingsModule";
-import {mapStateToProps, styles, UnconnectedApp} from "./App";
+import {HomePage} from "../pages/HomePage";
+import {ISettingsState} from "../redux/modules/settingsModule";
+import {classNames, mapStateToProps, UnconnectedApp} from "./App";
 
 describe("<App />", () => {
-  const language: IState<ISettings, ISettingsMeta> = {
-    meta: {
-      locale: "en-GB"
-    },
-    payload: {
-      translations: {greeting: "Hello!"}
-    }
-  };
   const route: IRouteState = {
     meta: {id: 1, params: {}, options: {}, redirected: false},
     name: "home",
@@ -26,39 +17,41 @@ describe("<App />", () => {
     params: {},
     path: "/"
   };
-
-  it("matches snapshot", () => {
-    const component = shallow(<UnconnectedApp language={language} route={route}/>);
-    expect(component).toMatchSnapshot();
-  });
+  const settings: ISettingsState = {
+    error: "",
+    language: "en",
+    loaded: true,
+    pending: false,
+    translations: {"Not found": "Not Found"}
+  };
+  const translations = {notFound: "Not Found"};
 
   it("maps state to props correctly", () => {
     const props = mapStateToProps({
       router: {route, previousRoute: route, transitionRoute: null, transitionError: null},
-      settings: language
+      settings
     });
-    expect(props.language).toEqual(language);
     expect(props.route).toEqual(route);
+    expect(props.translations).toEqual({notFound: "Not Found"});
   });
 
   it("renders with correct style", () => {
-    const component = shallow(<UnconnectedApp language={language} route={route}/>);
-    expect(component.find("section")).toHaveClassName(styles.container);
+    const wrapper = shallow(<UnconnectedApp route={route} translations={translations}/>);
+    expect(wrapper.find("section")).toHaveClassName(classNames.container);
   });
 
-  it("renders IntlProvider with correct props", () => {
-    const component = shallow(<UnconnectedApp language={language} route={route} />);
-    expect(component.find(IntlProvider)).toHaveProp("locale", language.meta.locale);
-    expect(component.find(IntlProvider)).toHaveProp("messages", language.payload.translations);
+  it("renders HomePage", () => {
+    const wrapper = shallow(<UnconnectedApp route={route} translations={translations}/>);
+    expect(wrapper.find(HomePage).length).toBe(1);
   });
 
   it("renders Not Found when route is null", () => {
-    const component = shallow(<UnconnectedApp language={language} route={null} />);
-    expect(component.find("div")).toHaveText("Not found");
+    const wrapper = shallow(<UnconnectedApp route={null} translations={translations}/>);
+    expect(wrapper.find("div")).toHaveText("Not Found");
   });
 
   it("renders Not Found when segment is undefined", () => {
-    const component = shallow(<UnconnectedApp language={language} route={routeUnavailable} />);
-    expect(component.find("div")).toHaveText("Not found");
+    const wrapper = shallow(<UnconnectedApp route={routeUnavailable} translations={translations}/>);
+    expect(wrapper.find("div")).toHaveText("Not Found");
   });
 });

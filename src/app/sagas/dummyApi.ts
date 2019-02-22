@@ -1,19 +1,15 @@
-import {ISettings} from "../redux/modules/settingsModule";
-import {IStars} from "../redux/modules/starsModule";
+import {ITranslations} from "../redux/modules/settingsModule";
 
 // Don't forget to enable this in production!
 // tslint:disable:no-http-string
 
 export const dummyApi = {
-  getStars: (): Promise<IStars | {error: string}> => {
-    return fetch("https://api.github.com/repos/barbar/vortigern").then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return res.json().then((json) => ({error: json.message}));
-    });
+  getStarsCount: (): Promise<number> => {
+    return fetch("https://api.github.com/repos/crazyfactory/ts-react-boilerplate")
+      .then((res) => res.json())
+      .then((json) => json.stargazers_count);
   },
-  getTranslations: (payload: string): Promise<ISettings> => {
-    return fetch(`http://localhost:8889/translation/${payload}`).then((res) => res.json());
+  getTranslations: (payload: string): Promise<ITranslations> => {
+    return fetch(`http://localhost:8889/translations/${payload}`).then((res) => res.json());
   }
 };

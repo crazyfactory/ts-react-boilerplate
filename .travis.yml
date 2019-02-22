@@ -20,7 +20,6 @@ before_script: greenkeeper-lockfile-update
 script:
   - npm run lint
   - npm run build
-  - npm run test:no-cache -- --maxWorkers=4
   - npm run build:prod
   - npm run test:no-cache -- --maxWorkers=4
 

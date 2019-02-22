@@ -1,72 +1,71 @@
-import {promiseAction} from "../../helpers/promiseReducer";
-import {IAction, IState} from "./baseModule";
-import {IStars, LOAD_STARS, loadStars, starsReducer} from "./starsModule";
+import {loadStarsCount} from "./starsActionCreators";
+import {IStarsState, starsReducer} from "./starsModule";
 
 describe("starsModule", () => {
   describe("reducer", () => {
     it("returns initial state when state and action type are undefined", () => {
-      const initialState: IState<IStars> = {
-        isFetching: true,
-        payload: {
-          stargazers_count: -1
-        }
+      const initialState: IStarsState = {
+        count: 0,
+        error: "",
+        loaded: false,
+        pending: false
       };
       expect(starsReducer(undefined, {type: undefined})).toEqual(initialState);
     });
 
-    it("handles action of type LOAD_STARS", () => {
-      const action = {type: LOAD_STARS};
-      const stateBeforeAndAfter: IState<IStars> = {isFetching: false, payload: {stargazers_count: 100}};
-      expect(starsReducer(stateBeforeAndAfter, action)).toEqual(stateBeforeAndAfter);
-    });
-
-    it("handles action of type LOAD_STARS_PENDING", () => {
-      const action = {type: promiseAction(LOAD_STARS).PENDING};
-      const stateBefore: IState<IStars> = {isFetching: false, payload: null};
-      const stateAfter: IState<IStars> = {isFetching: true, payload: null};
-      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
-    });
-
-    it("handles action of type LOAD_STARS_FULFILLED", () => {
-      const action: IAction<IStars> = {
-        payload: {
-          stargazers_count: 99
-        },
-        type: promiseAction(LOAD_STARS).FULFILLED
+    it("handles pending action", () => {
+      const state: IStarsState = {
+        count: 0,
+        error: "",
+        loaded: false,
+        pending: false
       };
-      const stateBefore: IState<IStars> = {isFetching: true, payload: null};
-      const stateAfter: IState<IStars> = {
-        isFetching: false,
-        payload: {
-          stargazers_count: 99
-        }
-      };
-      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+      expect(starsReducer(state, loadStarsCount.setPending(null))).toEqual({
+        count: 0,
+        error: "",
+        loaded: false,
+        pending: true
+      });
     });
 
-    it("handles action of type LOAD_STARS_REJECTED", () => {
-      const action: IAction<IStars> = {type: promiseAction(LOAD_STARS).REJECTED, message: "error!"};
-      const stateBefore: IState<IStars> = {isFetching: true, payload: null};
-      const stateAfter: IState<IStars> = {error: true, isFetching: false, message: "error!", payload: null};
-      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
+    it("handles fulfilled action", () => {
+      const state: IStarsState = {
+        count: 0,
+        error: "",
+        loaded: false,
+        pending: true
+      };
+      expect(starsReducer(state, loadStarsCount.setFulfilled(10))).toEqual({
+        count: 10,
+        error: "",
+        loaded: true,
+        pending: false
+      });
+    });
+
+    it("handles rejected action", () => {
+      const state: IStarsState = {
+        count: 0,
+        error: "",
+        loaded: false,
+        pending: true
+      };
+      expect(starsReducer(state, loadStarsCount.setRejected(null, "Error"))).toEqual({
+        count: 0,
+        error: "Error",
+        loaded: true,
+        pending: false
+      });
     });
 
     it("handles actions with unknown type", () => {
-      const action: IAction<IStars> = {type: ""};
-      const stateBefore: IState<IStars> = {isFetching: false, payload: null};
-      const stateAfter: IState<IStars> = {isFetching: false, payload: null};
-      expect(starsReducer(stateBefore, action)).toEqual(stateAfter);
-    });
-  });
-
-  describe("action creator", () => {
-    describe("loadStars()", () => {
-      it("creates correct action", () => {
-        const expectedValue: IAction<IStars> = {
-          type: LOAD_STARS
-        };
-        expect(loadStars()).toEqual(expectedValue);
-      });
+      const state: IStarsState = {
+        count: 10,
+        error: "",
+        loaded: true,
+        pending: false
+      };
+      expect(starsReducer(state, {type: "unknown"} as any)).toBe(state);
     });
   });
 });
