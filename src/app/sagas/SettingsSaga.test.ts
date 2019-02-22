@@ -4,7 +4,7 @@ import * as ReduxSagaEffects from "redux-saga/effects";
 import {getType} from "typesafe-actions";
 import {setLanguage} from "../redux/modules/settingsActionCreators";
 import {dummyApi} from "./dummyApi";
-import {SettingsSaga} from "./settingsSaga";
+import {SettingsSaga} from "./SettingsSaga";
 
 describe("SettingsSaga", () => {
   describe("fetchTranslations", () => {
