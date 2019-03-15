@@ -1,6 +1,7 @@
 import autobind from "autobind-decorator";
 import * as React from "react";
 import {Helmet} from "react-helmet";
+import * as serialize from "serialize-javascript";
 import {getStyles} from "typestyle";
 import {IStore} from "../redux/IStore";
 
@@ -23,7 +24,7 @@ export class Html extends React.Component<IHtmlProps> {
 
     const initialStateScript = (
       <script
-        dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`}}
+        dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${serialize(initialState, {isJSON: true})};`}}
         charSet="UTF-8"
       />
     );

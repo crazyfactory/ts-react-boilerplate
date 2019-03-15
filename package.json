@@ -81,6 +81,7 @@
     "@types/react-dom": "^16.8.2",
     "@types/react-helmet": "^5.0.8",
     "@types/react-redux": "^7.0.1",
+    "@types/serialize-javascript": "^1.5.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-core": "^6.26.3",
     "cross-env": "^5.2.0",
@@ -130,6 +131,7 @@
     "redux-saga": "^1.0.1",
     "reselect": "^4.0.0",
     "router5": "^6.6.3",
+    "serialize-javascript": "^1.6.1",
     "serve-favicon": "^2.5.0",
     "typesafe-actions": "^3.1.0",
     "typestyle": "^2.0.1"
