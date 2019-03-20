@@ -4,9 +4,14 @@
     "tslint-react"
   ],
   "rulesDirectory": [
-    "node_modules/tslint-microsoft-contrib"
+    "node_modules/tslint-microsoft-contrib",
+    "node_modules/@crazyfactory/tslint-rules/lib"
   ],
   "rules": {
+    "hex-format": true,
+    "jsx-space-before-closing-tag": [true, "never"],
+    "create-async-actions": true,
+    "no-dup-actions": true,
     "no-banned-terms": true,
     "no-cookies": true,
     "no-delete-expression": true,

@@ -22,16 +22,16 @@ describe("<Link />", () => {
 
   it("renders href correctly", () => {
     let component;
-    component = shallow(<UnconnectedLink name="home" dispatch={jest.fn()} />, {context: {router}});
+    component = shallow(<UnconnectedLink name="home" dispatch={jest.fn()}/>, {context: {router}});
     expect(component.find("a")).toHaveProp("href", "/");
 
     component = shallow(
-      <UnconnectedLink name="product" params={{id: 10}} dispatch={jest.fn()} />, {context: {router}}
+      <UnconnectedLink name="product" params={{id: 10}} dispatch={jest.fn()}/>, {context: {router}}
     );
     expect(component.find("a")).toHaveProp("href", "/product/10");
 
     component = shallow(
-      <UnconnectedLink name="account.order" params={{id: 10}} dispatch={jest.fn()} />, {context: {router}}
+      <UnconnectedLink name="account.order" params={{id: 10}} dispatch={jest.fn()}/>, {context: {router}}
     );
     expect(component.find("a")).toHaveProp("href", "/account/order/10");
   });
@@ -44,7 +44,7 @@ describe("<Link />", () => {
     });
 
     const component = shallow(
-      <UnconnectedLink name="account.order" params={{id: 10}} dispatch={jest.fn()} />, {context: {router}}
+      <UnconnectedLink name="account.order" params={{id: 10}} dispatch={jest.fn()}/>, {context: {router}}
     );
     expect(component.find("a")).toHaveClassName("active");
   });
@@ -56,13 +56,13 @@ describe("<Link />", () => {
       path: "/"
     });
 
-    const component = shallow(<UnconnectedLink name="about" dispatch={jest.fn()} />, {context: {router}});
+    const component = shallow(<UnconnectedLink name="about" dispatch={jest.fn()}/>, {context: {router}});
     expect(component.find("a")).not.toHaveClassName("active");
   });
 
   it("calls dispatch with correct arguments when clicked", () => {
     const dispatch = jest.fn();
-    const component = shallow(<UnconnectedLink name="home" dispatch={dispatch} />, {context: {router}});
+    const component = shallow(<UnconnectedLink name="home" dispatch={dispatch}/>, {context: {router}});
     expect(dispatch).not.toHaveBeenCalled();
     component.find("a").simulate("click", { preventDefault(): void {} });
     expect(dispatch).toHaveBeenCalledWith(actions.navigateTo("home"));
