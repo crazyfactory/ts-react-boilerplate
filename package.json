@@ -134,7 +134,7 @@
     "router5": "^6.6.3",
     "serialize-javascript": "^1.6.1",
     "serve-favicon": "^2.5.0",
-    "typesafe-actions": "^3.1.0",
+    "typesafe-actions": "^4.0.0",
     "typestyle": "^2.0.1"
   },
   "jest": {
