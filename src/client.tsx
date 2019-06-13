@@ -27,13 +27,13 @@ if (!appConfig.ssr) {
 }
 router.start();
 renderOrHydrate(
-  <ReactHotLoader>
+  (<ReactHotLoader>
     <Provider store={store} key="provider">
       <RouterProvider router={router}>
         <App/>
       </RouterProvider>
     </Provider>
-  </ReactHotLoader>,
+  </ReactHotLoader>),
   document.getElementById("app")
 );
 
@@ -43,13 +43,13 @@ if ((module as any).hot) {
   (module as any).hot.accept("./app/containers/App", () => {
     const {App: NewApp} = require("./app/containers/App");
     renderOrHydrate(
-      <ReactHotLoader>
+      (<ReactHotLoader>
         <Provider store={store}>
           <RouterProvider router={router}>
             <NewApp/>
           </RouterProvider>
         </Provider>
-      </ReactHotLoader>,
+      </ReactHotLoader>),
       document.getElementById("app")
     );
   });
