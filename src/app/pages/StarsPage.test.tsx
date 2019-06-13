@@ -53,7 +53,8 @@ describe("<Stars />", () => {
         loadStarsCount={loadStars}
         pending={false}
         translations={translations}
-      />);
+      />
+    );
     expect(loadStars).toHaveBeenCalled();
   });
 
