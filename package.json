@@ -76,7 +76,7 @@
     "@types/enzyme": "^3.1.18",
     "@types/express": "^4.16.1",
     "@types/jest": "^24.0.6",
-    "@types/node": "^11.9.4",
+    "@types/node": "^12.0.0",
     "@types/prop-types": "^15.5.9",
     "@types/react": "^16.8.3",
     "@types/react-dom": "^16.8.2",
@@ -114,7 +114,7 @@
     "webpack-manifest-plugin": "^2.0.4"
   },
   "dependencies": {
-    "@sentry/browser": "^4.6.1",
+    "@sentry/browser": "^5.0.0",
     "autobind-decorator": "^2.4.0",
     "chalk": "^2.4.2",
     "es6-promise": "^4.2.6",
@@ -134,7 +134,7 @@
     "router5": "^6.6.3",
     "serialize-javascript": "^1.6.1",
     "serve-favicon": "^2.5.0",
-    "typesafe-actions": "^3.1.0",
+    "typesafe-actions": "^4.0.0",
     "typestyle": "^2.0.1"
   },
   "jest": {
