@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {classes, stylesheet} from "typestyle";
 import {Color} from "../constants/Color";
 

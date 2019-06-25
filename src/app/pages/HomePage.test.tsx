@@ -1,5 +1,5 @@
 import {shallow} from "enzyme";
-import * as React from "react";
+import React from "react";
 import {ISettingsState} from "../redux/modules/settingsModule";
 import {mapStateToProps, UnconnectedHomePage} from "./HomePage";
 describe("<HomePage />", () => {

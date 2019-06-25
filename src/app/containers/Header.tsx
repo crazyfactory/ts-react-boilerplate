@@ -1,14 +1,17 @@
-import * as React from "react";
+import React from "react";
 import {connect} from "react-redux";
+import {ConnectedLink} from "react-router5";
 import {createSelector} from "reselect";
 import {stylesheet} from "typestyle";
-import {Link} from "../components/Link";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
 import {translationsSelector} from "../selectors/translationsSelector";
 
 const classNames = stylesheet({
+  activeLink: {
+    textDecoration: "underline"
+  },
   nav: {
     $nest: {
       ul: {
@@ -40,10 +43,26 @@ class Header extends React.Component<IStateToProps> {
     return (
       <nav className={classNames.nav}>
         <ul>
-          <li><Link name="home">{translations.home}</Link></li>
-          <li><Link name="about">{translations.aboutUs}</Link></li>
-          <li><Link name="counter">{translations.counter}</Link></li>
-          <li><Link name="stars">{translations.stars}</Link></li>
+          <li>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName="home">
+              {translations.home}
+            </ConnectedLink>
+          </li>
+          <li>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName="about">
+              {translations.aboutUs}
+            </ConnectedLink>
+          </li>
+          <li>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName="counter">
+              {translations.counter}
+            </ConnectedLink>
+          </li>
+          <li>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName="stars">
+              {translations.stars}
+            </ConnectedLink>
+          </li>
         </ul>
       </nav>
     );

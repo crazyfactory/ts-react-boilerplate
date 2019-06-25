@@ -49,6 +49,7 @@ module.exports = {
           
           a {
             color: #000;
+            text-decoration: none;
           }
 
           a:active, a:visited {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {Helmet} from "react-helmet";
 import {connect} from "react-redux";
 import {createRouteNodeSelector, RouterState} from "redux-router5";
