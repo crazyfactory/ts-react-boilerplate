@@ -1,4 +1,3 @@
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const path = require('path');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -35,7 +34,7 @@ const config = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'ts-loader',
         exclude: /node_modules/
       },
       {
@@ -62,7 +61,6 @@ const config = {
   },
 
   plugins: [
-    new CheckerPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: true,
       options: {

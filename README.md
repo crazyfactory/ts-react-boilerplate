@@ -38,7 +38,7 @@ and impure things like accessing the browser cache) in React/Redux applications 
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
-  - [Awesome TypeScript Loader](https://github.com/s-panferov/awesome-typescript-loader) as ts loader.
+  - [TS Loader](https://github.com/TypeStrong/ts-loader) as ts loader.
   - [React Hot Loader](https://github.com/gaearon/react-hot-loader) provides hot reload capability to our development
   server
   - [File Loader](https://github.com/webpack/file-loader)
