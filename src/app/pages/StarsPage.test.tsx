@@ -1,5 +1,5 @@
 import {shallow} from "enzyme";
-import React from "react";
+import * as React from "react";
 import {ISettingsState} from "../redux/modules/settingsModule";
 import {loadStarsCount} from "../redux/modules/starsActionCreators";
 import {IStarsState} from "../redux/modules/starsModule";

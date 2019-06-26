@@ -1,5 +1,5 @@
 import {shallow} from "enzyme";
-import React from "react";
+import * as React from "react";
 import {ConnectedLink} from "react-router5";
 import {ISettingsState} from "../redux/modules/settingsModule";
 import {mapStateToProps, UnconnectedHeader} from "./Header";

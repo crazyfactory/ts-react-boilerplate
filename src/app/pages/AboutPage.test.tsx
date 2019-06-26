@@ -1,5 +1,5 @@
 import {shallow} from "enzyme";
-import React from "react";
+import * as React from "react";
 import {Button} from "../components/Button";
 import {setLanguage as setLanguageActionCreator} from "../redux/modules/settingsActionCreators";
 import {ISettingsState} from "../redux/modules/settingsModule";

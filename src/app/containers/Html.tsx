@@ -1,5 +1,5 @@
 import autobind from "autobind-decorator";
-import React from "react";
+import * as React from "react";
 import {Helmet} from "react-helmet";
 import serialize from "serialize-javascript";
 import {getStyles} from "typestyle";

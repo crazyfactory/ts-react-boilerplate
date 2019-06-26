@@ -1,5 +1,5 @@
 import {shallow} from "enzyme";
-import React from "react";
+import * as React from "react";
 import {State as IRouteState} from "router5";
 import {HomePage} from "../pages/HomePage";
 import {ISettingsState} from "../redux/modules/settingsModule";

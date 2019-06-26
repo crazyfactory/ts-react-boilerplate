@@ -1,7 +1,7 @@
 import * as e6p from "es6-promise";
 (e6p as any).polyfill();
 import "isomorphic-fetch";
-import React from "react";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";

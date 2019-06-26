@@ -4,7 +4,7 @@ import Chalk from "chalk";
 import express from "express";
 import "isomorphic-fetch";
 import path from "path";
-import React from "react";
+import * as React from "react";
 import {renderToString} from "react-dom/server";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";
