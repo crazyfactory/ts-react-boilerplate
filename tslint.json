@@ -71,7 +71,6 @@
     "no-unnecessary-bind": true,
     "no-unnecessary-override": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-with-statement": true,
     "promise-must-complete": true,
     "radix": true,
