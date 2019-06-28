@@ -1,14 +1,14 @@
 import * as e6p from "es6-promise";
 (e6p as any).polyfill();
 import Chalk from "chalk";
-import * as express from "express";
+import express from "express";
 import "isomorphic-fetch";
-import * as path from "path";
+import path from "path";
 import * as React from "react";
 import {renderToString} from "react-dom/server";
 import {Provider} from "react-redux";
 import {RouterProvider} from "react-router5";
-import * as favicon from "serve-favicon";
+import favicon from "serve-favicon";
 import {config as appConfig} from "../config";
 import {App} from "./app/containers/App";
 import {Html} from "./app/containers/Html";

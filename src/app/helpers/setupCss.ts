@@ -31,6 +31,7 @@ export function setupCss(): void {
 
   a {
     color: ${Color.BLACK};
+    text-decoration: none;
   }
 
   a:active, a:visited {

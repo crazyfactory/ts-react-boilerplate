@@ -1,7 +1,7 @@
 import autobind from "autobind-decorator";
 import * as React from "react";
 import {Helmet} from "react-helmet";
-import * as serialize from "serialize-javascript";
+import serialize from "serialize-javascript";
 import {getStyles} from "typestyle";
 import {IStore} from "../redux/IStore";
 

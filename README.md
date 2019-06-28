@@ -38,7 +38,7 @@ and impure things like accessing the browser cache) in React/Redux applications 
 
 #### Build System
 - [Webpack](https://github.com/webpack/webpack) for bundling.
-  - [Awesome TypeScript Loader](https://github.com/s-panferov/awesome-typescript-loader) as ts loader.
+  - [TS Loader](https://github.com/TypeStrong/ts-loader) as ts loader.
   - [React Hot Loader](https://github.com/gaearon/react-hot-loader) provides hot reload capability to our development
   server
   - [File Loader](https://github.com/webpack/file-loader)
@@ -63,7 +63,6 @@ and impure things like accessing the browser cache) in React/Redux applications 
 - [TS Jest](https://github.com/kulshekhar/ts-jest) as Jest preprocessor
 - [Enzyme](https://github.com/airbnb/enzyme) for rendering React Components.
 - [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
-- [Wallaby](http://wallabyjs.com) intelligent test runner for JavaScript that continuously runs your tests.
 
 #### Doc
 - [React Style Guidist](https://github.com/styleguidist/react-styleguidist) - isolates React component development
@@ -118,8 +117,7 @@ React Style Guidist
 ├── README.md                   # This file
 ├── styleguide.config.js        # Config for doc
 ├── tsconfig.json               # TypeScript transpiler configuration.
-├── tslint.json                 # Configures tslint.
-└── wallaby.conf.js             # Configuraton for wallaby testing
+└── tslint.json                 # Configures tslint.
 ```
 
 ## Installation
