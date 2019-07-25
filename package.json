@@ -94,7 +94,7 @@
     "mini-html-webpack-plugin": "^1.0.0",
     "react-docgen-typescript": "^1.12.5",
     "react-hot-loader": "^4.11.1",
-    "react-styleguidist": "^8.0.6",
+    "react-styleguidist": "^9.1.12",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
