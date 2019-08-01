@@ -17,7 +17,7 @@ module.exports = {
       <head>
         <meta charset="utf-8">
         <title>${title}</title>
-        ${generateCSSReferences(css, publicPath)}
+        ${generateCSSReferences({files: css, publicPath})}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
           @import url(https://fonts.googleapis.com/css?family=Roboto);
