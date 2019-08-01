@@ -73,7 +73,7 @@ module.exports = {
       </head>
       <body>
         <div id="rsg-root"></div>
-        ${generateJSReferences(js, publicPath)}
+        ${generateJSReferences({files: js, publicPath})}
       </body>
       </html>
     `
