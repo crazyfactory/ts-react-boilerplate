@@ -91,7 +91,7 @@
     "husky": "^3.0.0",
     "jest": "^24.8.0",
     "jest-enzyme": "^7.0.2",
-    "mini-html-webpack-plugin": "^1.0.0",
+    "mini-html-webpack-plugin": "^2.0.0",
     "react-docgen-typescript": "^1.12.5",
     "react-hot-loader": "^4.11.1",
     "react-styleguidist": "^9.1.12",
