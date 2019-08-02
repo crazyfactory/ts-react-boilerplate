@@ -1,5 +1,8 @@
 const fs = require('fs');
 const manifest = require('../../build/manifest');
+const utils = require('../utils');
+
+utils.copySync('./src/index.html', './build/index.html');
 
 const scriptFileNames = [];
 Object.keys(manifest).forEach((key) => {
