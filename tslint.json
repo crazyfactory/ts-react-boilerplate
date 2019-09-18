@@ -30,11 +30,13 @@
     "no-string-based-set-timeout": true,
     "react-no-dangerous-html": [
       true,
-      {
-        "file": "./src/app/containers/Html.tsx",
-        "method": "render",
-        "comment": "string comes from trusted source - our initial state"
-      }
+      [
+        {
+          "file": "./src/app/containers/Html.tsx",
+          "method": "render",
+          "comment": "string comes from trusted source - our initial state"
+        }
+      ]
     ],
     "chai-vague-errors": true,
     "forin": true,
