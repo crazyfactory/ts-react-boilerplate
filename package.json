@@ -113,34 +113,32 @@
     "webpack-manifest-plugin": "^2.0.4"
   },
   "dependencies": {
-    "@sentry/browser": "^5.4.3",
+    "@sentry/browser": "^5.6.3",
     "autobind-decorator": "^2.4.0",
     "chalk": "^2.4.2",
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
-    "react-redux": "^7.1.0",
+    "react-redux": "^7.1.1",
     "react-router5": "^7.1.0",
-    "redux": "^4.0.1",
+    "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-router5": "^7.0.2",
-    "redux-saga": "^1.0.3",
+    "redux-saga": "^1.0.5",
     "reselect": "^4.0.0",
     "router5": "^7.0.2",
     "router5-plugin-browser": "^7.0.2",
-    "serialize-javascript": "^1.7.0",
+    "serialize-javascript": "^2.1.0",
     "serve-favicon": "^2.5.0",
     "typesafe-actions": "^4.4.2",
-    "typestyle": "^2.0.2"
+    "typestyle": "^2.0.4"
   },
   "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
+    "preset": "ts-jest",
     "cacheDirectory": "<rootDir>/.jest/cache",
     "collectCoverage": true,
     "coverageDirectory": "<rootDir>/coverage",
