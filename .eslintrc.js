@@ -129,9 +129,9 @@ module.exports = {
             "error",
             {
                 "rulesDirectory": [
-                    "C:\\workspace\\ts-react-boilerplate\\node_modules\\tslint-react\\rules",
-                    "C:\\workspace\\ts-react-boilerplate\\node_modules\\tslint-microsoft-contrib",
-                    "C:\\workspace\\ts-react-boilerplate\\node_modules\\@crazyfactory\\tslint-rules\\lib"
+                    "node_modules/tslint-react/rules",
+                    "node_modules/tslint-microsoft-contrib",
+                    "node_modules/@crazyfactory/tslint-rules/lib"
                 ],
                 "rules": {
                     "align": [
