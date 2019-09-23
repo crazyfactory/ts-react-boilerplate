@@ -17,6 +17,7 @@ module.exports = {
         "@typescript-eslint/array-type": "error",
         "@typescript-eslint/ban-types": "error",
         "@typescript-eslint/class-name-casing": "error",
+        "@typescript-eslint/consistent-type-assertions": "error",
         "@typescript-eslint/explicit-member-accessibility": [
             "error",
             {
@@ -25,32 +26,34 @@ module.exports = {
                 }
             }
         ],
-        "@typescript-eslint/indent": "error",
-        "@typescript-eslint/interface-name-prefix": "error",
-        "@typescript-eslint/no-angle-bracket-type-assertion": "error",
+        "@typescript-eslint/indent": ["error", 2],
+        "@typescript-eslint/interface-name-prefix": [
+            "error",
+            {
+              "prefixWithI": "always"
+            }
+        ],
+        "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/no-empty-function": "error",
         "@typescript-eslint/no-empty-interface": "error",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-extraneous-class": "error",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-misused-new": "error",
         "@typescript-eslint/no-namespace": "off",
-        "@typescript-eslint/no-object-literal-type-assertion": "error",
         "@typescript-eslint/no-parameter-properties": "off",
         "@typescript-eslint/no-require-imports": "off",
         "@typescript-eslint/no-this-alias": "error",
-        "@typescript-eslint/no-triple-slash-reference": "error",
         "@typescript-eslint/no-use-before-declare": "off",
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/prefer-for-of": "error",
         "@typescript-eslint/prefer-function-type": "error",
-        "@typescript-eslint/prefer-interface": "error",
         "@typescript-eslint/prefer-namespace-keyword": "off",
         "@typescript-eslint/type-annotation-spacing": "error",
         "@typescript-eslint/unified-signatures": "error",
-        "arrow-body-style": "error",
         "arrow-parens": [
             "error",
-            "as-needed"
+            "always"
         ],
         "complexity": "off",
         "constructor-super": "error",
@@ -63,7 +66,7 @@ module.exports = {
             "error",
             1
         ],
-        "member-ordering": "error",
+        "member-ordering": "off",
         "new-parens": "error",
         "no-bitwise": "error",
         "no-caller": "error",
@@ -72,11 +75,13 @@ module.exports = {
             "error",
             {
                 "allow": [
+                    "error",
                     "debug",
-                    "log",
+                    "info",
                     "time",
                     "timeEnd",
-                    "trace"
+                    "trace",
+                    "warn"
                 ]
             }
         ],
@@ -85,7 +90,7 @@ module.exports = {
         "no-debugger": "error",
         "no-duplicate-case": "error",
         "no-empty": "error",
-        "no-empty-functions": "error",
+        "no-empty-function": "off",
         "no-eval": "error",
         "no-extra-bind": "error",
         "no-extra-semi": "error",
@@ -109,7 +114,7 @@ module.exports = {
         "no-unused-labels": "error",
         "no-var": "error",
         "object-shorthand": "error",
-        "one-var": "error",
+        "one-var": "off",
         "prefer-const": "error",
         "prefer-object-spread": "error",
         "quote-props": [
@@ -117,16 +122,7 @@ module.exports = {
             "consistent-as-needed"
         ],
         "radix": "error",
-        "space-before-function-paren": [
-            "error",
-            {
-                "anonymous": "never",
-                "asyncArrow": "always",
-                "constructor": "never",
-                "method": "never",
-                "named": "never"
-            }
-        ],
+        "space-before-function-paren": ["error", "never"],
         "use-isnan": "error",
         "valid-typeof": "off",
         "@typescript-eslint/tslint/config": [
@@ -151,6 +147,7 @@ module.exports = {
                     ],
                     "create-async-actions": true,
                     "export-name": true,
+                    "function-constructor": true,
                     "function-name": [
                         true,
                         {
@@ -162,6 +159,7 @@ module.exports = {
                     ],
                     "hex-format": true,
                     "import-spacing": true,
+                    "increment-decrement": true,
                     "jquery-deferred-must-complete": true,
                     "jsdoc-format": true,
                     "jsx-boolean-value": true,
@@ -207,14 +205,12 @@ module.exports = {
                     "no-duplicate-variable": true,
                     "no-exec-script": true,
                     "no-for-in": true,
-                    "no-function-constructor-with-string-args": true,
                     "no-function-expression": true,
                     "no-http-string": true,
                     "no-implicit-dependencies": [
                         true,
                         "dev"
                     ],
-                    "no-increment-decrement": true,
                     "no-inner-html": true,
                     "no-jquery-raw-elements": true,
                     "no-reference-import": true,
@@ -223,7 +219,6 @@ module.exports = {
                     "no-string-based-set-interval": true,
                     "no-string-based-set-timeout": true,
                     "no-trailing-whitespace": true,
-                    "no-unnecessary-bind": true,
                     "no-unnecessary-local-variable": true,
                     "no-unnecessary-override": true,
                     "no-unused-expression": true,
@@ -293,6 +288,7 @@ module.exports = {
                         "property-declaration",
                         "member-variable-declaration"
                     ],
+                    "unnecessary-bind": true,
                     "use-named-parameter": true,
                     "variable-name": [
                         true,

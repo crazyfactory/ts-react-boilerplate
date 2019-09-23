@@ -31,21 +31,21 @@ export class Html extends React.Component<IHtmlProps> {
 
     return (
       <html>
-      <head>
-        {head.base.toComponent()}
-        {head.title.toComponent()}
-        {head.meta.toComponent()}
-        {head.link.toComponent()}
-        {head.script.toComponent()}
-        {renderStyles}
-        <link rel="shortcut icon" href="/favicon.ico"/>
-      </head>
-      <body>
-        {/* tslint:disable-next-line:react-no-dangerous-html */}
-        <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
-        {initialStateScript}
-        {scripts}
-      </body>
+        <head>
+          {head.base.toComponent()}
+          {head.title.toComponent()}
+          {head.meta.toComponent()}
+          {head.link.toComponent()}
+          {head.script.toComponent()}
+          {renderStyles}
+          <link rel="shortcut icon" href="/favicon.ico"/>
+        </head>
+        <body>
+          {/* tslint:disable-next-line:react-no-dangerous-html */}
+          <main id="app" dangerouslySetInnerHTML={{__html: markup}}/>
+          {initialStateScript}
+          {scripts}
+        </body>
       </html>
     );
   }

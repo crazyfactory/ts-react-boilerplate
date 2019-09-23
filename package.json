@@ -42,8 +42,7 @@
     "test": "jest",
     "test:no-cache": "jest --no-cache",
     "test:watch": "jest --watch",
-    "lint": "tslint -t stylish --project tsconfig.json \"src/**/**.ts*\" -e \"src/**/**.snap\"",
-    "eslint": "eslint \"src/**/**.ts*\"",
+    "lint": "eslint \"src/**/**.ts*\"",
     "lint:fix": "npm run lint -s -- --fix",
     "doc": "styleguidist server --config styleguide.config.js"
   },
