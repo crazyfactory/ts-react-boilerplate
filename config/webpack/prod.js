@@ -29,7 +29,7 @@ const config = {
       {
         enforce: 'pre',
         test: /\.tsx?$/,
-        loader: 'tslint-loader'
+        loader: 'eslint-loader'
       },
       {
         test: /\.tsx?$/,
