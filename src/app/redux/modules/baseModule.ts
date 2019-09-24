@@ -11,8 +11,8 @@ export interface IBaseState {
   pending: boolean;
 }
 
-export type IAsyncActionCreator<T extends string, P> = (payload: P) => IAction<P, T>;
-export type IRejectedActionCreator<T extends string, P> = (payload: P, message: string) => IAction<P, T>;
+export type TAsyncActionCreator<T extends string, P> = (payload: P) => IAction<P, T>;
+export type TRejectedActionCreator<T extends string, P> = (payload: P, message: string) => IAction<P, T>;
 
 export interface IAsyncActionsBuilder<
   T1 extends string,
@@ -24,23 +24,21 @@ export interface IAsyncActionsBuilder<
   P3,
   P4
 > {
-  invoke: IAsyncActionCreator<T1, P1>;
-  setFulfilled: IAsyncActionCreator<T3, P3>;
-  setPending: IAsyncActionCreator<T2, P2>;
-  setRejected: IRejectedActionCreator<T4, P4>;
+  invoke: TAsyncActionCreator<T1, P1>;
+  setFulfilled: TAsyncActionCreator<T3, P3>;
+  setPending: TAsyncActionCreator<T2, P2>;
+  setRejected: TRejectedActionCreator<T4, P4>;
 }
 
-export interface IGetAsyncAction<T1 extends string, T2 extends string, T3 extends string, T4 extends string> {
-  // tslint:disable-next-line:callable-types
-  <P1, P2, P3, P4>(): IAsyncActionsBuilder<T1, T2, T3, T4, P1, P2, P3, P4>;
-}
+export type TGetAsyncAction<T1 extends string, T2 extends string, T3 extends string, T4 extends string> =
+  <P1, P2, P3, P4>() => IAsyncActionsBuilder<T1, T2, T3, T4, P1, P2, P3, P4>;
 
 export function createAsyncActions<T1 extends string, T2 extends string, T3 extends string, T4 extends string>(
   baseType: T1,
   pendingType: T2,
   fulfilledType: T3,
   rejectedType: T4
-): IGetAsyncAction<T1, T2, T3, T4> {
+): TGetAsyncAction<T1, T2, T3, T4> {
 
   function builder<P1, P2, P3, P4>(): IAsyncActionsBuilder<T1, T2, T3, T4, P1, P2, P3, P4> {
     const invokeActionCreator = (payload: P1): IAction<P1, T1> => ({type: baseType, payload});
