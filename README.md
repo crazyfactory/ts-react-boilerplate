@@ -53,7 +53,8 @@ and impure things like accessing the browser cache) in React/Redux applications 
 - [Serve Favicon](https://github.com/expressjs/serve-favicon) for serving favicon.
 
 #### Developer Experience
-- [TS Lint](https://github.com/palantir/tslint) for linting TypeScript files.
+- [ESLint](https://github.com/eslint/eslint) for linting.
+- [Typescript ESLint](https://github.com/typescript-eslint/typescript-eslint) enables ESLint to support TypeScript.
 - [Redux Logger](https://github.com/theaqua/redux-logger)
 - [Redux DevTools](https://github.com/gaearon/redux-devtools)
 - [Chalk](https://github.com/chalk/chalk) for colored terminal logs.
@@ -65,10 +66,7 @@ and impure things like accessing the browser cache) in React/Redux applications 
 - [Jest Enzyme](https://github.com/blainekasten/enzyme-matchers) for asserting React Components.
 
 #### Doc
-- [React Style Guidist](https://github.com/styleguidist/react-styleguidist) - isolates React component development
-environment with a living style guide
-- [React Docgen Typescript](https://github.com/styleguidist/react-docgen-typescript) - Typescript parser for
-React Style Guidist
+- [Storybook](https://github.com/storybookjs/storybook) - UI component dev & test: React and more.
 
 ## Directory Structure
 ```bash
