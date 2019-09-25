@@ -30,6 +30,9 @@ const classNames = stylesheet({
 export type TButtonType = "primary" | "secondary";
 
 interface IProps extends React.HTMLProps<HTMLButtonElement> {
+  /**
+   * Either primary or secondary
+   */
   type?: TButtonType;
 }
 
