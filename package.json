@@ -2,35 +2,14 @@
   "name": "ts-react-boilerplate",
   "description": "A universal boilerplate for building web applications w/ TypeScript, React, Redux and more.",
   "main": "build/server.js",
-  "config": {
-    "validate-commit-msg": {
-      "types": [
-        "build",
-        "chore",
-        "ci",
-        "cleanup",
-        "docs",
-        "feat",
-        "fix",
-        "followup",
-        "improve",
-        "perf",
-        "refactor",
-        "revert",
-        "style",
-        "test",
-        "unfeat"
-      ]
-    }
-  },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run lint"
     }
   },
   "scripts": {
     "prepush": "npm run build && npm run build:prod && npm run test:no-cache",
-    "commitmsg": "validate-commit-msg",
     "clean": "rimraf build && rimraf .jest/cache",
     "prebuild": "npm run clean -s",
     "build": "webpack --config config/webpack/index.js",
@@ -72,6 +51,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@crazyfactory/tslint-rules": "^1.6.1",
     "@storybook/addon-docs": "^5.3.0-alpha.3",
     "@storybook/react": "^5.2.1",
@@ -110,7 +91,6 @@
     "tslint-react": "^4.1.0",
     "typescript": "^3.6.3",
     "url-loader": "^2.1.0",
-    "validate-commit-msg": "^2.14.0",
     "webpack": "^4.40.2",
     "webpack-bundle-analyzer": "^3.5.0",
     "webpack-cli": "^3.3.9",
