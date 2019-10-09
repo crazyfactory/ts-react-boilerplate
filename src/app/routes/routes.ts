@@ -7,7 +7,7 @@ import {HomePage} from "../pages/HomePage";
 import {StarsPage} from "../pages/StarsPage";
 
 interface IRoute {
-  name: string;
+  name: RoutablePages;
   path: string;
 }
 type RoutablePages = "homePage"
@@ -19,11 +19,19 @@ type RouteConfig = Record<RoutablePages, Omit<IRoute, "name">>;
 type RoutePageMap = Record<RoutablePages, ComponentClass>;
 type RouteNavigate = Record<RoutablePages, (...params: any[]) => Action>;
 
-function getRoutes(routeConfig: RouteConfig): IRoute[] {
-  return Object.keys(routeConfig).map((key) => ({
-    name: key,
-    path: routeConfig[key].path
-  }));
+function getRoutes(routeConfig: RouteConfig): Record<RoutablePages, IRoute> {
+  return Object.keys(routeConfig)
+    .map((key) => ({
+      name: key,
+      path: routeConfig[key].path
+    }))
+    .reduce(
+      (a, c) => {
+        a[c.name] = c;
+        return a;
+      },
+      {} as any
+    );
 }
 
 function getNavigateAction<T extends {[key: string]: any}>(routeName: RoutablePages, params?: T): Action {
@@ -47,8 +55,8 @@ export const routePageMap: RoutePageMap = {
 };
 
 export const navigate: RouteNavigate = {
-  aboutPage: () => getNavigateAction("aboutPage"),
-  counterPage: () => getNavigateAction("counterPage"),
-  homePage: () => getNavigateAction("homePage"),
-  starsPage: () => getNavigateAction("starsPage")
+  aboutPage: () => getNavigateAction(routes.aboutPage.name),
+  counterPage: () => getNavigateAction(routes.counterPage.name),
+  homePage: () => getNavigateAction(routes.homePage.name),
+  starsPage: () => getNavigateAction(routes.starsPage.name)
 };
