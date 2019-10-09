@@ -7,13 +7,23 @@ const Stage: React.FunctionComponent<{initialState: any}> = ({children, initialS
   );
 };
 
+const renderChildrenFn = (story, context) => (state, setState) => {
+  const setCombinedState = (updatedState) => setState({...state, ...updatedState});
+  return <div>{story({...context, state, setState: setCombinedState})}</div>;
+};
+
 export function withInitialState(initialState: any): (
   story: (...args: any) => JSX.Element,
   context: any
 ) => JSX.Element {
   return (story, context) => (
-    <Stage initialState={initialState}>
-      {(state, setState) => <div>{story({...context, state, setState})}</div>}
-    </Stage>
+    <>
+      <Stage initialState={initialState}>
+        {renderChildrenFn(story, context)}
+      </Stage>
+      <div style={{backgroundColor: "#eee", marginTop: 30, maxWidth: 500, overflowX: "auto", padding: 10}}>
+        initialState: {JSON.stringify(initialState)}
+      </div>
+    </>
   );
 }
