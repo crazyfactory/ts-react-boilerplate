@@ -1,10 +1,6 @@
 import {ComponentClass} from "react";
 import {Action} from "redux";
 import {actions} from "redux-router5";
-import {AboutPage} from "../pages/AboutPage";
-import {CounterPage} from "../pages/CounterPage";
-import {HomePage} from "../pages/HomePage";
-import {StarsPage} from "../pages/StarsPage";
 
 interface IRoute {
   name: RoutablePages;
@@ -16,7 +12,7 @@ type RoutablePages = "homePage"
 | "starsPage";
 
 type RouteConfig = Record<RoutablePages, Omit<IRoute, "name">>;
-type RoutePageMap = Record<RoutablePages, ComponentClass>;
+export type RoutePageMap = Record<RoutablePages, ComponentClass>;
 type RouteNavigate = Record<RoutablePages, (...params: any[]) => Action>;
 
 function getRoutes(routeConfig: RouteConfig): Record<RoutablePages, IRoute> {
@@ -46,13 +42,6 @@ const config: RouteConfig = {
 };
 
 export const routes = getRoutes(config);
-
-export const routePageMap: RoutePageMap = {
-  aboutPage: AboutPage,
-  counterPage: CounterPage,
-  homePage: HomePage,
-  starsPage: StarsPage
-};
 
 export const navigate: RouteNavigate = {
   aboutPage: () => getNavigateAction(routes.aboutPage.name),
