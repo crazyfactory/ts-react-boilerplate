@@ -1,8 +1,8 @@
-var path = require('path');
-var fs = require('fs');
-var utils = require('../utils');
+const path = require('path');
+const fs = require('fs');
+const utils = require('../utils');
 
-var nodeModules = {};
+const nodeModules = {};
 fs.readdirSync('node_modules')
   .filter(function (x) {
     return ['.bin'].indexOf(x) === -1;
@@ -11,7 +11,7 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
-var config = {
+const config = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   externals: nodeModules,
   target: 'node',
@@ -56,6 +56,10 @@ var config = {
       {
         test: /\.(jpe?g|png|gif)$/i,
         loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
+      },
+      {
+        test: /\.css$/,
+        loader: 'null-loader'
       }
     ]
   },

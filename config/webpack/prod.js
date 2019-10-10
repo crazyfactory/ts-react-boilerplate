@@ -1,7 +1,11 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ManifestPlugin = require('webpack-manifest-plugin');
+const appConfig = require('../').config;
 const utils = require('../utils');
 
 const config = {
@@ -15,7 +19,10 @@ const config = {
   },
 
   entry: {
-    app: './src/client.tsx'
+    app: [
+      './src/client.tsx',
+      './src/vendor/main.ts'
+    ]
   },
 
   output: {
@@ -55,6 +62,20 @@ const config = {
       {
         test: /\.(jpe?g|png|gif)$/i,
         loader: 'url-loader?limit=1000&name=images/[hash].[ext]'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          appConfig.ssr ?
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: process.env.NODE_ENV !== 'production',
+              }
+            } :
+            'style-loader',
+          'css-loader'
+        ]
       }
     ]
   },
@@ -77,11 +98,15 @@ const config = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[chunkhash].css'
+    }),
     // Uncomment this to analyze bundle
     // new BundleAnalyzerPlugin()
   ],
 
   optimization: {
+    minimizer: [new TerserWebpackPlugin({}), new OptimizeCSSAssetsPlugin({})],
     splitChunks: {
       chunks: 'all'
     }
