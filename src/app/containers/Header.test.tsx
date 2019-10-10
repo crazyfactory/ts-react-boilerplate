@@ -2,6 +2,7 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {ConnectedLink} from "react-router5";
 import {ISettingsState} from "../redux/modules/settingsModule";
+import {routes} from "../routes/routes";
 import {mapStateToProps, UnconnectedHeader} from "./Header";
 
 describe("<Header />", () => {
@@ -33,9 +34,17 @@ describe("<Header />", () => {
 
   it("contains links", () => {
     const wrapper = shallow(<UnconnectedHeader translations={translations}/>);
-    expect(wrapper.containsMatchingElement(<ConnectedLink routeName="home">Home</ConnectedLink>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<ConnectedLink routeName="about">About Us</ConnectedLink>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<ConnectedLink routeName="counter">Counter</ConnectedLink>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<ConnectedLink routeName="stars">Stars</ConnectedLink>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(
+      <ConnectedLink routeName={routes.homePage.name}>Home</ConnectedLink>)
+    ).toBeTruthy();
+    expect(wrapper.containsMatchingElement(
+      <ConnectedLink routeName={routes.aboutPage.name}>About Us</ConnectedLink>)
+    ).toBeTruthy();
+    expect(wrapper.containsMatchingElement(
+      <ConnectedLink routeName={routes.counterPage.name}>Counter</ConnectedLink>)
+    ).toBeTruthy();
+    expect(wrapper.containsMatchingElement(
+      <ConnectedLink routeName={routes.starsPage.name}>Stars</ConnectedLink>)
+    ).toBeTruthy();
   });
 });

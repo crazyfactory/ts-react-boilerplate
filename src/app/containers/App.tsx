@@ -14,6 +14,7 @@ import {CounterPage} from "../pages/CounterPage";
 import {HomePage} from "../pages/HomePage";
 import {StarsPage} from "../pages/StarsPage";
 import {IStore} from "../redux/IStore";
+import {RoutePageMap} from "../routes/routes";
 import {translationsSelector} from "../selectors/translationsSelector";
 import {Header} from "./Header";
 
@@ -35,13 +36,12 @@ interface IStateToProps {
 }
 
 class App extends React.Component<IStateToProps> {
-  private components: {[key: string]: React.ComponentClass} = {
-    about: AboutPage,
-    counter: CounterPage,
-    home: HomePage,
-    stars: StarsPage
+  private components: RoutePageMap = {
+    aboutPage: AboutPage,
+    counterPage: CounterPage,
+    homePage: HomePage,
+    starsPage: StarsPage
   };
-
   public render(): JSX.Element {
     const {route, translations: {notFound}} = this.props;
     const segment = route ? route.name.split(".")[0] : undefined;
