@@ -113,9 +113,6 @@ const config = {
   }
 };
 
-utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
-utils.createIfDoesntExist('./build');
-utils.createIfDoesntExist('./build/public');
 utils.copySync('./src/favicon.ico', './build/public/favicon.ico', true);
 
 module.exports = config;
