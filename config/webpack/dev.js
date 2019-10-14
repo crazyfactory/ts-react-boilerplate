@@ -1,6 +1,8 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const appConfig = require('../').config;
 const utils = require('../utils');
 
 const config = {
@@ -56,6 +58,20 @@ const config = {
       {
         test: /\.(jpe?g|png|gif)$/i,
         loader: 'url-loader?limit=10000&name=images/[hash].[ext]'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          appConfig.ssr ?
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: process.env.NODE_ENV !== 'production',
+              }
+            } :
+            'style-loader',
+          'css-loader'
+        ]
       }
     ]
   },
@@ -78,7 +94,10 @@ const config = {
         NODE_ENV: JSON.stringify('development')
       }
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    })
   ],
 
   optimization: {
@@ -86,9 +105,6 @@ const config = {
   }
 };
 
-utils.copySyncIfDoesntExist('./config/main.js', './config/main.local.js');
-utils.createIfDoesntExist('./build');
-utils.createIfDoesntExist('./build/public');
 utils.copySync('./src/favicon.ico', './build/public/favicon.ico', true);
 utils.copySync('./src/index.html', './build/index.html');
 

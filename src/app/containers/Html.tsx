@@ -16,11 +16,16 @@ export class Html extends React.Component<IHtmlProps> {
     const head = Helmet.renderStatic();
     const {markup, initialState} = this.props;
 
-    // Styles
+    // styles from typestyle
     const renderStyles = <style id="styles-target">{getStyles()}</style>;
 
-    // Scripts
-    const scripts = this.getScriptFileNames().map((src, i) => <script src={src} key={i}/>);
+    // styles from css files
+    const links = this.getFileNames(".css").map(
+      (href, i) => <link key={i} href={href} rel="stylesheet" type="text/css"/>
+    );
+
+    // scripts
+    const scripts = this.getFileNames(".js").map((src, i) => <script src={src} key={i}/>);
 
     const initialStateScript = (
       <script
@@ -38,6 +43,7 @@ export class Html extends React.Component<IHtmlProps> {
           {head.link.toComponent()}
           {head.script.toComponent()}
           {renderStyles}
+          {links}
           <link rel="shortcut icon" href="/favicon.ico"/>
         </head>
         <body>
@@ -51,11 +57,11 @@ export class Html extends React.Component<IHtmlProps> {
   }
 
   @autobind
-  private getScriptFileNames(): string[] {
+  private getFileNames(endsWith: string): string[] {
     const {manifest} = this.props;
     const scriptFileNames: string[] = [];
     Object.keys(manifest).forEach((key: string) => {
-      if (manifest[key].endsWith(".js")) {
+      if (manifest[key].endsWith(endsWith)) {
         scriptFileNames.push(manifest[key]);
       }
     });
