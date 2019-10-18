@@ -95,6 +95,7 @@
     "tslint": "^5.20.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "tslint-react": "^4.1.0",
+    "ttypescript": "^1.5.7",
     "typescript": "^3.6.3",
     "url-loader": "^2.1.0",
     "webpack": "^4.40.2",
@@ -126,6 +127,7 @@
     "router5-plugin-browser": "^7.0.2",
     "serialize-javascript": "^2.1.0",
     "serve-favicon": "^2.5.0",
+    "ts-optchain": "^0.1.8",
     "typesafe-actions": "^4.4.2",
     "typestyle": "^2.0.4"
   },

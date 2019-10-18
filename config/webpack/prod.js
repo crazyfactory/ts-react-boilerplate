@@ -7,6 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const ManifestPlugin = require('webpack-manifest-plugin');
 const appConfig = require('../').config;
 const utils = require('../utils');
+const optChainTransform = require('ts-optchain/transform').default;
 
 const config = {
   mode: 'production',
@@ -41,6 +42,12 @@ const config = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
+        options: {
+          compiler: 'ttypescript',
+          getCustomTransformers: (program) => ({
+            after: [optChainTransform(program)],
+          })
+        },
         exclude: /node_modules/
       },
       {
