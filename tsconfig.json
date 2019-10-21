@@ -12,7 +12,10 @@
     "noUnusedLocals": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "plugins": [
+      { "transform": "ts-optchain/transform" },
+    ]
   },
   "exclude": [
     "node_modules",
