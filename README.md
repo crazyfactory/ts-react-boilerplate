@@ -9,9 +9,9 @@ ___
 
 ##### Based on [Vortigern](https://github.com/barbar/vortigern)
 
-[![TypeScript](https://barbaruploads.s3.amazonaws.com/bicoz/typescript.png)](https://www.typescriptlang.org/)
-[![React](https://barbaruploads.s3.amazonaws.com/bicoz/react.png)](https://github.com/facebook/react)
-[![Redux](https://barbaruploads.s3.amazonaws.com/bicoz/redux.png)](https://github.com/reactjs/redux)
+[![TypeScript](./.github/typescript.png)](https://www.typescriptlang.org/)
+[![React](./.github/react.png)](https://github.com/facebook/react)
+[![Redux](./.github/redux.png)](https://github.com/reactjs/redux)
 
 ## Libraries
 This boilerplate uses the following libraries and tools:
