@@ -11,6 +11,7 @@ const tslintRules = {
     "check-space"
   ],
   "create-async-actions": true,
+  "enum-sort-keys": true,
   "export-name": true,
   "function-constructor": true,
   "function-name": [
@@ -24,6 +25,7 @@ const tslintRules = {
   ],
   "hex-format": true,
   "import-spacing": true,
+  "interface-sort-keys": true,
   "increment-decrement": true,
   "jquery-deferred-must-complete": true,
   "jsdoc-format": true,

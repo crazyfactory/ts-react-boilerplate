@@ -6,9 +6,9 @@ import {getStyles} from "typestyle";
 import {IStore} from "../redux/IStore";
 
 interface IHtmlProps {
+  initialState?: Partial<IStore>;
   manifest?: {[key: string]: string};
   markup?: string;
-  initialState?: Partial<IStore>;
 }
 
 export class Html extends React.Component<IHtmlProps> {

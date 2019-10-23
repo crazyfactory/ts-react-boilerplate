@@ -1,8 +1,8 @@
 import {Action} from "redux";
 
 export interface IAction<P, T = string, M = string> extends Action<T> {
-  payload?: P;
   message?: M;
+  payload?: P;
 }
 
 export interface IBaseState {

@@ -10,8 +10,8 @@ import {sentryMiddleware} from "./middlewares/sentryMiddleware";
 import rootReducer from "./rootReducer";
 
 interface IExtendedStore extends Store<Partial<IStore>> {
-  runSaga: (rootSaga: any) => Task;
   close: () => void;
+  runSaga: (rootSaga: any) => Task;
 }
 
 export function configureStore(router: Router, initialState?: Partial<IStore>): IExtendedStore {
