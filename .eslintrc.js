@@ -118,16 +118,8 @@ const tslintRules = {
     true,
     "double"
   ],
-  "react-no-dangerous-html": [
-    true,
-    [
-      {
-        "file": "./src/app/containers/Html.tsx",
-        "method": "render",
-        "comment": "string comes from trusted source - our initial state"
-      }
-    ]
-  ],
+   // todo: Specifying excluded files as an option used to work until updating eslint and it's parsers.
+  "react-no-dangerous-html": true,
   "react-this-binding-issue": true,
   "semicolon": [
     true,
