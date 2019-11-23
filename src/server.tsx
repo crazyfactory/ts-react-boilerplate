@@ -1,8 +1,8 @@
 import * as e6p from "es6-promise";
 (e6p as any).polyfill();
 import Chalk from "chalk";
+import "cross-fetch/polyfill";
 import express from "express";
-import "isomorphic-fetch";
 import path from "path";
 import * as React from "react";
 import {renderToString} from "react-dom/server";
