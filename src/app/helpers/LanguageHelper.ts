@@ -27,17 +27,17 @@ export class LanguageHelper {
     return JSON.parse(fs.readFileSync(LanguageHelper.getLanguageFileLocation(language)).toString());
   }
 
-  public getTranslations(): any {
-    return LanguageHelper.getTranslations(
-      LanguageHelper.isSupported(this.preferredLanguage) ? this.preferredLanguage : "en"
-    );
+  public getPreferredLanguage(): string {
+    return this.preferredLanguage;
   }
 
   public getRequestedLanguage(): string {
     return this.requestedLanguage;
   }
 
-  public getPreferredLanguage(): string {
-    return this.preferredLanguage;
+  public getTranslations(): any {
+    return LanguageHelper.getTranslations(
+      LanguageHelper.isSupported(this.preferredLanguage) ? this.preferredLanguage : "en"
+    );
   }
 }
