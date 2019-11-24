@@ -28,6 +28,7 @@ export class Html extends React.Component<IHtmlProps> {
     const scripts = this.getFileNames(".js").map((src, i) => <script src={src} key={i}/>);
 
     const initialStateScript = (
+      // tslint:disable-next-line:react-no-dangerous-html
       <script
         dangerouslySetInnerHTML={{__html: `window.__INITIAL_STATE__=${serialize(initialState, {isJSON: true})};`}}
         charSet="UTF-8"

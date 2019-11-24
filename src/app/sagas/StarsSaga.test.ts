@@ -1,8 +1,5 @@
 jest.mock("./dummyApi");
 import {runSaga} from "redux-saga";
-import * as ReduxSagaEffects from "redux-saga/effects";
-import {getType} from "typesafe-actions";
-import {loadStarsCount} from "../redux/modules/starsActionCreators";
 import {dummyApi} from "./dummyApi";
 import {StarsSaga} from "./StarsSaga";
 
@@ -39,18 +36,6 @@ describe("StarsSaga", () => {
           {payload: null, type: "STARS/LOAD_STARS_COUNT_PENDING"},
           {message: "Error", payload: null, type: "STARS/LOAD_STARS_COUNT_REJECTED"}
         ]);
-      });
-    });
-
-    describe("registerListeners", () => {
-      it("listens for loadStarsCount INVOKED and calls fetchStarsCount", () => {
-        const spied = jest.spyOn(ReduxSagaEffects, "fork");
-        const starsSaga = new StarsSaga();
-        starsSaga.watch();
-        const gen = (spied.mock.calls[0][0] as any)();
-        expect(
-          gen.next().value
-        ).toEqual(ReduxSagaEffects.takeLatest(getType(loadStarsCount.invoke), starsSaga.fetchStarsCount));
       });
     });
   });

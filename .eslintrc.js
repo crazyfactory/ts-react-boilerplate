@@ -25,7 +25,7 @@ const tslintRules = {
   ],
   "hex-format": true,
   "import-spacing": true,
-  "interface-sort-keys": true,
+  "interface-sort-keys": false,
   "increment-decrement": true,
   "jquery-deferred-must-complete": true,
   "jsdoc-format": true,
@@ -59,6 +59,23 @@ const tslintRules = {
   "max-line-length": [
     true,
     120
+  ],
+  "member-ordering": [
+    true,
+    {
+      "order": [
+        "public-static-field",
+        "public-instance-field",
+        "private-static-field",
+        "private-instance-field",
+        "public-constructor",
+        "private-constructor",
+        "public-instance-method",
+        "protected-instance-method",
+        "private-instance-method"
+      ],
+      "alphabetize": true
+    }
   ],
   "mocha-avoid-only": true,
   "no-backbone-get-set-outside-model": true,
@@ -118,16 +135,8 @@ const tslintRules = {
     true,
     "double"
   ],
-  "react-no-dangerous-html": [
-    true,
-    [
-      {
-        "file": "./src/app/containers/Html.tsx",
-        "method": "render",
-        "comment": "string comes from trusted source - our initial state"
-      }
-    ]
-  ],
+   // todo: Specifying excluded files as an option used to work until updating eslint and it's parsers.
+  "react-no-dangerous-html": true,
   "react-this-binding-issue": true,
   "semicolon": [
     true,
@@ -232,7 +241,7 @@ module.exports = {
         "prefixWithI": "always"
       }
     ],
-    "@typescript-eslint/member-ordering": "error",
+    "@typescript-eslint/member-ordering": "off",
     "@typescript-eslint/no-empty-function": "error",
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/no-explicit-any": "off",

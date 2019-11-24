@@ -8,14 +8,12 @@
     "inlineSourceMap": false,
     "inlineSources": false,
     "experimentalDecorators": true,
+    "noEmit": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "plugins": [
-      { "transform": "ts-optchain/transform" },
-    ]
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",

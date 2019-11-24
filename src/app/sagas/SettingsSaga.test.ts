@@ -1,8 +1,5 @@
 jest.mock("./dummyApi");
 import {runSaga} from "redux-saga";
-import * as ReduxSagaEffects from "redux-saga/effects";
-import {getType} from "typesafe-actions";
-import {setLanguage} from "../redux/modules/settingsActionCreators";
 import {dummyApi} from "./dummyApi";
 import {SettingsSaga} from "./SettingsSaga";
 
@@ -48,18 +45,6 @@ describe("SettingsSaga", () => {
           {message: "Error", payload: null, type: "SETTINGS/SET_LANGUAGE_REJECTED"}
         ]);
       });
-    });
-  });
-
-  describe("registerListeners", () => {
-    it("listens for setLanguage INVOKED and calls fetchTranslations", () => {
-      const spied = jest.spyOn(ReduxSagaEffects, "fork");
-      const settingsSaga = new SettingsSaga();
-      settingsSaga.watch();
-      const gen = (spied.mock.calls[0][0] as any)();
-      expect(
-        gen.next().value
-      ).toEqual(ReduxSagaEffects.takeLatest(getType(setLanguage.invoke), settingsSaga.fetchTranslations));
     });
   });
 });
