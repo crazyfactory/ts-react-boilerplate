@@ -134,7 +134,7 @@
     "reselect": "^4.0.0",
     "router5": "^7.0.2",
     "router5-plugin-browser": "^7.0.2",
-    "serialize-javascript": "^2.1.0",
+    "serialize-javascript": "^2.1.1",
     "serve-favicon": "^2.5.0",
     "typesafe-actions": "^4.4.2",
     "typestyle": "^2.0.4"
