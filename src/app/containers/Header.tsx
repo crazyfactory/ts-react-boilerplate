@@ -6,7 +6,7 @@ import {stylesheet} from "typestyle";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
-import {routes} from "../routes/routes";
+import {getRoutes} from "../routes/routes";
 import {translationsSelector} from "../selectors/translationsSelector";
 
 const classNames = stylesheet({
@@ -45,22 +45,22 @@ class Header extends React.Component<IStateToProps> {
       <nav className={classNames.nav}>
         <ul>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.homePage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().homePage.name}>
               {translations.home}
             </ConnectedLink>
           </li>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.aboutPage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().aboutPage.name}>
               {translations.aboutUs}
             </ConnectedLink>
           </li>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.counterPage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().counterPage.name}>
               {translations.counter}
             </ConnectedLink>
           </li>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.starsPage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().starsPage.name}>
               {translations.stars}
             </ConnectedLink>
           </li>

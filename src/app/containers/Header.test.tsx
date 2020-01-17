@@ -2,7 +2,7 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {ConnectedLink} from "react-router5";
 import {ISettingsState} from "../redux/modules/settingsModule";
-import {routes} from "../routes/routes";
+import {getRoutes} from "../routes/routes";
 import {mapStateToProps, UnconnectedHeader} from "./Header";
 
 describe("<Header />", () => {
@@ -35,16 +35,16 @@ describe("<Header />", () => {
   it("contains links", () => {
     const wrapper = shallow(<UnconnectedHeader translations={translations}/>);
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={routes.homePage.name}>Home</ConnectedLink>)
+      <ConnectedLink routeName={getRoutes().homePage.name}>Home</ConnectedLink>)
     ).toBeTruthy();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={routes.aboutPage.name}>About Us</ConnectedLink>)
+      <ConnectedLink routeName={getRoutes().aboutPage.name}>About Us</ConnectedLink>)
     ).toBeTruthy();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={routes.counterPage.name}>Counter</ConnectedLink>)
+      <ConnectedLink routeName={getRoutes().counterPage.name}>Counter</ConnectedLink>)
     ).toBeTruthy();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={routes.starsPage.name}>Stars</ConnectedLink>)
+      <ConnectedLink routeName={getRoutes().starsPage.name}>Stars</ConnectedLink>)
     ).toBeTruthy();
   });
 });
