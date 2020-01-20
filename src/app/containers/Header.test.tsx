@@ -34,17 +34,18 @@ describe("<Header />", () => {
 
   it("contains links", () => {
     const wrapper = shallow(<UnconnectedHeader translations={translations}/>);
+    const routes = getRoutes();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={getRoutes().homePage.name}>Home</ConnectedLink>)
+      <ConnectedLink routeName={routes.homePage.name}>Home</ConnectedLink>)
     ).toBeTruthy();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={getRoutes().aboutPage.name}>About Us</ConnectedLink>)
+      <ConnectedLink routeName={routes.aboutPage.name}>About Us</ConnectedLink>)
     ).toBeTruthy();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={getRoutes().counterPage.name}>Counter</ConnectedLink>)
+      <ConnectedLink routeName={routes.counterPage.name}>Counter</ConnectedLink>)
     ).toBeTruthy();
     expect(wrapper.containsMatchingElement(
-      <ConnectedLink routeName={getRoutes().starsPage.name}>Stars</ConnectedLink>)
+      <ConnectedLink routeName={routes.starsPage.name}>Stars</ConnectedLink>)
     ).toBeTruthy();
   });
 });

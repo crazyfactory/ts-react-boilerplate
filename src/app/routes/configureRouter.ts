@@ -4,7 +4,8 @@ import {MiddlewareFactory} from "router5/types/types/router";
 import {getRoutes} from "./routes";
 
 export function configureRouter(baseUrl: string = ""): Router {
-  const router = createRouter(Object.keys(getRoutes(baseUrl)).map((key) => getRoutes(baseUrl)[key]));
+  const routes = getRoutes(baseUrl);
+  const router = createRouter(Object.keys(routes).map((key) => routes[key]));
   router.usePlugin(browserPlugin({useHash: false}));
 
   const middlewares: MiddlewareFactory[] = [];

@@ -7,9 +7,10 @@ import {getRoutes} from "../routes/routes";
 import {classNames, mapStateToProps, UnconnectedApp} from "./App";
 
 describe("<App />", () => {
+  const routes = getRoutes();
   const route: IRouteState = {
     meta: {id: 1, params: {}, options: {}, redirected: false},
-    name: getRoutes().homePage.name,
+    name: routes.homePage.name,
     params: {},
     path: "/"
   };

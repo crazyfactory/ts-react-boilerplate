@@ -41,26 +41,27 @@ interface IStateToProps {
 class Header extends React.Component<IStateToProps> {
   public render(): JSX.Element {
     const {translations} = this.props;
+    const routes = getRoutes();
     return (
       <nav className={classNames.nav}>
         <ul>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().homePage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.homePage.name}>
               {translations.home}
             </ConnectedLink>
           </li>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().aboutPage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.aboutPage.name}>
               {translations.aboutUs}
             </ConnectedLink>
           </li>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().counterPage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.counterPage.name}>
               {translations.counter}
             </ConnectedLink>
           </li>
           <li>
-            <ConnectedLink activeClassName={classNames.activeLink} routeName={getRoutes().starsPage.name}>
+            <ConnectedLink activeClassName={classNames.activeLink} routeName={routes.starsPage.name}>
               {translations.stars}
             </ConnectedLink>
           </li>
