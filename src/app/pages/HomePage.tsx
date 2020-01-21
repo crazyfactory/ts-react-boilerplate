@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {createSelector} from "reselect";
 import {stylesheet} from "typestyle";
 import {Color} from "../constants/Color";
+import crazyImage from "../images/crazy.png";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
@@ -27,7 +28,7 @@ class HomePage extends React.Component<IStateToProps> {
     return (
       <div className={classNames.container}>
         <a href={"https://www.crazy-factory.com"}>
-          <img alt={"barbar"} src={require("../images/crazy.png")}/>
+          <img alt={"crazy logo"} src={crazyImage}/>
         </a>
         <p>{translations.hello}</p>
       </div>

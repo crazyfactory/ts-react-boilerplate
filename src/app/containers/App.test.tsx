@@ -3,10 +3,11 @@ import * as React from "react";
 import {State as IRouteState} from "router5";
 import {HomePage} from "../pages/HomePage";
 import {ISettingsState} from "../redux/modules/settingsModule";
-import {routes} from "../routes/routes";
+import {getRoutes} from "../routes/routes";
 import {classNames, mapStateToProps, UnconnectedApp} from "./App";
 
 describe("<App />", () => {
+  const routes = getRoutes();
   const route: IRouteState = {
     meta: {id: 1, params: {}, options: {}, redirected: false},
     name: routes.homePage.name,

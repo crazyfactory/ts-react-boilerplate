@@ -2,7 +2,7 @@ import {shallow} from "enzyme";
 import * as React from "react";
 import {ConnectedLink} from "react-router5";
 import {ISettingsState} from "../redux/modules/settingsModule";
-import {routes} from "../routes/routes";
+import {getRoutes} from "../routes/routes";
 import {mapStateToProps, UnconnectedHeader} from "./Header";
 
 describe("<Header />", () => {
@@ -34,6 +34,7 @@ describe("<Header />", () => {
 
   it("contains links", () => {
     const wrapper = shallow(<UnconnectedHeader translations={translations}/>);
+    const routes = getRoutes();
     expect(wrapper.containsMatchingElement(
       <ConnectedLink routeName={routes.homePage.name}>Home</ConnectedLink>)
     ).toBeTruthy();

@@ -6,7 +6,7 @@ import {stylesheet} from "typestyle";
 import {Translator} from "../models/Translator";
 import {ITranslator} from "../models/TranslatorInterfaces";
 import {IStore} from "../redux/IStore";
-import {routes} from "../routes/routes";
+import {getRoutes} from "../routes/routes";
 import {translationsSelector} from "../selectors/translationsSelector";
 
 const classNames = stylesheet({
@@ -41,6 +41,7 @@ interface IStateToProps {
 class Header extends React.Component<IStateToProps> {
   public render(): JSX.Element {
     const {translations} = this.props;
+    const routes = getRoutes();
     return (
       <nav className={classNames.nav}>
         <ul>
