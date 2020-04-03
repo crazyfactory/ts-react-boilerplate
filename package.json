@@ -88,7 +88,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.7.0",
-    "eslint-loader": "^3.0.2",
+    "eslint-loader": "^4.0.0",
     "file-loader": "^5.0.1",
     "husky": "^4.0.2",
     "jest": "^24.9.0",
