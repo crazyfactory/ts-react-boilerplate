@@ -75,7 +75,7 @@
     "@types/prop-types": "^15.7.2",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.4",
-    "@types/react-helmet": "^5.0.10",
+    "@types/react-helmet": "^6.0.0",
     "@types/react-redux": "^7.1.2",
     "@types/serialize-javascript": "^1.5.0",
     "@types/storybook__react": "^4.0.2",
