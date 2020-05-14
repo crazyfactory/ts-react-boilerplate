@@ -136,7 +136,7 @@
     "router5-plugin-browser": "^8.0.1",
     "serialize-javascript": "^3.0.0",
     "serve-favicon": "^2.5.0",
-    "typesafe-actions": "^4.4.2",
+    "typesafe-actions": "^5.1.0",
     "typestyle": "^2.1.0"
   },
   "jest": {
