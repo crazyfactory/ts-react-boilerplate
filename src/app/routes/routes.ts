@@ -1,4 +1,4 @@
-import {ComponentClass} from "react";
+import {ConnectedComponent} from "react-redux";
 import {Action} from "redux";
 import {actions} from "redux-router5";
 
@@ -12,7 +12,7 @@ type RoutablePages = "homePage"
 | "starsPage";
 
 type RouteConfig = Record<RoutablePages, Omit<IRoute, "name">>;
-export type RoutePageMap = Record<RoutablePages, ComponentClass>;
+export type RoutePageMap = Record<RoutablePages, ConnectedComponent<any, any>>;
 type RouteNavigate = Record<RoutablePages, (...params: any[]) => Action>;
 
 const config: RouteConfig = {
