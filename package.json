@@ -79,7 +79,7 @@
     "@types/react-redux": "^7.1.8",
     "@types/serialize-javascript": "^1.5.0",
     "@types/storybook__react": "^5.2.1",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/eslint-plugin-tslint": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "babel-loader": "^8.1.0",
