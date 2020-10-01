@@ -14,4 +14,4 @@ jobs:
       - name: build
         run: npm run build
       - name: test
-        run: npm run test
+        run: npm run test:no-cache -- --maxWorkers=4
