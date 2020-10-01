@@ -15,3 +15,5 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test:no-cache -- --maxWorkers=4
+      - name: upload-codecov
+        run: bash <(curl -s https://codecov.io/bash)

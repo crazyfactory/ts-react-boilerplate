@@ -13,5 +13,7 @@ jobs:
         run: npm i
       - name: build
         run: npm run build
+      - name: build-production
+        run: npm run build:prod
       - name: lint
         run: npm run type-check
