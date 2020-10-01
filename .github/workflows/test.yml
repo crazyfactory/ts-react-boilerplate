@@ -16,4 +16,6 @@ jobs:
       - name: test
         run: npm run test:no-cache -- --maxWorkers=4
       - name: upload-codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: bash <(curl -s https://codecov.io/bash)
