@@ -1,0 +1,19 @@
+name: build
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '13'
+      - name: install
+        run: npm i
+      - name: build
+        run: npm run build
+      - name: build-production
+        run: npm run build:prod
+      - name: lint
+        run: npm run type-check
