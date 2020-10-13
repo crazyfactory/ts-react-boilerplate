@@ -15,5 +15,5 @@ jobs:
         run: npm run build
       - name: build-production
         run: npm run build:prod
-      - name: lint
+      - name: type-check
         run: npm run type-check
