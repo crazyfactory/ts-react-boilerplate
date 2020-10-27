@@ -115,7 +115,7 @@
     "webpack-manifest-plugin": "^2.2.0"
   },
   "dependencies": {
-    "@sentry/browser": "^5.24.2",
+    "@sentry/browser": "^5.25.0",
     "autobind-decorator": "^2.4.0",
     "chalk": "^4.1.0",
     "cross-fetch": "^3.0.6",
