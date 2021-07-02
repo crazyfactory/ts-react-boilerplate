@@ -1,11 +1,9 @@
-# ts-react-boilerplate
+# Archival notice:
+A while ago, this project provided a lot of benefits. Having TypeScript + SSR with saga meant any project who started with this boilerplate would be maintainable, and everything was discoverable and with good developer experience.
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/crazyfactory/ts-react-boilerplate.svg?token=817c7964cfab1973415f903cc9bde50f4d9ea8d7fe44c1b0e722569f0c99438d)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/crazyfactory/ts-react-boilerplate.svg?branch=master)](https://travis-ci.org/crazyfactory/ts-react-boilerplate)
-[![Dependency Status](https://david-dm.org/crazyfactory/ts-react-boilerplate.svg)](https://david-dm.org/crazyfactory/ts-react-boilerplate)
-[![devDependency Status](https://david-dm.org/crazyfactory/ts-react-boilerplate/dev-status.svg)](https://david-dm.org/crazyfactory/ts-react-boilerplate?type=dev)
-[![GitHub issues](https://img.shields.io/github/issues/crazyfactory/ts-react-boilerplate.svg)](https://github.com/crazyfactory/ts-react-boilerplate/issues)
-___
+Now time has come to say good bye. NextJS does everything this project does and more. It's also maintained by brilliant engineers at vercel, it doesn't make sense for us to keep this project open and not being able to maintain it. Hence we're archiving this project in favor of NextJS.
+
+# ts-react-boilerplate
 
 ##### Based on [Vortigern](https://github.com/barbar/vortigern)
 
